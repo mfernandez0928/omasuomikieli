@@ -1,0 +1,96 @@
+/**
+ * Static content check that runs without a TypeScript runtime.
+ *
+ * It parses the data files as text and reports the mistakes that are easy to
+ * make when adding words and lessons by hand: duplicate ids, duplicate
+ * headwords, and cross-references that point at something which no longer
+ * exists. The app runs the same checks at runtime (see `validateWords` and the
+ * Data audit screen); this script is for the terminal and CI.
+ *
+ * Run: npm run validate:data
+ */
+import { readFileSync, readdirSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const wordsDir = join(root, 'src/data/words');
+const grammarDir = join(root, 'src/data/grammar');
+
+const read = (file) => readFileSync(file, 'utf8');
+const tsFiles = (dir) =>
+  readdirSync(dir)
+    .filter((f) => f.endsWith('.ts') && f !== 'index.ts')
+    .map((f) => join(dir, f));
+
+/** Pulls every `id: '...'` at the top level of an entry object. */
+function collectIds(source) {
+  return [...source.matchAll(/^\s{2,4}id: '([^']+)'/gm)].map((m) => m[1]);
+}
+
+function collectField(source, field) {
+  const out = [];
+  for (const m of source.matchAll(new RegExp(`${field}: \\[([^\\]]*)\\]`, 'gs'))) {
+    for (const r of m[1].matchAll(/'([^']+)'/g)) out.push(r[1]);
+  }
+  return out;
+}
+
+function collectHeadwords(source) {
+  return [...source.matchAll(/^\s{4}fi: '((?:[^'\\]|\\.)*)'/gm)].map((m) => m[1]);
+}
+
+const problems = [];
+const wordIds = new Set();
+const headwords = new Map();
+const grammarIds = new Set();
+
+for (const file of tsFiles(wordsDir)) {
+  const src = read(file);
+  const name = file.replace(root + '\\', '').replace(root + '/', '');
+
+  for (const id of collectIds(src)) {
+    if (wordIds.has(id)) problems.push(`duplicate word id "${id}" (${name})`);
+    wordIds.add(id);
+  }
+  for (const fi of collectHeadwords(src)) {
+    const key = fi.toLowerCase();
+    if (headwords.has(key)) {
+      problems.push(`duplicate headword "${fi}" (${name} and ${headwords.get(key)})`);
+    }
+    headwords.set(key, name);
+  }
+}
+
+for (const file of tsFiles(grammarDir)) {
+  for (const id of collectIds(read(file))) grammarIds.add(id);
+}
+
+// The supplied database is imported under a `db-` prefix at runtime.
+const legacy = read(join(root, 'src/data/legacy/finnish_learning_database_v0.2.1.js'));
+for (const m of legacy.matchAll(/"id":\s*"([^"]+)"/g)) wordIds.add(`db-${m[1]}`);
+
+for (const file of [...tsFiles(wordsDir), ...tsFiles(grammarDir)]) {
+  const src = read(file);
+  const name = file.replace(root + '\\', '').replace(root + '/', '');
+
+  for (const ref of [...collectField(src, 'related'), ...collectField(src, 'relatedWords')]) {
+    if (!wordIds.has(ref)) problems.push(`"${ref}" is not a known word id (${name})`);
+  }
+  for (const ref of [...collectField(src, 'grammarRefs'), ...collectField(src, 'relatedGrammar')]) {
+    if (!grammarIds.has(ref)) problems.push(`"${ref}" is not a known grammar id (${name})`);
+  }
+}
+
+console.log(
+  `known word ids: ${wordIds.size} (curated + imported, before duplicate headwords are merged)`,
+);
+console.log(`grammar lessons: ${grammarIds.size}`);
+
+if (problems.length) {
+  console.error(`\n${problems.length} problem(s):`);
+  for (const p of problems) console.error(`  - ${p}`);
+  process.exit(1);
+}
+
+console.log('No duplicate ids, duplicate headwords or broken cross-references.');

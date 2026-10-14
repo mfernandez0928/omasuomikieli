@@ -1,0 +1,28 @@
+{
+  // Use the TypeScript version installed in this project, not the one bundled
+  // with VS Code, so the editor and `npm run build` agree.
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // The content files are full of ä and ö. Keep them intact.
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabSize": 2,
+
+  // Auto-import using the @/ alias from tsconfig instead of long relative paths.
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+
+  // The spell checker would otherwise flag every Finnish and Tagalog word.
+  "cSpell.language": "en,fi",
+  "cSpell.enabled": false,
+
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true
+  }
+}

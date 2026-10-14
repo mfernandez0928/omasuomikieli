@@ -1,0 +1,34 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+dist-ssr/
+*.local
+
+# local backups of the vocabulary data (not part of the app)
+.backups/
+
+# editor / OS
+.DS_Store
+Thumbs.db
+*.swp
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# env
+.env
+.env.*
+!.env.example
+
+# vercel
+.vercel
+
+# Full textbook word-list transcription: a working record, not for a public repo.
+src/data/sources/*.local.ts

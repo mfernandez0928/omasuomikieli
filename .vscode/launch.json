@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      // Press F5. This starts the dev server (via the "dev" task) and opens
+      // Chrome attached to the debugger, so you can set breakpoints directly
+      // in the .tsx files.
+      "name": "Debug Oma Suomi in Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "dev",
+      "sourceMaps": true
+    },
+    {
+      // Use this one when you want to debug the built app, including the
+      // service worker and offline behaviour.
+      "name": "Debug production build",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:4173",
+      "webRoot": "${workspaceFolder}/dist",
+      "preLaunchTask": "preview",
+      "sourceMaps": true
+    }
+  ]
+}
