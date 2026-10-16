@@ -156,6 +156,8 @@ p {
 
 .app-shell {
   min-height: 100dvh;
+  /* Fills the area behind the translucent status bar with the app background. */
+  padding-top: 0;
   display: flex;
   flex-direction: column;
   background:
@@ -168,7 +170,17 @@ p {
   width: 100%;
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 var(--gutter);
+  /*
+    index.html sets viewport-fit=cover and a translucent iOS status bar, so the
+    page is laid out BEHIND the status bar and the home indicator. Every edge
+    therefore has to pay back its own inset, or the first element on the page
+    (the hero title, a screen's TopBar) renders underneath the clock and signal
+    icons. Only the bottom inset was applied before, which is why the top of
+    every screen was cut off once installed.
+  */
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
   padding-bottom: calc(var(--nav-h) + 28px + env(safe-area-inset-bottom, 0px));
 }
 
@@ -430,6 +442,13 @@ p {
   color: var(--gold);
 }
 
+/* Studied something, but the daily goal is not reached yet. */
+.week__dot--partial {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(246, 166, 35, 0.16);
+}
+
 /* ===================== home cards ===================== */
 
 .tiles {
@@ -675,6 +694,8 @@ p {
   -webkit-backdrop-filter: blur(14px);
   border-top: 1px solid var(--border-soft);
   padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
 }
 
 .nav__item {

@@ -67,7 +67,17 @@ const TILES: {
   },
 ];
 
-const DAY_LABELS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+/*
+  The week strip shows the last seven days ENDING TODAY, so a fixed Mon..Sun
+  array mislabels every column unless today happens to be Sunday. Each dot is
+  now labelled from its own date instead.
+*/
+const WEEKDAY = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+function dayLabel(isoDate: string): string {
+  const [y, m, d] = isoDate.split('-').map(Number);
+  return WEEKDAY[new Date(y, m - 1, d).getDay()];
+}
 
 export function Home() {
   const navigate = useNavigate();
@@ -80,6 +90,7 @@ export function Home() {
   const resume = loadResume();
 
   const remaining = Math.max(0, goal - done);
+  const exercisesToday = week.find((d) => d.date === today)?.exercisesAnswered ?? 0;
 
   return (
     <div className="page fade-in">
@@ -117,6 +128,16 @@ export function Home() {
                     ? 'Goal reached today. Nice work!'
                     : `Keep going! ${remaining} more ${remaining === 1 ? 'word' : 'words'} today.`}
                 </p>
+                {/*
+                  The goal counts reviewed words only. Exercises are real work
+                  too, so they are shown rather than silently ignored - that
+                  mismatch is what made the strip look wrong.
+                */}
+                {exercisesToday > 0 && (
+                  <p className="tiny dim" style={{ marginTop: 2 }}>
+                    {exercisesToday} {exercisesToday === 1 ? 'exercise' : 'exercises'} answered today
+                  </p>
+                )}
               </div>
               <p className="goal__count">
                 {done} <small>/ {goal}</small>
@@ -129,19 +150,32 @@ export function Home() {
         </div>
 
         <div className="week">
-          {week.map((day, i) => {
-            const active = day.wordsStudied > 0 || day.exercisesAnswered > 0;
+          {week.map((day) => {
+            /*
+              A tick used to mean "did anything today", while the counter above
+              only tracks words reviewed. Answering a grammar exercise therefore
+              ticked the day while the goal still read 0 / 10. The tick now means
+              the goal was actually reached; partial study gets its own state.
+            */
+            const goalMet = day.wordsStudied >= goal;
+            const studied = day.wordsStudied > 0 || day.exercisesAnswered > 0;
             const isToday = day.date === today;
             return (
               <div key={day.date} className="week__day">
-                <span>{DAY_LABELS[i]}</span>
+                <span style={isToday ? { color: 'var(--gold)', fontWeight: 700 } : undefined}>
+                  {dayLabel(day.date)}
+                </span>
                 <span
-                  className={`week__dot ${active ? 'week__dot--done' : ''} ${
-                    isToday && !active ? 'week__dot--today' : ''
-                  }`}
-                  title={`${day.date}: ${day.wordsStudied} words, ${day.exercisesAnswered} exercises`}
+                  className={`week__dot ${goalMet ? 'week__dot--done' : ''} ${
+                    !goalMet && studied ? 'week__dot--partial' : ''
+                  } ${isToday && !studied ? 'week__dot--today' : ''}`}
+                  title={`${day.date}: ${day.wordsStudied} of ${goal} words, ${day.exercisesAnswered} exercises`}
                 >
-                  {active ? <Icon name="check" size={14} /> : isToday ? <Icon name="flame" size={12} /> : null}
+                  {goalMet ? (
+                    <Icon name="check" size={14} />
+                  ) : studied ? (
+                    <Icon name="flame" size={12} />
+                  ) : null}
                 </span>
               </div>
             );
