@@ -6,6 +6,7 @@ import { NOUNS } from './nouns';
 import { FUNCTION_WORDS } from './function-words';
 import { EXTRA_WORDS } from './extra-verbs';
 import { OS1_WORDS } from './os1-words';
+import { OS1_WORDS_2 } from './os1-words-2';
 
 /**
  * The curated set is authored in this folder. The supplied v0.2.1 database is
@@ -23,6 +24,7 @@ const CURATED: Word[] = [
   ...FUNCTION_WORDS,
   ...EXTRA_WORDS,
   ...OS1_WORDS,
+  ...OS1_WORDS_2,
 ];
 
 const curatedFinnish = new Set(CURATED.map((w) => w.fi.toLowerCase()));
@@ -83,4 +85,4 @@ export function validateWords(words: Word[] = WORDS): ValidationIssue[] {
   return issues;
 }
 
-export { CORE_VERBS, B1_VERBS, NOUNS, FUNCTION_WORDS, EXTRA_WORDS, OS1_WORDS };
+export { CORE_VERBS, B1_VERBS, NOUNS, FUNCTION_WORDS, EXTRA_WORDS, OS1_WORDS, OS1_WORDS_2 };
