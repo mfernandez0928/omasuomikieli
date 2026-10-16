@@ -7,6 +7,7 @@ import { GRAMMAR_BY_ID } from '@/data/grammar';
 import { TOPIC_BY_ID } from '@/data/topics';
 import { useApp } from '@/hooks/useApp';
 import { saveResume } from '@/services/storage/prefs';
+import { isPartialParadigm, personalForms } from '@/services/conjugation';
 import type { WordStatus } from '@/types';
 
 const STATUS_LABEL: Record<WordStatus, string> = {
@@ -80,6 +81,8 @@ export function WordDetail() {
   const isFavourite = favourites.has(word.id);
   const vf = word.verbForms;
   const nf = word.nominalForms;
+  const persons = personalForms(word);
+  const partial = isPartialParadigm(word);
 
   return (
     <div className="page fade-in">
@@ -183,26 +186,41 @@ export function WordDetail() {
             <tbody>
               {vf && (
                 <>
-                  <Row label="minä (1sg)" value={vf.present1sg} />
-                  <Row label="hän (3sg)" value={vf.present3sg} />
-                  <Row label="he (3pl)" value={vf.present3pl} />
-                  <Row label="negative (en ___)" value={vf.negativePresent} />
-                  <Row label="imperfect (minä)" value={vf.imperfect1sg} />
+                  {/*
+                    Persoonamuodot: all six persons. Only minä and hän are
+                    stored; sinä / me / te follow from the minä form by
+                    swapping the ending, which is exact in Finnish.
+                  */}
+                  {persons.map((f) => (
+                    <Row key={f.person} label={`${f.person} (preesens)`} value={f.value} />
+                  ))}
+                  <Row label="kieltomuoto (en ___)" value={vf.negativePresent} />
+                  <Row label="imperfekti (minä)" value={vf.imperfect1sg} />
                   <Row label="NUT-partisiippi" value={vf.pastParticiple} />
-                  <Row label="conditional (minä)" value={vf.conditional1sg} />
+                  <Row label="konditionaali (minä)" value={vf.conditional1sg} />
                 </>
               )}
               {nf && (
                 <>
-                  <Row label="genetiivi" value={nf.genitive} />
-                  <Row label="partitiivi" value={nf.partitive} />
+                  <Row label="genetiivi (yksikkö)" value={nf.genitive} />
+                  <Row label="partitiivi (yksikkö)" value={nf.partitive} />
                   <Row label="illatiivi" value={nf.illative} />
-                  <Row label="monikko" value={nf.pluralNominative} />
+                  <Row label="monikon nominatiivi" value={nf.pluralNominative} />
                   <Row label="monikon partitiivi" value={nf.pluralPartitive} />
                 </>
               )}
             </tbody>
           </table>
+          {persons.length > 0 && (
+            <p
+              className="tiny"
+              style={{ color: 'var(--card-ink-soft)', padding: '2px 10px 8px', lineHeight: 1.45 }}
+            >
+              {partial
+                ? 'The he form is not shown: it needs the strong stem, which this entry does not record yet.'
+                : 'sinä, me and te follow from the minä form; the endings are regular.'}
+            </p>
+          )}
         </div>
       )}
 
