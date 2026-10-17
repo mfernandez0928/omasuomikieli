@@ -73,6 +73,7 @@ export type WordType =
   | 'numeraali'
   | 'partikkeli'
   | 'konjunktio'
+  | 'prepositio'
   | 'postpositio'
   | 'fraasi';
 

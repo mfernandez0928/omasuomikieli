@@ -17,6 +17,8 @@ const TYPES: { value: WordType | 'all'; label: string }[] = [
   { value: 'adverbi', label: 'Adverbi' },
   { value: 'pronomini', label: 'Pronomini' },
   { value: 'konjunktio', label: 'Konjunktio' },
+  { value: 'postpositio', label: 'Postpositio' },
+  { value: 'partikkeli', label: 'Partikkeli' },
 ];
 
 export function Vocabulary() {
