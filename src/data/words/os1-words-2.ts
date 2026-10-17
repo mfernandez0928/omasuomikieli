@@ -468,7 +468,7 @@ export const OS1_WORDS_2: Word[] = [
     topics: ['liikkuminen'],
     verbForms: { present1sg: 'kävelen', present3sg: 'kävelee' },
     verbType: 3,
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 4: Ruokakaupassa', page: 97, section: 'SANASTO', sourceTerm: 'kävellä (3l, kävelen' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 4: Ruokakaupassa', page: 97, section: 'SANASTO', sourceTerm: 'kävellä, kävelen' },
     verification: 'source-verified',
   },
   {
@@ -484,7 +484,7 @@ export const OS1_WORDS_2: Word[] = [
     topics: ['koti'],
     verbForms: { present1sg: 'laitan', present3sg: 'laittaa' },
     verbType: 1,
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 4: Ruokakaupassa', page: 97, section: 'SANASTO', sourceTerm: 'laittaa (1l, laitan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 4: Ruokakaupassa', page: 97, section: 'SANASTO', sourceTerm: 'laittaa, laitan' },
     verification: 'source-verified',
   },
   {
@@ -767,7 +767,7 @@ export const OS1_WORDS_2: Word[] = [
       'Appears in the Oma suomi 1 chapter 4 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['ostokset'],
     verbForms: { present1sg: 'pakkaan', present3sg: 'pakkaa' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 4: Ruokakaupassa', page: 97, section: 'SANASTO', sourceTerm: 'pakata c4i, pakkaan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 4: Ruokakaupassa', page: 97, section: 'SANASTO', sourceTerm: 'pakata, pakkaan' },
     verification: 'source-verified',
   },
   {
@@ -811,7 +811,7 @@ export const OS1_WORDS_2: Word[] = [
       'Appears in the Oma suomi 1 chapter 4 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['ostokset'],
     verbForms: { present1sg: 'painan', present3sg: 'painaa' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 4: Ruokakaupassa', page: 97, section: 'SANASTO', sourceTerm: 'painaa m, painan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 4: Ruokakaupassa', page: 97, section: 'SANASTO', sourceTerm: 'painaa, painan' },
     verification: 'source-verified',
   },
   {
@@ -1593,7 +1593,7 @@ export const OS1_WORDS_2: Word[] = [
     topics: ['abstraktit'],
     verbForms: { present1sg: 'kestän', present3sg: 'kestää' },
     verbType: 1,
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'kestää (1), kestän' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'kestää, kestän' },
     verification: 'source-verified',
   },
   {
@@ -1651,7 +1651,7 @@ export const OS1_WORDS_2: Word[] = [
     topics: ['koti'],
     verbForms: { present1sg: 'korjaan', present3sg: 'korjaa' },
     verbType: 4,
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'korjata !4l, korjaan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'korjata, korjaan' },
     verification: 'source-verified',
   },
   {
@@ -1821,7 +1821,7 @@ export const OS1_WORDS_2: Word[] = [
       'Appears in the Oma suomi 1 chapter 5 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['palvelut'],
     verbForms: { present1sg: 'lähetän', present3sg: 'lähettää' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'lähettää (11, lähetän' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'lähettää, lähetän' },
     verification: 'source-verified',
   },
   {
@@ -2369,7 +2369,7 @@ export const OS1_WORDS_2: Word[] = [
     topics: ['arki'],
     verbForms: { present1sg: 'uin', present3sg: 'ui' },
     verbType: 2,
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'uida (2l, uin' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'uida, uin' },
     verification: 'source-verified',
   },
   {
@@ -2412,7 +2412,7 @@ export const OS1_WORDS_2: Word[] = [
     topics: ['ostokset'],
     verbForms: { present1sg: 'vaihdan', present3sg: 'vaihtaa' },
     verbType: 1,
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'vaihtaa <1l, vaihdan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'vaihtaa, vaihdan' },
     verification: 'source-verified',
   },
   {
@@ -2513,7 +2513,7 @@ export const OS1_WORDS_2: Word[] = [
     topics: ['koti'],
     verbForms: { present1sg: 'vuokraan', present3sg: 'vuokraa' },
     verbType: 4,
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'vuokrata (4>, vuokraan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'vuokrata, vuokraan' },
     verification: 'source-verified',
   },
   {

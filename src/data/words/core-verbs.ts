@@ -44,7 +44,7 @@ export const CORE_VERBS: Word[] = [
     noteTl: 'Walang hiwalay na salita para sa "to have" sa suomi. Ginagamit ang olla: minulla on = mayroon ako.',
     related: ['v-tulla', 'n-koira'],
     grammarRefs: ['g-verbityypit', 'g-preesens', 'g-adessiivi'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'olla (3l, olen' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'olla, olen' },
     reviewNote:
       'olla matched Suomen mestari 2 p.84 and Suomen mestari 3 pp.12/121 only inside phrases (olla paikalla, olla kiinnostunut, olla vastassa), so neither book is cited. Resolved in batch 4: Oma suomi 1\'s index lists \'olla (1), olen\' as a headword, so the entry is sourced there instead.',
     verification: 'source-verified',
@@ -194,7 +194,7 @@ export const CORE_VERBS: Word[] = [
     noteTl: 'Tyyppi 3. Ang trabaho ay may -na/-nä (essiivi): hoitajana = bilang nurse.',
     related: ['n-tyo', 'v-olla'],
     grammarRefs: ['g-verbityypit', 'g-kpt'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 11: Minun urapolkuni', page: 274, section: 'SANASTO', sourceTerm: 'työskennellä (3>, työskentelen' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 11: Minun urapolkuni', page: 274, section: 'SANASTO', sourceTerm: 'työskennellä, työskentelen' },
     verification: 'source-verified',
   },
   {
@@ -227,7 +227,7 @@ export const CORE_VERBS: Word[] = [
     noteTl: 'opiskella = mag-aral. oppia = matuto. Partitiivi ang wika: suomea.',
     related: ['v-oppia', 'n-koulu'],
     grammarRefs: ['g-partitiivi', 'g-verbityypit'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'opiskella m, opiskelen' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'opiskella, opiskelen' },
     verification: 'source-verified',
   },
   {
@@ -301,7 +301,7 @@ export const CORE_VERBS: Word[] = [
     noteTl: 'Partitiivi ang tinutulungan: autan sinua. Imperfekti: autoin.',
     related: ['n-apu', 'v-tarvita'],
     grammarRefs: ['g-partitiivi', 'g-rektio', 'g-imperfekti'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'auttaa (n, autan + P' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'auttaa (n, autan +' },
     verification: 'source-verified',
   },
   {
@@ -334,7 +334,7 @@ export const CORE_VERBS: Word[] = [
     noteTl: 'Dalawang pagbabago: preesens ymmärrän (rt -> rr), imperfekti ymmärsin (rt -> rs).',
     related: ['v-tietaa', 'v-kuunnella'],
     grammarRefs: ['g-kpt', 'g-imperfekti', 'g-kielto'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'ymmärtää m, ymmärrän' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'ymmärtää, ymmärrän' },
     verification: 'source-verified',
   },
   {
@@ -377,7 +377,7 @@ export const CORE_VERBS: Word[] = [
     noteTl: 'Modelong verbo ng tyyppi 1: walang KPT, kaya madaling i-conjugate.',
     related: ['v-kertoa', 'v-sanoa'],
     grammarRefs: ['g-verbityypit', 'g-preesens', 'g-rektio'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'puhua 111, puhun' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'puhua, puhun' },
     verification: 'source-verified',
   },
   {
@@ -418,7 +418,7 @@ export const CORE_VERBS: Word[] = [
     noteTl: 'kuunnella = makinig nang sadya. kuulla = marinig lang.',
     related: ['v-kuulla', 'v-puhua'],
     grammarRefs: ['g-verbityypit', 'g-partitiivi'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'kuunnella !3l, kuuntelen+ P taivas, taivaan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'kuunnella, kuuntelen+ P taivas, taivaan' },
     verification: 'source-verified',
   },
   {
@@ -547,7 +547,7 @@ export const CORE_VERBS: Word[] = [
     noteTl: 'KPT: rt -> rr (kerron). Ang utos ay "kerro!".',
     related: ['v-sanoa', 'v-puhua'],
     grammarRefs: ['g-kpt', 'g-imperatiivi', 'g-rektio'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 9: Yllätysjuhlat', page: 235, section: 'SANASTO', sourceTerm: 'kertoa m, kerron' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 9: Yllätysjuhlat', page: 235, section: 'SANASTO', sourceTerm: 'kertoa, kerron' },
     verification: 'source-verified',
   },
   {
@@ -625,7 +625,7 @@ export const CORE_VERBS: Word[] = [
       'The imported note listed the stem as "harjoittel-". Type 3 stems end in -e-, so the correct stem is "harjoittele-".',
     related: ['v-opiskella', 'v-kehittaa'],
     grammarRefs: ['g-verbityypit', 'g-partitiivi'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 7: (kappale 7)', page: 181, section: 'SANASTO', sourceTerm: 'harjoitella l3l, harjoittelen+ P • matkustaja, -n' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 7: (kappale 7)', page: 181, section: 'SANASTO', sourceTerm: 'harjoitella, harjoittelen+ P • matkustaja, -n' },
     verification: 'source-verified',
   },
   {
@@ -721,7 +721,7 @@ export const CORE_VERBS: Word[] = [
     noteTl: 'Kapareho ng tehdä. Ang "Nähdään!" ang karaniwang paalam.',
     related: ['v-tehda', 'v-katsoa'],
     grammarRefs: ['g-verbityypit', 'g-passiivi'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'nähdä (2J, naen' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'nähdä, naen' },
     verification: 'source-verified',
   },
   {

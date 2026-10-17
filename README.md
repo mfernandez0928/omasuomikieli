@@ -122,14 +122,17 @@ on the Data audit screen:
 
 | Status | Count | Meaning |
 | --- | --- | --- |
-| `source-verified` | 524 | Headword found in a named book, **and** its forms checked |
+| `source-verified` | 705 | Headword found in a named book, **and** its forms checked |
 | `linguistically-checked` | 47 | Not in the lists read so far; forms derived and checked against standard morphology |
 | `supplementary` | 10 | Imported from the v0.2.1 database; useful, but not traced or individually checked |
 | `needs-review` | 1 | Something specific is uncertain — the entry says what |
 
-**582 dictionary entries.** Sources matched: **Suomen mestari 2** (all 8 chapter word lists,
+**763 dictionary entries.** Sources matched: **Suomen mestari 2** (all 8 chapter word lists,
 printed pages), **Suomen mestari 3** (ch. 1–4, 6–8; ch. 5 outstanding) and **Oma suomi 1**
-(all 13 chapter SANASTO lists; chapters 1–5 imported with meanings so far).
+(all 13 chapter SANASTO lists; chapters 1–6 and 8 imported with meanings so far).
+
+Every verb in the dictionary carries a full six-person paradigm. Where the book prints only the
+1sg, the stem, verb type and 3sg were filled in by hand so nothing is left partial.
 
 ### Oma suomi 1 SANASTO transcription
 

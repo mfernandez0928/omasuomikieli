@@ -38,7 +38,7 @@ export const EXTRA_WORDS: Word[] = [
     noteTl: 'osata = natutunang kakayahan. voida = pwede o kaya ngayon.',
     related: ['v-voida', 'v-oppia', 'v-tietaa'],
     grammarRefs: ['g-verbityypit', 'g-kielto'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 9: Yllätysjuhlat', page: 235, section: 'SANASTO', sourceTerm: 'osata t41, osaan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 9: Yllätysjuhlat', page: 235, section: 'SANASTO', sourceTerm: 'osata, osaan' },
     verification: 'source-verified',
   },
   {
@@ -67,7 +67,7 @@ export const EXTRA_WORDS: Word[] = [
     noteTl: 'sanoa = sabihin. kertoa = ikwento. puhua = magsalita ng wika.',
     related: ['v-kertoa', 'v-puhua', 'v-kuulla'],
     grammarRefs: ['g-verbityypit', 'g-imperfekti'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'sanoa (1), sanon' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'sanoa, sanon' },
     verification: 'source-verified',
   },
   {
@@ -283,7 +283,7 @@ export const EXTRA_WORDS: Word[] = [
     note: 'KPT nt -> nn: tunnen. Compare tuntua (to seem), which is a different verb.',
     related: ['v-tietaa', 'v-tuntua'],
     grammarRefs: ['g-kpt', 'g-objekti'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 9: Yllätysjuhlat', page: 235, section: 'SANASTO', sourceTerm: 'tuntea 111, tunnen' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 9: Yllätysjuhlat', page: 235, section: 'SANASTO', sourceTerm: 'tuntea, tunnen' },
     verification: 'source-verified',
   },
   {
@@ -317,7 +317,7 @@ export const EXTRA_WORDS: Word[] = [
     noteTl: 'Mas pang-usapan kaysa "pitää", pero pareho ang kaso: -sta/-stä.',
     related: ['v-pitaa', 'v-rakastaa'],
     grammarRefs: ['g-elatiivi', 'g-kpt', 'g-rektio'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'tykätä \'4\', tykkään+ mistä' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'tykätä, tykkään+ mistä' },
     verification: 'source-verified',
   },
   {
@@ -663,7 +663,7 @@ export const EXTRA_WORDS: Word[] = [
     noteTl: 'Makikita sa pinto ng tindahan: "Palvelemme..." kasama ang oras.',
     related: ['n-asiakas', 'v-hoitaa'],
     grammarRefs: ['g-verbityypit'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'palvella 131, palvelen' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'palvella, palvelen' },
     verification: 'source-verified',
   },
   {
@@ -726,7 +726,7 @@ export const EXTRA_WORDS: Word[] = [
     noteTl: 'Laging partitiivi: rakastan sinua. Hindi *rakastan sinut.',
     related: ['v-tykata', 'v-pitaa'],
     grammarRefs: ['g-partitiivi', 'g-objekti'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'rakastaa (1), rakastan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'rakastaa, rakastan' },
     verification: 'source-verified',
   },
   {

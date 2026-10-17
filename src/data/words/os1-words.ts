@@ -95,7 +95,7 @@ export const OS1_WORDS: Word[] = [
     topics: ['koti'],
     verbForms: { present1sg: 'asun', present3sg: 'asuu' },
     note: 'Oma suomi 1 prints the rection as + missä.',
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'asua c11, asun+ missä' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'asua, asun+ missä' },
     verification: 'source-verified',
   },
   {
@@ -404,7 +404,7 @@ export const OS1_WORDS: Word[] = [
       'Appears in the Oma suomi 1 chapter 1 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['koulu'],
     verbForms: { present1sg: 'kirjoitan', present3sg: 'kirjoittaa' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'kirjoittaa (i1, kirjoitan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'kirjoittaa, kirjoitan' },
     verification: 'source-verified',
   },
   {
@@ -447,7 +447,7 @@ export const OS1_WORDS: Word[] = [
       'Appears in the Oma suomi 1 chapter 1 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['sosiaaliset'],
     verbForms: { present1sg: 'tutustun', present3sg: 'tutustuu' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'tutustua m, tutustun' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'tutustua, tutustun' },
     verification: 'source-verified',
   },
   {
@@ -547,7 +547,7 @@ export const OS1_WORDS: Word[] = [
       'Appears in the Oma suomi 1 chapter 1 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['sosiaaliset'],
     verbForms: { present1sg: 'häiritsen', present3sg: 'häiritsee' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'häiritä 1s1, häiritsen' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'häiritä, häiritsen' },
     verification: 'source-verified',
   },
   {
@@ -563,7 +563,7 @@ export const OS1_WORDS: Word[] = [
       'Appears in the Oma suomi 1 chapter 1 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['koulu'],
     verbForms: { present1sg: 'täydennän', present3sg: 'täydentää' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'täydentää f11, täydennän' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'täydentää, täydennän' },
     verification: 'source-verified',
   },
   {
@@ -1657,7 +1657,7 @@ export const OS1_WORDS: Word[] = [
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['arki'],
     verbForms: { present1sg: 'avaan', present3sg: 'avaa' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'avata t4l, avaan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'avata, avaan' },
     verification: 'source-verified',
   },
   {
@@ -1686,7 +1686,7 @@ export const OS1_WORDS: Word[] = [
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['arki'],
     verbForms: { present1sg: 'herään', present3sg: 'herää' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'herätä 14l, herään' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'herätä, herään' },
     verification: 'source-verified',
   },
   {
@@ -1729,7 +1729,7 @@ export const OS1_WORDS: Word[] = [
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['arki'],
     verbForms: { present1sg: 'istun', present3sg: 'istuu' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'istua 01, istun' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'istua, istun' },
     verification: 'source-verified',
   },
   {
@@ -1758,7 +1758,7 @@ export const OS1_WORDS: Word[] = [
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['sosiaaliset'],
     verbForms: { present1sg: 'juttelen', present3sg: 'juttelee' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'jutella 01, juttelen' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'jutella, juttelen' },
     verification: 'source-verified',
   },
   {
@@ -1815,7 +1815,7 @@ export const OS1_WORDS: Word[] = [
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['koti'],
     verbForms: { present1sg: 'keitän', present3sg: 'keittää' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'keittää m, keitän' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'keittää, keitän' },
     verification: 'source-verified',
   },
   {
@@ -1929,7 +1929,7 @@ export const OS1_WORDS: Word[] = [
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['liikkuminen'],
     verbForms: { present1sg: 'lähden', present3sg: 'lähtee' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'lähteä (11, lähden' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'lähteä, lähden' },
     verification: 'source-verified',
   },
   {
@@ -2002,7 +2002,7 @@ export const OS1_WORDS: Word[] = [
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['arki'],
     verbForms: { present1sg: 'nousen', present3sg: 'nousee' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'nousta 01, nousen' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'nousta, nousen' },
     verification: 'source-verified',
   },
   {
@@ -2076,7 +2076,7 @@ export const OS1_WORDS: Word[] = [
     topics: ['arki'],
     verbForms: { present1sg: 'pelaan', present3sg: 'pelaa' },
     verbType: 4,
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'pelata !4l, pelaan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'pelata, pelaan' },
     verification: 'source-verified',
   },
   {
@@ -2092,7 +2092,7 @@ export const OS1_WORDS: Word[] = [
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['koti'],
     verbForms: { present1sg: 'pesen', present3sg: 'pesee' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'pestä <11, pesen' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'pestä, pesen' },
     verification: 'source-verified',
   },
   {
@@ -2163,7 +2163,7 @@ export const OS1_WORDS: Word[] = [
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['koti'],
     verbForms: { present1sg: 'siivoan', present3sg: 'siivoaa' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'siivota 14l, siivoan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'siivota, siivoan' },
     verification: 'source-verified',
   },
   {
@@ -2362,7 +2362,7 @@ export const OS1_WORDS: Word[] = [
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['palvelut'],
     verbForms: { present1sg: 'varaan', present3sg: 'varaa' },
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'varata 141, varaan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'varata, varaan' },
     verification: 'source-verified',
   },
   {

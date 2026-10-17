@@ -312,7 +312,7 @@ export const B1_VERBS: Word[] = [
     note: 'Both rections are worth memorising together; the -maan form is the one you need for "managed to".',
     related: ['v-epaonnistua', 'v-jaksaa'],
     grammarRefs: ['g-rektio', 'g-maan', 'g-inessiivi'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 9: Yllätysjuhlat', page: 235, section: 'SANASTO', sourceTerm: 'onnistua m, onnistun' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 9: Yllätysjuhlat', page: 235, section: 'SANASTO', sourceTerm: 'onnistua, onnistun' },
     verification: 'source-verified',
   },
   {
@@ -544,7 +544,7 @@ export const B1_VERBS: Word[] = [
     note: 'Type 4, and the stem strengthens rr: verrata -> vertaa-. What you compare TO takes -Vn.',
     related: ['v-huomata'],
     grammarRefs: ['g-verbityypit', 'g-illatiivi', 'g-rektio'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 7: (kappale 7)', page: 181, section: 'SANASTO', sourceTerm: 'verrata !4), vertaan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 7: (kappale 7)', page: 181, section: 'SANASTO', sourceTerm: 'verrata, vertaan' },
     verification: 'source-verified',
   },
   {
@@ -568,7 +568,7 @@ export const B1_VERBS: Word[] = [
     note: 'Usually followed by "että" + a normal clause. KPT tt -> t: ehdotan.',
     related: ['n-ehdotus', 'v-pyytaa'],
     grammarRefs: ['g-kpt'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 9: Yllätysjuhlat', page: 235, section: 'SANASTO', sourceTerm: 'ehdottaa 111, ehdotan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 9: Yllätysjuhlat', page: 235, section: 'SANASTO', sourceTerm: 'ehdottaa, ehdotan' },
     verification: 'source-verified',
   },
   {
@@ -647,7 +647,7 @@ export const B1_VERBS: Word[] = [
     ],
     related: ['v-lopettaa', 'v-jatkaa'],
     grammarRefs: ['g-kpt'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 6: Vaatteet ja ostokset', page: 155, section: 'SANASTO', sourceTerm: 'aloittaa (1l, aloitan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 6: Vaatteet ja ostokset', page: 155, section: 'SANASTO', sourceTerm: 'aloittaa, aloitan' },
     verification: 'source-verified',
   },
   {
@@ -884,7 +884,7 @@ export const B1_VERBS: Word[] = [
     note: 'In practice used almost only in the 3rd person: tapahtuu, tapahtui. "Mitä tapahtui?" is the everyday question.',
     related: ['v-esiintya'],
     grammarRefs: ['g-imperfekti'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'tapahtua m, se tapahtuu' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'tapahtua, se tapahtuu' },
     verification: 'source-verified',
   },
   {
@@ -954,7 +954,7 @@ export const B1_VERBS: Word[] = [
     note: 'Two meanings: "Yksi paperi puuttuu" = one paper is missing; "puuttua asiaan" = to step in.',
     related: ['v-riittaa'],
     grammarRefs: ['g-kpt', 'g-illatiivi'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 7: (kappale 7)', page: 181, section: 'SANASTO', sourceTerm: 'puuttua <1>' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 7: (kappale 7)', page: 181, section: 'SANASTO', sourceTerm: 'puuttua' },
     verification: 'source-verified',
   },
   {
@@ -974,7 +974,7 @@ export const B1_VERBS: Word[] = [
     note: 'A very Finnish verb with no clean English equivalent: it is about having energy left. "Mitä kuuluu?" - "Jaksan hyvin."',
     noteTl: 'Walang eksaktong salin sa Ingles - ito ay tungkol sa natitirang lakas.',
     related: ['v-selvita', 'v-onnistua'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 204, section: 'SANASTO', sourceTerm: 'jaksaa !1l, jaksan' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 204, section: 'SANASTO', sourceTerm: 'jaksaa, jaksan' },
     verification: 'source-verified',
   },
   {
@@ -1096,7 +1096,7 @@ export const B1_VERBS: Word[] = [
     noteTl: 'Illatiivi: luotan sinuun. Hindi *luotan sinua.',
     related: ['v-uskoa'],
     grammarRefs: ['g-kpt', 'g-illatiivi', 'g-rektio'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 10: On hauskaa auttaa ystävää', page: 257, section: 'SANASTO', sourceTerm: 'luottaa 11>, luotan + mihin' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 10: On hauskaa auttaa ystävää', page: 257, section: 'SANASTO', sourceTerm: 'luottaa, luotan + mihin' },
     verification: 'source-verified',
   },
   {
@@ -1411,7 +1411,7 @@ export const B1_VERBS: Word[] = [
     noteTl: 'Pinakamahalagang tanong sa klase: "Mitä ___ tarkoittaa?"',
     related: ['n-tarkoitus', 'v-selittaa'],
     grammarRefs: ['g-kpt'],
-    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 11: Minun urapolkuni', page: 274, section: 'SANASTO', sourceTerm: 'tarkoittaa m, tarkoitan + P' },
+    source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 11: Minun urapolkuni', page: 274, section: 'SANASTO', sourceTerm: 'tarkoittaa, tarkoitan +' },
     verification: 'source-verified',
   },
 ];
