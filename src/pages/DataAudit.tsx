@@ -5,6 +5,9 @@ import { IMPORTED_WORDS, MERGED_AWAY, WORDS, validateWords } from '@/data/words'
 import { GRAMMAR_LESSONS } from '@/data/grammar';
 import { PHRASES } from '@/data/phrases';
 import { SOURCE_BOOKS } from '@/data/sources';
+import { SCENES, SCENE_LEXICON } from '@/data/situations';
+import { ALL_SPOKEN } from '@/data/puhekieli';
+import { getWord } from '@/data/words';
 import { OS1_SANASTO_CHAPTERS } from '@/data/sources/os1-sanasto';
 
 const SEVERITY_STYLE = {
@@ -187,6 +190,8 @@ export function DataAudit() {
         </div>
       </section>
 
+      <SituationsProvenance />
+
       {/* ------------------------- integrity check --------------------------- */}
       <section className="section">
         <h2 className="section__title" style={{ fontSize: '1rem', marginBottom: 10 }}>
@@ -217,6 +222,74 @@ export function DataAudit() {
         </Callout>
       </div>
     </div>
+  );
+}
+
+/**
+ * The Situations feature makes a narrower claim than the rest of the app, so it
+ * gets its own row of numbers: the dialogue is written, the words are not.
+ */
+function SituationsProvenance() {
+  const stats = useMemo(() => {
+    const choices = SCENES.reduce((n, s) => n + s.turns.length, 0);
+    const replies = SCENES.reduce(
+      (n, s) => n + s.turns.reduce((m, t) => m + t.options.length, 0),
+      0,
+    );
+    const traced = SCENE_LEXICON.filter((g) => g.wordId);
+    // Some forms that are not dictionary entries still have a real citation in
+    // their note - the numerals are printed in the Suomen mestari 2 tables.
+    const citedBasis = SCENE_LEXICON.filter(
+      (g) => !g.wordId && /Suomen mestari|Oma suomi/.test(g.basis ?? ''),
+    ).length;
+    const entries = [...new Set(traced.map((g) => g.wordId!))];
+    const words = entries.map((id) => getWord(id)).filter((w) => Boolean(w));
+    const cited = words.filter((w) => w!.source !== null).length;
+    return {
+      choices,
+      replies,
+      forms: SCENE_LEXICON.length,
+      tracedForms: traced.length,
+      basisForms: SCENE_LEXICON.length - traced.length,
+      citedBasis,
+      entries: entries.length,
+      cited,
+    };
+  }, []);
+
+  return (
+    <section className="section">
+      <h2 className="section__title" style={{ fontSize: '1rem', marginBottom: 10 }}>
+        Situations
+      </h2>
+      <Callout kind="warn">
+        <b>The dialogues are written for this app.</b> They are not transcripts of anything printed
+        in a book, and there is no AI answering - each scene always goes the same way. What is
+        sourced is the language they are built from.
+      </Callout>
+      <div className="panel panel--tight" style={{ marginTop: 10 }}>
+        <p className="small" style={{ lineHeight: 1.75 }}>
+          {SCENES.length} scenes · {stats.choices} choices · {stats.replies} written replies
+          <br />
+          {stats.forms} distinct Finnish word forms appear in the dialogue lines
+          <br />
+          <b>{stats.tracedForms}</b> of them trace to one of <b>{stats.entries}</b> dictionary
+          entries, and <b>{stats.cited}</b> of those entries carry a book citation
+          <br />
+          {stats.basisForms} are not dictionary entries - names, greeting and reply words,
+          numerals, and one form that is not Finnish at all and appears only inside a wrong answer
+          option. {stats.citedBasis} of those carry a book citation in their note anyway; the rest
+          say plainly that they have none, rather than carrying an invented one
+          <br />
+          {ALL_SPOKEN.length} spoken forms transcribed from Suomen mestari 2, s. 293-296, which is
+          where every puhekieli form in the scenes comes from
+        </p>
+      </div>
+      <p className="tiny dim" style={{ marginTop: 8, lineHeight: 1.65 }}>
+        <code>npm run validate:situations</code> re-checks all of this and fails if a dialogue line
+        gains a word that is not accounted for.
+      </p>
+    </section>
   );
 }
 

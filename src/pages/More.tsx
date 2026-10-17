@@ -6,11 +6,18 @@ import { WORDS } from '@/data/words';
 
 const LINKS: { to: string; title: string; sub: string; icon: IconName; colour: string }[] = [
   {
+    to: '/situations',
+    title: 'Situations',
+    sub: 'Role-play a conversation, choose what to say',
+    icon: 'chat',
+    colour: 'var(--c-phrases)',
+  },
+  {
     to: '/phrases',
     title: 'Useful Phrases',
     sub: 'Organised by real-life situation',
-    icon: 'chat',
-    colour: 'var(--c-phrases)',
+    icon: 'hand',
+    colour: '#0ea5e9',
   },
   {
     to: '/listening',

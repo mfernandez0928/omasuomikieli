@@ -488,3 +488,108 @@ export interface SessionResume {
   percent: number;
   updatedAt: number;
 }
+
+/* ------------------------------------------------------------------ */
+/* Situations (role-play)                                              */
+/* ------------------------------------------------------------------ */
+
+/**
+ * A scripted role-play scene: the other person speaks, the learner picks what
+ * to say back.
+ *
+ * Honesty note, because this is easy to oversell. The dialogues are WRITTEN
+ * for this app - they are not transcripts of anything printed in a book, and
+ * there is no AI on the other end. What is sourced is the material they are
+ * built from: every word maps to a dictionary entry that carries its own
+ * citation, and every spoken form comes from the puhekieli tables in
+ * `src/data/puhekieli.ts`. `scripts/validate-situations.mjs` enforces that -
+ * a line containing a word that is not accounted for fails the build.
+ */
+export interface RolePlayLine {
+  fi: string;
+  en: string;
+  tl: string;
+  /** The same line in standard Finnish, when the spoken form differs. */
+  yleiskieli?: string;
+}
+
+export interface RolePlayOption extends RolePlayLine {
+  /** Whether this reply actually does the job. */
+  ok: boolean;
+  /** Why it works, or what is wrong with it. Never just 'correct'. */
+  why: string;
+  whyTl: string;
+}
+
+export interface RolePlayTurn {
+  id: string;
+  /** What the other person says first. Omitted when the learner opens. */
+  partner?: RolePlayLine;
+  /** What the learner has to achieve on this turn. */
+  task: string;
+  taskTl: string;
+  options: RolePlayOption[];
+  /** Id of the goal this turn ticks off. */
+  completes?: string;
+}
+
+export interface RolePlayGoal {
+  id: string;
+  en: string;
+  tl: string;
+}
+
+export interface RolePlay {
+  id: string;
+  /** English label, e.g. 'At the shop'. */
+  title: string;
+  /** Finnish label as a Finn would name the situation, e.g. 'Kaupassa'. */
+  titleFi: string;
+  /** One line of scene-setting. */
+  setting: string;
+  settingTl: string;
+  /** Who the learner is talking to, in English. */
+  partnerName: string;
+  level: Level;
+  icon: string;
+  colour: string;
+  /** Which register the scene is written in, and why it is the realistic one. */
+  register: 'puhekieli' | 'yleiskieli' | 'mixed';
+  registerNote: string;
+  goals: RolePlayGoal[];
+  turns: RolePlayTurn[];
+  /** What the other person says as the scene ends. */
+  closing?: RolePlayLine;
+  /** Dictionary ids for the words the scene leans on, for follow-up study. */
+  vocabulary: string[];
+  grammarRefs?: string[];
+  /** Books the vocabulary and spoken forms were taken from. */
+  vocabularyFrom: SourceRef[];
+  /** Always 'supplementary': the dialogue itself is written, not quoted. */
+  origin: ContentOrigin;
+  verification: Verification;
+}
+
+/**
+ * One surface form appearing in a scene, with the dictionary entry it comes
+ * from. This is what makes the vocabulary claim checkable rather than a
+ * promise: the validator requires every word of every line to have an entry
+ * here, and every `wordId` to resolve to a real dictionary word.
+ */
+export interface SceneGloss {
+  /** The form exactly as it appears in a dialogue line, lower-cased. */
+  form: string;
+  /** Dictionary entry id, when the form inflects from a dictionary headword. */
+  wordId?: string;
+  /** The dictionary form, for display. */
+  lemma: string;
+  /** Short English gloss of this form in this context. */
+  en: string;
+  /** The grammar of the form, e.g. 'inessiivi' or 'mä = minä (puhekieli)'. */
+  grammar?: string;
+  /**
+   * Set when the form is not a dictionary word and never will be: names,
+   * greetings and interjections. The string says where it comes from.
+   */
+  basis?: string;
+}

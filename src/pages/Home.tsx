@@ -34,11 +34,19 @@ const TILES: {
     light: true,
   },
   {
+    to: '/situations',
+    title: 'Situations',
+    sub: 'Role-play a real conversation',
+    icon: 'chat',
+    bg: 'var(--c-phrases)',
+    light: true,
+  },
+  {
     to: '/phrases',
     title: 'Useful Phrases',
     sub: 'Everyday situations',
-    icon: 'chat',
-    bg: 'var(--c-phrases)',
+    icon: 'hand',
+    bg: '#0ea5e9',
     light: true,
   },
   {

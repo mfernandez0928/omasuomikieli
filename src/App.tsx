@@ -8,6 +8,7 @@ import { GrammarLessonPage } from '@/pages/GrammarLesson';
 import { Vocabulary } from '@/pages/Vocabulary';
 import { WordDetail } from '@/pages/WordDetail';
 import { PhraseSituation, PhrasesList } from '@/pages/Phrases';
+import { SituationPlay, SituationsList } from '@/pages/Situations';
 import {
   GrammarPractice,
   MixedPractice,
@@ -56,6 +57,9 @@ export default function App() {
 
             <Route path="/phrases" element={<PhrasesList />} />
             <Route path="/phrases/:id" element={<PhraseSituation />} />
+
+            <Route path="/situations" element={<SituationsList />} />
+            <Route path="/situations/:id" element={<SituationPlay />} />
 
             <Route path="/practice" element={<PracticeHub />} />
             <Route path="/practice/review" element={<ReviewSession />} />

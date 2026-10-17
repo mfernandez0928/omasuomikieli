@@ -1379,3 +1379,133 @@ p {
     font-size: 0.82rem;
   }
 }
+
+/* ==========================================================================
+   Situations (role-play)
+   ========================================================================== */
+
+/* Goal checklist above the conversation. */
+.goals {
+  display: grid;
+  gap: 8px;
+  list-style: none;
+}
+.goals__item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+.goals__item--met {
+  color: var(--ink);
+}
+.goals__tick {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: var(--surface-3);
+  color: var(--ink-dim);
+}
+.goals__item--met .goals__tick {
+  background: var(--ok);
+  color: #04210f;
+}
+.goals__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+/* The conversation itself. */
+.chat {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+.chat__row {
+  display: flex;
+}
+.chat__row--partner {
+  justify-content: flex-start;
+}
+.chat__row--you {
+  justify-content: flex-end;
+}
+.bubble {
+  max-width: 88%;
+  padding: 11px 13px;
+  border-radius: 16px;
+  border: 1px solid var(--border-soft);
+}
+.bubble--partner {
+  background: var(--surface-2);
+  border-bottom-left-radius: 5px;
+}
+.bubble--you {
+  background: rgba(246, 166, 35, 0.13);
+  border-color: rgba(246, 166, 35, 0.34);
+  border-bottom-right-radius: 5px;
+}
+.bubble__fi {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+.bubble__toggle {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: transparent;
+  padding: 2px 0;
+}
+
+/* A tappable word inside a dialogue line. */
+.w {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  padding: 0;
+  border-bottom: 1px dotted rgba(246, 166, 35, 0.6);
+  border-radius: 0;
+  min-height: 0;
+}
+.w:hover,
+.w:focus-visible {
+  color: var(--gold-bright);
+  border-bottom-color: var(--gold-bright);
+}
+
+/* Word explanation, docked above the bottom nav. */
+.glossbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: var(--nav-h);
+  z-index: 35;
+  margin: 0 auto;
+  max-width: var(--max-w);
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: var(--r) var(--r) 0 0;
+  box-shadow: var(--shadow);
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px));
+  margin-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Reply options are white study cards, so their secondary text needs the
+   card ink rather than the dark-surface ink. */
+.option .small {
+  color: var(--card-ink-soft);
+  font-weight: 500;
+}
