@@ -77,10 +77,10 @@ over plain `http://` on a remote host.
 
 | Content | Count |
 | --- | --- |
-| Dictionary entries | 768 |
+| Dictionary entries | 777 |
 | Grammar lessons | 24 (A1 → B1), 19 textbook-derived |
 | Exercises | 106 (95 in grammar lessons, 11 in reading) |
-| Phrases | 77 across 14 situations |
+| Phrases | 96 across 15 situations |
 | Role-play situations | 5 scenes, 18 turns, 54 written replies |
 | Reading passages | 3, with comprehension questions |
 
@@ -124,14 +124,14 @@ Every entry carries one of four statuses, defined in `src/types/index.ts`:
 
 | Status | Count | Meaning |
 | --- | --- | --- |
-| `source-verified` | 710 | Headword located in a named book, **and** its forms checked |
-| `linguistically-checked` | 47 | Not in the lists read so far; forms derived and checked against standard morphology |
+| `source-verified` | 716 | Headword located in a named book, **and** its forms checked |
+| `linguistically-checked` | 50 | Not in the lists read so far; forms derived and checked against standard morphology |
 | `supplementary` | 10 | Imported from the v0.2.1 database; useful, but not traced or individually checked |
 | `needs-review` | 1 | Something specific is uncertain; the entry records what |
 
 Sources matched: **Suomen mestari 2** (all 8 chapter word lists, printed pages), **Suomen
 mestari 3** (ch. 1–4, 6–8; ch. 5 outstanding) and **Oma suomi 1** (all 13 chapter SANASTO lists
-transcribed). 646 Oma suomi 1 headwords are imported with meanings, concentrated in chapters
+transcribed). 652 Oma suomi 1 headwords are imported with meanings, concentrated in chapters
 1–6 and 8; chapters 7 and 9–13 are so far only sampled.
 
 Every verb carries a full six-person present-tense paradigm. Where a book prints only the 1sg, the
@@ -317,7 +317,7 @@ vocabulary in the role-plays.
    them. They would need OCR first.
 2. **Suomen mestari 2 and 3 have not been mined for new vocabulary**, only matched against existing
    entries. Suomen mestari 3 chapter 5 word lists are still outstanding.
-3. **791 of the 1 432 transcribed Oma suomi 1 headwords are not yet imported.** They need
+3. **785 of the 1 432 transcribed Oma suomi 1 headwords are not yet imported.** They need
    English and Tagalog meanings and a topic before they can become dictionary entries; chapters 7
    and 9–13 are the bulk of the backlog.
 4. **Listening practice has no recorded audio.** It uses the device's Finnish text-to-speech; with

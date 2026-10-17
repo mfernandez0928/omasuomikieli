@@ -341,7 +341,8 @@ export type SituationId =
   | 'apu'
   | 'ongelma'
   | 'mielipide'
-  | 'anteeksi';
+  | 'anteeksi'
+  | 'pyynnot';
 
 export interface Phrase {
   id: string;

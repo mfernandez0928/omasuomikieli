@@ -140,6 +140,13 @@ export const SITUATIONS: Situation[] = [
     description: 'Apologising and fixing a misunderstanding.',
     icon: 'people',
   },
+  {
+    id: 'pyynnot',
+    title: 'Asking someone to do something',
+    titleFi: 'Pyynnöt: tee se minulle',
+    description: 'Short requests addressed to one person, and the case each one puts you in.',
+    icon: 'hand',
+  },
 ];
 
 export const SITUATION_BY_ID = new Map(SITUATIONS.map((s) => [s.id, s]));

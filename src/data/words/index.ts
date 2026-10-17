@@ -9,6 +9,7 @@ import { OS1_WORDS } from './os1-words';
 import { OS1_WORDS_2 } from './os1-words-2';
 import { OS1_WORDS_3 } from './os1-words-3';
 import { OS1_CORE_WORDS } from './os1-core';
+import { EVERYDAY_VERBS } from './everyday-verbs';
 
 /**
  * The curated set is authored in this folder. The supplied v0.2.1 database is
@@ -29,6 +30,7 @@ const CURATED: Word[] = [
   ...OS1_WORDS_2,
   ...OS1_WORDS_3,
   ...OS1_CORE_WORDS,
+  ...EVERYDAY_VERBS,
 ];
 
 const curatedFinnish = new Set(CURATED.map((w) => w.fi.toLowerCase()));
@@ -99,4 +101,5 @@ export {
   OS1_WORDS_2,
   OS1_WORDS_3,
   OS1_CORE_WORDS,
+  EVERYDAY_VERBS,
 };
