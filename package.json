@@ -4,6 +4,8 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Oma Suomi - a personal Finnish learning PWA (Finnish / English / Tagalog)",
+  "author": "MarkDev",
+  "license": "UNLICENSED",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

@@ -6,6 +6,7 @@ import { useApp, useDailyProgress } from '@/hooks/useApp';
 import { lastSevenDays } from '@/services/storage/progress';
 import { todayKey } from '@/services/storage/prefs';
 import { loadResume } from '@/services/storage/prefs';
+import { BRAND } from '@/data/brand';
 import { TOPICS } from '@/data/topics';
 import { GRAMMAR_LESSONS } from '@/data/grammar';
 import { dueCount } from '@/services/srs/scheduler';
@@ -117,6 +118,7 @@ export function Home() {
           <span>Suomi</span>
         </h1>
         <p className="hero__sub">Learn Finnish. Every Day.</p>
+        <p className="hero__mark">{BRAND}</p>
       </section>
 
       {loadState === 'unavailable' && <StorageWarning />}

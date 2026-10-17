@@ -1509,3 +1509,14 @@ p {
   color: var(--card-ink-soft);
   font-weight: 500;
 }
+
+/* The app's own mark, under the hero title. */
+.hero__mark {
+  margin-top: 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.85;
+}

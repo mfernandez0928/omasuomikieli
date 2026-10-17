@@ -3,6 +3,7 @@ import { Icon, type IconName } from '@/components/Icon';
 import { TopBar } from '@/components/ui';
 import { useApp } from '@/hooks/useApp';
 import { WORDS } from '@/data/words';
+import { BRAND, COPYRIGHT } from '@/data/brand';
 
 const LINKS: { to: string; title: string; sub: string; icon: IconName; colour: string }[] = [
   {
@@ -100,6 +101,10 @@ export function More() {
 
       <p className="tiny dim center" style={{ marginTop: 26, lineHeight: 1.7 }}>
         Oma Suomi · {WORDS.length} words · works offline · no account needed
+        <span style={{ display: 'block', marginTop: 6 }}>
+          <b style={{ color: 'var(--gold)' }}>{BRAND}</b>
+        </span>
+        <span style={{ display: 'block' }}>{COPYRIGHT}</span>
       </p>
     </div>
   );

@@ -5,6 +5,7 @@ import { Callout, Toggle, TopBar } from '@/components/ui';
 import { useApp } from '@/hooks/useApp';
 import { clearAll, exportAll, isStorageAvailable } from '@/services/storage/db';
 import { WORDS } from '@/data/words';
+import { BRAND, COPYRIGHT } from '@/data/brand';
 import { GRAMMAR_LESSONS, ALL_EXERCISES } from '@/data/grammar';
 import { PHRASES } from '@/data/phrases';
 
@@ -182,6 +183,11 @@ export function Settings() {
       <p className="tiny dim center" style={{ marginTop: 22, lineHeight: 1.7 }}>
         Oma Suomi runs entirely on this device. There is no account, no server and no tracking. Your
         progress lives in this browser's storage only - clearing site data erases it.
+      </p>
+
+      <p className="tiny dim center" style={{ marginTop: 14, lineHeight: 1.7 }}>
+        <b style={{ color: 'var(--gold)' }}>{BRAND}</b>
+        <span style={{ display: 'block' }}>{COPYRIGHT}</span>
       </p>
     </div>
   );
