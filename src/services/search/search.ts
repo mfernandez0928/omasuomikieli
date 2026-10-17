@@ -7,7 +7,7 @@ import { GRAMMAR_LESSONS } from '@/data/grammar';
  * Search across the whole dictionary, including inflected forms.
  *
  * Finnish needs the inflected forms in the index: a learner who meets
- * "kaupassa" in the wild should find "kauppa". Every form we actually store
+ * "kaupassa" in the wild should find "kauppa". Every form the entry stores
  * (genitive, partitive, illative, plurals, conjugations) is indexed alongside
  * the headword, the English and the Tagalog.
  */
@@ -43,7 +43,7 @@ function fold(s: string): string {
  * This is the same move the Genitive lesson teaches: drop the -n from the
  * genitive and you have the stem that -ssa, -sta, -lla, -lta and -lle attach
  * to. Deriving them here means a learner who meets "kaupassa" in the wild can
- * look it up, without us storing (or asserting) a dozen extra forms per word.
+ * look it up, without storing a dozen extra forms per entry.
  *
  * These forms are used for MATCHING ONLY. They are never shown as dictionary
  * data, because the regular pattern does not hold for every word.
@@ -233,7 +233,8 @@ export function searchPhrases(query: string): Phrase[] {
 /**
  * Normalises a typed answer before comparing: case, surrounding space,
  * repeated spaces and trailing punctuation are all ignored. Finnish letters
- * are NOT folded here - writing "aiti" for "äiti" is a real mistake.
+ * are kept distinct: writing "aiti" for "äiti" is a spelling error, not a
+ * variant.
  */
 export function normaliseAnswer(s: string): string {
   return s

@@ -1,11 +1,8 @@
 import type { SrsCard, SrsGrade, WordStatus } from '@/types';
 
 /**
- * A transparent SM-2 style scheduler.
- *
- * Deliberately simple and inspectable: you can read off exactly when a card
- * comes back, and the app shows the interval on the answer buttons. Nothing
- * here talks to a server - all state lives in IndexedDB on this device.
+ * SM-2 style scheduler. State lives in IndexedDB on the device; the next
+ * interval is shown on the answer buttons.
  *
  * - again: reset to 10 minutes, ease down, count a lapse
  * - hard:  interval x 1.2, ease down a little

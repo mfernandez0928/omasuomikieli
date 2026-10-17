@@ -2,25 +2,19 @@ import type { RolePlay } from '@/types';
 import { PUHEKIELI_SOURCE } from '@/data/puhekieli';
 
 /**
- * Role-play scenes.
+ * Role-play scenes: short scripted conversations of three or four turns.
  *
- * What these are: short scripted conversations where the other person speaks
- * and you choose what to say back. Every scene ends by itself after a handful
- * of turns.
+ * The dialogue is written for this app rather than quoted from a book, so the
+ * vocabulary is constrained instead:
  *
- * What these are NOT: there is no AI on the other end, and the dialogue is not
- * a transcript of anything printed in a book. The sentences were written for
- * this app. What comes out of the books is the material they are made of:
+ *  - every word form resolves through `lexicon.ts` to a dictionary entry that
+ *    carries its own citation;
+ *  - colloquial forms (mä, oon, meen, onks, tos, sit) come from the Puhekieli
+ *    section of Suomen mestari 2, printed pages 293-296;
+ *  - `scripts/validate-situations.mjs` fails on an unaccounted word.
  *
- *  - every word in every line maps to a dictionary entry, and those entries
- *    carry their own book citations;
- *  - every spoken form (mä, oon, meen, onks, tos, sit, ...) comes from the
- *    Puhekieli section of Suomen mestari 2, printed pages 293-296;
- *  - `scripts/validate-situations.mjs` refuses to pass if a line contains a
- *    word that is not accounted for in `lexicon.ts`.
- *
- * The wrong options are deliberately near-misses - the mistake a learner
- * actually makes - and each one says what went wrong rather than just "no".
+ * Distractors are near-misses rather than nonsense, and each carries the rule
+ * it breaks.
  */
 export const SCENES: RolePlay[] = [
   /* ----------------------------------------------------------------- */
@@ -38,7 +32,7 @@ export const SCENES: RolePlay[] = [
     colour: 'var(--c-phrases)',
     register: 'puhekieli',
     registerNote:
-      'Spoken Finnish. In a shop nobody says minä or tarvitsetko - you will hear mä and tarvitseks sä, and the standard form is shown under every line.',
+      'Spoken Finnish. In a shop you will hear mä and tarvitseks sä rather than minä and tarvitsetko. The standard form is shown under every line.',
     goals: [
       { id: 'find', en: 'Ask where the milk is', tl: 'Itanong kung saan ang gatas' },
       { id: 'price', en: 'Ask what it costs', tl: 'Itanong kung magkano' },
@@ -252,7 +246,7 @@ export const SCENES: RolePlay[] = [
     colour: '#ef4756',
     register: 'yleiskieli',
     registerNote:
-      'Standard Finnish on purpose. This is a phone call to an office, and the careful forms - haluaisin, teillä, minun pitää - are what you will hear and be expected to use.',
+      'Standard Finnish, because this is a call to an office. The careful forms (haluaisin, teillä, minun pitää) are what you will hear and be expected to use.',
     goals: [
       { id: 'asia', en: 'Say who you are and why you are calling', tl: 'Sabihin kung sino ka at bakit tumatawag' },
       { id: 'oireet', en: 'Describe your symptoms', tl: 'Ilarawan ang mga sintomas' },
@@ -452,7 +446,7 @@ export const SCENES: RolePlay[] = [
     colour: 'var(--c-grammar)',
     register: 'mixed',
     registerNote:
-      'A private call, so spoken forms are normal on both sides - but the facts you are asking for (vuokra, neliömetri, kerros) are the written vocabulary of adverts.',
+      'A private call, so spoken forms are normal on both sides. The facts you are asking for (vuokra, neliömetri, kerros) keep the written vocabulary of adverts.',
     goals: [
       { id: 'vapaa', en: 'Find out whether the flat is still free', tl: 'Tanungin kung bakante pa' },
       { id: 'vuokra', en: 'Ask the rent per month', tl: 'Itanong ang upa kada buwan' },
@@ -662,7 +656,7 @@ export const SCENES: RolePlay[] = [
     colour: 'var(--c-listening)',
     register: 'puhekieli',
     registerNote:
-      'A stranger on the street speaks to you the way they speak to anyone: mä, sä, tos, sit. The standard form is under every line.',
+      'A stranger on the street uses everyday forms: mä, sä, tos, sit. The standard form is under every line.',
     goals: [
       { id: 'kysy', en: 'Ask where the station is', tl: 'Itanong kung saan ang istasyon' },
       { id: 'matka', en: 'Find out whether you can walk', tl: 'Tanungin kung kaya maglakad' },
@@ -826,7 +820,7 @@ export const SCENES: RolePlay[] = [
     colour: 'var(--c-vocab)',
     register: 'mixed',
     registerNote:
-      'Spoken forms are normal with a supervisor you know - but what you say has to be complete: who you are, what is wrong, and what happens next.',
+      'Spoken forms are normal with a supervisor you know, but the call still has to cover three things: who you are, what is wrong, and what happens next.',
     goals: [
       { id: 'ilmoitus', en: 'Say who you are and that you cannot come', tl: 'Sabihin kung sino ka at hindi ka makakapasok' },
       { id: 'oireet', en: 'Say what is wrong', tl: 'Sabihin kung ano ang nararamdaman' },

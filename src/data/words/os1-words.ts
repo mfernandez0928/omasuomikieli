@@ -4,12 +4,12 @@ import type { Word } from '@/types';
  * Vocabulary imported from the Oma suomi 1 chapter SANASTO lists.
  *
  * The Finnish headword, the genitive or 1st-person form, the verb type and the
- * printed page all come from the book (see `src/data/sources/os1-sanasto.ts`
- * for the full transcription). The English and Tagalog meanings and the topic
- * are this app's own - the SANASTO lists are monolingual.
+ * printed page all come from the book (see `src/data/sources/os1-sanasto.ts`).
+ * The SANASTO lists are monolingual, so the English and Tagalog meanings and
+ * the topic are editorial.
  *
- * 3sg forms are intentionally left empty where the book does not print one:
- * the app shows only the forms it actually has.
+ * The 3sg is left empty where the book prints none; the UI renders only the
+ * forms that are present.
  */
 export const OS1_WORDS: Word[] = [
   {

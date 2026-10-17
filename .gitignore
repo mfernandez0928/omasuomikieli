@@ -5,6 +5,7 @@ node_modules/
 dist/
 dist-ssr/
 *.local
+tsconfig.tsbuildinfo
 
 # local backups of the vocabulary data (not part of the app)
 .backups/
@@ -32,3 +33,9 @@ logs/
 
 # Full textbook word-list transcription: a working record, not for a public repo.
 src/data/sources/*.local.ts
+
+# local editor and assistant tooling
+.idea/
+.claude/
+.cursor/
+.aider*

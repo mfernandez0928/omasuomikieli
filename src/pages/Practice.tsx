@@ -186,7 +186,7 @@ export function ReviewSession() {
     setRevealed(false);
 
     if (grade === 'again') {
-      // Put it back near the end of this session rather than losing it.
+      // Requeue near the end of the session instead of dropping it.
       setQueue((q) => {
         const base = q ?? activeQueue;
         const rest = base.filter((_, i) => i !== pos);
@@ -403,7 +403,7 @@ export function WordPractice() {
       });
     }
 
-    // 2. Conjugation, when we actually know the form.
+    // 2. Conjugation, where the form is known.
     if (word.verbForms?.present1sg) {
       out.push({
         id: `wp-${word.id}-1sg`,

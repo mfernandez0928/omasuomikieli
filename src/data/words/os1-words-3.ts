@@ -5,7 +5,7 @@ import type { Word } from '@/types';
  * body parts, the doctor) and chapter 6 (clothes, weather, seasons).
  *
  * The book supplies the headword, forms, verb type and printed page; the
- * English and Tagalog meanings and the topic are this app's own.
+ * English and Tagalog meanings and the topic are editorial.
  */
 export const OS1_WORDS_3: Word[] = [
   {

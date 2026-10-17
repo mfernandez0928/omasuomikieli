@@ -1,17 +1,15 @@
 import type { SourceRef } from '@/types';
 
 /**
- * Spoken Finnish (puhekieli), transcribed from Suomen mestari 2's own
- * Puhekieli section, printed pages 293-296.
+ * Spoken Finnish, transcribed from the Puhekieli section of Suomen mestari 2,
+ * printed pages 293-296.
  *
- * The book states what variety it teaches: "Tämän kirjan puhekieli on
- * yleispuhekieltä, jota puhutaan esimerkiksi pääkaupunkiseudulla" - the general
- * spoken language of the Helsinki region. Finland has plenty of local variation
- * on top of this; that sentence is the book's own scope note, not ours.
+ * The variety is the one the book teaches: yleispuhekieli, the general spoken
+ * language of the Helsinki region. Regional variation on top of it is out of
+ * scope here.
  *
- * This file is the single source of truth for every spoken form the Situations
- * use. `scripts/validate-situations.mjs` checks each dialogue line against it,
- * so a scene cannot quietly invent a colloquial form.
+ * Single source of truth for the colloquial forms the Situations use;
+ * `scripts/validate-situations.mjs` checks each dialogue line against it.
  */
 
 export const PUHEKIELI_SOURCE: SourceRef = {
@@ -26,14 +24,14 @@ export const PUHEKIELI_SOURCE: SourceRef = {
 export interface SpokenForm {
   /** The spoken form as the book prints it. */
   spoken: string;
-  /** The standard-language equivalent. */
+  /** Standard-language equivalent. */
   standard: string;
   /** Printed page it was read from. */
   page: number;
 }
 
-/** Personal pronouns, all cases the book tabulates (pp. 294). */
-export const SPOKEN_PRONOUNS: SpokenForm[] = [
+/** Personal pronouns, in the cases the book tabulates (p. 294). */
+const SPOKEN_PRONOUNS: SpokenForm[] = [
   { spoken: 'mä', standard: 'minä', page: 294 },
   { spoken: 'sä', standard: 'sinä', page: 294 },
   { spoken: 'se', standard: 'hän', page: 294 },
@@ -64,7 +62,7 @@ export const SPOKEN_PRONOUNS: SpokenForm[] = [
 ];
 
 /** Verb forms the book tabulates (pp. 295-296). */
-export const SPOKEN_VERBS: SpokenForm[] = [
+const SPOKEN_VERBS: SpokenForm[] = [
   // olla
   { spoken: 'oon', standard: 'olen', page: 295 },
   { spoken: 'oot', standard: 'olet', page: 295 },
@@ -82,7 +80,7 @@ export const SPOKEN_VERBS: SpokenForm[] = [
   { spoken: 'tuut', standard: 'tulet', page: 295 },
   { spoken: 'tullaan', standard: 'tulemme', page: 295 },
   { spoken: 'tuu', standard: 'tule', page: 295 },
-  // the me- and he-persons, which the book treats as a rule of their own
+  // The me- and he-persons, which the book gives as a rule of their own.
   { spoken: 'asutaan', standard: 'asumme', page: 295 },
   { spoken: 'luetaan', standard: 'luemme', page: 295 },
   { spoken: 'syödään', standard: 'syömme', page: 295 },
@@ -91,8 +89,8 @@ export const SPOKEN_VERBS: SpokenForm[] = [
   { spoken: 'ollu', standard: 'ollut', page: 296 },
 ];
 
-/** Question particle -ks, and other small words (pp. 296). */
-export const SPOKEN_PARTICLES: SpokenForm[] = [
+/** Question particle -ks and other short words (p. 296). */
+const SPOKEN_PARTICLES: SpokenForm[] = [
   { spoken: 'mut', standard: 'mutta', page: 296 },
   { spoken: 'sit', standard: 'sitten', page: 296 },
   { spoken: 'eiku', standard: 'ei vaan', page: 296 },
@@ -107,7 +105,7 @@ export const SPOKEN_PARTICLES: SpokenForm[] = [
 ];
 
 /** Spoken numbers (p. 293). */
-export const SPOKEN_NUMBERS: SpokenForm[] = [
+const SPOKEN_NUMBERS: SpokenForm[] = [
   { spoken: 'yks', standard: 'yksi', page: 293 },
   { spoken: 'kaks', standard: 'kaksi', page: 293 },
   { spoken: 'kolme', standard: 'kolme', page: 293 },
@@ -134,13 +132,3 @@ export const ALL_SPOKEN: SpokenForm[] = [
   ...SPOKEN_PARTICLES,
   ...SPOKEN_NUMBERS,
 ];
-
-export const SPOKEN_BY_FORM = new Map(ALL_SPOKEN.map((f) => [f.spoken.toLowerCase(), f]));
-
-/**
- * The -ks question ending, which is what makes a spoken question sound spoken:
- * "Asuks sä Jyväskylässä?" for "Asutko Jyväskylässä?" (p. 296).
- */
-export const KS_QUESTION_NOTE =
-  'Spoken Finnish replaces the -ko/-kö question ending with -ks: Asutko? becomes Asuks sä?, ' +
-  'Oletteko? becomes Ootteks te?, Menemmekö? becomes Mennäänks me?';

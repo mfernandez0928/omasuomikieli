@@ -18,11 +18,9 @@ interface ListeningItem {
 type Mode = 'words' | 'phrases';
 
 /**
- * Listening practice driven by the device's own Finnish voice.
- *
- * This is honest about its limits: there are no recorded audio files in this
- * app, so if the device has no fi-FI voice installed there is nothing to play
- * and we say so instead of reading Finnish in an English accent.
+ * Listening practice driven by the device's own Finnish voice. The app ships no
+ * audio files, so without an installed fi-FI voice there is nothing to play and
+ * the UI says so rather than falling back to an English one.
  */
 export function Listening() {
   const navigate = useNavigate();

@@ -17,8 +17,8 @@ const SEVERITY_STYLE = {
 } as const;
 
 /**
- * Transparency screen. Everything the app changed about the supplied database
- * is listed here, so no edit is hidden behind a nicer-looking dictionary.
+ * Provenance screen: which content came from which book, what was changed
+ * during import, and what is still unverified.
  */
 export function DataAudit() {
   const issues = useMemo(() => validateWords(), []);
@@ -226,8 +226,8 @@ export function DataAudit() {
 }
 
 /**
- * The Situations feature makes a narrower claim than the rest of the app, so it
- * gets its own row of numbers: the dialogue is written, the words are not.
+ * Situations are sourced differently from the rest of the content: the dialogue
+ * is written, its vocabulary is not. The counts come from the lexicon.
  */
 function SituationsProvenance() {
   const stats = useMemo(() => {
@@ -237,8 +237,8 @@ function SituationsProvenance() {
       0,
     );
     const traced = SCENE_LEXICON.filter((g) => g.wordId);
-    // Some forms that are not dictionary entries still have a real citation in
-    // their note - the numerals are printed in the Suomen mestari 2 tables.
+    // Some forms without a dictionary entry still carry a citation in their
+    // note; the numerals are printed in the Suomen mestari 2 tables.
     const citedBasis = SCENE_LEXICON.filter(
       (g) => !g.wordId && /Suomen mestari|Oma suomi/.test(g.basis ?? ''),
     ).length;
@@ -264,7 +264,7 @@ function SituationsProvenance() {
       </h2>
       <Callout kind="warn">
         <b>The dialogues are written for this app.</b> They are not transcripts of anything printed
-        in a book, and there is no AI answering - each scene always goes the same way. What is
+        in a book, and each scene is scripted, so it follows the same path every time. What is
         sourced is the language they are built from.
       </Callout>
       <div className="panel panel--tight" style={{ marginTop: 10 }}>

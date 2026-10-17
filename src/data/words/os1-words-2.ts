@@ -6,7 +6,7 @@ import type { Word } from '@/types';
  *
  * As in the first batch, the Finnish headword, the genitive or 1st-person
  * form, the verb type and the printed page come from the book; the English and
- * Tagalog meanings and the topic are this app's own.
+ * Tagalog meanings and the topic are editorial.
  */
 export const OS1_WORDS_2: Word[] = [
   {

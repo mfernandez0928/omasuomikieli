@@ -48,12 +48,28 @@
       "detail": "Serve the built app, including the service worker (test offline here)"
     },
     {
+      "label": "validate",
+      "type": "npm",
+      "script": "validate",
+      "problemMatcher": [],
+      "group": "test",
+      "detail": "Run both content validators"
+    },
+    {
       "label": "validate:data",
       "type": "npm",
       "script": "validate:data",
       "problemMatcher": [],
       "group": "test",
       "detail": "Check for duplicate ids, duplicate headwords and broken cross-references"
+    },
+    {
+      "label": "validate:situations",
+      "type": "npm",
+      "script": "validate:situations",
+      "problemMatcher": [],
+      "group": "test",
+      "detail": "Check that every word in the role-play dialogues is accounted for"
     },
     {
       "label": "typecheck",

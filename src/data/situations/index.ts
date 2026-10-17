@@ -4,30 +4,22 @@ import { GLOSS_BY_FORM, SCENE_LEXICON } from './lexicon';
 
 export { SCENES, SCENE_LEXICON, GLOSS_BY_FORM };
 
-export const SCENE_BY_ID = new Map(SCENES.map((s) => [s.id, s]));
+const SCENE_BY_ID = new Map(SCENES.map((s) => [s.id, s]));
 
 export function getScene(id: string): RolePlay | undefined {
   return SCENE_BY_ID.get(id);
 }
 
-/** How many choices the learner makes in a scene. */
-export function sceneTurnCount(scene: RolePlay): number {
-  return scene.turns.length;
-}
-
-/**
- * Splits a Finnish line into pieces so the UI can make each word tappable,
- * keeping punctuation and spacing as separate, untappable pieces.
- */
+/** A run of letters carrying a gloss, or the punctuation and spacing between. */
 export interface LinePiece {
   text: string;
   gloss?: SceneGloss;
 }
 
+/** Splits a line into word and non-word pieces so the UI can make words tappable. */
 export function splitLine(fi: string): LinePiece[] {
   const pieces: LinePiece[] = [];
-  // Letters (including Finnish vowels) form words; everything else is kept
-  // verbatim so the sentence reads exactly as written.
+  // Letters form words; punctuation and spacing pass through unchanged.
   for (const chunk of fi.split(/([A-Za-zÅÄÖåäö]+)/)) {
     if (!chunk) continue;
     const gloss = GLOSS_BY_FORM.get(chunk.toLowerCase());

@@ -61,8 +61,8 @@ const VERIFICATION_BADGE: Record<
     className: 'badge--ok',
     hint: 'Found in a named textbook at a page that was read, and its forms were checked.',
   },
-  // The common case. Showing a badge on nearly every word would be noise, so
-  // this one stays silent and the detail page explains the basis instead.
+  // The common case: a badge on nearly every word would be noise, so this one
+  // renders nothing and the detail page carries the basis.
   'linguistically-checked': null,
   supplementary: {
     label: 'supplementary',
@@ -151,8 +151,8 @@ export function Loading({ label = 'Loading...' }: { label?: string }) {
 
 /**
  * Shown when IndexedDB cannot be opened (private browsing, blocked storage).
- * The app still works for reading; only saving is affected, and we say so
- * rather than silently losing the learner's answers.
+ * Reading still works; only persistence is affected, and the warning says so
+ * before answers are lost.
  */
 export function StorageWarning() {
   return (

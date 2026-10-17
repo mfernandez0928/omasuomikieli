@@ -1,13 +1,11 @@
 import type { Word } from '@/types';
 
 /**
- * A2.2 / B1 verbs, seeded from the user's own "Finnish Vocabulary.docx".
+ * A2.2 and B1 verbs, seeded from the author's own "Finnish Vocabulary.docx".
  *
- * That table carried a "Vartalo" column which contained a number of errors.
- * Every stem below has been re-derived from the verb type; entries whose
- * imported stem was wrong are marked `verification: 'corrected'` and carry a
- * `correctionNote` saying exactly what changed, so nothing is silently
- * rewritten behind the user's back.
+ * That table's "Vartalo" column carried several errors. Every stem below is
+ * re-derived from the verb type; entries whose imported stem was wrong carry a
+ * `correctionNote` recording the change.
  */
 export const B1_VERBS: Word[] = [
   {

@@ -1,25 +1,21 @@
 /**
- * Checks that the Situations dialogues only use words this app can account for.
+ * Validates the vocabulary used by the Situations dialogues.
  *
- * The claim the feature makes is narrow and worth keeping honest: the sentences
- * were written for the app, but every word in them traces to a dictionary entry
- * that carries its own book citation, and every spoken form comes from the
- * Puhekieli section of Suomen mestari 2 (printed pages 293-296).
+ * The scenes are written rather than quoted, so the guarantee is about their
+ * vocabulary: every word traces to a dictionary entry with its own citation,
+ * and colloquial forms come from Suomen mestari 2, pp. 293-296.
  *
- * So this script:
+ * Checks:
  *
- *   1. pulls every Finnish line out of `scenes.ts` (the `fi` and `yleiskieli`
- *      fields only - the English and Tagalog explanations are prose and quote
- *      Finnish words on purpose);
- *   2. splits them into word forms;
- *   3. requires each form to have an entry in `lexicon.ts`;
- *   4. requires each lexicon `wordId` to resolve to a real dictionary entry;
- *   5. requires each lexicon entry with no `wordId` to carry a `basis` saying
- *      why - so a missing citation cannot hide as an omission;
- *   6. requires every spoken form the lexicon marks as puhekieli to actually
- *      appear in `puhekieli.ts`, which is transcribed from those pages.
+ *   1. extract the Finnish lines from `scenes.ts` (`fi` and `yleiskieli` only;
+ *      the English and Tagalog fields quote Finnish words in prose);
+ *   2. split them into word forms;
+ *   3. each form must have an entry in `lexicon.ts`;
+ *   4. each `wordId` must resolve to a dictionary entry;
+ *   5. an entry without a `wordId` must carry a `basis`;
+ *   6. a form marked as colloquial must appear in `puhekieli.ts`.
  *
- * It also reports lexicon entries nothing uses, so the file does not rot.
+ * Lexicon entries no scene uses are reported, so the table does not rot.
  *
  * Run: npm run validate:situations
  */
@@ -78,8 +74,7 @@ const used = new Set();
 const unaccounted = new Map();
 
 for (const line of finnishLines) {
-  // Digits are left out on purpose: prices and years are read as numbers and
-  // carry no Finnish morphology to check.
+  // Digits are skipped: prices and times carry no Finnish morphology.
   for (const form of line.toLowerCase().match(/[a-zåäö]+/g) ?? []) {
     used.add(form);
     if (!byForm.has(form)) {
@@ -99,7 +94,7 @@ for (const g of lexicon) {
   if (!g.wordId && !g.basis) {
     problems.push(`lexicon "${g.form}" has no wordId and no basis - say where the form comes from`);
   }
-  // A form claimed to be spoken Finnish has to be in the transcribed tables.
+  // A form marked as colloquial has to appear in the transcribed tables.
   const claimsPuhekieli = /puhekieli: \S+ -> (\S+)/.exec(g.grammar);
   if (claimsPuhekieli) {
     const claimed = claimsPuhekieli[1].toLowerCase().replace(/[^a-zåäö]+$/, '');

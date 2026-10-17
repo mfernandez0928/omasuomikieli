@@ -1,14 +1,14 @@
 /**
- * Oma Suomi - content schema.
+ * Content schema: vocabulary, grammar lessons, phrases, role-plays and the
+ * persisted learner state.
  *
- * Two hard rules encoded here:
+ * Two invariants the rest of the codebase relies on:
  *
- * 1. `source` is `null` unless the material was actually read out of a named
- *    book. We never fabricate a book + chapter citation. `SourceRef` therefore
- *    has no optional-page escape hatch that invites guessing.
- * 2. `verification` records how confident we are in the *linguistic* data
- *    (stem, verb type, inflection). `needs-review` entries are surfaced in the
- *    UI instead of being silently presented as fact.
+ * 1. `source` is `null` unless the entry was taken from a named book at a
+ *    located page. `SourceRef` has no field that can hold a guess.
+ * 2. `verification` grades the linguistic data (stem, verb type, inflection)
+ *    independently of the citation, and `needs-review` entries are surfaced in
+ *    the UI.
  */
 
 export type Level = 'A1' | 'A2.1' | 'A2.2' | 'B1';
@@ -16,23 +16,18 @@ export type Level = 'A1' | 'A2.1' | 'A2.2' | 'B1';
 export const LEVELS: Level[] = ['A1', 'A2.1', 'A2.2', 'B1'];
 
 /**
- * How trustworthy an entry is, and on what basis.
+ * Evidence behind an entry's linguistic data, ordered strongest to weakest.
  *
- * These four values are the app's whole vocabulary for provenance, and they
- * are deliberately ordered from strongest to weakest evidence:
+ *  - `source-verified`        headword located in a named book at a known page,
+ *                             and its forms checked.
+ *  - `linguistically-checked` not present in the available sources; stem, verb
+ *                             type and forms derived from standard morphology.
+ *  - `supplementary`          neither traced to a source nor checked form by
+ *                             form.
+ *  - `needs-review`           `reviewNote` records what is uncertain.
  *
- *  - `source-verified`      the headword was found in a named book at a page
- *                           that was actually read, AND its forms were checked.
- *  - `linguistically-checked` not found in the readable sources, but the stem,
- *                           verb type and inflected forms were derived and
- *                           checked against standard Finnish morphology.
- *  - `supplementary`        kept because it is useful, but neither traced to a
- *                           source nor fully checked form by form.
- *  - `needs-review`         something specific is uncertain; `reviewNote` says
- *                           what, and the UI flags it rather than hiding it.
- *
- * A textbook appearance is evidence about the WORD, not about every field on
- * the entry, so `source-verified` still requires the forms to have been checked.
+ * A textbook appearance is evidence about the headword, not about every field,
+ * so `source-verified` still requires the forms to have been checked.
  */
 export type Verification =
   | 'source-verified'
@@ -40,34 +35,28 @@ export type Verification =
   | 'supplementary'
   | 'needs-review';
 
-/** A citation. Only ever constructed from material actually inspected. */
+/** A citation to a book, chapter and location within it. */
 export interface SourceRef {
-  /** Id in SOURCE_BOOKS, so the citation resolves to the inventory entry. */
+  /** Key into SOURCE_BOOKS, so the citation resolves to the inventory entry. */
   bookId: string;
   book: string;
   chapter: string;
-  /**
-   * Printed page, recorded only where the PDF-to-printed page mapping was
-   * verified for that book. Left out otherwise rather than guessed.
-   */
+  /** Printed page. Set only where the PDF-to-print page mapping is known. */
   page?: number;
-  /** PDF page, where that is what could be verified instead of a printed one. */
+  /** PDF page, used where no printed page number is available. */
   pdfPage?: number;
-  /** Which part of the book, e.g. 'SANASTO' for a chapter word list. */
+  /** Part of the book, e.g. 'SANASTO' for a chapter word list. */
   section?: string;
-  /** The grammar point as the book's own contents lists it, in its wording. */
+  /** The term or heading as the book itself prints it. */
   sourceTerm?: string;
-  /** Short note on what exactly came from there. */
+  /** What specifically was taken from this location. */
   note?: string;
 }
 
 /**
- * Where a lesson's substance comes from.
- *
- * `source-derived` means the rule and its terminology were taken from a book
- * listed in `source`. `supplementary` means the topic is useful but was NOT
- * found in any readable supplied book, so it is additional content and is
- * labelled as such in the UI.
+ * Whether a lesson's rule and terminology come from the book named in `source`,
+ * or go beyond the available sources. `supplementary` content is labelled as
+ * such in the UI.
  */
 export type ContentOrigin = 'source-derived' | 'supplementary';
 
@@ -104,7 +93,7 @@ export type TopicId =
   | 'abstraktit'
   | 'perus';
 
-/** Noun/adjective principal parts. Only filled where actually known. */
+/** Noun and adjective principal parts. Filled only where known. */
 export interface NominalForms {
   /** yksikön genetiivi, e.g. ruoka -> ruoan */
   genitive?: string;
@@ -165,10 +154,7 @@ export interface Word {
   level: Level;
   topics: TopicId[];
 
-  /**
-   * Present-tense stem. Deliberately optional: many words have no useful
-   * stem to show, and a wrong stem is worse than none.
-   */
+  /** Present-tense stem. Omitted where it is not known. */
   vartalo?: string;
   verbType?: VerbType;
   verbForms?: VerbForms;
@@ -181,9 +167,9 @@ export interface Word {
   /** Same note, in Tagalog. */
   noteTl?: string;
   /**
-   * Irregular forms that are worth finding in the dictionary but cannot be
-   * derived from the regular pattern (e.g. työ -> töissä, koti -> kotona).
-   * Search-only: these are never presented as the word's paradigm.
+   * Irregular forms worth finding by search but not derivable from the regular
+   * pattern (työ -> töissä, koti -> kotona). Indexed for search only; never
+   * rendered as part of the paradigm.
    */
   searchAliases?: string[];
   /** ids of related words */
@@ -193,11 +179,11 @@ export interface Word {
 
   source: SourceRef | null;
   verification: Verification;
-  /** What was wrong in the imported note, when the entry was corrected. */
+  /** What was corrected, for entries changed after import. */
   correctionNote?: string;
-  /** What is still uncertain, when verification === 'needs-review'. */
+  /** What is uncertain, when verification is 'needs-review'. */
   reviewNote?: string;
-  /** Why the entry carries the level it does. */
+  /** Basis for the assigned CEFR level. */
   levelBasis?: string;
 }
 
@@ -216,10 +202,9 @@ export interface GrammarExample {
 }
 
 /**
- * A conjugation / declension table rendered inside a lesson.
- *
- * `rows` is [label, ...cells] so one table can show several verbs side by side
- * (e.g. persoona | puhua | syödä | tulla).
+ * A conjugation or declension table inside a lesson. Each row is
+ * `[label, ...cells]`, so one table can show several words side by side
+ * (persoona | puhua | syödä | tulla).
  */
 export interface GrammarTable {
   title: string;
@@ -259,16 +244,16 @@ export interface Exercise {
   kind: ExerciseKind;
   /** The instruction shown above the question. */
   prompt: string;
-  /** Sentence or word, with `___` marking the gap where relevant. */
+  /** Sentence or word; `___` marks the gap. */
   question: string;
   /** Extra hint shown under the question, e.g. the dictionary form. */
   hint?: string;
   options?: string[];
-  /** Index into `options`, or the exact expected string for typed answers. */
+  /** Index into `options`, or the expected string for typed answers. */
   answer: string;
-  /** Other strings accepted as correct (case/spacing are normalised anyway). */
+  /** Further accepted answers. Case and spacing are normalised before compare. */
   alsoAccept?: string[];
-  /** Shown after answering - must explain, not just say "correct". */
+  /** Shown after answering; explains the rule rather than restating the result. */
   explanation: string;
   explanationTl: string;
   /** Pairs for `match` exercises. */
@@ -292,8 +277,8 @@ export interface GrammarLesson {
   minutes: number;
   moduleId: string;
   /**
-   * Why the lesson carries the level it does. Where a book states its own CEFR
-   * level, that is quoted; where the level is this app's judgement, it says so.
+   * Basis for the assigned CEFR level: the book's own stated level where it
+   * gives one, otherwise an editorial judgement, which the string records.
    */
   levelBasis?: string;
 
@@ -365,9 +350,9 @@ export interface Phrase {
   tl: string;
   situation: SituationId;
   level: Level;
-  /** The same thing as people actually say it, when it differs. */
+  /** The colloquial equivalent, where it differs from the standard form. */
   puhekieli?: string;
-  /** When to use which register, or a politeness note. */
+  /** Register or politeness note. */
   note?: string;
   noteTl?: string;
   /** Grammar lessons that explain the structure used here. */
@@ -400,7 +385,7 @@ export type SrsGrade = 'again' | 'hard' | 'good' | 'easy';
 
 export type WordStatus = 'new' | 'learning' | 'known' | 'difficult';
 
-/** One scheduled card in the spaced-repetition system. */
+/** A scheduled review card. */
 export interface SrsCard {
   /** `${kind}:${refId}` */
   id: string;
@@ -408,9 +393,9 @@ export interface SrsCard {
   refId: string;
   /** Interval in days until the next review. */
   intervalDays: number;
-  /** Ease multiplier, SM-2 style. Clamped to [1.3, 2.8]. */
+  /** SM-2 style ease multiplier, clamped to [1.3, 2.8]. */
   ease: number;
-  /** Consecutive non-'again' answers. */
+  /** Run of consecutive answers graded above 'again'. */
   streak: number;
   /** epoch ms */
   due: number;
@@ -423,18 +408,17 @@ export interface SrsCard {
 
 export interface MistakeEntry {
   id: string;
-  /** What the learner wrote / chose. */
+  /** The answer given. */
   wrong: string;
   /** The correct form. */
   right: string;
-  /** Free-text personal note. */
+  /** Free-text note added by the learner. */
   note?: string;
-  /** Where it came from. */
   origin: 'practice' | 'manual';
   wordId?: string;
   grammarId?: string;
   createdAt: number;
-  /** Times reviewed since being logged. */
+  /** Reviews since the entry was logged. */
   reviewed: number;
   resolved: boolean;
 }
@@ -472,9 +456,9 @@ export interface Settings {
   dailyGoal: number;
   /** Show Tagalog translations throughout. */
   showTagalog: boolean;
-  /** Show the romanised/plain hint text under Finnish examples. */
+  /** Show English glosses under Finnish examples. */
   showEnglish: boolean;
-  /** Speak Finnish via the Web Speech API when a speaker button is pressed. */
+  /** Use the Web Speech API for the speaker buttons. */
   speechEnabled: boolean;
   /** New cards introduced per day. */
   newPerDay: number;
@@ -494,16 +478,14 @@ export interface SessionResume {
 /* ------------------------------------------------------------------ */
 
 /**
- * A scripted role-play scene: the other person speaks, the learner picks what
- * to say back.
+ * A scripted role-play scene: the other speaker's lines are fixed, and the
+ * learner picks a reply from a short list.
  *
- * Honesty note, because this is easy to oversell. The dialogues are WRITTEN
- * for this app - they are not transcripts of anything printed in a book, and
- * there is no AI on the other end. What is sourced is the material they are
- * built from: every word maps to a dictionary entry that carries its own
- * citation, and every spoken form comes from the puhekieli tables in
- * `src/data/puhekieli.ts`. `scripts/validate-situations.mjs` enforces that -
- * a line containing a word that is not accounted for fails the build.
+ * The dialogue is written for this app rather than quoted from a book, so its
+ * vocabulary is constrained instead: every word form resolves through
+ * `src/data/situations/lexicon.ts` to a dictionary entry, and every colloquial
+ * form comes from `src/data/puhekieli.ts`. `scripts/validate-situations.mjs`
+ * enforces both and fails on an unaccounted word.
  */
 export interface RolePlayLine {
   fi: string;
@@ -514,22 +496,22 @@ export interface RolePlayLine {
 }
 
 export interface RolePlayOption extends RolePlayLine {
-  /** Whether this reply actually does the job. */
+  /** Whether the reply achieves the turn's task. */
   ok: boolean;
-  /** Why it works, or what is wrong with it. Never just 'correct'. */
+  /** The rule behind the result, not a restatement of it. */
   why: string;
   whyTl: string;
 }
 
 export interface RolePlayTurn {
   id: string;
-  /** What the other person says first. Omitted when the learner opens. */
+  /** The other speaker's line. Omitted on turns where the learner opens. */
   partner?: RolePlayLine;
-  /** What the learner has to achieve on this turn. */
+  /** What the learner has to achieve on the turn. */
   task: string;
   taskTl: string;
   options: RolePlayOption[];
-  /** Id of the goal this turn ticks off. */
+  /** Goal completed by answering this turn correctly. */
   completes?: string;
 }
 
@@ -543,53 +525,52 @@ export interface RolePlay {
   id: string;
   /** English label, e.g. 'At the shop'. */
   title: string;
-  /** Finnish label as a Finn would name the situation, e.g. 'Kaupassa'. */
+  /** Finnish label for the situation, e.g. 'Kaupassa'. */
   titleFi: string;
   /** One line of scene-setting. */
   setting: string;
   settingTl: string;
-  /** Who the learner is talking to, in English. */
+  /** Who the learner is talking to. */
   partnerName: string;
   level: Level;
   icon: string;
   colour: string;
-  /** Which register the scene is written in, and why it is the realistic one. */
+  /** Register the scene is written in, and why that register fits it. */
   register: 'puhekieli' | 'yleiskieli' | 'mixed';
   registerNote: string;
   goals: RolePlayGoal[];
   turns: RolePlayTurn[];
-  /** What the other person says as the scene ends. */
+  /** The other speaker's closing line. */
   closing?: RolePlayLine;
-  /** Dictionary ids for the words the scene leans on, for follow-up study. */
+  /** Dictionary ids the scene draws on, offered for follow-up study. */
   vocabulary: string[];
   grammarRefs?: string[];
-  /** Books the vocabulary and spoken forms were taken from. */
+  /** Citations for the register and colloquial forms the scene uses. */
   vocabularyFrom: SourceRef[];
-  /** Always 'supplementary': the dialogue itself is written, not quoted. */
+  /** Always 'supplementary': the dialogue is written, not quoted. */
   origin: ContentOrigin;
   verification: Verification;
 }
 
 /**
- * One surface form appearing in a scene, with the dictionary entry it comes
- * from. This is what makes the vocabulary claim checkable rather than a
- * promise: the validator requires every word of every line to have an entry
- * here, and every `wordId` to resolve to a real dictionary word.
+ * One surface form used in a scene, resolved to the dictionary entry it
+ * inflects from. Drives the tap-to-translate UI, and gives the validator
+ * something to check each dialogue line against.
  */
 export interface SceneGloss {
-  /** The form exactly as it appears in a dialogue line, lower-cased. */
+  /** The form as it appears in a dialogue line, lower-cased. */
   form: string;
-  /** Dictionary entry id, when the form inflects from a dictionary headword. */
+  /** Dictionary entry the form inflects from, where there is one. */
   wordId?: string;
-  /** The dictionary form, for display. */
+  /** Dictionary form, for display. */
   lemma: string;
-  /** Short English gloss of this form in this context. */
+  /** English gloss of this form in this context. */
   en: string;
-  /** The grammar of the form, e.g. 'inessiivi' or 'mä = minä (puhekieli)'. */
+  /** Morphology of the form, e.g. 'inessiivi' or 'mä = minä (puhekieli)'. */
   grammar?: string;
   /**
-   * Set when the form is not a dictionary word and never will be: names,
-   * greetings and interjections. The string says where it comes from.
+   * Where the form comes from when it has no `wordId`: names, greetings,
+   * numerals. Required in that case; the validator checks for it.
    */
   basis?: string;
 }

@@ -1,16 +1,14 @@
 /**
  * Per-chapter coverage of the Oma suomi 1 SANASTO word lists.
  *
- * This file holds only factual metadata about the book: which chapter, which
- * printed page, how many entries that list contains, and whether the page had
- * a usable text layer. It does NOT contain the word lists themselves.
+ * Metadata only: chapter, printed page, entry count, and whether the page had
+ * a usable text layer. The word lists themselves are not in this file.
  *
- * The full 1 501-entry transcription is a working record kept OUT of version
- * control (`src/data/sources/os1-sanasto.local.ts`, gitignored), because
- * transcribing every word list of a copyrighted textbook into a public
- * repository would republish a substantial part of the book. The dictionary
- * entries derived from it cite chapter and page instead, which is ordinary
- * citation.
+ * The full 1 501-entry transcription is a working record kept out of version
+ * control (`src/data/sources/os1-sanasto.local.ts`, gitignored); committing
+ * every word list of a copyrighted textbook to a public repository would
+ * reproduce a substantial part of it. Dictionary entries derived from it cite
+ * chapter and page.
  */
 
 /** Per-chapter coverage, for the Data audit screen. */

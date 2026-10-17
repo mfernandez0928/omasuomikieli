@@ -1,15 +1,14 @@
 import type { Word } from '@/types';
 
 /**
- * Core verbs and nouns that the other entries cross-reference.
+ * Core verbs and nouns that other entries cross-reference.
  *
- * These were added after the startup integrity check reported `related` links
- * pointing at words that did not exist. Rather than deleting the links, the
- * words themselves were written out - they are all everyday A1-A2 vocabulary
- * that the dictionary should have had anyway.
+ * Added after the startup integrity check reported `related` links pointing at
+ * missing words. They are everyday A1-A2 vocabulary, so the entries were
+ * written out and the links kept.
  *
- * As everywhere else, `vartalo` is the strong vowel stem and the 1sg/3sg forms
- * are both listed so KPT gradation is visible.
+ * As elsewhere, `vartalo` is the strong vowel stem, and both the 1sg and 3sg
+ * are listed so KPT gradation stays visible.
  */
 export const EXTRA_WORDS: Word[] = [
   {

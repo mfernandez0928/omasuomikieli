@@ -3,13 +3,12 @@ import { LEGACY_DB } from './index';
 import type { LegacyWord } from './types';
 
 /**
- * Converts the supplied v0.2.1 database into the app schema, applying a
- * recorded audit instead of silently rewriting anything.
+ * Converts the supplied v0.2.1 database into the app schema.
  *
- * The supplied file's own note says: "Check every entry against the source
+ * The supplied file carries the note: "Check every entry against the source
  * books before treating source attribution or level as verified." This module
- * is that check. Every change is listed in `LEGACY_AUDIT` and shown in the app
- * under Settings -> Data audit, so the original data is never quietly altered.
+ * performs that check. Each change is recorded in `LEGACY_AUDIT` and listed
+ * under Settings -> Data audit.
  */
 
 export type AuditSeverity = 'bug' | 'correction' | 'note';
@@ -274,9 +273,8 @@ function convert(w: LegacyWord): Word {
 const ALL_CONVERTED = LEGACY_DB.words.map(convert);
 
 /**
- * Hand-curated entries take priority. When a curated word already covers the
- * same Finnish headword, the imported copy is skipped rather than creating a
- * duplicate dictionary entry.
+ * Curated entries take priority: where one already covers the same Finnish
+ * headword, the imported copy is skipped to avoid a duplicate.
  */
 export function importLegacyWords(curatedFinnish: Set<string>): Word[] {
   return ALL_CONVERTED.filter((w) => !curatedFinnish.has(w.fi.toLowerCase()));

@@ -1,23 +1,18 @@
 import type { SceneGloss } from '@/types';
 
 /**
- * Every word form that appears in a Situations dialogue line, with the
+ * Every word form used in a Situations dialogue line, resolved to the
  * dictionary entry it inflects from.
  *
- * This file is what turns "the words come from the books" from a promise into
- * something a script can check. `scripts/validate-situations.mjs` tokenises
- * every Finnish line in `scenes.ts` and fails if a single form is missing from
- * here, or if a `wordId` does not resolve to a real dictionary entry - and
- * those entries carry their own book citations.
+ * `scripts/validate-situations.mjs` tokenises every Finnish line in
+ * `scenes.ts` and fails if a form is missing here or a `wordId` does not
+ * resolve. The UI reads the same table for tap-to-translate.
  *
- * `basis` is used where a form honestly is not a dictionary headword: names,
- * greeting and reply words, numerals, the determiner koko. It says so plainly
- * rather than inventing a citation - and where a real citation does exist (the
- * numerals are printed in Suomen mestari 2, s. 293) the note carries it. One
- * entry, `kauka`, is not Finnish at all: it exists only inside a wrong answer
- * option, and says so.
- *
- * The UI uses this file too: tapping a word in a dialogue shows its gloss.
+ * `basis` covers forms that are not dictionary headwords: proper names,
+ * greeting and reply words, numerals, and the determiner koko. Where a source
+ * exists for one, the note carries it; the numerals are printed in Suomen
+ * mestari 2, s. 293. The entry `kauka` is not Finnish and occurs only inside a
+ * distractor option.
  */
 export const SCENE_LEXICON: SceneGloss[] = [
   { form: 'aika', wordId: 'n-aika', lemma: 'aika', en: 'time, appointment', grammar: 'nominatiivi' },

@@ -30,10 +30,10 @@ export function SituationsList() {
       />
 
       <Callout kind="info">
-        You pick what to say, and the other person answers. These are{' '}
-        <b>written conversations</b>, not a chat with an AI - so they always go the same way. What
-        comes out of the books is the language: every word traces to a dictionary entry, and the
-        spoken forms come from Suomen mestari 2, s. 293-296.
+        You choose what to say and the other person answers. The dialogue is{' '}
+        <b>scripted</b>, so a scene follows the same path each time you play it. The language is
+        sourced: every word traces to a dictionary entry, and the spoken forms come from Suomen
+        mestari 2, s. 293-296.
       </Callout>
 
       <div className="rows" style={{ marginTop: 16 }}>
@@ -55,9 +55,8 @@ export function SituationsList() {
       </div>
 
       <p className="tiny dim" style={{ marginTop: 22, lineHeight: 1.7 }}>
-        Every line is checked by <code>npm run validate:situations</code>, which refuses to pass if
-        a dialogue contains a word that is not traced to a dictionary entry or explained in the
-        lexicon.
+        <code>npm run validate:situations</code> checks every line and fails on a word that is
+        neither traced to a dictionary entry nor explained in the lexicon.
       </p>
     </div>
   );
@@ -110,7 +109,7 @@ function SceneRunner({ scene }: { scene: RolePlay }) {
   const [attempted, setAttempted] = useState(false);
   const [gloss, setGloss] = useState<SceneGloss | null>(null);
 
-  // Everything said so far, so the scene reads as a conversation.
+  // Lines spoken so far, rendered above the current turn.
   const [transcript, setTranscript] = useState<Said[]>(() =>
     scene.turns[0]?.partner ? [{ who: 'partner', line: scene.turns[0].partner }] : [],
   );
@@ -123,8 +122,8 @@ function SceneRunner({ scene }: { scene: RolePlay }) {
     const option = turn.options[index];
     setChosen(index);
 
-    // Only the first attempt on a turn counts, so a learner who tries again
-    // after reading the explanation is not punished twice for one mistake.
+    // Only the first attempt on a turn is scored, so re-answering after reading
+    // the explanation does not count the same mistake twice.
     if (!attempted) {
       setAttempted(true);
       setFirstTry((s) => ({ right: s.right + (option.ok ? 1 : 0), total: s.total + 1 }));
@@ -466,8 +465,8 @@ function Finished({
       </p>
       <p className="small" style={{ color: 'var(--ink-soft)', marginTop: 6, lineHeight: 1.55 }}>
         {clean
-          ? 'Every reply right on the first try. Try it again in a week and see if it still is.'
-          : 'The replies you got wrong are in My Mistakes, with the correct version next to them.'}
+          ? 'Every reply right on the first try. Come back to this scene in a week.'
+          : 'The replies you got wrong are in My Mistakes, with the correct version beside them.'}
       </p>
 
       {words.length > 0 && (

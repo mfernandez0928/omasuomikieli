@@ -90,7 +90,7 @@ export function saveStreak(state: StreakState): void {
 }
 
 export function todayKey(d: Date = new Date()): string {
-  // Local time, not UTC - the learner's day is what matters.
+  // Local time, not UTC: the streak follows the learner's own day.
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, '0');
   const day = String(d.getDate()).padStart(2, '0');

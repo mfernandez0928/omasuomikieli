@@ -1,14 +1,13 @@
 import type { Word } from '@/types';
 
 /**
- * High-frequency words that the Situations dialogues needed and the dictionary
- * did not yet have - the negative verb, the question word mikä and its case
- * forms, and a few reply words.
+ * High-frequency words the Situations dialogues needed and the dictionary did
+ * not yet carry: the negative verb, the question word mikä with its case
+ * forms, and two reply words.
  *
- * Every one of them was found in an Oma suomi 1 SANASTO list, so each carries a
- * real chapter and printed page rather than a note explaining its absence.
- * They were added because `scripts/validate-situations.mjs` surfaced them as
- * forms with no dictionary entry behind them.
+ * `scripts/validate-situations.mjs` surfaced them as forms with no dictionary
+ * entry behind them. Each was then located in an Oma suomi 1 SANASTO list, so
+ * each carries a chapter and printed page.
  */
 export const OS1_CORE_WORDS: Word[] = [
   {
@@ -20,8 +19,8 @@ export const OS1_CORE_WORDS: Word[] = [
     level: 'A1',
     topics: ['perus'],
     vartalo: 'e-',
-    // The negative is a verb in Finnish: it takes the person ending and the
-    // main verb stays in its bare form. That is why it is typed as a verb.
+    // The negative is a verb in Finnish: it takes the person ending while the
+    // main verb stays in its bare form. Hence the 'verbi' type.
     verbForms: {
       present1sg: 'en',
       present3sg: 'ei',

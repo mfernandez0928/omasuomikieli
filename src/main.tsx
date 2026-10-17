@@ -18,7 +18,7 @@ createRoot(container).render(
 registerSW({ immediate: true });
 
 if (import.meta.env.DEV) {
-  // Surface content problems during development instead of shipping them.
+  // Surface content problems during development.
   void (async () => {
     const { validateWords } = await import('./data/words');
     const issues = validateWords();

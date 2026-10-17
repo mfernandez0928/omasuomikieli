@@ -1,11 +1,10 @@
 /**
  * Source inventory.
  *
- * Built by actually opening the supplied PDFs, extracting their text and
- * reading their tables of contents — not from general knowledge about what is
- * "usually" taught at a given level.
+ * Compiled from the supplied PDFs: text extracted, tables of contents read.
+ * Nothing here is filled in from what a book at a given level usually covers.
  *
- * Method, so the claims here can be re-checked:
+ * Method, so the entries can be re-checked:
  *  - Text was extracted with `pdftotext -layout -enc UTF-8`.
  *  - Chapter titles and grammar points come from each book's own
  *    Sisällysluettelo, cross-checked against the chapter opener in the body.
@@ -48,7 +47,7 @@ export interface SourceBook {
   pdfPages?: number;
   /** How PDF pages relate to printed pages, and how that was checked. */
   pageMapping?: string;
-  /** What could not be read, stated plainly. */
+  /** What could not be read from this file. */
   limitation?: string;
   chapters: SourceChapter[];
   /** Anything notable found while inspecting the file. */

@@ -3,7 +3,7 @@
  *
  * No network call and no paid service: this uses whatever Finnish voice the
  * device already has. On devices with no fi-FI voice installed, `canSpeak()`
- * returns false and the UI hides the speaker buttons rather than playing
+ * returns false and the UI hides the speaker buttons instead of playing
  * Finnish text in an English accent.
  */
 
@@ -64,7 +64,7 @@ export function speak(text: string): void {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.voice = cachedVoice;
     utterance.lang = cachedVoice.lang;
-    // Slightly slow: these are study examples, not conversation.
+    // Slightly below normal rate; these are study examples, not conversation.
     utterance.rate = 0.9;
     window.speechSynthesis.speak(utterance);
   } catch {
