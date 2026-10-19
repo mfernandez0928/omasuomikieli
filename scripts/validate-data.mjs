@@ -104,10 +104,37 @@ for (const file of [...tsFiles(wordsDir), ...tsFiles(grammarDir)]) {
   }
 }
 
+/*
+  Exercises. Their ids have to be unique across every file, because the runner
+  tracks which questions were answered by id, and a `wordId` on a question is a
+  link the learner can follow out of it.
+*/
+const exerciseIds = new Set();
+const exerciseFiles = [
+  ...tsFiles(grammarDir),
+  join(root, 'src/data/reading.ts'),
+];
+for (const file of exerciseFiles) {
+  const src = read(file);
+  const name = file.replace(root + '\\', '').replace(root + '/', '');
+
+  for (const m of src.matchAll(/id: '(ex-[^']+)'/g)) {
+    if (exerciseIds.has(m[1])) problems.push(`duplicate exercise id "${m[1]}" (${name})`);
+    exerciseIds.add(m[1]);
+  }
+  for (const m of src.matchAll(/wordId: '([^']+)'/g)) {
+    if (!wordIds.has(m[1])) problems.push(`"${m[1]}" is not a known word id (${name})`);
+  }
+  for (const m of src.matchAll(/grammarId: '([^']+)'/g)) {
+    if (!grammarIds.has(m[1])) problems.push(`"${m[1]}" is not a known grammar id (${name})`);
+  }
+}
+
 console.log(
   `known word ids: ${wordIds.size} (curated + imported, before duplicate headwords are merged)`,
 );
 console.log(`grammar lessons: ${grammarIds.size}`);
+console.log(`exercises: ${exerciseIds.size}`);
 
 if (problems.length) {
   console.error(`\n${problems.length} problem(s):`);

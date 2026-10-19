@@ -69,7 +69,10 @@ export function GrammarLessonPage() {
 
   const markRead = async () => {
     const current = progress?.percent ?? 0;
-    if (current < 60) {
+    // 60 means "read it, not practised yet". Once practice has produced a
+    // score, that score stands; re-reading must not raise it back up.
+    const practised = (progress?.exercisesDone ?? 0) > 0;
+    if (!practised && current < 60) {
       await saveProgress({
         grammarId: lesson.id,
         percent: 60,
@@ -129,14 +132,24 @@ export function GrammarLessonPage() {
                   }
             }
             onFinish={async (score) => {
+              /*
+                The percentage is the score, not "you reached the end". It used
+                to be hard-coded to 100, so a lesson you half got wrong looked
+                finished on the home screen and there was nothing telling you to
+                come back to it. The runner reports across repeat rounds, so
+                fixing the ones you missed does take it to 100.
+              */
+              const pct = score.answered
+                ? Math.round((score.correct / score.answered) * 100)
+                : 0;
               await saveProgress({
                 grammarId: lesson.id,
-                percent: 100,
+                percent: pct,
                 section: 6,
                 exercisesDone: score.answered,
                 exercisesTotal: lesson.exercises.length,
                 updatedAt: Date.now(),
-                completed: true,
+                completed: pct === 100,
               });
             }}
           />

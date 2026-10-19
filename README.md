@@ -79,7 +79,7 @@ over plain `http://` on a remote host.
 | --- | --- |
 | Dictionary entries | 822 |
 | Grammar lessons | 24 (A1 → B1), 19 textbook-derived |
-| Exercises | 106 (95 in grammar lessons, 11 in reading) |
+| Exercises | 203 (192 in grammar lessons, 8 per lesson, 11 in reading) |
 | Phrases | 112 across 15 situations |
 | Role-play situations | 5 scenes, 18 turns, 54 written replies |
 | Reading passages | 3, with comprehension questions |
@@ -214,6 +214,7 @@ src/
   data/
     words/         Dictionary, split by group — add new words here
     grammar/       Lessons by level — add new lessons here
+      extra-exercises.ts  Further practice, merged onto each lesson by id
     phrases/       Phrases by situation
     situations/    Role-play scenes and their vocabulary lexicon
     legacy/        The supplied v0.2.1 database, verbatim, and its adapter
@@ -291,6 +292,11 @@ a `moduleId` of `m-basic`, `m-more` or `m-b1`.
 Exercises support `multiple-choice`, `fill-blank`, `choose-form`, `match`, `translate`,
 `conjugate`, `choose-case` and `correct-sentence`. Every one needs an `explanation` and
 `explanationTl`; the engine never shows a bare "Correct" or "Incorrect".
+
+Each lesson carries eight questions. The lesson file holds the teaching text and the first few;
+the rest live in `extra-exercises.ts`, keyed by lesson id and merged in `index.ts`, so the lesson
+text stays readable. `validate:data` rejects a repeated option, an answer that is not among its
+options, a duplicate exercise id and a `wordId` that does not resolve.
 
 ## Adding a role-play scene
 
