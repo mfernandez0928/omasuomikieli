@@ -4,6 +4,11 @@ import type { Settings, SessionResume } from '@/types';
  * Small, synchronously-read preferences. localStorage is the right tool here:
  * these are tiny and needed during the first paint. Every access is wrapped
  * because localStorage throws in some private-browsing modes.
+ *
+ * Everything read back is validated field by field rather than cast. Storage
+ * can hold anything an extension, an older build or a tampering script left
+ * there, and an unchecked `as Settings` puts that straight into arithmetic and
+ * into router paths.
  */
 
 const SETTINGS_KEY = 'oma-suomi:settings';
@@ -18,14 +23,32 @@ export const DEFAULT_SETTINGS: Settings = {
   newPerDay: 5,
 };
 
-function readJson<T>(key: string, fallback: T): T {
+/** Parses a stored value, or returns null when it is absent or not an object. */
+function readRecord(key: string): Record<string, unknown> | null {
   try {
     const raw = localStorage.getItem(key);
-    if (!raw) return fallback;
-    return { ...fallback, ...(JSON.parse(raw) as object) } as T;
+    if (!raw) return null;
+    const parsed: unknown = JSON.parse(raw);
+    if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) return null;
+    return parsed as Record<string, unknown>;
   } catch {
-    return fallback;
+    return null;
   }
+}
+
+function boolOr(value: unknown, fallback: boolean): boolean {
+  return typeof value === 'boolean' ? value : fallback;
+}
+
+/** A finite integer inside [min, max]; anything else falls back. */
+function intOr(value: unknown, fallback: number, min: number, max: number): number {
+  if (typeof value !== 'number' || !Number.isFinite(value)) return fallback;
+  const n = Math.round(value);
+  return n < min || n > max ? fallback : n;
+}
+
+function stringOr(value: unknown, fallback: string, maxLength = 200): string {
+  return typeof value === 'string' && value.length <= maxLength ? value : fallback;
 }
 
 function writeJson(key: string, value: unknown): void {
@@ -37,19 +60,46 @@ function writeJson(key: string, value: unknown): void {
 }
 
 export function loadSettings(): Settings {
-  return readJson<Settings>(SETTINGS_KEY, DEFAULT_SETTINGS);
+  const raw = readRecord(SETTINGS_KEY);
+  if (!raw) return DEFAULT_SETTINGS;
+  return {
+    dailyGoal: intOr(raw.dailyGoal, DEFAULT_SETTINGS.dailyGoal, 1, 500),
+    newPerDay: intOr(raw.newPerDay, DEFAULT_SETTINGS.newPerDay, 0, 200),
+    showTagalog: boolOr(raw.showTagalog, DEFAULT_SETTINGS.showTagalog),
+    showEnglish: boolOr(raw.showEnglish, DEFAULT_SETTINGS.showEnglish),
+    speechEnabled: boolOr(raw.speechEnabled, DEFAULT_SETTINGS.speechEnabled),
+  };
 }
 
 export function saveSettings(settings: Settings): void {
   writeJson(SETTINGS_KEY, settings);
 }
 
+/**
+ * `refId` goes on to build a route, so it is restricted to the shape real ids
+ * have rather than accepted as any string.
+ */
+const ID_PATTERN = /^[a-z0-9-]{1,64}$/i;
+
 export function loadResume(): SessionResume[] {
   try {
     const raw = localStorage.getItem(RESUME_KEY);
     if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as SessionResume[]) : [];
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed
+      .filter((e): e is Record<string, unknown> => typeof e === 'object' && e !== null)
+      .filter((e) => (e.kind === 'grammar' || e.kind === 'vocabulary') &&
+        typeof e.refId === 'string' && ID_PATTERN.test(e.refId))
+      .slice(0, 4)
+      .map((e) => ({
+        kind: e.kind as SessionResume['kind'],
+        refId: e.refId as string,
+        title: stringOr(e.title, ''),
+        subtitle: stringOr(e.subtitle, ''),
+        percent: intOr(e.percent, 0, 0, 100),
+        updatedAt: intOr(e.updatedAt, 0, 0, Number.MAX_SAFE_INTEGER),
+      }));
   } catch {
     return [];
   }
@@ -82,7 +132,14 @@ export interface StreakState {
 const DEFAULT_STREAK: StreakState = { lastDate: '', current: 0, best: 0 };
 
 export function loadStreak(): StreakState {
-  return readJson<StreakState>(STREAK_KEY, DEFAULT_STREAK);
+  const raw = readRecord(STREAK_KEY);
+  if (!raw) return DEFAULT_STREAK;
+  const lastDate = stringOr(raw.lastDate, '', 10);
+  return {
+    lastDate: /^\d{4}-\d{2}-\d{2}$/.test(lastDate) ? lastDate : '',
+    current: intOr(raw.current, 0, 0, 100000),
+    best: intOr(raw.best, 0, 0, 100000),
+  };
 }
 
 export function saveStreak(state: StreakState): void {

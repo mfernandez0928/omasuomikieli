@@ -154,7 +154,13 @@ const FAV_KEY = 'oma-suomi:favourites';
 export function loadFavourites(): Set<string> {
   try {
     const raw = localStorage.getItem(FAV_KEY);
-    return new Set<string>(raw ? (JSON.parse(raw) as string[]) : []);
+    if (!raw) return new Set<string>();
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return new Set<string>();
+    // Ids end up in routes and in lookups, so only id-shaped strings are kept.
+    return new Set<string>(
+      parsed.filter((id): id is string => typeof id === 'string' && /^[a-z0-9-]{1,64}$/i.test(id)),
+    );
   } catch {
     return new Set();
   }
