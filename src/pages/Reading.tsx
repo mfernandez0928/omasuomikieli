@@ -41,6 +41,8 @@ export function ReadingText() {
   const navigate = useNavigate();
   const { settings } = useApp();
   const text = READING_BY_ID.get(id);
+  const order = READING_TEXTS.findIndex((t) => t.id === id);
+  const following = order >= 0 ? READING_TEXTS[order + 1] : undefined;
 
   const [showTranslation, setShowTranslation] = useState(false);
   const [stage, setStage] = useState<'read' | 'questions'>('read');
@@ -79,7 +81,18 @@ export function ReadingText() {
               </p>
             ))}
           </div>
-          <ExerciseRunner exercises={text.questions} title={text.title} />
+          <ExerciseRunner
+            exercises={text.questions}
+            title={text.title}
+            nextUp={
+              following
+                ? {
+                    label: `Next text: ${following.title}`,
+                    onGo: () => navigate(`/reading/${following.id}`),
+                  }
+                : { label: 'Back to all texts', onGo: () => navigate('/reading') }
+            }
+          />
         </>
       ) : (
         <div className="stack">

@@ -105,7 +105,7 @@ export const A1_CORE: GrammarLesson[] = [
         prompt: 'Choose the correct form.',
         question: 'Hän käyttää sovellusta. Hän on ___.',
         hint: 'käyttää → the person who does it',
-        options: ['käyttäja', 'käyttäjä', 'käyttäja'],
+        options: ['käyttäja', 'käyttäjä', 'käyttaja'],
         answer: 'käyttäjä',
         explanation:
           'käyttää has ä and y - both front vowels - and no a, o or u anywhere, so the suffix must be -jä: käyttäjä.',

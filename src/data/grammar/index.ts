@@ -40,6 +40,12 @@ export function getLesson(id: string): GrammarLesson | undefined {
   return GRAMMAR_BY_ID.get(id);
 }
 
+/** The lesson after this one in curriculum order, if there is one. */
+export function nextLesson(id: string): GrammarLesson | undefined {
+  const i = GRAMMAR_LESSONS.findIndex((l) => l.id === id);
+  return i >= 0 ? GRAMMAR_LESSONS[i + 1] : undefined;
+}
+
 export function lessonsInModule(moduleId: string): GrammarLesson[] {
   return GRAMMAR_LESSONS.filter((l) => l.moduleId === moduleId);
 }

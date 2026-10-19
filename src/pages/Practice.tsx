@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Icon, type IconName } from '@/components/Icon';
 import { Callout, EmptyState, LevelBadge, SpeakButton, TopBar } from '@/components/ui';
 import { ExerciseRunner } from '@/components/ExerciseRunner';
-import { ALL_EXERCISES, GRAMMAR_BY_ID, exercisesForGrammar } from '@/data/grammar';
+import { ALL_EXERCISES, GRAMMAR_BY_ID, exercisesForGrammar, nextLesson } from '@/data/grammar';
 import { WORDS, getWord } from '@/data/words';
 import { useApp } from '@/hooks/useApp';
 import { buildQueue, dueCount, previewInterval } from '@/services/srs/scheduler';
@@ -290,32 +290,64 @@ export function ReviewSession() {
 
 export function GrammarPractice() {
   const { id = '' } = useParams();
+  const navigate = useNavigate();
   const lesson = GRAMMAR_BY_ID.get(id);
   const exercises = exercisesForGrammar(id);
+  const following = nextLesson(id);
 
   return (
     <div className="page fade-in">
       <TopBar title={lesson?.title ?? 'Practice'} subtitle={lesson?.subtitle} />
-      <ExerciseRunner exercises={exercises} title={lesson?.title ?? 'Practice'} />
+      <ExerciseRunner
+        exercises={exercises}
+        title={lesson?.title ?? 'Practice'}
+        nextUp={
+          following
+            ? {
+                label: `Next: ${following.title}`,
+                onGo: () => navigate(`/practice/grammar/${following.id}`),
+              }
+            : { label: 'Mixed practice', onGo: () => navigate('/practice/mixed') }
+        }
+      />
     </div>
   );
 }
 
+/** Draws a fresh dozen questions from across the curriculum. */
+function drawMixed(): Exercise[] {
+  const pool = [...ALL_EXERCISES];
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return pool.slice(0, 12);
+}
+
 /** Shuffled questions from across the whole curriculum. */
 export function MixedPractice() {
-  const [exercises] = useState<Exercise[]>(() => {
-    const pool = [...ALL_EXERCISES];
-    for (let i = pool.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [pool[i], pool[j]] = [pool[j], pool[i]];
-    }
-    return pool.slice(0, 12);
-  });
+  const [exercises, setExercises] = useState<Exercise[]>(drawMixed);
+  // Bumped on each draw so the runner starts clean even in the unlikely case
+  // that the new dozen matches the old one.
+  const [draw, setDraw] = useState(0);
 
   return (
     <div className="page fade-in">
       <TopBar title="Mixed practice" subtitle="12 questions from across the curriculum" />
-      <ExerciseRunner exercises={exercises} title="Mixed practice" />
+      <ExerciseRunner
+        key={draw}
+        exercises={exercises}
+        title="Mixed practice"
+        nextUp={{
+          label: 'Another 12 questions',
+          hint: `Drawn from ${ALL_EXERCISES.length} across the curriculum.`,
+          onGo: () => {
+            setExercises(drawMixed());
+            setDraw((d) => d + 1);
+            window.scrollTo(0, 0);
+          },
+        }}
+      />
     </div>
   );
 }
@@ -370,7 +402,11 @@ export function WeakTopics() {
           These questions come from the grammar you have got wrong most often, hardest topic first.
         </Callout>
       </div>
-      <ExerciseRunner exercises={exercises} title="Weak topics" />
+      <ExerciseRunner
+        exercises={exercises}
+        title="Weak topics"
+        nextUp={{ label: 'Mixed practice', onGo: () => navigate('/practice/mixed') }}
+      />
     </div>
   );
 }
@@ -484,7 +520,11 @@ export function WordPractice() {
   return (
     <div className="page fade-in">
       <TopBar title={word.fi} subtitle={`${exercises.length} questions`} />
-      <ExerciseRunner exercises={exercises} title={word.fi} />
+      <ExerciseRunner
+        exercises={exercises}
+        title={word.fi}
+        nextUp={{ label: 'Back to the word', onGo: () => navigate(`/vocabulary/${word.id}`) }}
+      />
     </div>
   );
 }

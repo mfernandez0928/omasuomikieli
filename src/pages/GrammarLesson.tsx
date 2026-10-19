@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Icon } from '@/components/Icon';
 import { Callout, EmptyState, LevelBadge, SpeakButton, TopBar } from '@/components/ui';
 import { ExerciseRunner } from '@/components/ExerciseRunner';
-import { GRAMMAR_BY_ID, getLesson } from '@/data/grammar';
+import { GRAMMAR_BY_ID, getLesson, nextLesson } from '@/data/grammar';
 import type { GrammarLesson } from '@/types';
 import { getWord } from '@/data/words';
 import { useApp } from '@/hooks/useApp';
@@ -18,6 +18,7 @@ export function GrammarLessonPage() {
   const [tab, setTab] = useState<Tab>('lesson');
 
   const lesson = getLesson(id);
+  const following = nextLesson(id);
   const progress = lessonProgress.find((p) => p.grammarId === id);
 
   useEffect(() => {
@@ -114,6 +115,19 @@ export function GrammarLessonPage() {
           <ExerciseRunner
             exercises={lesson.exercises}
             title={lesson.title}
+            nextUp={
+              following
+                ? {
+                    label: `Next lesson: ${following.title}`,
+                    hint: `${following.subtitle} · ${following.level}`,
+                    onGo: () => navigate(`/grammar/${following.id}`),
+                  }
+                : {
+                    label: 'Back to all lessons',
+                    hint: 'That is the last lesson in the curriculum.',
+                    onGo: () => navigate('/grammar'),
+                  }
+            }
             onFinish={async (score) => {
               await saveProgress({
                 grammarId: lesson.id,

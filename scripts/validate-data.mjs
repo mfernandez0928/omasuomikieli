@@ -66,6 +66,28 @@ for (const file of tsFiles(grammarDir)) {
   for (const id of collectIds(read(file))) grammarIds.add(id);
 }
 
+/*
+  Multiple-choice checks. A repeated option renders as two identical buttons
+  and makes React drop one of them; an answer that is not among the options
+  cannot be chosen at all. Both read fine in the source and are obvious in use.
+*/
+for (const file of [...tsFiles(grammarDir), join(root, 'src/data/reading.ts')]) {
+  const src = read(file);
+  const name = file.replace(root + '\\', '').replace(root + '/', '');
+  for (const m of src.matchAll(/options: \[([^\]]*)\]/g)) {
+    const options = [...m[1].matchAll(/'((?:[^'\\]|\\.)*)'/g)].map((o) => o[1]);
+    if (!options.length) continue;
+    if (new Set(options).size !== options.length) {
+      problems.push(`repeated option in [${options.join(', ')}] (${name})`);
+    }
+    const tail = src.slice(m.index + m[0].length, m.index + m[0].length + 400);
+    const answer = tail.match(/answer: '((?:[^'\\]|\\.)*)'/);
+    if (answer && !options.includes(answer[1])) {
+      problems.push(`answer "${answer[1]}" is not one of its options (${name})`);
+    }
+  }
+}
+
 // The supplied database is imported under a `db-` prefix at runtime.
 const legacy = read(join(root, 'src/data/legacy/finnish_learning_database_v0.2.1.js'));
 for (const m of legacy.matchAll(/"id":\s*"([^"]+)"/g)) wordIds.add(`db-${m[1]}`);

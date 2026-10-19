@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Icon } from '@/components/Icon';
 import { Callout, ProgressBar, SpeakButton } from '@/components/ui';
 import type { Exercise } from '@/types';
@@ -8,6 +8,16 @@ import { useApp } from '@/hooks/useApp';
 export interface RunScore {
   answered: number;
   correct: number;
+}
+
+/**
+ * Where to go once the set is finished. Supplied by the caller, because the
+ * runner does not know whether it is inside a lesson, a mixed set or a word.
+ */
+export interface NextUp {
+  label: string;
+  hint?: string;
+  onGo: () => void;
 }
 
 /** Deterministic shuffle so options do not jump around on re-render. */
@@ -27,12 +37,32 @@ export function ExerciseRunner({
   exercises,
   title,
   onFinish,
+  nextUp,
 }: {
   exercises: Exercise[];
   title: string;
   onFinish?: (score: RunScore) => void | Promise<void>;
+  nextUp?: NextUp;
 }) {
   const { settings, addMistake, noteActivity } = useApp();
+
+  /*
+    `pool` is the set being asked right now. The first round is the caller's
+    own order, which lessons author deliberately from easy to hard. A repeat
+    round holds only the questions that were missed, shuffled, so finishing a
+    set never means answering the same correct answers again.
+  */
+  const signature = useMemo(() => exercises.map((e) => e.id).join('|'), [exercises]);
+  const [pool, setPool] = useState<Exercise[]>(exercises);
+  const [round, setRound] = useState(0);
+
+  /*
+    `score` is this round only, which is what the result screen reports. The
+    caller is told about the whole set instead: a repeat round covers two of
+    five questions, and a lesson's stored progress must not fall back to two.
+  */
+  const attempted = useRef<Set<string>>(new Set());
+  const everCorrect = useRef<Set<string>>(new Set());
 
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState<RunScore>({ answered: 0, correct: 0 });
@@ -47,12 +77,34 @@ export function ExerciseRunner({
   const [checked, setChecked] = useState(false);
   const [wasCorrect, setWasCorrect] = useState(false);
 
-  const current = exercises[index];
+  const current = pool[index];
 
   const rightColumn = useMemo(
     () => (current?.pairs ? shuffled(current.pairs.map((p) => p.right), current.id) : []),
     [current],
   );
+
+  // A caller can hand over a different set (mixed practice drawing again), so
+  // the run restarts when the questions themselves change, not on every render.
+  useEffect(() => {
+    attempted.current = new Set();
+    everCorrect.current = new Set();
+    setPool(exercises);
+    setRound(0);
+    setIndex(0);
+    setScore({ answered: 0, correct: 0 });
+    setWrongIds([]);
+    setDone(false);
+    setSelected(null);
+    setTyped('');
+    setMatchPicks({});
+    setActiveLeft(null);
+    setChecked(false);
+    setWasCorrect(false);
+    // `signature` is the content of `exercises`; the array identity changes on
+    // every render in some callers.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [signature]);
 
   if (!exercises.length) {
     return (
@@ -93,6 +145,8 @@ export function ExerciseRunner({
 
   const handleCheck = async () => {
     const correct = evaluate();
+    attempted.current.add(current.id);
+    if (correct) everCorrect.current.add(current.id);
     setWasCorrect(correct);
     setChecked(true);
     setScore((s) => ({ answered: s.answered + 1, correct: s.correct + (correct ? 1 : 0) }));
@@ -122,25 +176,35 @@ export function ExerciseRunner({
   };
 
   const handleNext = async () => {
-    if (index + 1 >= exercises.length) {
+    if (index + 1 >= pool.length) {
       setDone(true);
-      await onFinish?.({ answered: score.answered, correct: score.correct });
+      await onFinish?.({
+        answered: attempted.current.size,
+        correct: everCorrect.current.size,
+      });
       return;
     }
     setIndex((i) => i + 1);
     resetQuestion();
   };
 
-  const retryWrong = () => {
+  /** Replays only what was missed, in a different order each time. */
+  const practiseMissed = () => {
+    const missed = pool.filter((e) => wrongIds.includes(e.id));
+    if (!missed.length) return;
+    setPool(shuffled(missed, `round-${round + 1}-${signature}`));
+    setRound((r) => r + 1);
     setDone(false);
     setIndex(0);
     setScore({ answered: 0, correct: 0 });
+    setWrongIds([]);
     resetQuestion();
   };
 
   if (done) {
     const pct = score.answered ? Math.round((score.correct / score.answered) * 100) : 0;
-    const wrongList = exercises.filter((e) => wrongIds.includes(e.id));
+    const wrongList = pool.filter((e) => wrongIds.includes(e.id));
+    const allCorrect = score.answered > 0 && wrongList.length === 0;
     return (
       <div className="stack fade-in">
         <div className="panel center">
@@ -166,11 +230,13 @@ export function ExerciseRunner({
             <ProgressBar percent={pct} />
           </div>
           <p className="small muted" style={{ marginTop: 12, lineHeight: 1.55 }}>
-            {pct === 100
-              ? 'Every answer correct. This rule is solid - the review queue will bring it back in a few days.'
+            {allCorrect
+              ? round > 0
+                ? 'That clears the ones you missed. Nothing left to repeat here.'
+                : 'Every answer correct. This rule is solid - the review queue will bring it back in a few days.'
               : pct >= 70
-                ? 'Good result. The ones you missed are saved in My Mistakes so you can come back to them.'
-                : 'Worth another pass. Re-read the rule above, then try again - the mistakes are saved for you.'}
+                ? 'Good result. Only the ones below are left, and they are saved in My Mistakes too.'
+                : 'Worth another pass. Re-read the rule above, then take just the ones below.'}
           </p>
         </div>
 
@@ -192,10 +258,32 @@ export function ExerciseRunner({
           </div>
         )}
 
-        <button className="btn btn--primary btn--block" onClick={retryWrong}>
-          <Icon name="refresh" size={17} />
-          Try again
-        </button>
+        {/*
+          No repeat button once everything is right: answering the same correct
+          answers again teaches nothing. What is offered instead is the way on.
+        */}
+        <div className="stack" style={{ gap: 8 }}>
+          {wrongList.length > 0 && (
+            <button className="btn btn--primary btn--block" onClick={practiseMissed}>
+              <Icon name="refresh" size={17} />
+              Practise {wrongList.length === 1 ? 'the one' : `the ${wrongList.length}`} you missed
+            </button>
+          )}
+          {nextUp && (
+            <button
+              className={`btn btn--block ${wrongList.length ? 'btn--ghost' : 'btn--primary'}`}
+              onClick={nextUp.onGo}
+            >
+              {nextUp.label}
+              <Icon name="chevron-right" size={17} />
+            </button>
+          )}
+          {nextUp?.hint && (
+            <p className="tiny dim center" style={{ marginTop: 2 }}>
+              {nextUp.hint}
+            </p>
+          )}
+        </div>
       </div>
     );
   }
@@ -208,11 +296,11 @@ export function ExerciseRunner({
         <div className="qbar__progress">
           <div
             className="progress__fill"
-            style={{ width: `${(index / exercises.length) * 100}%`, height: '100%' }}
+            style={{ width: `${(index / pool.length) * 100}%`, height: '100%' }}
           />
         </div>
         <span className="qbar__count">
-          {index + 1} / {exercises.length}
+          {index + 1} / {pool.length}
         </span>
       </div>
 
@@ -330,7 +418,7 @@ export function ExerciseRunner({
         </div>
       ) : (
         <div className="stack" style={{ gap: 8 }}>
-          {(current.options ?? []).map((opt) => {
+          {(current.options ?? []).map((opt, i) => {
             const isAnswer = opt === current.answer;
             const isPicked = selected === opt;
             // Nothing is revealed until the learner has committed an answer.
@@ -345,7 +433,9 @@ export function ExerciseRunner({
                   : '';
             return (
               <button
-                key={opt}
+                // Keyed by position as well as text: two options can read the
+                // same, and a bare text key silently drops one of them.
+                key={`${i}-${opt}`}
                 className={`option ${cls}`}
                 disabled={checked}
                 onClick={() => setSelected(opt)}
@@ -379,7 +469,7 @@ export function ExerciseRunner({
 
       {checked ? (
         <button className="btn btn--primary btn--block" onClick={handleNext}>
-          {index + 1 >= exercises.length ? 'See results' : 'Next question'}
+          {index + 1 >= pool.length ? 'See results' : 'Next question'}
           <Icon name="chevron-right" size={18} />
         </button>
       ) : (
