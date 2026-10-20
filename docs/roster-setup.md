@@ -33,9 +33,17 @@ create index learners_id_idx on public.learners (id);
 
 alter table public.learners enable row level security;
 
--- The only thing the public key may do is add a row. It cannot read, change
--- or delete one. This matters: the anon key ships inside the JS bundle and
--- anyone can read it out, so without this the whole roster would be public.
+-- Two locks, not one.
+--
+-- The grant is the Postgres-level lock: the public role may insert and that is
+-- all, so no policy mistake can turn into a readable table. It is needed
+-- explicitly because the project was created with "automatically expose new
+-- tables" switched off.
+grant usage on schema public to anon;
+grant insert on table public.learners to anon;
+
+-- The policy is the row-level lock. This matters because the anon key ships
+-- inside the JS bundle and anyone can read it out of there.
 create policy "anon may add a learner"
   on public.learners
   for insert
@@ -46,11 +54,18 @@ create policy "anon may add a learner"
 Do **not** add a `select` policy. Read the roster from the dashboard's Table
 Editor, which uses the service role and bypasses RLS.
 
-## 2. Choose the EU region
+## 2. Settings at creation time
 
-When creating the project, pick **Frankfurt (eu-central-1)** or another EU
-region. The region cannot be changed afterwards, and keeping EU residents'
-names inside the EU is the simplest position to be in under GDPR.
+These cannot be changed afterwards, so they are worth getting right once.
+
+| Setting | Value | Why |
+| --- | --- | --- |
+| Region | **Frankfurt (eu-central-1)** | EU residents' names stay in the EU, which is the simplest GDPR position. Pick it explicitly through "Need a specific region?" rather than leaving the broad "Europe" group. |
+| Database password | generate one, then save it | Needed for direct Postgres access later. It is not used by the app. |
+| Enable Data API | **on** | The app posts to the REST API. With this off nothing arrives. |
+| Automatically expose new tables | **off** | Otherwise every future table is reachable by the public key the moment it is created. The grant above opens this one table deliberately. |
+| Enable automatic RLS | **on** | A safety net: any table made later starts locked instead of open. |
+| Postgres type | **Postgres**, not OrioleDB | OrioleDB is beta and not meant for production. |
 
 ## 3. Get the two values
 
