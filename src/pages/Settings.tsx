@@ -5,6 +5,7 @@ import { Callout, Toggle, TopBar } from '@/components/ui';
 import { useApp } from '@/hooks/useApp';
 import { clearAll, exportAll, isStorageAvailable } from '@/services/storage/db';
 import { cleanName, isName } from '@/services/storage/prefs';
+import { rosterEnabled } from '@/services/sync/roster';
 import type { UserProfile } from '@/types';
 import { WORDS } from '@/data/words';
 import { BRAND, COPYRIGHT } from '@/data/brand';
@@ -226,7 +227,9 @@ function NameEditor({
             {profile.firstName} {profile.lastName}
           </p>
           <p className="tiny dim" style={{ marginTop: 2 }}>
-            Nasa phone mo lang ito. Hindi ipinapadala kahit saan.
+            {rosterEnabled
+              ? 'Ang pangalan lang ang nakikita ng gumawa ng app. Nasa phone mo ang progress mo.'
+              : 'Nasa phone mo lang ito. Hindi ipinapadala kahit saan.'}
           </p>
         </div>
         <button

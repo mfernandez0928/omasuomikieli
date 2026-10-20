@@ -17,6 +17,9 @@ createRoot(container).render(
 // autoUpdate means a new version activates on the next visit.
 registerSW({ immediate: true });
 
+// Names that could not be reported earlier (offline, blocked) go out now.
+void import('./services/sync/roster').then((m) => m.flushRoster());
+
 if (import.meta.env.DEV) {
   // Surface content problems during development.
   void (async () => {

@@ -29,6 +29,7 @@ import {
   todayKey,
   type StreakState,
 } from '@/services/storage/prefs';
+import { recordLearner } from '@/services/sync/roster';
 import {
   loadActivity,
   loadCards,
@@ -226,6 +227,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         ? { ...prev, firstName, lastName }
         : makeProfile(firstName, lastName);
       saveProfile(next);
+      // Reporting the name must never hold up the screen behind it.
+      void recordLearner(next);
       return next;
     });
   }, []);

@@ -2,12 +2,15 @@ import { useState } from 'react';
 import { HeroArt } from '@/components/HeroArt';
 import { Icon } from '@/components/Icon';
 import { cleanName, isName } from '@/services/storage/prefs';
+import { rosterEnabled } from '@/services/sync/roster';
 
 /**
  * Shown once, before the app opens, to ask who is using it.
  *
- * The name is kept in this browser. Nothing is sent anywhere, and the screen
- * says so, because a name box that does not explain itself reads as a sign-up.
+ * The note at the bottom follows the build: it says the name stays on the
+ * device, or that the name alone is reported, depending on whether this build
+ * has a roster configured. A name box that does not say where the name goes
+ * reads as a sign-up, and in the reporting case it would also be untrue.
  */
 export function Welcome({ onDone }: { onDone: (first: string, last: string) => void }) {
   const [first, setFirst] = useState('');
@@ -104,8 +107,19 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
         </button>
 
         <p className="tiny dim" style={{ marginTop: 14, lineHeight: 1.65 }}>
-          Nananatili sa phone mo ang pangalan mo. Walang account, walang password, at hindi ito
-          ipinapadala kahit saan. Mapapalitan mo ito mamaya sa Settings.
+          {rosterEnabled ? (
+            <>
+              Nasa phone mo lang ang progress mo. Ang <b>pangalan lang</b> ang ipinapadala sa
+              gumawa ng app, para malaman niya kung sino ang gumagamit — walang sagot, walang
+              progress, walang ibang impormasyon. Walang password. Mapapalitan mo ito sa Settings,
+              at pwede mong hilingin na burahin.
+            </>
+          ) : (
+            <>
+              Nananatili sa phone mo ang pangalan mo. Walang account, walang password, at hindi ito
+              ipinapadala kahit saan. Mapapalitan mo ito mamaya sa Settings.
+            </>
+          )}
         </p>
       </div>
     </div>
