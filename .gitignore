@@ -39,3 +39,6 @@ src/data/sources/*.local.ts
 .claude/
 .cursor/
 .aider*
+
+# Promo video and its rendered frames: generated, and large.
+marketing/

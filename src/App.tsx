@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { HashRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { BottomNav } from '@/components/BottomNav';
-import { AppProvider } from '@/hooks/useApp';
+import { AppProvider, useApp } from '@/hooks/useApp';
 import { Home } from '@/pages/Home';
+import { Welcome } from '@/pages/Welcome';
 import { GrammarList } from '@/pages/GrammarList';
 import { GrammarLessonPage } from '@/pages/GrammarLesson';
 import { Vocabulary } from '@/pages/Vocabulary';
@@ -35,6 +36,17 @@ function ScrollToTop() {
   return null;
 }
 
+/**
+ * Nothing opens until the app knows who is using it. The name lives in this
+ * browser, so this gate costs one screen on the first run and never appears
+ * again on that device.
+ */
+function Gate({ children }: { children: ReactNode }) {
+  const { profile, setProfileName } = useApp();
+  if (!profile) return <Welcome onDone={setProfileName} />;
+  return <>{children}</>;
+}
+
 export default function App() {
   return (
     <AppProvider>
@@ -46,6 +58,7 @@ export default function App() {
       <HashRouter>
         <ScrollToTop />
         <div className="app-shell">
+          <Gate>
           <Routes>
             <Route path="/" element={<Home />} />
 
@@ -82,6 +95,7 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
           <BottomNav />
+          </Gate>
         </div>
       </HashRouter>
     </AppProvider>

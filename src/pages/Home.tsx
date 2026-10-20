@@ -90,7 +90,7 @@ function dayLabel(isoDate: string): string {
 
 export function Home() {
   const navigate = useNavigate();
-  const { activity, cards, loadState, streak, lessonProgress } = useApp();
+  const { activity, cards, loadState, streak, lessonProgress, profile } = useApp();
   const { done, goal, percent } = useDailyProgress();
 
   const week = lastSevenDays(activity);
@@ -113,6 +113,7 @@ export function Home() {
             <Icon name="settings" size={19} />
           </button>
         </div>
+        {profile && <p className="hero__greeting">Moi, {profile.firstName}!</p>}
         <h1 className="hero__title">
           Oma
           <span>Suomi</span>

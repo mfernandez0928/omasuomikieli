@@ -1520,3 +1520,17 @@ p {
   color: var(--gold);
   opacity: 0.85;
 }
+
+/* Personal greeting above the wordmark on the home screen. */
+.hero__greeting {
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+/* The name gate has no bottom nav, so it needs its own bottom padding. */
+.page--welcome {
+  padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+}

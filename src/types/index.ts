@@ -576,3 +576,23 @@ export interface SceneGloss {
    */
   basis?: string;
 }
+
+/* ------------------------------------------------------------------ */
+/* Who is using the app                                                */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The learner's own name, entered once before the app opens.
+ *
+ * It is stored in this browser and nowhere else. `id` is generated locally and
+ * is what a future sync would key on, so the name itself never has to be the
+ * identifier.
+ */
+export interface UserProfile {
+  /** Random local id, created with the profile. */
+  id: string;
+  firstName: string;
+  lastName: string;
+  /** epoch ms */
+  createdAt: number;
+}

@@ -100,7 +100,7 @@ export function More() {
       </div>
 
       <p className="tiny dim center" style={{ marginTop: 26, lineHeight: 1.7 }}>
-        Oma Suomi · {WORDS.length} words · works offline · no account needed
+        Oma Suomi · {WORDS.length} words · works offline · nothing leaves your device
         <span style={{ display: 'block', marginTop: 6 }}>
           <b style={{ color: 'var(--gold)' }}>{BRAND}</b>
         </span>

@@ -15,12 +15,16 @@ import type {
   Settings,
   SrsCard,
   SrsGrade,
+  UserProfile,
   WordStatus,
 } from '@/types';
 import {
   DEFAULT_SETTINGS,
+  loadProfile,
   loadSettings,
   loadStreak,
+  makeProfile,
+  saveProfile,
   saveSettings,
   todayKey,
   type StreakState,
@@ -60,8 +64,12 @@ interface AppState {
   favourites: Set<string>;
   streak: StreakState;
   speechReady: boolean;
+  /** null until the learner has given a name. */
+  profile: UserProfile | null;
 
   updateSettings: (patch: Partial<Settings>) => void;
+  /** Creates the profile on first run, or renames an existing one. */
+  setProfileName: (firstName: string, lastName: string) => void;
   gradeCard: (card: SrsCard, grade: SrsGrade) => Promise<SrsCard>;
   setWordStatus: (wordId: string, status: WordStatus) => Promise<void>;
   toggleFavourite: (wordId: string) => void;
@@ -82,6 +90,8 @@ const AppContext = createContext<AppState | null>(null);
 export function AppProvider({ children }: { children: ReactNode }) {
   const [loadState, setLoadState] = useState<LoadState>('loading');
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
+  // Read synchronously so the name gate never flashes for someone who has one.
+  const [profile, setProfile] = useState<UserProfile | null>(() => loadProfile());
   const [cards, setCards] = useState<SrsCard[]>([]);
   const [activity, setActivity] = useState<DayActivity[]>([]);
   const [mistakes, setMistakes] = useState<MistakeEntry[]>([]);
@@ -210,6 +220,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const setProfileName = useCallback((firstName: string, lastName: string) => {
+    setProfile((prev) => {
+      const next = prev
+        ? { ...prev, firstName, lastName }
+        : makeProfile(firstName, lastName);
+      saveProfile(next);
+      return next;
+    });
+  }, []);
+
   const addMistake = useCallback(
     async (input: Omit<MistakeEntry, 'id' | 'createdAt' | 'reviewed' | 'resolved'>) => {
       const entry = await logMistake(input);
@@ -255,6 +275,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     () => ({
       loadState,
       settings,
+      profile,
       cards,
       activity,
       mistakes,
@@ -264,6 +285,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       streak,
       speechReady,
       updateSettings,
+      setProfileName,
       gradeCard,
       setWordStatus,
       toggleFavourite,
@@ -287,7 +309,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
       favourites,
       streak,
       speechReady,
+      profile,
       updateSettings,
+      setProfileName,
       gradeCard,
       setWordStatus,
       toggleFavourite,

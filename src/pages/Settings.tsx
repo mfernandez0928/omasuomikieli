@@ -4,6 +4,8 @@ import { Icon } from '@/components/Icon';
 import { Callout, Toggle, TopBar } from '@/components/ui';
 import { useApp } from '@/hooks/useApp';
 import { clearAll, exportAll, isStorageAvailable } from '@/services/storage/db';
+import { cleanName, isName } from '@/services/storage/prefs';
+import type { UserProfile } from '@/types';
 import { WORDS } from '@/data/words';
 import { BRAND, COPYRIGHT } from '@/data/brand';
 import { GRAMMAR_LESSONS, ALL_EXERCISES } from '@/data/grammar';
@@ -11,7 +13,8 @@ import { PHRASES } from '@/data/phrases';
 
 export function Settings() {
   const navigate = useNavigate();
-  const { settings, updateSettings, speechReady, cards, mistakes, personalWords, streak } = useApp();
+  const { settings, updateSettings, speechReady, cards, mistakes, personalWords, streak, profile, setProfileName } =
+    useApp();
   const [confirmReset, setConfirmReset] = useState(false);
   const [exported, setExported] = useState(false);
 
@@ -34,6 +37,13 @@ export function Settings() {
       <TopBar title="Settings" />
 
       <section className="panel">
+        <p className="eyebrow" style={{ marginBottom: 10 }}>
+          Sino ka
+        </p>
+        <NameEditor profile={profile} onSave={setProfileName} />
+      </section>
+
+      <section className="panel" style={{ marginTop: 14 }}>
         <p className="eyebrow" style={{ marginBottom: 6 }}>
           Daily goal
         </p>
@@ -181,14 +191,104 @@ export function Settings() {
       </section>
 
       <p className="tiny dim center" style={{ marginTop: 22, lineHeight: 1.7 }}>
-        Oma Suomi runs entirely on this device. There is no account, no server and no tracking. Your
-        progress lives in this browser's storage only - clearing site data erases it.
+        Oma Suomi runs entirely on this device. There is no password, no server and no tracking.
+        Your name and your progress live in this browser's storage only - clearing site data erases
+        them.
       </p>
 
       <p className="tiny dim center" style={{ marginTop: 14, lineHeight: 1.7 }}>
         <b style={{ color: 'var(--gold)' }}>{BRAND}</b>
         <span style={{ display: 'block' }}>{COPYRIGHT}</span>
       </p>
+    </div>
+  );
+}
+
+/** Lets the learner correct the name they gave on the first run. */
+function NameEditor({
+  profile,
+  onSave,
+}: {
+  profile: UserProfile | null;
+  onSave: (first: string, last: string) => void;
+}) {
+  const [editing, setEditing] = useState(false);
+  const [first, setFirst] = useState(profile?.firstName ?? '');
+  const [last, setLast] = useState(profile?.lastName ?? '');
+
+  if (!profile) return null;
+
+  if (!editing) {
+    return (
+      <div className="row row--between" style={{ gap: 10 }}>
+        <div style={{ minWidth: 0 }}>
+          <p style={{ fontWeight: 700, fontSize: '1.05rem' }}>
+            {profile.firstName} {profile.lastName}
+          </p>
+          <p className="tiny dim" style={{ marginTop: 2 }}>
+            Nasa phone mo lang ito. Hindi ipinapadala kahit saan.
+          </p>
+        </div>
+        <button
+          className="btn btn--sm"
+          onClick={() => {
+            setFirst(profile.firstName);
+            setLast(profile.lastName);
+            setEditing(true);
+          }}
+        >
+          <Icon name="pencil" size={14} />
+          Palitan
+        </button>
+      </div>
+    );
+  }
+
+  const ready = isName(first) && isName(last);
+
+  return (
+    <div className="stack" style={{ gap: 10 }}>
+      <div className="field">
+        <label className="field__label" htmlFor="setFirst">
+          Etunimi · First name
+        </label>
+        <input
+          id="setFirst"
+          className="input"
+          value={first}
+          onChange={(e) => setFirst(e.target.value)}
+          maxLength={40}
+          autoComplete="given-name"
+        />
+      </div>
+      <div className="field">
+        <label className="field__label" htmlFor="setLast">
+          Sukunimi · Last name
+        </label>
+        <input
+          id="setLast"
+          className="input"
+          value={last}
+          onChange={(e) => setLast(e.target.value)}
+          maxLength={40}
+          autoComplete="family-name"
+        />
+      </div>
+      <div className="row" style={{ gap: 8 }}>
+        <button
+          className="btn btn--primary btn--sm"
+          disabled={!ready}
+          onClick={() => {
+            onSave(cleanName(first), cleanName(last));
+            setEditing(false);
+          }}
+        >
+          I-save
+        </button>
+        <button className="btn btn--sm" onClick={() => setEditing(false)}>
+          Huwag na
+        </button>
+      </div>
     </div>
   );
 }

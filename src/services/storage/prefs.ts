@@ -1,4 +1,4 @@
-import type { Settings, SessionResume } from '@/types';
+import type { Settings, SessionResume, UserProfile } from '@/types';
 
 /**
  * Small, synchronously-read preferences. localStorage is the right tool here:
@@ -12,6 +12,7 @@ import type { Settings, SessionResume } from '@/types';
  */
 
 const SETTINGS_KEY = 'oma-suomi:settings';
+const PROFILE_KEY = 'oma-suomi:profile';
 const RESUME_KEY = 'oma-suomi:resume';
 const STREAK_KEY = 'oma-suomi:streak';
 
@@ -173,4 +174,64 @@ export function touchStreak(now: Date = new Date()): StreakState {
 
   saveStreak(next);
   return next;
+}
+
+/* ------------------------------ the learner ------------------------------ */
+
+/**
+ * Trims a typed name. If it arrived with no capitals at all, each word gets
+ * one, so "mark" greets as "Mark"; a name the learner capitalised themselves
+ * is left exactly as typed, which keeps "de la Cruz" and "van Dijk" intact.
+ */
+export function cleanName(input: string): string {
+  const n = input.replace(/\s+/g, ' ').trim().slice(0, 40);
+  if (n !== n.toLowerCase()) return n;
+  return n.replace(/(^|[\s'-])(\p{L})/gu, (_, sep, ch) => sep + ch.toLocaleUpperCase());
+}
+
+export function isName(input: string): boolean {
+  const n = cleanName(input);
+  // At least one letter, and nothing that looks like a URL or markup.
+  return n.length >= 2 && /\p{L}/u.test(n) && !/[<>{}\/@]|https?:/i.test(n);
+}
+
+export function loadProfile(): UserProfile | null {
+  const raw = readRecord(PROFILE_KEY);
+  if (!raw) return null;
+  const first = cleanName(stringOr(raw.firstName, '', 40));
+  const last = cleanName(stringOr(raw.lastName, '', 40));
+  const id = stringOr(raw.id, '', 40);
+  if (!first || !id) return null;
+  return {
+    id,
+    firstName: first,
+    lastName: last,
+    createdAt: intOr(raw.createdAt, Date.now(), 0, Number.MAX_SAFE_INTEGER),
+  };
+}
+
+export function saveProfile(profile: UserProfile): void {
+  writeJson(PROFILE_KEY, profile);
+}
+
+/** Builds a profile with a fresh local id. */
+export function makeProfile(firstName: string, lastName: string): UserProfile {
+  const rnd =
+    typeof crypto !== 'undefined' && crypto.randomUUID
+      ? crypto.randomUUID()
+      : Math.random().toString(36).slice(2) + Date.now().toString(36);
+  return {
+    id: rnd,
+    firstName: cleanName(firstName),
+    lastName: cleanName(lastName),
+    createdAt: Date.now(),
+  };
+}
+
+export function clearProfile(): void {
+  try {
+    localStorage.removeItem(PROFILE_KEY);
+  } catch {
+    /* ignore */
+  }
 }
