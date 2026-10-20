@@ -17,6 +17,23 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
   const [last, setLast] = useState('');
   const [touched, setTouched] = useState(false);
 
+  /*
+    Everyone who used the app before this screen existed meets it on their next
+    visit, and a name wall in front of work they have already done reads as
+    "start again". Their streak and saved words are untouched, so say so.
+  */
+  const [returning] = useState(() => {
+    try {
+      return Boolean(
+        localStorage.getItem('oma-suomi:streak') ||
+          localStorage.getItem('oma-suomi:favourites') ||
+          localStorage.getItem('oma-suomi:settings'),
+      );
+    } catch {
+      return false;
+    }
+  });
+
   const firstOk = isName(first);
   const lastOk = isName(last);
   const ready = firstOk && lastOk;
@@ -49,6 +66,18 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
         <p className="small muted" style={{ marginTop: 4, lineHeight: 1.55 }}>
           <b>Ano ang pangalan mo?</b> Ito ang ibabati sa iyo ng app at dito nakatali ang progress mo.
         </p>
+
+        {returning && (
+          <div className="callout callout--ok" style={{ marginTop: 12 }}>
+            <span className="callout__icon">
+              <Icon name="check" size={14} />
+            </span>
+            <span>
+              Nandiyan pa lahat ng progress mo — ang streak, ang mga natutunan mo, at ang My
+              Mistakes. Pangalan lang ang bago.
+            </span>
+          </div>
+        )}
 
         <div className="field" style={{ marginTop: 16 }}>
           <label className="field__label" htmlFor="firstName">
