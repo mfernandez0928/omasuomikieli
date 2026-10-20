@@ -694,7 +694,7 @@ export const NOUNS: Word[] = [
     ],
     note: 'KPT k disappears: ruoka -> ruoan. The spellings ruuan / ruuat are also standard and very common.',
     noteTl: 'Nawawala ang k: ruoka -> ruoan. Tama rin ang ruuan.',
-    related: ['n-kauppa', 'db-syoda'],
+    related: ['n-kauppa', 'v-syoda'],
     grammarRefs: ['g-kpt', 'g-partitiivi', 'g-objekti'],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'ruoka, ruoan' },
     verification: 'source-verified',

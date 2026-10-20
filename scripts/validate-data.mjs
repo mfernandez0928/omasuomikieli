@@ -99,9 +99,30 @@ for (const file of [...tsFiles(grammarDir), join(root, 'src/data/reading.ts')]) 
   }
 }
 
-// The supplied database is imported under a `db-` prefix at runtime.
-const legacy = read(join(root, 'src/data/legacy/finnish_learning_database_v0.2.1.js'));
-for (const m of legacy.matchAll(/"id":\s*"([^"]+)"/g)) wordIds.add(`db-${m[1]}`);
+/*
+  The supplied database is imported under a `db-` prefix at runtime, but only
+  where no curated entry already covers the same headword — `importLegacyWords`
+  drops the rest. This used to add every id in the file, curated duplicates
+  included, so a `related` link to a word that gets merged away passed the check
+  here and only failed in the app. It now mirrors the merge.
+*/
+const legacyRaw = read(join(root, 'src/data/legacy/finnish_learning_database_v0.2.1.js'));
+const legacyJson = legacyRaw
+  .slice(legacyRaw.indexOf('{'), legacyRaw.lastIndexOf('}') + 1)
+  .replace(/;\s*export default[\s\S]*$/, '');
+
+let legacyWords = [];
+try {
+  legacyWords = JSON.parse(legacyJson).words ?? [];
+} catch {
+  problems.push('could not parse the supplied v0.2.1 database as JSON');
+}
+
+for (const w of legacyWords) {
+  if (!headwords.has(w.finnish) && !headwords.has(String(w.finnish ?? '').toLowerCase())) {
+    wordIds.add(`db-${w.id}`);
+  }
+}
 
 for (const file of [...tsFiles(wordsDir), ...tsFiles(grammarDir)]) {
   const src = read(file);

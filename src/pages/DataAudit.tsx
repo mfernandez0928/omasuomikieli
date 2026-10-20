@@ -240,15 +240,14 @@ function RosterStatus() {
       </h2>
       {rosterEnabled ? (
         <Callout kind="ok" icon="check">
-          <b>On.</b> This build carries both Supabase values, so a learner's name is reported the
-          first time they open the app. Nothing else is sent: no progress, no answers, no mistakes.
+          <b>Names are recorded.</b> The name you give on the first screen is sent once, so the
+          person who made the app knows who is using it. Nothing else leaves your device: not your
+          progress, not your answers, not your mistakes.
         </Callout>
       ) : (
-        <Callout kind="warn">
-          <b>Off.</b> This build carries no Supabase values, so names stay on each learner's own
-          device and nothing is recorded. Set <code>VITE_SUPABASE_URL</code> and{' '}
-          <code>VITE_SUPABASE_ANON_KEY</code> on the Production environment, then redeploy: Vite
-          reads them while building, not while running.
+        <Callout kind="info">
+          <b>Nothing is recorded.</b> The name you gave stays in this browser and is not sent
+          anywhere.
         </Callout>
       )}
     </section>
