@@ -11,6 +11,7 @@ import { OS1_WORDS_3 } from './os1-words-3';
 import { OS1_CORE_WORDS } from './os1-core';
 import { EVERYDAY_VERBS } from './everyday-verbs';
 import { WORK_AND_LIFE } from './work-and-life';
+import { OS1_K1_WORDS } from './os1-k1';
 
 /**
  * The curated set is authored in this folder. The supplied v0.2.1 database is
@@ -33,6 +34,7 @@ const CURATED: Word[] = [
   ...OS1_CORE_WORDS,
   ...EVERYDAY_VERBS,
   ...WORK_AND_LIFE,
+  ...OS1_K1_WORDS,
 ];
 
 const curatedFinnish = new Set(CURATED.map((w) => w.fi.toLowerCase()));
@@ -67,7 +69,8 @@ export function validateWords(words: Word[] = WORDS): ValidationIssue[] {
     }
     seenIds.add(w.id);
 
-    const key = w.fi.toLowerCase();
+    // Case is part of the headword: suomi is the language, Suomi the country.
+    const key = w.fi;
     const prev = seenHeadwords.get(key);
     if (prev) {
       issues.push({
@@ -105,4 +108,5 @@ export {
   OS1_CORE_WORDS,
   EVERYDAY_VERBS,
   WORK_AND_LIFE,
+  OS1_K1_WORDS,
 };

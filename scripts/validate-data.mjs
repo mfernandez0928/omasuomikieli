@@ -43,6 +43,7 @@ function collectHeadwords(source) {
 const problems = [];
 const wordIds = new Set();
 const headwords = new Map();
+const caseVariants = new Map();
 const grammarIds = new Set();
 
 for (const file of tsFiles(wordsDir)) {
@@ -54,11 +55,21 @@ for (const file of tsFiles(wordsDir)) {
     wordIds.add(id);
   }
   for (const fi of collectHeadwords(src)) {
-    const key = fi.toLowerCase();
-    if (headwords.has(key)) {
-      problems.push(`duplicate headword "${fi}" (${name} and ${headwords.get(key)})`);
+    /*
+      Case is part of the headword in Finnish: suomi is the language and Suomi
+      is the country, englanti and Englanti likewise. So an exact repeat is the
+      failure, and a pair that differs only in case is reported below for the
+      author to confirm rather than treated as a mistake.
+    */
+    if (headwords.has(fi)) {
+      problems.push(`duplicate headword "${fi}" (${name} and ${headwords.get(fi)})`);
     }
-    headwords.set(key, name);
+    headwords.set(fi, name);
+
+    const lower = fi.toLowerCase();
+    const seen = caseVariants.get(lower);
+    if (seen && !seen.includes(fi)) seen.push(fi);
+    else if (!seen) caseVariants.set(lower, [fi]);
   }
 }
 
@@ -135,6 +146,13 @@ console.log(
 );
 console.log(`grammar lessons: ${grammarIds.size}`);
 console.log(`exercises: ${exerciseIds.size}`);
+
+const pairs = [...caseVariants.values()].filter((v) => v.length > 1);
+if (pairs.length) {
+  console.log(`
+headwords that differ only in case (${pairs.length}) - check each is deliberate:`);
+  for (const v of pairs) console.log(`  ${v.join('  /  ')}`);
+}
 
 if (problems.length) {
   console.error(`\n${problems.length} problem(s):`);
