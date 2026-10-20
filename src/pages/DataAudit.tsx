@@ -8,6 +8,7 @@ import { SOURCE_BOOKS } from '@/data/sources';
 import { SCENES, SCENE_LEXICON } from '@/data/situations';
 import { ALL_SPOKEN } from '@/data/puhekieli';
 import { getWord } from '@/data/words';
+import { rosterEnabled } from '@/services/sync/roster';
 import { OS1_SANASTO_CHAPTERS } from '@/data/sources/os1-sanasto';
 
 const SEVERITY_STYLE = {
@@ -190,6 +191,8 @@ export function DataAudit() {
         </div>
       </section>
 
+      <RosterStatus />
+
       <SituationsProvenance />
 
       {/* ------------------------- integrity check --------------------------- */}
@@ -222,6 +225,33 @@ export function DataAudit() {
         </Callout>
       </div>
     </div>
+  );
+}
+
+/**
+ * Says out loud whether this build reports learner names, so the question can
+ * be answered by opening the app rather than by reading the JS bundle.
+ */
+function RosterStatus() {
+  return (
+    <section className="section">
+      <h2 className="section__title" style={{ fontSize: '1rem', marginBottom: 10 }}>
+        Learner roster
+      </h2>
+      {rosterEnabled ? (
+        <Callout kind="ok" icon="check">
+          <b>On.</b> This build carries both Supabase values, so a learner's name is reported the
+          first time they open the app. Nothing else is sent: no progress, no answers, no mistakes.
+        </Callout>
+      ) : (
+        <Callout kind="warn">
+          <b>Off.</b> This build carries no Supabase values, so names stay on each learner's own
+          device and nothing is recorded. Set <code>VITE_SUPABASE_URL</code> and{' '}
+          <code>VITE_SUPABASE_ANON_KEY</code> on the Production environment, then redeploy: Vite
+          reads them while building, not while running.
+        </Callout>
+      )}
+    </section>
   );
 }
 
