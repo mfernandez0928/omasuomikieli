@@ -226,11 +226,11 @@ function NameEditor({
           <p style={{ fontWeight: 700, fontSize: '1.05rem' }}>
             {profile.firstName} {profile.lastName}
           </p>
-          <p className="tiny dim" style={{ marginTop: 2 }}>
-            {rosterEnabled
-              ? 'Ang pangalan lang ang nakikita ng gumawa ng app. Nasa phone mo ang progress mo.'
-              : 'Nasa phone mo lang ito. Hindi ipinapadala kahit saan.'}
-          </p>
+          {rosterEnabled && (
+            <p className="tiny dim" style={{ marginTop: 2 }}>
+              Ang pangalan lang ang naitatala. Nasa phone mo ang progress mo.
+            </p>
+          )}
         </div>
         <button
           className="btn btn--sm"

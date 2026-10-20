@@ -60,7 +60,6 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
             value={first}
             onChange={(e) => setFirst(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && submit()}
-            placeholder="Mark"
             autoComplete="given-name"
             autoCapitalize="words"
             spellCheck={false}
@@ -83,7 +82,6 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
             value={last}
             onChange={(e) => setLast(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && submit()}
-            placeholder="Fernandez"
             autoComplete="family-name"
             autoCapitalize="words"
             spellCheck={false}
@@ -106,21 +104,17 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
           <Icon name="chevron-right" size={18} />
         </button>
 
-        <p className="tiny dim" style={{ marginTop: 14, lineHeight: 1.65 }}>
-          {rosterEnabled ? (
-            <>
-              Nasa phone mo lang ang progress mo. Ang <b>pangalan lang</b> ang ipinapadala sa
-              gumawa ng app, para malaman niya kung sino ang gumagamit — walang sagot, walang
-              progress, walang ibang impormasyon. Walang password. Mapapalitan mo ito sa Settings,
-              at pwede mong hilingin na burahin.
-            </>
-          ) : (
-            <>
-              Nananatili sa phone mo ang pangalan mo. Walang account, walang password, at hindi ito
-              ipinapadala kahit saan. Mapapalitan mo ito mamaya sa Settings.
-            </>
-          )}
-        </p>
+        {/*
+          Shown only when this build reports names. With no roster configured
+          the screen says nothing about where the name goes, which is better
+          than a promise that would stop being true the day keys are added.
+        */}
+        {rosterEnabled && (
+          <p className="tiny dim" style={{ marginTop: 14, lineHeight: 1.65 }}>
+            Ang pangalan lang ang naitatala, para malaman kung sino ang gumagamit. Nasa phone mo
+            ang progress mo. Mapapalitan sa Settings.
+          </p>
+        )}
       </div>
     </div>
   );
