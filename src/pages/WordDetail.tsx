@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icon } from '@/components/Icon';
-import { Callout, EmptyState, Gloss, SpeakButton, TopBar, useGlossVisibility } from '@/components/ui';
+import { Callout, EmptyState, SpeakButton, TopBar } from '@/components/ui';
 import { getWord } from '@/data/words';
 import { GRAMMAR_BY_ID } from '@/data/grammar';
 import { TOPIC_BY_ID } from '@/data/topics';
@@ -24,7 +24,6 @@ export function WordDetail() {
   const [savedToMyWords, setSavedToMyWords] = useState(false);
 
   const word = getWord(id);
-  const { showEn, showTl } = useGlossVisibility(Boolean(word?.noteTl));
   const card = cards.find((c) => c.id === `word:${id}`);
 
   /*
@@ -110,7 +109,13 @@ export function WordDetail() {
               {word.fi}
             </h1>
             <p style={{ color: 'var(--card-ink-soft)', marginTop: 6, fontSize: '0.98rem' }}>
-              <Gloss en={word.en} tl={word.tl} tlStyle={{ color: '#b45309' }} />
+              {word.en}
+              {settings.showTagalog && (
+                <>
+                  {'  ·  '}
+                  <b style={{ color: '#b45309' }}>{word.tl}</b>
+                </>
+              )}
             </p>
           </div>
           <SpeakButton text={word.fi} />
@@ -283,8 +288,8 @@ export function WordDetail() {
       {word.note && (
         <div style={{ marginTop: 14 }}>
           <Callout kind="info" icon="idea">
-            {showEn || !word.noteTl ? word.note : word.noteTl}
-            {showEn && showTl && word.noteTl && (
+            {word.note}
+            {settings.showTagalog && word.noteTl && (
               <span style={{ display: 'block', marginTop: 6, opacity: 0.85 }}>{word.noteTl}</span>
             )}
           </Callout>

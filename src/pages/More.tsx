@@ -115,7 +115,7 @@ export function More() {
         </span>
         <span className="rowcard__body">
           <span className="rowcard__title">What's new</span>
-          <span className="rowcard__sub">Ano ang bago sa app · v{APP_VERSION}</span>
+          <span className="rowcard__sub">What changed in the app · v{APP_VERSION}</span>
         </span>
         <Icon name="chevron-right" size={17} className="rowcard__chev" />
       </button>
@@ -125,7 +125,6 @@ export function More() {
           releases={RELEASES}
           onClose={() => setShowNotes(false)}
           heading="Update history"
-          headingTl="Kasaysayan ng mga update"
         />
       )}
 

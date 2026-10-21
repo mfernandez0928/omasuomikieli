@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Icon } from '@/components/Icon';
-import { EmptyState, Gloss, LevelBadge, SpeakButton, TopBar, VerificationBadge } from '@/components/ui';
+import { EmptyState, LevelBadge, SpeakButton, TopBar, VerificationBadge } from '@/components/ui';
 import { WORDS } from '@/data/words';
 import { TOPICS } from '@/data/topics';
 import { searchWords, type SearchFilters } from '@/services/search/search';
@@ -24,7 +24,7 @@ const TYPES: { value: WordType | 'all'; label: string }[] = [
 export function Vocabulary() {
   const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
-  const { favourites, cards } = useApp();
+  const { favourites, cards, settings } = useApp();
 
   const [query, setQuery] = useState('');
   const [showFilters, setShowFilters] = useState(false);
@@ -173,7 +173,13 @@ export function Vocabulary() {
                     {status === 'difficult' && <span className="badge badge--review">hard</span>}
                   </span>
                   <span className="wcard__gloss" style={{ display: 'block' }}>
-                    <Gloss en={word.en} tl={word.tl} />
+                    {word.en}
+                    {settings.showTagalog && (
+                      <>
+                        {'  ·  '}
+                        <b>{word.tl}</b>
+                      </>
+                    )}
                   </span>
                   {matchedForm && (
                     <span className="tiny" style={{ color: '#b45309' }}>
