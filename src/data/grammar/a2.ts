@@ -4,7 +4,7 @@ import type { GrammarLesson } from '@/types';
 export const A2_LESSONS: GrammarLesson[] = [
   {
     id: 'g-imperfekti',
-    order: 15,
+    order: 17,
     title: 'Imperfect (past tense)',
     subtitle: 'the -i- past',
     level: 'A2.1',
@@ -149,7 +149,7 @@ export const A2_LESSONS: GrammarLesson[] = [
 
   {
     id: 'g-perfekti',
-    order: 16,
+    order: 18,
     title: 'Perfect tense',
     subtitle: 'olen tehnyt',
     level: 'A2.1',
@@ -266,7 +266,7 @@ export const A2_LESSONS: GrammarLesson[] = [
 
   {
     id: 'g-objekti',
-    order: 17,
+    order: 19,
     title: 'Object forms',
     subtitle: 'total or partial?',
     level: 'A2.1',
@@ -411,7 +411,7 @@ export const A2_LESSONS: GrammarLesson[] = [
 
   {
     id: 'g-maan',
-    order: 18,
+    order: 21,
     title: '-maan / -mään',
     subtitle: 'going somewhere to do something',
     level: 'A2.1',
@@ -551,7 +551,7 @@ export const A2_LESSONS: GrammarLesson[] = [
 
   {
     id: 'g-imperatiivi',
-    order: 19,
+    order: 23,
     title: 'Imperative',
     subtitle: 'giving instructions',
     level: 'A2.2',
@@ -680,7 +680,7 @@ export const A2_LESSONS: GrammarLesson[] = [
 
   {
     id: 'g-adjektiivit',
-    order: 20,
+    order: 24,
     title: 'Adjectives & comparison',
     subtitle: 'hyvä, parempi, paras',
     level: 'A2.1',

@@ -345,6 +345,7 @@ function AuditRow({ finding }: { finding: (typeof LEGACY_AUDIT)[number] }) {
 
 const ACCESS_LABEL: Record<string, { label: string; cls: string }> = {
   readable: { label: 'readable', cls: 'badge--ok' },
+  'read-as-images': { label: 'read page by page', cls: 'badge--ok' },
   'image-only': { label: 'no text layer', cls: 'badge--review' },
   'sample-only': { label: 'sample only', cls: 'badge--review' },
 };

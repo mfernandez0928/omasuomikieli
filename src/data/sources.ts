@@ -17,6 +17,13 @@
 export type SourceAccess =
   /** Text extracted successfully; chapters and grammar points verified. */
   | 'readable'
+  /**
+   * No text layer, but every page was opened and read as an image, so its
+   * content is known. Kept apart from `readable` because the reading was done
+   * by eye rather than by `pdftotext`: a word that could not be made out is a
+   * possibility here in a way it is not for an extracted file.
+   */
+  | 'read-as-images'
   /** File opens, but the pages are images with no text layer. */
   | 'image-only'
   /** File is too small to be the full work (a sample or extract). */
@@ -382,6 +389,129 @@ export const SOURCE_BOOKS: SourceBook[] = [
     limitation:
       'Read far enough to confirm it is a readable English-language guide to the YKI exam. Its chapters have not been mapped to lessons yet, so nothing cites it.',
     chapters: [],
+  },
+
+  {
+    id: 'lm',
+    title: 'Learning Materials (scanned course packet)',
+    access: 'read-as-images',
+    pdfPages: 41,
+    pageMapping:
+      'Cited by PDF page, because the packet is not one book. Where a page prints its own number that number is given too, in the citation note. PDF pages 8 and 9 are second scans of 6 and 7.',
+    limitation:
+      'No text layer on any of the 41 pages; each was read as an image. The packet mixes printed textbook pages with loose teacher handouts, and the running footers name three different books (Alku 1 on PDF 14-17, Oikeesti aikuisten 1 on PDF 35, Oikeesti aikuisten 2 on PDF 36). The rest print a page number but no title, so no title is asserted for them. PDF pages 11-13 print 109-112 and a footnote referring the reader on to "Harjoitus tekee mestarin 2", which suggests but does not state the volume they come from.',
+    notes: [
+      'Several pages carry a learner\'s handwritten answers. Those were treated as data to check, not as the key: where an answer was wrong the printed question was kept and the correct answer worked out from the rule the page itself teaches.',
+      'PDF 1 exercise 5 is a listening task whose recording is not in the packet, so its answers could not be verified and nothing cites it.',
+      'PDF 24 prints a real-looking email address and PDF 15 a personal identity code. Both are textbook filler and neither was copied into the app.',
+    ],
+    chapters: [
+      {
+        number: 1,
+        titleFi: 'Monikon partitiivi (irtomonisteet)',
+        pdfPage: 2,
+        grammar: [
+          'monikon partitiivin muodostus (-a/-ä, -ta/-tä)',
+          'monikon partitiivin käyttö: määrän ilmaus, subjekti, objekti, predikatiivi',
+        ],
+      },
+      {
+        number: 2,
+        titleFi: 'Nominityypit ja nominien astevaihtelu',
+        pdfPage: 11,
+        grammar: ['nominityypit', 'A- ja B-astevaihtelu', 'astevaihtelu sijamuodoittain'],
+      },
+      {
+        number: 3,
+        titleFi: 'Kappale 7: Minulla on stressiä (Alku 1)',
+        pdfPage: 14,
+        grammar: [],
+        topics: ['terveys', 'sairaudet', 'jaksaminen'],
+      },
+      {
+        number: 4,
+        titleFi: 'Kappale 6: Postpositiot (Alku 1)',
+        pdfPage: 16,
+        grammar: ['postpositiot + genetiivi'],
+      },
+      {
+        number: 5,
+        titleFi: 'Kodintavarat ja huonekalut; OSATA / VOIDA / SAADA',
+        pdfPage: 18,
+        grammar: ['osata, voida ja saada'],
+        topics: ['koti', 'huonekalut', 'kodinkoneet'],
+      },
+      {
+        number: 6,
+        titleFi: 'Kappale 9: Objekti (Harjoitukset, sivut 274-275)',
+        pdfPage: 21,
+        grammar: ['objekti: positiivinen ja negatiivinen lause', 'partitiiviverbit'],
+      },
+      {
+        number: 7,
+        titleFi: 'Lyhenteitä ja välimerkkejä',
+        pdfPage: 23,
+        grammar: ['kielioppilyhenteet', 'jne./ym./yms./tms. ja mm.', 'välimerkkien nimet'],
+      },
+      {
+        number: 8,
+        titleFi: 'Kappale 9: ruokasanasto (sivu 75)',
+        pdfPage: 25,
+        grammar: [],
+        topics: ['vihannekset', 'hedelmät', 'marjat', 'lihat'],
+      },
+      {
+        number: 9,
+        titleFi: 'Kappale 4: Millainen? Adjektiivien vastakohdat (sivu 35)',
+        pdfPage: 26,
+        grammar: ['adjektiivit'],
+      },
+      {
+        number: 10,
+        titleFi: 'Yksikön partitiivi (sivu 83)',
+        pdfPage: 29,
+        grammar: ['yksikön partitiivin päätteet', 'milloin tarvitset partitiivia'],
+      },
+      {
+        number: 11,
+        titleFi: 'Yhdyssanat ja puhekielen numerot (sivu 34)',
+        pdfPage: 30,
+        grammar: ['yhdyssanat', 'puhekielen numerot'],
+      },
+      {
+        number: 12,
+        titleFi: 'Kappale 3: Sanasto - luonto (sivut 87-89)',
+        pdfPage: 31,
+        grammar: [],
+        topics: ['villieläimet', 'metsän eläimet', 'linnut', 'kalat', 'hyönteiset', 'puut', 'kasvit'],
+      },
+      {
+        number: 13,
+        titleFi: 'Kappale 6: Possessiivisuffiksit (sivu 188)',
+        pdfPage: 32,
+        grammar: ['possessiivisuffiksit', 'puhekielen omistusrakenne'],
+      },
+      {
+        number: 14,
+        titleFi: 'Kappale 8: Monikon partitiivi (sivu 264)',
+        pdfPage: 33,
+        grammar: ['monikon partitiivi vartaloittain'],
+      },
+      {
+        number: 15,
+        titleFi: 'Ammatit ja konjunktiot (Oikeesti aikuisten 1 s.100, 2 s.40)',
+        pdfPage: 35,
+        grammar: ['konjunktiot'],
+        topics: ['ammatit'],
+      },
+      {
+        number: 16,
+        titleFi: 'Kappale 9: Sanasto - ammatit',
+        pdfPage: 37,
+        grammar: [],
+        topics: ['ammatit'],
+      },
+    ],
   },
 
   {

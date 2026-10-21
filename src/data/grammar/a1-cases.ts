@@ -717,7 +717,7 @@ export const A1_CASES: GrammarLesson[] = [
 
   {
     id: 'g-pronominit',
-    order: 14,
+    order: 15,
     title: 'Pronouns',
     subtitle: 'minä, tämä, se...',
     level: 'A1',

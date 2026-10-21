@@ -12,6 +12,11 @@ import { OS1_CORE_WORDS } from './os1-core';
 import { EVERYDAY_VERBS } from './everyday-verbs';
 import { WORK_AND_LIFE } from './work-and-life';
 import { OS1_K1_WORDS } from './os1-k1';
+import { LM_NATURE } from './lm-nature';
+import { LM_FOOD } from './lm-food';
+import { LM_PROFESSIONS } from './lm-professions';
+import { LM_HOME_HEALTH } from './lm-home-health';
+import { LM_LANGUAGE } from './lm-language';
 
 /**
  * The curated set is authored in this folder. The supplied v0.2.1 database is
@@ -35,6 +40,11 @@ const CURATED: Word[] = [
   ...EVERYDAY_VERBS,
   ...WORK_AND_LIFE,
   ...OS1_K1_WORDS,
+  ...LM_NATURE,
+  ...LM_FOOD,
+  ...LM_PROFESSIONS,
+  ...LM_HOME_HEALTH,
+  ...LM_LANGUAGE,
 ];
 
 const curatedFinnish = new Set(CURATED.map((w) => w.fi.toLowerCase()));
@@ -109,4 +119,9 @@ export {
   EVERYDAY_VERBS,
   WORK_AND_LIFE,
   OS1_K1_WORDS,
+  LM_NATURE,
+  LM_FOOD,
+  LM_PROFESSIONS,
+  LM_HOME_HEALTH,
+  LM_LANGUAGE,
 };

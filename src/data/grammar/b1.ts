@@ -4,7 +4,7 @@ import type { GrammarLesson } from '@/types';
 export const B1_LESSONS: GrammarLesson[] = [
   {
     id: 'g-rektio',
-    order: 21,
+    order: 25,
     title: 'Verb rections',
     subtitle: 'which case does this verb want?',
     level: 'A2.1',
@@ -161,7 +161,7 @@ export const B1_LESSONS: GrammarLesson[] = [
 
   {
     id: 'g-konditionaali',
-    order: 22,
+    order: 27,
     title: 'Conditional (-isi-)',
     subtitle: 'would, could, politely',
     level: 'A2.2',
@@ -299,7 +299,7 @@ export const B1_LESSONS: GrammarLesson[] = [
 
   {
     id: 'g-passiivi',
-    order: 23,
+    order: 28,
     title: 'Passive',
     subtitle: 'tehdään, puhutaan',
     level: 'A2.2',
@@ -432,7 +432,7 @@ export const B1_LESSONS: GrammarLesson[] = [
 
   {
     id: 'g-partisiipit',
-    order: 24,
+    order: 29,
     title: 'Participles',
     subtitle: '-nut, -va, -ttu',
     level: 'B1',

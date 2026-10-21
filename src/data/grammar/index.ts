@@ -3,6 +3,7 @@ import { A1_CORE } from './a1-core';
 import { A1_CASES } from './a1-cases';
 import { A2_LESSONS } from './a2';
 import { B1_LESSONS } from './b1';
+import { LM_LESSONS } from './lm';
 import { EXTRA_EXERCISES } from './extra-exercises';
 
 export const GRAMMAR_MODULES: GrammarModule[] = [
@@ -33,6 +34,7 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
   ...A1_CASES,
   ...A2_LESSONS,
   ...B1_LESSONS,
+  ...LM_LESSONS,
 ]
   // The lesson files hold the teaching text and the first few questions; the
   // rest of each practice set lives in extra-exercises.ts so neither file gets

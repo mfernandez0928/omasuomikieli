@@ -917,6 +917,192 @@ export const EXTRA_EXERCISES: Record<string, Exercise[]> = {
       grammarId: 'g-objekti',
       wordId: 'n-kassi',
     },
+
+    /*
+      The set below is the Kappale 9 object drill from the scanned packet
+      (PDF 21-22, printed pages 274-275). It is kept together and kept long
+      because the object is where this material shows the most errors: the
+      same worksheet had the partitive and the total object the wrong way
+      round in six of nine items, including both negative sentences, where
+      the partitive is not a preference but a rule.
+    */
+    {
+      id: 'ex-obj-9',
+      kind: 'choose-form',
+      prompt: 'Tiinan or Tiinaa?',
+      question: 'Katson ___.',
+      options: ['Tiinaa', 'Tiinan'],
+      answer: 'Tiinaa',
+      explanation: 'katsoa is a partitive verb: you always katson jotakin, never *katson jonkun.',
+      explanationTl: 'Partitiiviverbi ang katsoa: laging partitiivi ang kasama.',
+      grammarId: 'g-objekti',
+    },
+    {
+      id: 'ex-obj-10',
+      kind: 'choose-form',
+      prompt: 'Tiinan or Tiinaa?',
+      question: 'Tapaan ___ illalla.',
+      options: ['Tiinan', 'Tiinaa'],
+      answer: 'Tiinan',
+      explanation:
+        'Meeting her tonight is one complete event, so the object is total: Tapaan Tiinan illalla.',
+      explanationTl:
+        'Isang tapos na pangyayari ang pagkikita mamayang gabi, kaya total object: Tiinan.',
+      grammarId: 'g-objekti',
+    },
+    {
+      id: 'ex-obj-11',
+      kind: 'choose-form',
+      prompt: 'Tiinan or Tiinaa? Look at the verb first.',
+      question: 'Me emme löydä ___.',
+      options: ['Tiinaa', 'Tiinan'],
+      answer: 'Tiinaa',
+      explanation:
+        'The sentence is negative, and a negative sentence takes the partitive object with no exceptions at all.',
+      explanationTl:
+        'Negatibo ang pangungusap, at laging partitiivi ang objekti sa negatibo - walang eksepsiyon.',
+      grammarId: 'g-objekti',
+    },
+    {
+      id: 'ex-obj-12',
+      kind: 'choose-form',
+      prompt: 'Tiinan or Tiinaa? Look at the verb first.',
+      question: 'He eivät tunne ___.',
+      options: ['Tiinaa', 'Tiinan'],
+      answer: 'Tiinaa',
+      explanation:
+        'eivät makes it negative, so partitive. Compare the positive: "Tunnen Tiinan hyvin."',
+      explanationTl:
+        'Negatibo dahil sa eivät, kaya partitiivi. Ihambing: "Tunnen Tiinan hyvin."',
+      grammarId: 'g-objekti',
+    },
+    {
+      id: 'ex-obj-13',
+      kind: 'choose-form',
+      prompt: 'Tiinan or Tiinaa?',
+      question: 'Tunnen ___ hyvin.',
+      options: ['Tiinan', 'Tiinaa'],
+      answer: 'Tiinan',
+      explanation:
+        'Positive sentence, and tuntea takes a total object: Tunnen Tiinan hyvin. Add a negative and it flips to Tiinaa.',
+      explanationTl:
+        'Positibo, at total object ang tuntea: Tunnen Tiinan. Kapag negatibo, Tiinaa.',
+      grammarId: 'g-objekti',
+    },
+    {
+      id: 'ex-obj-14',
+      kind: 'choose-form',
+      prompt: 'Tiinan or Tiinaa?',
+      question: 'Rakastan ___.',
+      options: ['Tiinaa', 'Tiinan'],
+      answer: 'Tiinaa',
+      explanation:
+        'rakastaa is a partitive verb like katsoa and odottaa. Loving someone has no end point.',
+      explanationTl:
+        'Partitiiviverbi ang rakastaa, gaya ng katsoa at odottaa. Walang katapusan ang pagmamahal.',
+      grammarId: 'g-objekti',
+    },
+    {
+      id: 'ex-obj-15',
+      kind: 'fill-blank',
+      prompt: 'Put the object in the right form.',
+      question: 'Tänään hän ei vie ___ ulos. (koira)',
+      hint: 'Is the sentence positive or negative?',
+      answer: 'koiraa',
+      explanation:
+        'ei vie makes it negative, so the object is partitive: koiraa. Positive would be "hän vie koiran ulos".',
+      explanationTl:
+        'Negatibo ang ei vie, kaya partitiivi: koiraa. Kung positibo: "hän vie koiran ulos".',
+      grammarId: 'g-objekti',
+    },
+    {
+      id: 'ex-obj-16',
+      kind: 'fill-blank',
+      prompt: 'Put the object in the right form.',
+      question: 'Kalle hakee ___ koulun pihalta ja ajaa kotiin. (pyörä)',
+      hint: 'He fetches the whole bike and leaves with it',
+      answer: 'pyörän',
+      explanation:
+        'A completed action with a whole countable thing takes the total object: hakee pyörän.',
+      explanationTl:
+        'Tapos na aksyon at buong bagay, kaya total object: hakee pyörän.',
+      grammarId: 'g-objekti',
+    },
+    {
+      id: 'ex-obj-17',
+      kind: 'fill-blank',
+      prompt: 'Put the object in the right form.',
+      question: 'Nyt hän ei tarvitse ___, koska isä vie hänet autolla. (pyörä)',
+      answer: 'pyörää',
+      explanation: 'ei tarvitse is negative, so the object is partitive: pyörää.',
+      explanationTl: 'Negatibo ang ei tarvitse, kaya partitiivi: pyörää.',
+      grammarId: 'g-objekti',
+    },
+    {
+      id: 'ex-obj-18',
+      kind: 'fill-blank',
+      prompt: 'Pronouns have their own object form.',
+      question: 'Isä vie ___ autolla. (hän)',
+      hint: 'Not häntä - the trip gets completed',
+      answer: 'hänet',
+      explanation:
+        'The total object form of hän is hänet. The partitive häntä would be for an unfinished or negated action.',
+      explanationTl:
+        'Ang total object ng hän ay hänet. Ang häntä ay para sa hindi tapos o negatibo.',
+      grammarId: 'g-objekti',
+    },
+    {
+      id: 'ex-obj-19',
+      kind: 'fill-blank',
+      prompt: 'Put the object in the right form.',
+      question: 'Lapset eivät tunne ___, vaikka oikeasti joulupukki on heidän isä! (joulupukki)',
+      answer: 'joulupukkia',
+      explanation: 'eivät tunne is negative, so partitive: joulupukkia.',
+      explanationTl: 'Negatibo ang eivät tunne, kaya partitiivi: joulupukkia.',
+      grammarId: 'g-objekti',
+    },
+    {
+      id: 'ex-obj-20',
+      kind: 'fill-blank',
+      prompt: 'Put the object in the right form.',
+      question: 'Annan hänelle ___, koska hän on aamulla aina väsynyt. (herätyskello)',
+      hint: 'A present is given whole',
+      answer: 'herätyskellon',
+      explanation: 'Giving a present is complete and the thing is whole: total object, herätyskellon.',
+      explanationTl: 'Tapos ang pagbibigay at buo ang bagay: total object, herätyskellon.',
+      grammarId: 'g-objekti',
+    },
+    {
+      id: 'ex-obj-21',
+      kind: 'fill-blank',
+      prompt: 'Two objects, two different forms.',
+      question: 'Minun ystävä on jouluna Saksassa. Siksi en tapaa ___, mutta kirjoitan hänelle ___. (hän, postikortti)',
+      hint: 'The first clause is negative, the second is not',
+      answer: 'häntä ja postikortin',
+      alsoAccept: ['häntä, postikortin', 'häntä / postikortin'],
+      explanation:
+        'en tapaa is negative, so häntä. kirjoitan a whole postcard, so postikortin. The same sentence shows both rules at once.',
+      explanationTl:
+        'Negatibo ang en tapaa, kaya häntä. Buong postcard naman, kaya postikortin.',
+      grammarId: 'g-objekti',
+    },
+    {
+      id: 'ex-obj-22',
+      kind: 'multiple-choice',
+      prompt: 'In a negative sentence, the object is...',
+      question: 'En osta ___',
+      options: [
+        'always partitive',
+        'always the total object',
+        'either, depending on the verb',
+      ],
+      answer: 'always partitive',
+      explanation:
+        'This is the one object rule with no exceptions. If the sentence is negative, the object is partitive, whatever the verb and whatever the meaning.',
+      explanationTl:
+        'Ito ang tuntunin na walang eksepsiyon: kapag negatibo, laging partitiivi ang objekti.',
+      grammarId: 'g-objekti',
+    },
   ],
 
   'g-maan': [
