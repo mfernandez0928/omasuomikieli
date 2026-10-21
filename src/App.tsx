@@ -2,6 +2,7 @@ import { useEffect, type ReactNode } from 'react';
 import { HashRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { BottomNav } from '@/components/BottomNav';
 import { AppProvider, useApp } from '@/hooks/useApp';
+import { WhatsNew, useWhatsNew } from '@/components/WhatsNew';
 import { Home } from '@/pages/Home';
 import { Welcome } from '@/pages/Welcome';
 import { GrammarList } from '@/pages/GrammarList';
@@ -45,6 +46,22 @@ function Gate({ children }: { children: ReactNode }) {
   const { profile, setProfileName } = useApp();
   if (!profile) return <Welcome onDone={setProfileName} />;
   return <>{children}</>;
+}
+
+/**
+ * Tells a returning learner what changed since they last opened the app.
+ *
+ * Mounted OUTSIDE the gate on purpose. Someone who has not given a name yet
+ * has nothing to catch up on, and this has to be running while they are on
+ * the name screen in order to record that - otherwise they would be handed
+ * the whole changelog the moment they finished signing up. The hook renders
+ * nothing until there is a profile.
+ */
+function UpdateNotice() {
+  const { profile } = useApp();
+  const { releases, dismiss } = useWhatsNew(Boolean(profile));
+  if (!releases) return null;
+  return <WhatsNew releases={releases} onClose={dismiss} />;
 }
 
 export default function App() {
@@ -96,6 +113,7 @@ export default function App() {
           </Routes>
           <BottomNav />
           </Gate>
+          <UpdateNotice />
         </div>
       </HashRouter>
     </AppProvider>

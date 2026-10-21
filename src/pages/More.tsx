@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Icon, type IconName } from '@/components/Icon';
 import { TopBar } from '@/components/ui';
 import { useApp } from '@/hooks/useApp';
 import { WORDS } from '@/data/words';
 import { BRAND, COPYRIGHT } from '@/data/brand';
+import { WhatsNew } from '@/components/WhatsNew';
+import { APP_VERSION, RELEASES } from '@/data/releases';
 
 const LINKS: { to: string; title: string; sub: string; icon: IconName; colour: string }[] = [
   {
@@ -74,6 +77,9 @@ const LINKS: { to: string; title: string; sub: string; icon: IconName; colour: s
 export function More() {
   const navigate = useNavigate();
   const { favourites, mistakes } = useApp();
+  // The update dialog appears by itself after an update. This is how you get
+  // back to it afterwards, and how you read the older entries.
+  const [showNotes, setShowNotes] = useState(false);
 
   return (
     <div className="page fade-in">
@@ -98,6 +104,30 @@ export function More() {
           </button>
         ))}
       </div>
+
+      <button
+        className="rowcard"
+        style={{ marginTop: 10 }}
+        onClick={() => setShowNotes(true)}
+      >
+        <span className="rowcard__num" style={{ background: 'var(--gold)' }}>
+          <Icon name="gift" size={15} />
+        </span>
+        <span className="rowcard__body">
+          <span className="rowcard__title">What's new</span>
+          <span className="rowcard__sub">Ano ang bago sa app · v{APP_VERSION}</span>
+        </span>
+        <Icon name="chevron-right" size={17} className="rowcard__chev" />
+      </button>
+
+      {showNotes && (
+        <WhatsNew
+          releases={RELEASES}
+          onClose={() => setShowNotes(false)}
+          heading="Update history"
+          headingTl="Kasaysayan ng mga update"
+        />
+      )}
 
       <p className="tiny dim center" style={{ marginTop: 26, lineHeight: 1.7 }}>
         Oma Suomi · {WORDS.length} words · works offline · nothing leaves your device
