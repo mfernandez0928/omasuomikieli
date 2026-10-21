@@ -33,9 +33,19 @@ export interface Release {
 }
 
 /** The version this build is. Bump it whenever you add a release below. */
-export const APP_VERSION = '1.1.2';
+export const APP_VERSION = '1.2.0';
 
 export const RELEASES: Release[] = [
+  {
+    version: '1.2.0',
+    date: '2026-10-22',
+    title: 'Travel words, and recycling words',
+    notes: [
+      '134 new words. Trains, platforms, tickets and border crossings on one side; recycling, energy and the environment on the other.',
+      'Spoken forms are marked as spoken, so you can see that ratikka, netti and roskis are what people say and raitiovaunu, internet and roskakori are what gets written.',
+      'Time expressions like viime vuonna and ensi kuussa are in, each with the pattern behind it.',
+    ],
+  },
   {
     version: '1.1.2',
     date: '2026-10-21',
