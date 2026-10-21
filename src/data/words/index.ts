@@ -17,6 +17,8 @@ import { LM_FOOD } from './lm-food';
 import { LM_PROFESSIONS } from './lm-professions';
 import { LM_HOME_HEALTH } from './lm-home-health';
 import { LM_LANGUAGE } from './lm-language';
+import { BATCH_TRAVEL } from './batch-travel';
+import { BATCH_ENVIRONMENT } from './batch-environment';
 
 /**
  * The curated set is authored in this folder. The supplied v0.2.1 database is
@@ -45,6 +47,8 @@ const CURATED: Word[] = [
   ...LM_PROFESSIONS,
   ...LM_HOME_HEALTH,
   ...LM_LANGUAGE,
+  ...BATCH_TRAVEL,
+  ...BATCH_ENVIRONMENT,
 ];
 
 const curatedFinnish = new Set(CURATED.map((w) => w.fi.toLowerCase()));
@@ -124,4 +128,6 @@ export {
   LM_PROFESSIONS,
   LM_HOME_HEALTH,
   LM_LANGUAGE,
+  BATCH_TRAVEL,
+  BATCH_ENVIRONMENT,
 };

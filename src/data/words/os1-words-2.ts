@@ -1451,7 +1451,8 @@ export const OS1_WORDS_2: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 5 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['koti'],
-    nominalForms: { genitive: 'jätteen' },
+    nominalForms: { genitive: 'jätteen', partitive: 'jätettä', pluralNominative: 'jätteet', pluralPartitive: 'jätteitä' },
+    searchAliases: ['jätteet', 'jätteitä'],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'jäte, jätteen' },
     verification: 'source-verified',
   },
@@ -1493,6 +1494,9 @@ export const OS1_WORDS_2: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 5 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['liikkuminen'],
+    note: 'Three forms, like the postpositions: kauas (to far away), kaukana (far away), kaukaa (from far away).',
+    noteTl: 'Tatlong anyo: kauas (papuntang malayo), kaukana (nasa malayo), kaukaa (mula sa malayo).',
+    searchAliases: ['kauas', 'kaukaa'],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'kaukana + mistä' },
     verification: 'source-verified',
   },

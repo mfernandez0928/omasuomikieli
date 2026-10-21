@@ -33,6 +33,7 @@ having count(*) > 1
 
 
 -- ---------------------------------------------------------------------
+
 -- STEP 2 - delete the repeats and add the lock.
 --
 -- Run these three statements TOGETHER, in one Run. Do not run them one
