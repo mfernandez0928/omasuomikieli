@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icon } from '@/components/Icon';
-import { EmptyState, LevelBadge, SpeakButton, TopBar } from '@/components/ui';
+import { EmptyState, Gloss, LevelBadge, SpeakButton, TopBar } from '@/components/ui';
 import { ExerciseRunner } from '@/components/ExerciseRunner';
 import { READING_BY_ID, READING_TEXTS } from '@/data/reading';
 import { getWord } from '@/data/words';
-import { useApp } from '@/hooks/useApp';
 
 export function ReadingList() {
   const navigate = useNavigate();
@@ -39,7 +38,6 @@ export function ReadingList() {
 export function ReadingText() {
   const { id = '' } = useParams();
   const navigate = useNavigate();
-  const { settings } = useApp();
   const text = READING_BY_ID.get(id);
   const order = READING_TEXTS.findIndex((t) => t.id === id);
   const following = order >= 0 ? READING_TEXTS[order + 1] : undefined;
@@ -137,8 +135,7 @@ export function ReadingText() {
                       <b>{g.fi}</b>
                       <span className="small muted">
                         {' '}
-                        - {g.en}
-                        {settings.showTagalog && ` · ${g.tl}`}
+                        - <Gloss en={g.en} tl={g.tl} bold={false} separator=" · " />
                       </span>
                     </span>
                     {linked && <Icon name="chevron-right" size={15} className="dim" />}

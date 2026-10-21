@@ -36,9 +36,29 @@ export interface Release {
 }
 
 /** The version this build is. Bump it whenever you add a release below. */
-export const APP_VERSION = '1.1.0';
+export const APP_VERSION = '1.1.1';
 
 export const RELEASES: Release[] = [
+  {
+    version: '1.1.1',
+    date: '2026-10-21',
+    title: 'Choose which languages you want to see',
+    titleTl: 'Piliin kung anong wika ang gusto mong makita',
+    notes: [
+      {
+        en: 'Settings -> Show English now works. It had been a switch that saved but changed nothing, which is why translations appeared everywhere even with it turned off.',
+        tl: 'Gumagana na ang Settings -> Show English. Dati, nase-save ito pero walang binabago - kaya laging may translation kahit naka-off.',
+      },
+      {
+        en: 'Turn off whichever you do not need and a word shows one meaning instead of two. Turn off both and English is kept, so nothing is ever left without a meaning.',
+        tl: 'I-off ang hindi mo kailangan at isang kahulugan na lang ang lalabas. Kapag pareho ang naka-off, Ingles ang mananatili.',
+      },
+      {
+        en: 'This update notice follows the same setting, so it is no longer shown twice.',
+        tl: 'Sumusunod din dito ang abiso ng update, kaya hindi na ito doble.',
+      },
+    ],
+  },
   {
     version: '1.1.0',
     date: '2026-10-21',

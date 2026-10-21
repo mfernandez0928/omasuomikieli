@@ -271,3 +271,56 @@ export function FilterPills<T extends string>({
     </div>
   );
 }
+
+/* -------------------------------- glosses -------------------------------- */
+
+/**
+ * The English / Tagalog meaning shown beside a Finnish word or line.
+ *
+ * Both Display toggles in Settings are honoured here, in one place, so that
+ * turning a language off actually turns it off everywhere rather than in the
+ * screens that happened to remember to check.
+ *
+ * If a learner switches both off, English is still shown: the Settings screen
+ * offers to hide a translation, not to leave a Finnish word sitting on the
+ * page with no meaning at all, and silently showing nothing would read as a
+ * bug rather than as a choice.
+ */
+/**
+ * Which of the two glosses to render, for the places that lay English and
+ * Tagalog out as separate blocks rather than on one line. Same rule as
+ * `Gloss`, kept here so the two cannot drift apart.
+ */
+export function useGlossVisibility(hasTl = true) {
+  const { settings } = useApp();
+  const showTl = settings.showTagalog && hasTl;
+  return { showTl, showEn: settings.showEnglish || !showTl };
+}
+
+export function Gloss({
+  en,
+  tl,
+  separator = '  ·  ',
+  tlStyle,
+  bold = true,
+}: {
+  en: string;
+  tl: string;
+  separator?: string;
+  tlStyle?: React.CSSProperties;
+  /** Tagalog is bolded in most places, but not inside running text. */
+  bold?: boolean;
+}) {
+  const { settings } = useApp();
+  const showTl = settings.showTagalog && Boolean(tl);
+  const showEn = settings.showEnglish || !showTl;
+
+  return (
+    <>
+      {showEn && en}
+      {showEn && showTl && separator}
+      {showTl &&
+        (bold ? <b style={tlStyle}>{tl}</b> : <span style={tlStyle}>{tl}</span>)}
+    </>
+  );
+}

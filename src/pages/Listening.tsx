@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '@/components/Icon';
-import { Callout, EmptyState, FilterPills, TopBar } from '@/components/ui';
+import { Callout, EmptyState, FilterPills, TopBar, useGlossVisibility } from '@/components/ui';
 import { PHRASES } from '@/data/phrases';
 import { WORDS } from '@/data/words';
 import { useApp } from '@/hooks/useApp';
@@ -25,6 +25,7 @@ type Mode = 'words' | 'phrases';
 export function Listening() {
   const navigate = useNavigate();
   const { speechReady, settings, noteActivity, addMistake } = useApp();
+  const { showEn, showTl } = useGlossVisibility();
 
   const [mode, setMode] = useState<Mode>('phrases');
   const [index, setIndex] = useState(0);
@@ -214,10 +215,12 @@ export function Listening() {
           </Callout>
           <div className="wcard">
             <p className="wcard__fi">{item.fi}</p>
-            <p className="wcard__gloss" style={{ marginTop: 4 }}>
-              {item.en}
-            </p>
-            {settings.showTagalog && (
+            {showEn && (
+              <p className="wcard__gloss" style={{ marginTop: 4 }}>
+                {item.en}
+              </p>
+            )}
+            {showTl && (
               <p className="wcard__gloss">
                 <b>{item.tl}</b>
               </p>

@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icon, type IconName } from '@/components/Icon';
-import { Callout, EmptyState, LevelBadge, SpeakButton, TopBar } from '@/components/ui';
+import { Callout, EmptyState, LevelBadge, SpeakButton, TopBar, useGlossVisibility } from '@/components/ui';
 import { SCENES, getScene, splitLine } from '@/data/situations';
 import { GRAMMAR_BY_ID } from '@/data/grammar';
 import { getWord } from '@/data/words';
@@ -100,6 +100,7 @@ export function SituationPlay() {
 function SceneRunner({ scene }: { scene: RolePlay }) {
   const navigate = useNavigate();
   const { settings, addMistake, noteActivity } = useApp();
+  const { showEn, showTl } = useGlossVisibility();
 
   const [turnIndex, setTurnIndex] = useState(0);
   const [chosen, setChosen] = useState<number | null>(null);
@@ -211,8 +212,8 @@ function SceneRunner({ scene }: { scene: RolePlay }) {
                   {met ? <Icon name="check" size={12} /> : <span className="goals__dot" />}
                 </span>
                 <span>
-                  {g.en}
-                  {settings.showTagalog && (
+                  {showEn && g.en}
+                  {showTl && (
                     <span className="small dim" style={{ display: 'block' }}>
                       {g.tl}
                     </span>
@@ -310,7 +311,7 @@ function Bubble({
   line: RolePlayLine;
   onWord: (g: SceneGloss) => void;
 }) {
-  const { settings } = useApp();
+  const { showEn, showTl } = useGlossVisibility(Boolean(line.tl));
   const [open, setOpen] = useState(false);
   const pieces = splitLine(line.fi);
 
@@ -340,8 +341,8 @@ function Bubble({
         </div>
         {open && (
           <div className="fade-in" style={{ marginTop: 6 }}>
-            <p className="small">{line.en}</p>
-            {settings.showTagalog && (
+            {showEn && <p className="small">{line.en}</p>}
+            {showTl && (
               <p className="small">
                 <b>{line.tl}</b>
               </p>

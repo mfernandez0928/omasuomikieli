@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icon, type IconName } from '@/components/Icon';
-import { EmptyState, LevelBadge, SpeakButton, TopBar } from '@/components/ui';
+import { EmptyState, LevelBadge, SpeakButton, TopBar, useGlossVisibility } from '@/components/ui';
 import { SITUATIONS, SITUATION_BY_ID } from '@/data/topics';
 import { PHRASES, phraseCount, phrasesInSituation } from '@/data/phrases';
 import { GRAMMAR_BY_ID } from '@/data/grammar';
@@ -123,6 +123,7 @@ export function PhraseSituation() {
 export function PhraseCard({ id }: { id: string }) {
   const navigate = useNavigate();
   const { settings } = useApp();
+  const { showEn, showTl } = useGlossVisibility();
   const phrase = PHRASES.find((p) => p.id === id);
   const [open, setOpen] = useState(false);
 
@@ -141,10 +142,12 @@ export function PhraseCard({ id }: { id: string }) {
           <p className="wcard__fi" style={{ fontSize: '1rem', lineHeight: 1.4 }}>
             {phrase.fi}
           </p>
-          <p className="wcard__gloss" style={{ marginTop: 4 }}>
-            {phrase.en}
-          </p>
-          {settings.showTagalog && (
+          {showEn && (
+            <p className="wcard__gloss" style={{ marginTop: 4 }}>
+              {phrase.en}
+            </p>
+          )}
+          {showTl && (
             <p className="wcard__gloss">
               <b>{phrase.tl}</b>
             </p>

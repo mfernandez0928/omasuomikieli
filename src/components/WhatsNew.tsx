@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Icon } from '@/components/Icon';
+import { useGlossVisibility } from '@/components/ui';
 import {
   APP_VERSION,
   RELEASES,
@@ -111,6 +112,12 @@ export function WhatsNew({
 }) {
   const closeRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
+  /*
+    Release notes are about the app, not about Finnish, so there is no reason
+    to show the same sentence twice to someone who reads either language.
+    These follow the same Display toggles as the rest of the app.
+  */
+  const { showEn, showTl } = useGlossVisibility();
 
   useEffect(() => {
     closeRef.current?.focus();
@@ -169,9 +176,9 @@ export function WhatsNew({
             <Icon name="gift" size={17} />
           </span>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <p className="eyebrow">{headingTl}</p>
+            {showTl && <p className="eyebrow">{headingTl}</p>}
             <h2 id="whatsnew-title" className="modal__title">
-              {heading}
+              {showEn ? heading : headingTl}
             </h2>
           </div>
           <button
@@ -191,8 +198,8 @@ export function WhatsNew({
                 <span className="badge badge--ok">v{r.version}</span>
                 <span className="tiny dim">{r.date}</span>
               </div>
-              <h3 className="release__title">{r.title}</h3>
-              <p className="release__title-tl">{r.titleTl}</p>
+              <h3 className="release__title">{showEn ? r.title : r.titleTl}</h3>
+              {showEn && showTl && <p className="release__title-tl">{r.titleTl}</p>}
 
               <ul className="release__list">
                 {r.notes.map((n) => (
@@ -201,8 +208,8 @@ export function WhatsNew({
                       <Icon name="check" size={12} />
                     </span>
                     <span>
-                      {n.en}
-                      <span className="release__tl">{n.tl}</span>
+                      {showEn ? n.en : n.tl}
+                      {showEn && showTl && <span className="release__tl">{n.tl}</span>}
                     </span>
                   </li>
                 ))}
