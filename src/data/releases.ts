@@ -33,9 +33,17 @@ export interface Release {
 }
 
 /** The version this build is. Bump it whenever you add a release below. */
-export const APP_VERSION = '1.1.1';
+export const APP_VERSION = '1.1.2';
 
 export const RELEASES: Release[] = [
+  {
+    version: '1.1.2',
+    date: '2026-10-21',
+    title: 'The app speaks English',
+    notes: [
+      'The name screen and the name editor in Settings are English now. Finnish is still there as the thing you are learning, not as a second set of instructions.',
+    ],
+  },
   {
     version: '1.1.1',
     date: '2026-10-21',

@@ -71,9 +71,6 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
         <p className="small muted" style={{ marginTop: 6, lineHeight: 1.55 }}>
           What is your name? The app greets you with it and keeps your progress under it.
         </p>
-        <p className="small muted" style={{ marginTop: 4, lineHeight: 1.55 }}>
-          <b>Ano ang pangalan mo?</b> Ito ang ibabati sa iyo ng app at dito nakatali ang progress mo.
-        </p>
 
         {returning && (
           <div className="callout callout--ok" style={{ marginTop: 12 }}>
@@ -81,8 +78,8 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
               <Icon name="check" size={14} />
             </span>
             <span>
-              Nandiyan pa lahat ng progress mo — ang streak, ang mga natutunan mo, at ang My
-              Mistakes. Pangalan lang ang bago.
+              Everything you have done is still here — your streak, the words you have
+              learned and My Mistakes. Only the name is new.
             </span>
           </div>
         )}
@@ -104,7 +101,7 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
           />
           {touched && !firstOk && (
             <p className="tiny" style={{ color: 'var(--bad)' }}>
-              Kailangan ng pangalan — kahit dalawang letra man lang.
+              Please enter a first name — two letters is enough.
             </p>
           )}
         </div>
@@ -126,7 +123,7 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
           />
           {touched && !lastOk && (
             <p className="tiny" style={{ color: 'var(--bad)' }}>
-              Kailangan din ang apelyido.
+              A last name is needed too.
             </p>
           )}
         </div>
@@ -137,7 +134,7 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
           onClick={submit}
           disabled={!ready && touched}
         >
-          Aloitetaan · Simulan
+          Aloitetaan · Start
           <Icon name="chevron-right" size={18} />
         </button>
 
@@ -148,8 +145,8 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
         */}
         {rosterEnabled && (
           <p className="tiny dim" style={{ marginTop: 14, lineHeight: 1.65 }}>
-            Ang pangalan lang ang naitatala, para malaman kung sino ang gumagamit. Nasa phone mo
-            ang progress mo. Mapapalitan sa Settings.
+            Only your name is recorded, so the person who made the app knows who is using
+            it. Your progress stays on this device. You can change the name in Settings.
           </p>
         )}
       </div>

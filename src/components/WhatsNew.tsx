@@ -206,7 +206,7 @@ export function WhatsNew({
 
         <div className="modal__foot">
           <button className="btn btn--primary btn--block" onClick={onClose}>
-            Selvä · Sige
+            Selvä · Got it
           </button>
         </div>
       </div>

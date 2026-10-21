@@ -228,7 +228,7 @@ function NameEditor({
           </p>
           {rosterEnabled && (
             <p className="tiny dim" style={{ marginTop: 2 }}>
-              Ang pangalan lang ang naitatala. Nasa phone mo ang progress mo.
+              Only your name is recorded. Your progress stays on this device.
             </p>
           )}
         </div>
@@ -241,7 +241,7 @@ function NameEditor({
           }}
         >
           <Icon name="pencil" size={14} />
-          Palitan
+          Change
         </button>
       </div>
     );
@@ -286,10 +286,10 @@ function NameEditor({
             setEditing(false);
           }}
         >
-          I-save
+          Save
         </button>
         <button className="btn btn--sm" onClick={() => setEditing(false)}>
-          Huwag na
+          Cancel
         </button>
       </div>
     </div>
