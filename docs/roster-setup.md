@@ -29,6 +29,20 @@ alter table public.learners add constraint learners_sane_lengths check (
   and char_length(last_name) between 1 and 40
 );
 
+-- One row per name. The app already refuses to report a name it has reported
+-- before, but that record lives in the browser: it is gone when site data is
+-- cleared, it knows nothing about other phones, and it cannot know about a
+-- request that reached the table and then lost its answer on a flaky
+-- connection. This is the lock that does not depend on the device, and it is
+-- what keeps the table the size of the group using the app. The app reads the
+-- 409 it causes as "already recorded" and stops, rather than queueing another
+-- attempt.
+--
+-- On `lower()` so "mark santos" cannot sit next to "Mark Santos". The app
+-- folds case the same way before deciding whether to send at all.
+create unique index learners_unique_person
+  on public.learners (lower(first_name), lower(last_name));
+
 create index learners_id_idx on public.learners (id);
 
 alter table public.learners enable row level security;
@@ -53,6 +67,64 @@ create policy "anon may add a learner"
 
 Do **not** add a `select` policy. Read the roster from the dashboard's Table
 Editor, which uses the service role and bypasses RLS.
+
+### If the table already exists
+
+Tables created before the unique index existed will have collected duplicate
+rows — the same name more than once. Creating the index fails while they are
+still there, so clear them first.
+
+Look before you delete. This lists every name that appears more than once, and
+how many rows it has:
+
+```sql
+select first_name, last_name, count(*) as rows, min(received_at) as first_seen
+  from public.learners
+ group by lower(first_name), lower(last_name), first_name, last_name
+having count(*) > 1
+ order by rows desc;
+```
+
+Then run both statements together — the delete and the index belong in one go,
+because a name arriving in between would put a duplicate back:
+
+```sql
+-- Keeps the earliest row for each name and drops the repeats, matching on
+-- lower() so a difference in capitals does not save a duplicate.
+delete from public.learners a
+  using public.learners b
+ where lower(a.first_name) = lower(b.first_name)
+   and lower(a.last_name)  = lower(b.last_name)
+   and a.row_id > b.row_id;
+
+create unique index learners_unique_person
+  on public.learners (lower(first_name), lower(last_name));
+```
+
+The row that survives is the first time that name was seen, so `created_at`
+and `id` stay those of whoever typed it first.
+
+### What one row per name means
+
+Two different people who share a name are one row on the roster — the second
+is not recorded at all, and nothing in the app tells them so. That is the
+trade for a table that cannot grow with duplicates, and for a small group it
+is usually the right one. A roster that has to count people needs `id` to be
+what makes a row unique instead:
+
+```sql
+create unique index learners_unique_person on public.learners (id);
+```
+
+and `signature()` in `src/services/sync/roster.ts` has to include `e.id`
+again, or the app will not even send the second person's name.
+
+One more consequence worth knowing: because a repeat now answers 409 instead
+of 201, anyone holding the anon key can learn whether a given name is on the
+roster by posting it and watching the status. They still cannot read the table
+or list what is in it. For a small community roster that is a fair price for
+not storing the same person twice; a roster where membership itself is
+sensitive should go behind a function that always answers the same way.
 
 ## 2. Settings at creation time
 
@@ -93,7 +165,8 @@ so a redeploy is required for them to take effect.
 ## 5. Check it
 
 Open the deployed app in a private window, enter a name, then look at the
-`learners` table. One row should appear.
+`learners` table. One row should appear — exactly one. Reloading the app, or
+typing the same name again in Settings, should not add another.
 
 If nothing arrives, the browser console will show a blocked request. The usual
 causes are a missing redeploy after setting the variables, or a Content Security

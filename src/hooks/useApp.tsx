@@ -221,17 +221,26 @@ export function AppProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
-  const setProfileName = useCallback((firstName: string, lastName: string) => {
-    setProfile((prev) => {
-      const next = prev
-        ? { ...prev, firstName, lastName }
+  /*
+    The new profile is built here rather than inside a `setProfile` updater.
+    An updater has to be pure: React calls it more than once for the same
+    change, and StrictMode does so on purpose in development. With the save
+    and the roster POST inside one, every name typed on the first screen
+    arrived at the table twice.
+  */
+  const setProfileName = useCallback(
+    (firstName: string, lastName: string) => {
+      if (profile && profile.firstName === firstName && profile.lastName === lastName) return;
+      const next = profile
+        ? { ...profile, firstName, lastName }
         : makeProfile(firstName, lastName);
       saveProfile(next);
+      setProfile(next);
       // Reporting the name must never hold up the screen behind it.
       void recordLearner(next);
-      return next;
-    });
-  }, []);
+    },
+    [profile],
+  );
 
   const addMistake = useCallback(
     async (input: Omit<MistakeEntry, 'id' | 'createdAt' | 'reviewed' | 'resolved'>) => {

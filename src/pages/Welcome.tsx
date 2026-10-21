@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { HeroArt } from '@/components/HeroArt';
 import { Icon } from '@/components/Icon';
 import { cleanName, isName } from '@/services/storage/prefs';
@@ -38,9 +38,17 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
   const lastOk = isName(last);
   const ready = firstOk && lastOk;
 
+  /*
+    One submit only. Enter and a tap, or a double tap, both land before the
+    screen has a chance to go away, and each one would have created a profile
+    of its own — a second local id, and a second name on the roster.
+  */
+  const done = useRef(false);
+
   const submit = () => {
     setTouched(true);
-    if (!ready) return;
+    if (!ready || done.current) return;
+    done.current = true;
     onDone(cleanName(first), cleanName(last));
   };
 
