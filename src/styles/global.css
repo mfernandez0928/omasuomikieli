@@ -1694,3 +1694,19 @@ p {
   margin-top: 3px;
   line-height: 1.5;
 }
+
+/* ===================== the word explained in Finnish ===================== */
+
+/*
+  Finnish read as Finnish, not as a translation, so it is set apart from the
+  English note below it and given room to breathe.
+*/
+.selitys {
+  border-left: 3px solid var(--gold);
+}
+
+.selitys__text {
+  font-size: 0.97rem;
+  line-height: 1.65;
+  color: var(--ink);
+}

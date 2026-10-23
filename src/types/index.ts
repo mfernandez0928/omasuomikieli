@@ -163,6 +163,18 @@ export interface Word {
   rections?: Rection[];
 
   examples?: ExampleSentence[];
+  /**
+   * A short explanation in Finnish, written for the learner to read at A2.
+   *
+   * This is not a translation of `note` - it is Finnish to be read as
+   * Finnish, the way a monolingual dictionary explains a word, so that
+   * looking something up is itself a minute of reading practice. Keep it to
+   * one or two sentences and use words a learner at this level already has.
+   *
+   *   todella: "Todella tarkoittaa, että jokin on hyvin tai erittäin
+   *   jotakin. Sitä käytetään myös korostamaan asiaa."
+   */
+  selitys?: string;
   /** Short grammar/usage note in English. */
   note?: string;
   /** Same note, in Tagalog. */

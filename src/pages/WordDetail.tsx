@@ -284,6 +284,16 @@ export function WordDetail() {
         </section>
       ) : null}
 
+      {/* --------------------- the word explained in Finnish ------------------- */}
+      {word.selitys && (
+        <section className="panel section selitys">
+          <p className="eyebrow" style={{ marginBottom: 6 }}>
+            Suomeksi
+          </p>
+          <p className="selitys__text">{word.selitys}</p>
+        </section>
+      )}
+
       {/* -------------------------------- note -------------------------------- */}
       {word.note && (
         <div style={{ marginTop: 14 }}>

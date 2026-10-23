@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icon } from '@/components/Icon';
-import { Callout, EmptyState, LevelBadge, SpeakButton, TopBar } from '@/components/ui';
+import { Callout, EmptyState, LevelBadge, SpeakButton, TopBar, useLeaveFor } from '@/components/ui';
 import { ExerciseRunner } from '@/components/ExerciseRunner';
 import { GRAMMAR_BY_ID, getLesson, nextLesson } from '@/data/grammar';
 import type { GrammarLesson } from '@/types';
@@ -12,6 +12,7 @@ import { saveResume } from '@/services/storage/prefs';
 type Tab = 'lesson' | 'practice';
 
 export function GrammarLessonPage() {
+  const leaveFor = useLeaveFor();
   const { id = '' } = useParams();
   const navigate = useNavigate();
   const { settings, lessonProgress, saveProgress } = useApp();
@@ -123,12 +124,12 @@ export function GrammarLessonPage() {
                 ? {
                     label: `Next lesson: ${following.title}`,
                     hint: `${following.subtitle} · ${following.level}`,
-                    onGo: () => navigate(`/grammar/${following.id}`),
+                    onGo: () => navigate(`/grammar/${following.id}`, { replace: true }),
                   }
                 : {
                     label: 'Back to all lessons',
                     hint: 'That is the last lesson in the curriculum.',
-                    onGo: () => navigate('/grammar'),
+                    onGo: () => leaveFor('/grammar'),
                   }
             }
             onFinish={async (score) => {

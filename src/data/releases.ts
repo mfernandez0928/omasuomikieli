@@ -33,9 +33,19 @@ export interface Release {
 }
 
 /** The version this build is. Bump it whenever you add a release below. */
-export const APP_VERSION = '1.2.0';
+export const APP_VERSION = '1.3.0';
 
 export const RELEASES: Release[] = [
+  {
+    version: '1.3.0',
+    date: '2026-10-23',
+    title: 'Words explained in Finnish',
+    notes: [
+      'Word pages now carry a short explanation in Finnish, so looking something up is a minute of reading practice rather than only a translation.',
+      'The 81 words that had nothing but a translation - nyt, paljon, hyvin, aikaisin, eilen and the rest - now have that explanation and example sentences.',
+      'Finishing a practice set and pressing back used to drop you into the questions you had just answered. It now takes you back where you came from.',
+    ],
+  },
   {
     version: '1.2.0',
     date: '2026-10-22',

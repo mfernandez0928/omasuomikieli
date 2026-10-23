@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icon } from '@/components/Icon';
-import { EmptyState, LevelBadge, SpeakButton, TopBar } from '@/components/ui';
+import { EmptyState, LevelBadge, SpeakButton, TopBar, useLeaveFor } from '@/components/ui';
 import { ExerciseRunner } from '@/components/ExerciseRunner';
 import { READING_BY_ID, READING_TEXTS } from '@/data/reading';
 import { getWord } from '@/data/words';
@@ -37,6 +37,7 @@ export function ReadingList() {
 }
 
 export function ReadingText() {
+  const leaveFor = useLeaveFor();
   const { id = '' } = useParams();
   const navigate = useNavigate();
   const { settings } = useApp();
@@ -88,9 +89,9 @@ export function ReadingText() {
               following
                 ? {
                     label: `Next text: ${following.title}`,
-                    onGo: () => navigate(`/reading/${following.id}`),
+                    onGo: () => navigate(`/reading/${following.id}`, { replace: true }),
                   }
-                : { label: 'Back to all texts', onGo: () => navigate('/reading') }
+                : { label: 'Back to all texts', onGo: () => leaveFor('/reading') }
             }
           />
         </>

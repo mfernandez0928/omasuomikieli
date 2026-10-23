@@ -50,6 +50,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 1 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['sosiaaliset'],
+    selitys: 'Anteeksi sanotaan, kun pyydetään anteeksi tai kun halutaan puhua vieraalle ihmiselle.',
+    examples: [
+      { fi: 'Anteeksi, missä on asema?', en: 'Excuse me, where is the station?', tl: 'Excuse me, nasaan ang istasyon?' },
+      { fi: 'Anteeksi, en kuullut.', en: 'Sorry, I did not hear.', tl: 'Pasensiya na, hindi ko narinig.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'anteeksi' },
     verification: 'source-verified',
   },
@@ -178,6 +183,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 1 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Vähän tarkoittaa pientä määrää. Sen jälkeen sana on partitiivissa. Vastakohta on paljon.',
+    examples: [
+      { fi: 'Puhun vähän suomea.', en: 'I speak a little Finnish.', tl: 'Kaunti lang ang suomi ko.' },
+    ],
+    note: 'Also means slightly: vähän väsynyt, a bit tired.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'vähän' },
     verification: 'source-verified',
   },
@@ -431,6 +441,10 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 1 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['sosiaaliset'],
+    selitys: 'Tervetuloa sanotaan, kun joku saapuu paikkaan.',
+    examples: [
+      { fi: 'Tervetuloa Suomeen!', en: 'Welcome to Finland!', tl: 'Maligayang pagdating sa Finland!' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'tervetuloa' },
     verification: 'source-verified',
   },
@@ -758,6 +772,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Itse korostaa, että juuri tämä henkilö tekee jotakin, ei kukaan muu.',
+    examples: [
+      { fi: 'Tein sen itse.', en: 'I did it myself.', tl: 'Ako mismo ang gumawa niyan.' },
+    ],
+    nominalForms: { genitive: 'itsensä', partitive: 'itseä' },
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'itse' },
     verification: 'source-verified',
   },
@@ -913,6 +932,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['koti'],
+    selitys: 'Kotona tarkoittaa, että joku on omassa kodissaan.',
+    examples: [
+      { fi: 'Olen tänään kotona.', en: 'I am at home today.', tl: 'Nasa bahay ako ngayon.' },
+    ],
+    note: 'An old frozen form, not the regular inessive of koti. Movement home is kotiin, and from home is kotoa.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'kotona' },
     verification: 'source-verified',
   },
@@ -1026,6 +1050,10 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Miksi on kysymyssana. Sillä kysytään syytä. Vastauksessa on usein koska.',
+    examples: [
+      { fi: 'Miksi olet myöhässä?', en: 'Why are you late?', tl: 'Bakit ka na-late?' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'miksi' },
     verification: 'source-verified',
   },
@@ -1039,6 +1067,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Millainen on kysymyssana. Sillä kysytään, minkälainen jokin on.',
+    examples: [
+      { fi: 'Millainen sää tänään on?', en: 'What is the weather like today?', tl: 'Kumusta ang panahon ngayon?' },
+    ],
+    nominalForms: { genitive: 'millaisen', partitive: 'millaista', pluralPartitive: 'millaisia' },
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'millainen' },
     verification: 'source-verified',
   },
@@ -1052,6 +1085,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Milloin on kysymyssana. Sillä kysytään aikaa.',
+    examples: [
+      { fi: 'Milloin kurssi alkaa?', en: 'When does the course start?', tl: 'Kailan magsisimula ang kurso?' },
+    ],
+    note: 'Use milloin in a question and kun inside a statement.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'milloin' },
     verification: 'source-verified',
   },
@@ -1093,6 +1131,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['sosiaaliset'],
+    selitys: 'Naimisissa tarkoittaa, että ihmisellä on puoliso.',
+    examples: [
+      { fi: 'Oletko naimisissa?', en: 'Are you married?', tl: 'May asawa ka na ba?' },
+    ],
+    note: 'Getting married is menna naimisiin; being married is olla naimisissa.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'naimisissa' },
     verification: 'source-verified',
   },
@@ -1106,6 +1149,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Nyt tarkoittaa tätä hetkeä. Se vastaa kysymykseen milloin.',
+    examples: [
+      { fi: 'Minulla on nyt kiire.', en: 'I am in a hurry right now.', tl: 'Nagmamadali ako ngayon.' },
+      { fi: 'Mitä teet nyt?', en: 'What are you doing now?', tl: 'Ano ang ginagawa mo ngayon?' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'nyt' },
     verification: 'source-verified',
   },
@@ -1133,6 +1181,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['liikkuminen'],
+    selitys: 'Oikealla tarkoittaa sitä puolta, joka ei ole vasen.',
+    examples: [
+      { fi: 'Kauppa on oikealla.', en: 'The shop is on the right.', tl: 'Nasa kanan ang tindahan.' },
+    ],
+    note: 'oikealla (on the right), oikealle (to the right), oikealta (from the right).',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'oikealla' },
     verification: 'source-verified',
   },
@@ -1190,6 +1243,12 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Paljon tarkoittaa suurta määrää. Sen jälkeen sana on partitiivissa.',
+    examples: [
+      { fi: 'Minulla on paljon työtä.', en: 'I have a lot of work.', tl: 'Marami akong trabaho.' },
+      { fi: 'Kaupassa on paljon ihmisiä.', en: 'There are a lot of people in the shop.', tl: 'Maraming tao sa tindahan.' },
+    ],
+    note: 'paljon takes the partitive: paljon työtä, paljon ihmisiä. Countable things go in the plural partitive.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'paljon' },
     verification: 'source-verified',
   },
@@ -1329,6 +1388,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Taas tarkoittaa, että sama asia tapahtuu uudestaan.',
+    examples: [
+      { fi: 'Sataa taas.', en: 'It is raining again.', tl: 'Umuulan na naman.' },
+    ],
+    note: 'taas, uudestaan and uudelleen all mean again. taas is the most everyday of the three.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'taas' },
     verification: 'source-verified',
   },
@@ -1342,6 +1406,10 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Takaisin kertoo, että joku tai jokin palaa sinne, missä se oli ennen.',
+    examples: [
+      { fi: 'Tulen pian takaisin.', en: 'I will be back soon.', tl: 'Babalik ako agad.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'takaisin' },
     verification: 'source-verified',
   },
@@ -1397,6 +1465,10 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Tänään tarkoittaa tätä päivää.',
+    examples: [
+      { fi: 'Tänään on tiistai.', en: 'Today is Tuesday.', tl: 'Martes ngayon.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'tänään' },
     verification: 'source-verified',
   },
@@ -1410,6 +1482,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Täällä tarkoittaa tätä paikkaa, jossa puhuja on.',
+    examples: [
+      { fi: 'Täällä on kylmä.', en: 'It is cold here.', tl: 'Malamig dito.' },
+    ],
+    note: 'The set is täällä (here), tänne (to here), täältä (from here).',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'täällä' },
     verification: 'source-verified',
   },
@@ -1437,6 +1514,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['sosiaaliset'],
+    selitys: 'Vanhemmat tarkoittaa äitiä ja isää yhdessä. Sana on aina monikossa.',
+    examples: [
+      { fi: 'Minun vanhempani asuvat Filippiineillä.', en: 'My parents live in the Philippines.', tl: 'Nasa Pilipinas ang mga magulang ko.' },
+    ],
+    note: 'Plural only in this sense. The singular vanhempi means older.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'vanhemmat' },
     verification: 'source-verified',
   },
@@ -1450,6 +1532,10 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['liikkuminen'],
+    selitys: 'Vasemmalla tarkoittaa sitä puolta, joka ei ole oikea.',
+    examples: [
+      { fi: 'Käänny vasemmalle risteyksessä.', en: 'Turn left at the junction.', tl: 'Kumaliwa ka sa interseksiyon.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'vasemmalla' },
     verification: 'source-verified',
   },
@@ -1519,6 +1605,10 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['sosiaaliset'],
+    selitys: 'Yhdessä tarkoittaa, että ihmiset tekevät jotakin saman aikaan, yhtenä ryhmänä. Vastakohta on yksin.',
+    examples: [
+      { fi: 'Syödään yhdessä!', en: 'Let us eat together!', tl: 'Sabay tayong kumain!' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'yhdessä' },
     verification: 'source-verified',
   },
@@ -1532,6 +1622,10 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 2 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['sosiaaliset'],
+    selitys: 'Yksin tarkoittaa, että joku on ilman muita ihmisiä.',
+    examples: [
+      { fi: 'Asun yksin pienessä asunnossa.', en: 'I live alone in a small flat.', tl: 'Mag-isa akong nakatira sa maliit na apartment.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'yksin' },
     verification: 'source-verified',
   },
@@ -1587,6 +1681,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['arki'],
+    selitys: 'Aamupala on ruoka, jonka ihminen syö aamulla.',
+    examples: [
+      { fi: 'Syön aamupalaksi puuroa.', en: 'I have porridge for breakfast.', tl: 'Lugaw ang almusal ko.' },
+    ],
+    nominalForms: { genitive: 'aamupalan', partitive: 'aamupalaa' },
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'aamupala. -n' },
     verification: 'source-verified',
   },
@@ -1600,6 +1699,12 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Aikaisin tarkoittaa, että jokin tapahtuu ennen tavallista aikaa. Vastakohta on myöhään.',
+    examples: [
+      { fi: 'Herään aikaisin joka aamu.', en: 'I wake up early every morning.', tl: 'Maaga akong gumigising tuwing umaga.' },
+      { fi: 'Juna lähtee aikaisin, joten mene nukkumaan ajoissa.', en: 'The train leaves early, so go to bed in good time.', tl: 'Maaga ang alis ng tren, kaya matulog ka nang maaga.' },
+    ],
+    note: 'aikaisin is early in the day or earlier than usual. Do not confuse it with aikaisemmin, which means earlier than something else.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'aikaisin' },
     verification: 'source-verified',
   },
@@ -1641,6 +1746,10 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['ostokset'],
+    selitys: 'Auki tarkoittaa, että ovi, ikkuna tai kauppa ei ole suljettu. Vastakohta on kiinni.',
+    examples: [
+      { fi: 'Kauppa on auki kello kymmeneen.', en: 'The shop is open until ten.', tl: 'Bukas ang tindahan hanggang alas-diyes.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'auki' },
     verification: 'source-verified',
   },
@@ -1670,6 +1779,10 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Ensin tarkoittaa, että jokin tapahtuu ennen muita asioita.',
+    examples: [
+      { fi: 'Pese ensin kädet.', en: 'Wash your hands first.', tl: 'Maghugas ka muna ng kamay.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'ensin' },
     verification: 'source-verified',
   },
@@ -1699,6 +1812,12 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Hyvin tarkoittaa kahta asiaa. Se voi kertoa, että jokin tehdään hyvällä tavalla, tai se voi korostaa adjektiivia.',
+    examples: [
+      { fi: 'Hän puhuu hyvin suomea.', en: 'She speaks Finnish well.', tl: 'Magaling siyang magsalita ng suomi.' },
+      { fi: 'Olen hyvin väsynyt.', en: 'I am very tired.', tl: 'Pagod na pagod ako.' },
+    ],
+    note: 'Two senses: well, and very. Before an adjective it means very, like todella.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'hyvin' },
     verification: 'source-verified',
   },
@@ -1742,6 +1861,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['arki'],
+    selitys: 'Juoda tarkoittaa, että nestettä otetaan suuhun ja niellään. Juoman sana on usein partitiivissa.',
+    examples: [
+      { fi: 'Juon aamulla kahvia.', en: 'I drink coffee in the morning.', tl: 'Umiinom ako ng kape sa umaga.' },
+      { fi: 'Haluatko juoda vettä?', en: 'Do you want to drink water?', tl: 'Gusto mo bang uminom ng tubig?' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'juoda CZ)\' juon' },
     verification: 'source-verified',
   },
@@ -1771,6 +1895,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Kanssa kertoo, kenen seurassa jokin tehdään. Sitä ennen sana on genetiivissä.',
+    examples: [
+      { fi: 'Menen elokuviin ystävän kanssa.', en: 'I am going to the cinema with a friend.', tl: 'Manonood ako ng sine kasama ang kaibigan.' },
+    ],
+    note: 'Takes the genitive, like other postpositions: ystävän kanssa.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'kanssa' },
     verification: 'source-verified',
   },
@@ -1828,6 +1957,10 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['ostokset'],
+    selitys: 'Kiinni tarkoittaa, että jokin on suljettu. Vastakohta on auki.',
+    examples: [
+      { fi: 'Apteekki on sunnuntaina kiinni.', en: 'The pharmacy is closed on Sunday.', tl: 'Sarado ang parmasya tuwing Linggo.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'kiinni' },
     verification: 'source-verified',
   },
@@ -1869,6 +2002,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Kuin käytetään, kun verrataan kahta asiaa.',
+    examples: [
+      { fi: 'Tämä on halvempi kuin tuo.', en: 'This is cheaper than that one.', tl: 'Mas mura ito kaysa roon.' },
+    ],
+    note: 'kuin compares; kun is about time. In speech both are often said ku, which is why they get mixed up in writing.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'kuin' },
     verification: 'source-verified',
   },
@@ -1970,6 +2108,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Myöhään tarkoittaa, että jokin tapahtuu vasta illalla tai yöllä, tai myöhemmin kuin tavallisesti. Vastakohta on aikaisin.',
+    examples: [
+      { fi: 'Menin eilen myöhään nukkumaan.', en: 'I went to bed late yesterday.', tl: 'Gabi na ako natulog kahapon.' },
+    ],
+    note: 'myöhään is late in the day. myöhässä is late for something, which is a different word.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'myöhään' },
     verification: 'source-verified',
   },
@@ -2105,6 +2248,10 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Pitkään tarkoittaa, että jokin kestää paljon aikaa.',
+    examples: [
+      { fi: 'Odotin bussia pitkään.', en: 'I waited for the bus for a long time.', tl: 'Matagal akong naghintay ng bus.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'pitkään' },
     verification: 'source-verified',
   },
@@ -2176,6 +2323,12 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Sitten tarkoittaa kahta asiaa. Se voi tarkoittaa seuraavaksi, tai se voi kertoa, kuinka kauan aikaa on kulunut.',
+    examples: [
+      { fi: 'Syön ensin ja sitten lähden.', en: 'First I eat and then I leave.', tl: 'Kakain muna ako at saka aalis.' },
+      { fi: 'Tulin Suomeen kaksi vuotta sitten.', en: 'I came to Finland two years ago.', tl: 'Dumating ako sa Finland dalawang taon na ang nakalipas.' },
+    ],
+    note: 'Two senses. After a time expression in the genitive it means ago: kaksi vuotta sitten.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'sitten' },
     verification: 'source-verified',
   },
@@ -2319,6 +2472,11 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['luonto'],
+    selitys: 'Ulkona tarkoittaa, että joku tai jokin ei ole sisällä vaan rakennuksen ulkopuolella.',
+    examples: [
+      { fi: 'Lapset leikkivät ulkona.', en: 'The children are playing outside.', tl: 'Naglalaro sa labas ang mga bata.' },
+    ],
+    note: 'ulkona (outside), ulos (to outside), ulkoa (from outside).',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'ulkona' },
     verification: 'source-verified',
   },
@@ -2332,6 +2490,10 @@ export const OS1_WORDS: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 3 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Ulos kertoo suunnan: sisältä ulkopuolelle.',
+    examples: [
+      { fi: 'Menen ulos kävelylle.', en: 'I am going out for a walk.', tl: 'Lalabas ako para maglakad.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'ulos' },
     verification: 'source-verified',
   },

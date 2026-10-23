@@ -74,6 +74,11 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['terveys'],
+    selitys: 'Vatsa on kehon osa, jossa ruoka sulaa.',
+    examples: [
+      { fi: 'Minulla on vatsa kipeä.', en: 'I have a stomach ache.', tl: 'Masakit ang tiyan ko.' },
+    ],
+    nominalForms: { genitive: 'vatsan', partitive: 'vatsaa' },
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 205, section: 'SANASTO', sourceTerm: 'vatsa, -n; maha, -n' },
     verification: 'source-verified',
   },
@@ -87,6 +92,11 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['terveys'],
+    selitys: 'Maha tarkoittaa samaa kuin vatsa. Se on tavallisempi puhekielessä.',
+    examples: [
+      { fi: 'Mahaan koskee.', en: 'My tummy hurts.', tl: 'Masakit ang tiyan ko.' },
+    ],
+    nominalForms: { genitive: 'mahan', partitive: 'mahaa' },
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 204, section: 'SANASTO', sourceTerm: 'maha, -n; vatsa, -n' },
     verification: 'source-verified',
   },
@@ -548,6 +558,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['terveys'],
+    selitys: 'Turvoksissa tarkoittaa, että jokin kehon osa on suurempi kuin tavallisesti, esimerkiksi vamman takia.',
+    examples: [
+      { fi: 'Nilkka on turvoksissa.', en: 'The ankle is swollen.', tl: 'Namamaga ang bukung-bukong.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 205, section: 'SANASTO', sourceTerm: 'turvoksissa' },
     verification: 'source-verified',
   },
@@ -827,6 +841,11 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['tyo'],
+    selitys: 'Poissaolo tarkoittaa sitä, että joku ei ole paikalla, esimerkiksi koulussa tai töissä.',
+    examples: [
+      { fi: 'Ilmoita poissaolosta opettajalle.', en: 'Report the absence to the teacher.', tl: 'Ipaalam ang pagliban sa guro.' },
+    ],
+    nominalForms: { genitive: 'poissaolon', partitive: 'poissaoloa' },
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 204, section: 'SANASTO', sourceTerm: 'poissaolo' },
     verification: 'source-verified',
   },
@@ -1302,6 +1321,11 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Yleinen tarkoittaa, että jokin on tavallinen ja tapahtuu usein, tai että se on kaikille tarkoitettu.',
+    examples: [
+      { fi: 'Se on hyvin yleinen nimi Suomessa.', en: 'It is a very common name in Finland.', tl: 'Napakakaraniwang pangalan iyan sa Finland.' },
+    ],
+    nominalForms: { genitive: 'yleisen', partitive: 'yleistä', pluralPartitive: 'yleisiä' },
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 205, section: 'SANASTO', sourceTerm: 'yleinen. yleisen' },
     verification: 'source-verified',
   },
@@ -1329,6 +1353,11 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['sosiaaliset'],
+    selitys: 'Kärsivällinen ihminen osaa odottaa rauhallisesti eikä suutu helposti.',
+    examples: [
+      { fi: 'Opettaja on hyvin kärsivällinen.', en: 'The teacher is very patient.', tl: 'Napakatiyaga ng guro.' },
+    ],
+    nominalForms: { genitive: 'kärsivällisen', partitive: 'kärsivällistä' },
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 204, section: 'SANASTO', sourceTerm: 'kärsivällinen, kärsivällisen • palvelu, -n' },
     verification: 'source-verified',
   },
@@ -1342,6 +1371,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Heti tarkoittaa, että jokin tapahtuu hyvin nopeasti, ilman odottamista.',
+    examples: [
+      { fi: 'Tule heti tänne!', en: 'Come here at once!', tl: 'Pumunta ka rito agad!' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 204, section: 'SANASTO', sourceTerm: 'heti' },
     verification: 'source-verified',
   },
@@ -1355,6 +1388,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Nopeasti tarkoittaa, että jokin tehdään lyhyessä ajassa. Vastakohta on hitaasti.',
+    examples: [
+      { fi: 'Söin aamupalan nopeasti.', en: 'I ate breakfast quickly.', tl: 'Mabilis kong kinain ang almusal.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 204, section: 'SANASTO', sourceTerm: 'nopeasti' },
     verification: 'source-verified',
   },
@@ -1368,6 +1405,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Myöhemmin tarkoittaa jotakin aikaa, joka tulee tämän jälkeen.',
+    examples: [
+      { fi: 'Soitan sinulle myöhemmin.', en: 'I will call you later.', tl: 'Tatawagan kita mamaya.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 204, section: 'SANASTO', sourceTerm: 'myöhemmin' },
     verification: 'source-verified',
   },
@@ -1381,6 +1422,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Lyhyesti tarkoittaa, että jokin sanotaan tai tehdään vähillä sanoilla tai lyhyessä ajassa.',
+    examples: [
+      { fi: 'Kerro lyhyesti, mitä tapahtui.', en: 'Tell me briefly what happened.', tl: 'Sabihin mo nang maikli kung ano ang nangyari.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 204, section: 'SANASTO', sourceTerm: 'lyhyesti' },
     verification: 'source-verified',
   },
@@ -1394,6 +1439,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Erikseen tarkoittaa, että asiat ovat eri paikoissa tai niitä käsitellään yksi kerrallaan. Vastakohta on yhdessä.',
+    examples: [
+      { fi: 'Maksamme erikseen.', en: 'We are paying separately.', tl: 'Hiwalay kaming magbabayad.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 204, section: 'SANASTO', sourceTerm: 'erikseen' },
     verification: 'source-verified',
   },
@@ -1407,6 +1456,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['liikkuminen'],
+    selitys: 'Eteenpäin kertoo suunnan: kohti sitä, mikä on edessä.',
+    examples: [
+      { fi: 'Jatka eteenpäin, kauppa on lähellä.', en: 'Keep going, the shop is nearby.', tl: 'Dumiretso ka lang, malapit na ang tindahan.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 204, section: 'SANASTO', sourceTerm: 'eteenpäin' },
     verification: 'source-verified',
   },
@@ -1420,6 +1473,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Poissa tarkoittaa, että joku ei ole paikalla.',
+    examples: [
+      { fi: 'Opettaja on tänään poissa.', en: 'The teacher is away today.', tl: 'Wala ang guro ngayon.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 204, section: 'SANASTO', sourceTerm: 'poissa' },
     verification: 'source-verified',
   },
@@ -1433,6 +1490,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['liikkuminen'],
+    selitys: 'Sisään kertoo suunnan: ulkopuolelta sisälle.',
+    examples: [
+      { fi: 'Tule sisään!', en: 'Come in!', tl: 'Pasok ka!' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 205, section: 'SANASTO', sourceTerm: 'sisään' },
     verification: 'source-verified',
   },
@@ -1446,6 +1507,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['sosiaaliset'],
+    selitys: 'Valitettavasti kertoo, että asia on ikävä tai että puhuja on pahoillaan siitä.',
+    examples: [
+      { fi: 'Valitettavasti en pääse tulemaan.', en: 'Unfortunately I cannot come.', tl: 'Sa kasamaang-palad, hindi ako makakapunta.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 205, section: 'SANASTO', sourceTerm: 'valitettavasti' },
     verification: 'source-verified',
   },
@@ -1459,6 +1524,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Riittävästi tarkoittaa, että jotakin on tarpeeksi.',
+    examples: [
+      { fi: 'Nuku riittävästi!', en: 'Sleep enough!', tl: 'Matulog ka nang sapat!' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 204, section: 'SANASTO', sourceTerm: 'riittävästi' },
     verification: 'source-verified',
   },
@@ -1472,6 +1541,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Seuraavaksi tarkoittaa, mikä asia tulee tämän jälkeen.',
+    examples: [
+      { fi: 'Seuraavaksi harjoittelemme verbejä.', en: 'Next we practise verbs.', tl: 'Sunod, magsasanay tayo ng mga verbo.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 204, section: 'SANASTO', sourceTerm: 'seuraavaksi' },
     verification: 'source-verified',
   },
@@ -1555,6 +1628,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 8 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['arki'],
+    selitys: 'Portaat ovat rakennuksessa, ja niitä pitkin mennään ylös ja alas. Sana on monikossa.',
+    examples: [
+      { fi: 'Menen portaita ylös.', en: 'I go up the stairs.', tl: 'Umaakyat ako sa hagdan.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 8: Mikä hätänä?', page: 204, section: 'SANASTO', sourceTerm: 'portaat' },
     verification: 'source-verified',
   },
@@ -1680,6 +1757,11 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 6 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['ostokset'],
+    selitys: 'Housut ovat vaate jaloissa. Sana on aina monikossa.',
+    examples: [
+      { fi: 'Ostin uudet housut.', en: 'I bought new trousers.', tl: 'Bumili ako ng bagong pantalon.' },
+    ],
+    note: 'Plural only. One pair is yhdet housut, two pairs kahdet housut.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 6: Vaatteet ja ostokset', page: 155, section: 'SANASTO', sourceTerm: 'housut' },
     verification: 'source-verified',
   },
@@ -1763,6 +1845,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 6 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['ostokset'],
+    selitys: 'Saappaat ovat korkeat kengät, jotka suojaavat jalkoja. Sana on monikossa.',
+    examples: [
+      { fi: 'Talvella tarvitset lämpimät saappaat.', en: 'In winter you need warm boots.', tl: 'Sa taglamig, kailangan mo ng mainit na bota.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 6: Vaatteet ja ostokset', page: 155, section: 'SANASTO', sourceTerm: 'saappaat' },
     verification: 'source-verified',
   },
@@ -1776,6 +1862,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 6 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['ostokset'],
+    selitys: 'Kumisaappaat ovat saappaat, jotka eivät päästä vettä läpi.',
+    examples: [
+      { fi: 'Lapsilla on kumisaappaat sateella.', en: 'The children wear rubber boots in the rain.', tl: 'May bota ang mga bata kapag umuulan.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 6: Vaatteet ja ostokset', page: 155, section: 'SANASTO', sourceTerm: 'kumisaappaat' },
     verification: 'source-verified',
   },
@@ -1789,6 +1879,11 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 6 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['ostokset'],
+    selitys: 'Lapaset ovat talvivaate käsissä. Niissä sormet ovat yhdessä.',
+    examples: [
+      { fi: 'Muista lapaset, ulkona on pakkasta.', en: 'Remember your mittens, it is freezing outside.', tl: 'Huwag kalimutan ang guwantes, nagyeyelo sa labas.' },
+    ],
+    note: 'In lapaset the fingers are together; in sormikkaat each finger has its own place.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 6: Vaatteet ja ostokset', page: 155, section: 'SANASTO', sourceTerm: 'lapaset' },
     verification: 'source-verified',
   },
@@ -1802,6 +1897,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 6 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['ostokset'],
+    selitys: 'Sormikkaat ovat käsine, jossa jokaisella sormella on oma paikka.',
+    examples: [
+      { fi: 'Sormikkaat ovat ohuemmat kuin lapaset.', en: 'Gloves are thinner than mittens.', tl: 'Mas manipis ang gloves kaysa mittens.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 6: Vaatteet ja ostokset', page: 155, section: 'SANASTO', sourceTerm: 'sormikkaat' },
     verification: 'source-verified',
   },
@@ -1815,6 +1914,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 6 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['ostokset'],
+    selitys: 'Haalarit ovat yksiosainen vaate, joka peittää sekä ylä- että alaruumiin. Lapset käyttävät niitä talvella.',
+    examples: [
+      { fi: 'Puen lapselle haalarit.', en: 'I put the snowsuit on the child.', tl: 'Sinusuotan ko ng overall ang bata.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 6: Vaatteet ja ostokset', page: 155, section: 'SANASTO', sourceTerm: 'haalarit' },
     verification: 'source-verified',
   },
@@ -2060,6 +2163,11 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 6 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['koti'],
+    selitys: 'Vessa on huone, jossa on wc-pönttö ja käsienpesuallas.',
+    examples: [
+      { fi: 'Missä vessa on?', en: 'Where is the toilet?', tl: 'Nasaan ang banyo?' },
+    ],
+    nominalForms: { genitive: 'vessan', partitive: 'vessaa' },
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 6: Vaatteet ja ostokset', page: 155, section: 'SANASTO', sourceTerm: 'vessa, -n = wc' },
     verification: 'source-verified',
   },
@@ -2457,6 +2565,11 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 6 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Eilen on päivä ennen tätä päivää.',
+    examples: [
+      { fi: 'Eilen satoi koko päivän.', en: 'It rained all day yesterday.', tl: 'Umulan buong araw kahapon.' },
+    ],
+    note: 'Time words like eilen, tänään and huomenna need no case ending: eilen, not *eilenä.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 6: Vaatteet ja ostokset', page: 155, section: 'SANASTO', sourceTerm: 'eilen' },
     verification: 'source-verified',
   },
@@ -2470,6 +2583,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 6 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Huomenna on päivä tämän päivän jälkeen.',
+    examples: [
+      { fi: 'Nähdään huomenna!', en: 'See you tomorrow!', tl: 'Kita tayo bukas!' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 6: Vaatteet ja ostokset', page: 155, section: 'SANASTO', sourceTerm: 'huomenna' },
     verification: 'source-verified',
   },
@@ -2483,6 +2600,10 @@ export const OS1_WORDS_3: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 6 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Vaikka kertoo, että asia tapahtuu, vaikka jokin olisi toisin.',
+    examples: [
+      { fi: 'Menen ulos, vaikka sataa.', en: 'I am going out even though it is raining.', tl: 'Lalabas ako kahit umuulan.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 6: Vaatteet ja ostokset', page: 155, section: 'SANASTO', sourceTerm: 'vaikka' },
     verification: 'source-verified',
   },

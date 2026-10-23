@@ -271,3 +271,30 @@ export function FilterPills<T extends string>({
     </div>
   );
 }
+
+/* ------------------------------- navigation ------------------------------ */
+
+/**
+ * Leaving a screen you have finished with.
+ *
+ * Finishing a practice set and then pressing the phone's back button should
+ * not drop you into the questions you just answered. Navigating forward to
+ * the word would do exactly that, and replacing the entry is no better: it
+ * leaves two entries pointing at the same screen, so the first back press
+ * looks like nothing happened.
+ *
+ * So this pops the finished screen off instead, and only falls back to a
+ * plain navigation when there is nothing to pop - someone who opened the
+ * practice URL directly has no previous screen to return to.
+ *
+ * React Router keeps its position in `history.state.idx`, which is how we can
+ * tell the difference.
+ */
+export function useLeaveFor() {
+  const navigate = useNavigate();
+  return (fallback: string) => {
+    const idx = (window.history.state as { idx?: number } | null)?.idx ?? 0;
+    if (idx > 0) navigate(-1);
+    else navigate(fallback, { replace: true });
+  };
+}

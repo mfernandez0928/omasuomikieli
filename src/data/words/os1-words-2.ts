@@ -117,6 +117,11 @@ export const OS1_WORDS_2: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 4 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Ihan korostaa sanaa, jonka edessä se on. Se tarkoittaa usein samaa kuin aivan tai täysin.',
+    examples: [
+      { fi: 'Olen ihan väsynyt.', en: 'I am completely tired.', tl: 'Pagod na pagod na ako.' },
+    ],
+    note: 'Everyday and slightly spoken. aivan is the more neutral word.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 4: Ruokakaupassa', page: 97, section: 'SANASTO', sourceTerm: 'ihan' },
     verification: 'source-verified',
   },
@@ -158,6 +163,11 @@ export const OS1_WORDS_2: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 4 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['sosiaaliset'],
+    selitys: 'Juhlat on tilaisuus, jossa ihmiset viettävät yhdessä aikaa ja iloitsevat. Sana on monikossa.',
+    examples: [
+      { fi: 'Meillä on ensi viikolla juhlat.', en: 'We have a party next week.', tl: 'May handaan kami sa susunod na linggo.' },
+    ],
+    note: 'Plural only, like häät (wedding) and hautajaiset (funeral).',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 4: Ruokakaupassa', page: 97, section: 'SANASTO', sourceTerm: 'juhlat' },
     verification: 'source-verified',
   },
@@ -567,6 +577,11 @@ export const OS1_WORDS_2: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 4 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Lopuksi tarkoittaa, että jokin tapahtuu viimeisenä.',
+    examples: [
+      { fi: 'Lopuksi haluan kiittää kaikkia.', en: 'Finally I want to thank everyone.', tl: 'Sa huli, gusto kong magpasalamat sa lahat.' },
+    ],
+    note: 'lopuksi is the last thing in a sequence. lopussa is at the end of something, and loppuun is all the way to the end.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 4: Ruokakaupassa', page: 97, section: 'SANASTO', sourceTerm: 'lopuksi' },
     verification: 'source-verified',
   },
@@ -1034,6 +1049,11 @@ export const OS1_WORDS_2: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 4 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['ostokset'],
+    selitys: 'Sika on kotieläin. Sian lihaa sanotaan sianlihaksi tai porsaanlihaksi.',
+    examples: [
+      { fi: 'Maatilalla on sikoja ja lehmiä.', en: 'There are pigs and cows on the farm.', tl: 'May mga baboy at baka sa bukid.' },
+    ],
+    nominalForms: { genitive: 'sian', partitive: 'sikaa', pluralPartitive: 'sikoja' },
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 4: Ruokakaupassa', page: 97, section: 'SANASTO', sourceTerm: 'sika' },
     verification: 'source-verified',
   },
@@ -1397,6 +1417,11 @@ export const OS1_WORDS_2: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 5 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['terveys'],
+    selitys: 'Hiukset kasvavat ihmisen päässä. Sana on monikossa.',
+    examples: [
+      { fi: 'Hänellä on pitkät hiukset.', en: 'She has long hair.', tl: 'Mahaba ang buhok niya.' },
+    ],
+    note: 'Plural in Finnish, singular in English. A single strand is hius, and animal fur is karva.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'hiukset' },
     verification: 'source-verified',
   },
@@ -1438,6 +1463,10 @@ export const OS1_WORDS_2: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 5 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Joskus tarkoittaa, että jokin tapahtuu vain muutaman kerran, ei aina.',
+    examples: [
+      { fi: 'Joskus käyn kahvilassa töiden jälkeen.', en: 'Sometimes I go to a cafe after work.', tl: 'Minsan pumupunta ako sa kapihan pagkatapos ng trabaho.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'joskus' },
     verification: 'source-verified',
   },
@@ -1896,6 +1925,10 @@ export const OS1_WORDS_2: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 5 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['liikkuminen'],
+    selitys: 'Myöhässä tarkoittaa, että joku tai jokin tulee liian myöhään. Vastakohta on ajoissa.',
+    examples: [
+      { fi: 'Bussi on kymmenen minuuttia myöhässä.', en: 'The bus is ten minutes late.', tl: 'Sampung minutong late ang bus.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'myöhässä' },
     verification: 'source-verified',
   },
@@ -2121,6 +2154,10 @@ export const OS1_WORDS_2: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 5 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['koti'],
+    selitys: 'Rikki tarkoittaa, että jokin ei toimi tai on mennyt epäkuntoon.',
+    examples: [
+      { fi: 'Minun puhelimeni on rikki.', en: 'My phone is broken.', tl: 'Sira ang telepono ko.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'rikki' },
     verification: 'source-verified',
   },
@@ -2218,6 +2255,11 @@ export const OS1_WORDS_2: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 5 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['terveys'],
+    selitys: 'Silmälasit auttavat näkemään paremmin. Sana on monikossa.',
+    examples: [
+      { fi: 'Käytän silmälaseja lukiessa.', en: 'I wear glasses when reading.', tl: 'Nagsasalamin ako kapag nagbabasa.' },
+    ],
+    note: 'Plural only, like most things that come in pairs: housut, sakset, lasit.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'silmälasit' },
     verification: 'source-verified',
   },
@@ -2287,6 +2329,11 @@ export const OS1_WORDS_2: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 5 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['sosiaaliset'],
+    selitys: 'Terveiset lähetetään, kun halutaan sanoa jollekin hei, vaikka ei nähdä. Sana on monikossa.',
+    examples: [
+      { fi: 'Terveisiä äidille!', en: 'Say hello to your mother!', tl: 'Pakikumusta mo ako sa nanay mo!' },
+    ],
+    note: 'A letter often ends Ystävällisin terveisin, kind regards.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'terveiset' },
     verification: 'source-verified',
   },
@@ -2386,6 +2433,11 @@ export const OS1_WORDS_2: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 5 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Usein tarkoittaa, että jokin tapahtuu monta kertaa. Vastakohta on harvoin.',
+    examples: [
+      { fi: 'Käyn usein kirjastossa.', en: 'I often go to the library.', tl: 'Madalas akong pumunta sa aklatan.' },
+    ],
+    note: 'The comparative is useammin, more often.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'usein' },
     verification: 'source-verified',
   },
@@ -2487,6 +2539,10 @@ export const OS1_WORDS_2: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 5 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['liikkuminen'],
+    selitys: 'Vieressä kertoo, että jokin on aivan toisen asian lähellä, sen sivulla. Sitä ennen sana on genetiivissä.',
+    examples: [
+      { fi: 'Kauppa on koulun vieressä.', en: 'The shop is next to the school.', tl: 'Katabi ng paaralan ang tindahan.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'vieressä' },
     verification: 'source-verified',
   },
@@ -2558,6 +2614,11 @@ export const OS1_WORDS_2: Word[] = [
     levelBasis:
       'Appears in the Oma suomi 1 chapter 5 SANASTO list. The book states no CEFR level; A1 is inferred from its position as book 1 of an adult integration course.',
     topics: ['perus'],
+    selitys: 'Väärä tarkoittaa, että jokin ei ole oikein. Vastakohta on oikea.',
+    examples: [
+      { fi: 'Tämä on väärä vastaus.', en: 'This is the wrong answer.', tl: 'Mali ang sagot na ito.' },
+    ],
+    nominalForms: { genitive: 'väärän', partitive: 'väärää', pluralPartitive: 'vääriä' },
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'väärä' },
     verification: 'source-verified',
   },

@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icon, type IconName } from '@/components/Icon';
-import { Callout, EmptyState, LevelBadge, SpeakButton, TopBar } from '@/components/ui';
+import { Callout, EmptyState, LevelBadge, SpeakButton, TopBar, useLeaveFor } from '@/components/ui';
 import { ExerciseRunner } from '@/components/ExerciseRunner';
 import { ALL_EXERCISES, GRAMMAR_BY_ID, exercisesForGrammar, nextLesson } from '@/data/grammar';
 import { WORDS, getWord } from '@/data/words';
@@ -305,9 +305,9 @@ export function GrammarPractice() {
           following
             ? {
                 label: `Next: ${following.title}`,
-                onGo: () => navigate(`/practice/grammar/${following.id}`),
+                onGo: () => navigate(`/practice/grammar/${following.id}`, { replace: true }),
               }
-            : { label: 'Mixed practice', onGo: () => navigate('/practice/mixed') }
+            : { label: 'Mixed practice', onGo: () => navigate('/practice/mixed', { replace: true }) }
         }
       />
     </div>
@@ -405,7 +405,7 @@ export function WeakTopics() {
       <ExerciseRunner
         exercises={exercises}
         title="Weak topics"
-        nextUp={{ label: 'Mixed practice', onGo: () => navigate('/practice/mixed') }}
+        nextUp={{ label: 'Mixed practice', onGo: () => navigate('/practice/mixed', { replace: true }) }}
       />
     </div>
   );
@@ -413,8 +413,8 @@ export function WeakTopics() {
 
 /** Practice built around a single dictionary word. */
 export function WordPractice() {
+  const leaveFor = useLeaveFor();
   const { id = '' } = useParams();
-  const navigate = useNavigate();
   const word = getWord(id);
 
   const exercises = useMemo<Exercise[]>(() => {
@@ -508,7 +508,7 @@ export function WordPractice() {
           title="Not enough data to build questions"
           text="This entry has no conjugations, forms or example sentence stored yet, so there is nothing reliable to test. Add them to the data file and the questions appear automatically."
           action={
-            <button className="btn btn--primary" onClick={() => navigate(`/vocabulary/${word.id}`)}>
+            <button className="btn btn--primary" onClick={() => leaveFor(`/vocabulary/${word.id}`)}>
               Back to the word
             </button>
           }
@@ -523,7 +523,7 @@ export function WordPractice() {
       <ExerciseRunner
         exercises={exercises}
         title={word.fi}
-        nextUp={{ label: 'Back to the word', onGo: () => navigate(`/vocabulary/${word.id}`) }}
+        nextUp={{ label: 'Back to the word', onGo: () => leaveFor(`/vocabulary/${word.id}`) }}
       />
     </div>
   );
