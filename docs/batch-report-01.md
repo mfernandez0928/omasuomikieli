@@ -81,40 +81,68 @@ These are the only corrections made without the source in hand. A soft hyphen
 is never part of a Finnish word and the remaining letters spell exactly one
 thing, so there was nothing to decide. No other term was altered.
 
-## 5. Incomplete — needs review (1)
+## 5. Incomplete — needs review (0)
 
-**saapuvat** — `verification: 'needs-review'`.
+**Resolved.** `saapuvat` was the one entry entered as `needs-review`, because a
+bare word list could not say whether it meant the Arrivals board or the third
+person plural of *saapua*.
 
-Entered as the Arrivals heading on an airport or station board, because the
-batch lists it between *turvatarkastus* and *passi*. But the same word is the
-third person plural of *saapua*, "they arrive", and without the page there is
-no way to know which was meant. The entry says so in its `reviewNote` and
-links to the verb. One line from the source settles it.
+Suomen mestari 2 page 16 settles it. The word stands in a list of airport
+nouns and signage — *lento, lentolippu, käsimatkatavara, turvatarkastus,
+**saapuvat**, passi, viisumi* — so the arrivals-board reading is the one the
+chapter teaches. The entry is now `source-verified` and the reasoning is
+recorded in its `source.note`.
 
 ---
 
-## What is missing from all of this: the source
+## The source: found, and confirmed word by word
 
-**Every new entry has `source: null`.** Not an oversight — the batch arrived
-as a bare word list with no book, chapter or page attached, and the source
-PDFs are not in this checkout, so nothing could be located. The project's own
-rule is that `SourceRef` has no field that can hold a guess, so an uncited
-entry is marked as such rather than given a plausible-looking citation.
+**Every one of the 134 entries is now `source-verified`.** No entry is left
+with `source: null`.
 
-The two lists do match two chapters closely:
+The books arrived later and three of the five carry a text layer: Oma suomi 1,
+Suomen mestari 2 and Suomen mestari 3. Both chapters this report predicted
+turned out to be right, and they were checked a headword at a time rather than
+by theme:
 
-| List | Almost certainly | On the evidence of |
+| List | Source | Confirmed |
 | --- | --- | --- |
-| Travel | **Suomen mestari 2, Kappale 1 "Viikonloppureissu"** (printed p. 10) | The travel theme, and the *Milloin?* time expressions, both of which sources.ts records as that chapter's content |
-| Environment | **Suomen mestari 3, Kappale 1 "Säästetään energiaa ja kierrätetään!"** (printed p. 10) | The chapter title is literally "let's save energy and recycle" |
+| Travel (72) | **Suomen mestari 2, Kappale 1 "Viikonloppureissu"**, p. 10–42, word list p. 13–16 | 72 of 72 |
+| Environment (62) | **Suomen mestari 3, Kappale 1 "Säästetään energiaa ja kierrätetään!"**, p. 10–40, word list p. 12 and 21 | 62 of 62 |
 
-That is a strong match, but matching a theme is not finding a word on a page.
-Confirm the chapter and give the page range and all 134 become
-`source-verified` in one pass.
+Each entry records the page the word was actually found on, preferring the
+chapter's own Sanasto pages over its exercise pages. A separate pass then
+re-read every citation and checked that the `sourceTerm` really occurs on the
+page the entry names: **134 of 134 hold.**
 
-Everything is `linguistically-checked` in the meantime: forms, verb types and
-rections are derived from standard Finnish morphology, which is exactly what
-that status means.
+Four entries needed the book's own spelling before they would match:
+
+| Entry | The book prints | Where |
+| --- | --- | --- |
+| menopaluu | *meno paluu* (two words) | sm2 p. 16 |
+| tehdä varaus | *tehdä (2) varaus = varata (4)* | sm2 p. 16 |
+| perua varaus | *perua (1) varaus, peruttu* | sm2 p. 16 |
+| banaaninkuori | *banaaninkuoret* (plural) | sm3 p. 13 |
+
+The last one is worth noting: this report entered **banaaninkuori** under the
+singular because the batch submitted a plural. The chapter uses the plural
+too — *"Mä en tiedä, mihin roskikseen nää banaaninkuoret pitää laittaa"* — so
+the singular headword with the plural as an alias was the right call.
+
+### The soft hyphen, confirmed
+
+Section 4 recorded two corrections made without the source in hand, both a
+soft hyphen sitting inside a word. The source confirms both. Page 12 of
+Suomen mestari 3 does not extract cleanly either: *ympäristöystävällinen*
+comes out of the PDF broken across several fragments, ending in a mangled
+"Uinen" for *llinen*. Whatever produced the original batch list hit the same
+layout, which is exactly where a stray soft hyphen comes from. The corrected
+spellings stand.
+
+### Still not in hand
+
+**No niin! 1** and **Suomen mestari 4** are scans with no text layer, so
+nothing in them has been searched. Neither was needed for this batch.
 
 ---
 
@@ -123,3 +151,8 @@ that status means.
 The list was explicitly partial. Nothing here assumes it covers a whole
 chapter or a whole book, and no gap in it has been filled by guessing at what
 the next page probably contains.
+
+Now that the chapter is known, that can be stated more precisely: these 134
+entries are what the submitted list contained, not everything Suomen mestari 2
+Kappale 1 and Suomen mestari 3 Kappale 1 teach. The chapters' word lists hold
+more than the batch asked for.

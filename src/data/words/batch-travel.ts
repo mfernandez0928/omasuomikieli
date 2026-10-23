@@ -52,8 +52,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'tt ~ t gradation: heittää -> heitän. The "drop someone off" sense is spoken Finnish; in writing use viedä.',
     noteTl: 'Astevaihtelu tt ~ t. Ang ibig sabihing "ihatid" ay pasalita lang; viedä sa sulat.',
     grammarRefs: ['g-kpt'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'heittää' },
+    verification: 'source-verified',
   },
   {
     id: 'f-olla-perilla',
@@ -69,8 +69,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'perillä is the state of having arrived. Movement to it is perille: "Pääsimme perille."',
     noteTl: 'Ang perillä ay ang pagkakarating na. Perille kung papunta: "Pääsimme perille."',
     searchAliases: ['perillä', 'perille'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'olla perillä' },
+    verification: 'source-verified',
   },
   {
     id: 'n-kyyti',
@@ -88,8 +88,8 @@ export const BATCH_TRAVEL: Word[] = [
     noteTl: 'Astevaihtelu t ~ d: kyyti -> kyydin.',
     searchAliases: ['kyydin'],
     grammarRefs: ['g-kpt'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'kyyti' },
+    verification: 'source-verified',
   },
   {
     id: 'v-paasta',
@@ -124,8 +124,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'Not the same as mennä. mennä is simply going; päästä is managing to get there, or being let in. Do not confuse with the time expression "... päästä" (in two weeks), which is a different word.',
     noteTl: 'Hindi ito mennä. Ang mennä ay basta pagpunta; ang päästä ay ang makarating o mapayagang pumasok.',
     grammarRefs: ['g-verbityypit'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'päästä' },
+    verification: 'source-verified',
   },
   {
     id: 'v-kelvata',
@@ -159,8 +159,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'Verb type 4, and p ~ v gradation shows in the infinitive and the NUT participle: kelvata, kelvannut, but kelpaan.',
     noteTl: 'Verbityyppi 4. Astevaihtelu p ~ v sa infinitiivi: kelvata, pero kelpaan.',
     grammarRefs: ['g-verbityypit', 'g-kpt'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'kelvata' },
+    verification: 'source-verified',
   },
   {
     id: 'v-saapua',
@@ -194,8 +194,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'p ~ v gradation: saapua -> saavun. More formal than tulla; this is the word on timetables and announcements.',
     noteTl: 'Astevaihtelu p ~ v. Mas pormal kaysa tulla - ito ang nasa iskedyul at anunsiyo.',
     grammarRefs: ['g-kpt'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'saapua' },
+    verification: 'source-verified',
   },
   {
     id: 'v-laskeutua',
@@ -221,8 +221,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 't ~ d gradation: laskeutua -> laskeudun.',
     noteTl: 'Astevaihtelu t ~ d: laskeutua -> laskeudun.',
     grammarRefs: ['g-kpt'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'laskeutua' },
+    verification: 'source-verified',
   },
 
   /* ------------------------------ the journey ----------------------------- */
@@ -241,8 +241,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'Spoken Finnish. The neutral word is matka, which is already in the dictionary.',
     noteTl: 'Pasalitang suomi. Ang neutral na salita ay matka.',
     related: ['n-matka'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'reissu' },
+    verification: 'source-verified',
   },
   {
     id: 'f-olla-matkalla',
@@ -256,8 +256,8 @@ export const BATCH_TRAVEL: Word[] = [
       { fi: 'Olen matkalla kotiin.', en: 'I am on my way home.', tl: 'Pauwi na ako.' },
     ],
     searchAliases: ['matkalla'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'olla matkalla' },
+    verification: 'source-verified',
   },
   {
     id: 'n-matkustaminen',
@@ -272,8 +272,8 @@ export const BATCH_TRAVEL: Word[] = [
     noteTl: 'Ang -minen ay ginagawang pangngalan ang verbo: matkustaa -> matkustaminen.',
     searchAliases: ['matkustamisen'],
     related: ['v-matkustaa'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'matkustaminen' },
+    verification: 'source-verified',
   },
   {
     id: 'n-matkailu',
@@ -287,8 +287,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'matkailu is tourism as an industry; matkustaminen is the act of travelling.',
     noteTl: 'Ang matkailu ay turismo bilang industriya; ang matkustaminen ay ang paglalakbay mismo.',
     related: ['n-matkustaminen'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'matkailu' },
+    verification: 'source-verified',
   },
   {
     id: 'n-turisti',
@@ -299,8 +299,8 @@ export const BATCH_TRAVEL: Word[] = [
     level: 'A2.1',
     topics: ['liikkuminen'],
     nominalForms: { genitive: 'turistin', partitive: 'turistia', pluralPartitive: 'turisteja' },
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'turisti' },
+    verification: 'source-verified',
   },
   {
     id: 'n-opas',
@@ -315,8 +315,8 @@ export const BATCH_TRAVEL: Word[] = [
     noteTl: 'Salitang -as, at dinadalawa ang p: opas -> oppaan.',
     searchAliases: ['oppaan'],
     grammarRefs: ['g-kpt'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'opas' },
+    verification: 'source-verified',
   },
   {
     id: 'n-nahtavyys',
@@ -334,8 +334,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'A -yys word: nähtävyys -> nähtävyyden, nähtävyyttä. Literally "a thing worth seeing".',
     noteTl: 'Salitang -yys. Literal: "bagay na dapat makita".',
     searchAliases: ['nähtävyyden', 'nähtävyyksiä'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'nähtävyys' },
+    verification: 'source-verified',
   },
   {
     id: 'n-kiertoajelu',
@@ -348,8 +348,8 @@ export const BATCH_TRAVEL: Word[] = [
     nominalForms: { genitive: 'kiertoajelun', partitive: 'kiertoajelua' },
     note: 'kierto (going round) + ajelu (a drive).',
     noteTl: 'kierto (pag-ikot) + ajelu (pamamasyal sakay).',
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'kiertoajelu' },
+    verification: 'source-verified',
   },
   {
     id: 'n-retki',
@@ -365,8 +365,8 @@ export const BATCH_TRAVEL: Word[] = [
     ],
     note: 'A short trip out and back, often for a day. Longer than a kävely, shorter than a matka.',
     noteTl: 'Maikling lakad at balik, madalas isang araw lang.',
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'retki' },
+    verification: 'source-verified',
   },
   {
     id: 'n-majoitus',
@@ -381,8 +381,8 @@ export const BATCH_TRAVEL: Word[] = [
       { fi: 'Oletko jo varannut majoituksen?', en: 'Have you booked the accommodation yet?', tl: 'Nakapag-book ka na ba ng matutuluyan?' },
     ],
     searchAliases: ['majoituksen'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'majoitus' },
+    verification: 'source-verified',
   },
   {
     id: 'n-alue',
@@ -396,8 +396,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'An -e word, so the partitive doubles the t: aluetta.',
     noteTl: 'Salitang -e, kaya dinadalawa ang t: aluetta.',
     searchAliases: ['alueen', 'alueella'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'alue' },
+    verification: 'source-verified',
   },
 
   /* ------------------------- trains, trams, boats ------------------------- */
@@ -417,8 +417,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'The standard word. In speech almost everyone says ratikka.',
     noteTl: 'Ito ang pormal. Sa usapan, ratikka ang sinasabi ng halos lahat.',
     related: ['n-ratikka'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'raitiovaunu' },
+    verification: 'source-verified',
   },
   {
     id: 'n-ratikka',
@@ -436,8 +436,8 @@ export const BATCH_TRAVEL: Word[] = [
     noteTl: 'Pasalita para sa raitiovaunu. Mahabang -kka, kaya heikko aste: ratikoita.',
     related: ['n-raitiovaunu'],
     grammarRefs: ['g-kpt'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'ratikka' },
+    verification: 'source-verified',
   },
   {
     id: 'n-raide',
@@ -452,8 +452,8 @@ export const BATCH_TRAVEL: Word[] = [
     noteTl: 'Sa istasyon sa Finland, raide ang sinasabi, hindi platform: "raiteelta 5".',
     searchAliases: ['raiteen', 'raiteelta'],
     related: ['n-laituri'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'raide' },
+    verification: 'source-verified',
   },
   {
     id: 'n-laituri',
@@ -467,8 +467,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'Both the station platform and a wooden jetty at a lake.',
     noteTl: 'Plataporma sa istasyon, at pantalan din sa tabing-lawa.',
     related: ['n-raide'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'laituri' },
+    verification: 'source-verified',
   },
   {
     id: 'n-vaunu',
@@ -479,8 +479,8 @@ export const BATCH_TRAVEL: Word[] = [
     level: 'A2.1',
     topics: ['liikkuminen'],
     nominalForms: { genitive: 'vaunun', partitive: 'vaunua', pluralPartitive: 'vaunuja' },
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'vaunu' },
+    verification: 'source-verified',
   },
   {
     id: 'n-hytti',
@@ -494,8 +494,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'tt ~ t gradation: hytti -> hytin.',
     noteTl: 'Astevaihtelu tt ~ t: hytti -> hytin.',
     grammarRefs: ['g-kpt'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'hytti' },
+    verification: 'source-verified',
   },
   {
     id: 'n-makuuhytti',
@@ -509,8 +509,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'maata (to lie down) + hytti. The night train to Lapland has these.',
     noteTl: 'maata (mahiga) + hytti. Nasa night train papuntang Lapland.',
     related: ['n-hytti'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'makuuhytti' },
+    verification: 'source-verified',
   },
   {
     id: 'n-kansi',
@@ -524,8 +524,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'A si-word with nt ~ nn gradation: kansi -> kannen, kantta. Two common senses: the deck of a ship, and the lid of a pot or the cover of a book.',
     noteTl: 'Salitang si- na may astevaihtelu: kansi -> kannen. Dalawang kahulugan: kubyerta ng barko, at takip o pabalat.',
     searchAliases: ['kannen', 'kantta', 'kannella'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'kansi' },
+    verification: 'source-verified',
   },
   {
     id: 'n-paateasema',
@@ -542,8 +542,8 @@ export const BATCH_TRAVEL: Word[] = [
     },
     note: 'pääte (end) + asema (station).',
     noteTl: 'pääte (dulo) + asema (istasyon).',
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'pääteasema' },
+    verification: 'source-verified',
   },
   {
     id: 'n-terminaali',
@@ -558,8 +558,8 @@ export const BATCH_TRAVEL: Word[] = [
       partitive: 'terminaalia',
       pluralPartitive: 'terminaaleja',
     },
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'terminaali' },
+    verification: 'source-verified',
   },
   {
     id: 'n-aikataulu',
@@ -579,8 +579,8 @@ export const BATCH_TRAVEL: Word[] = [
     ],
     note: 'aika (time) + taulu (table, board).',
     noteTl: 'aika (oras) + taulu (talahanayan).',
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'aikataulu' },
+    verification: 'source-verified',
   },
 
   /* ------------------------- tickets and booking -------------------------- */
@@ -600,8 +600,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'pp ~ p gradation: matkalippu -> matkalipun.',
     noteTl: 'Astevaihtelu pp ~ p: matkalippu -> matkalipun.',
     grammarRefs: ['g-kpt'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'matkalippu' },
+    verification: 'source-verified',
   },
   {
     id: 'n-lentolippu',
@@ -618,8 +618,8 @@ export const BATCH_TRAVEL: Word[] = [
     },
     related: ['n-matkalippu', 'n-lento'],
     grammarRefs: ['g-kpt'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'lentolippu' },
+    verification: 'source-verified',
   },
   {
     id: 'n-lento',
@@ -634,8 +634,8 @@ export const BATCH_TRAVEL: Word[] = [
     noteTl: 'Astevaihtelu nt ~ nn: lento -> lennon.',
     searchAliases: ['lennon'],
     grammarRefs: ['g-kpt'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'lento' },
+    verification: 'source-verified',
   },
   {
     id: 'n-meno',
@@ -649,8 +649,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'On a ticket machine, meno is one way and menopaluu is a return.',
     noteTl: 'Sa ticket machine, meno ay one way at menopaluu ay balikan.',
     related: ['n-paluu', 'n-menopaluu'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'meno' },
+    verification: 'source-verified',
   },
   {
     id: 'n-paluu',
@@ -662,8 +662,8 @@ export const BATCH_TRAVEL: Word[] = [
     topics: ['liikkuminen'],
     nominalForms: { genitive: 'paluun', partitive: 'paluuta' },
     related: ['n-meno', 'n-menopaluu'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'paluu' },
+    verification: 'source-verified',
   },
   {
     id: 'n-menopaluu',
@@ -675,8 +675,8 @@ export const BATCH_TRAVEL: Word[] = [
     topics: ['liikkuminen'],
     nominalForms: { genitive: 'menopaluun', partitive: 'menopaluuta' },
     related: ['n-meno', 'n-paluu'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'meno paluu' },
+    verification: 'source-verified',
   },
   {
     id: 'n-vaihto',
@@ -691,8 +691,8 @@ export const BATCH_TRAVEL: Word[] = [
     noteTl: 'Astevaihtelu ht ~ hd. Sa biyahe, ito ang paglipat ng tren o bus.',
     searchAliases: ['vaihdon'],
     grammarRefs: ['g-kpt'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'vaihto' },
+    verification: 'source-verified',
   },
   {
     id: 'n-varaus',
@@ -709,8 +709,8 @@ export const BATCH_TRAVEL: Word[] = [
     },
     searchAliases: ['varauksen'],
     related: ['v-varata'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'varaus' },
+    verification: 'source-verified',
   },
   {
     id: 'f-tehda-varaus',
@@ -724,8 +724,8 @@ export const BATCH_TRAVEL: Word[] = [
       { fi: 'Haluaisin tehdä varauksen kahdelle.', en: 'I would like to make a booking for two.', tl: 'Gusto kong mag-book para sa dalawa.' },
     ],
     related: ['n-varaus'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'tehdä (2) varaus' },
+    verification: 'source-verified',
   },
   {
     id: 'f-perua-varaus',
@@ -742,8 +742,16 @@ export const BATCH_TRAVEL: Word[] = [
     noteTl: 'Ang verbo ay perua. Ganoon din ang peruuttaa.',
     searchAliases: ['perua', 'peruuttaa'],
     related: ['n-varaus', 'a-peruttu'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: {
+      bookId: 'sm2',
+      book: 'Suomen mestari 2',
+      chapter: 'Kappale 1: Viikonloppureissu',
+      page: 16,
+      section: 'SANASTO',
+      sourceTerm: 'perua',
+      note: 'The word list on page 16 runs "tehdä (2) varaus = varata (4), perua (1) varaus, peruttu", so the phrase is taught there alongside tehdä varaus.',
+    },
+    verification: 'source-verified',
   },
   {
     id: 'a-peruttu',
@@ -761,8 +769,8 @@ export const BATCH_TRAVEL: Word[] = [
     noteTl: 'TU-partisiippi ng perua, ginagamit bilang adjektiivi. Ito ang nasa departures board.',
     related: ['f-perua-varaus'],
     grammarRefs: ['g-partisiipit'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'peruttu' },
+    verification: 'source-verified',
   },
 
   /* ---------------------------- airport, border --------------------------- */
@@ -777,8 +785,8 @@ export const BATCH_TRAVEL: Word[] = [
     nominalForms: { genitive: 'käsimatkatavaran', partitive: 'käsimatkatavaraa' },
     note: 'käsi (hand) + matkatavara (luggage).',
     noteTl: 'käsi (kamay) + matkatavara (bagahe).',
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'käsimatkatavara' },
+    verification: 'source-verified',
   },
   {
     id: 'n-turvatarkastus',
@@ -793,8 +801,8 @@ export const BATCH_TRAVEL: Word[] = [
     noteTl: 'turva (kaligtasan) + tarkastus (inspeksiyon).',
     searchAliases: ['turvatarkastuksen'],
     related: ['v-tarkistaa'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 26, sourceTerm: 'turvatarkastus' },
+    verification: 'source-verified',
   },
   {
     id: 'n-passi',
@@ -808,8 +816,8 @@ export const BATCH_TRAVEL: Word[] = [
     examples: [
       { fi: 'Saanko nähdä passin?', en: 'May I see your passport?', tl: 'Puwede ko bang makita ang pasaporte mo?' },
     ],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'passi' },
+    verification: 'source-verified',
   },
   {
     id: 'n-viisumi',
@@ -820,8 +828,8 @@ export const BATCH_TRAVEL: Word[] = [
     level: 'A2.1',
     topics: ['liikkuminen', 'palvelut'],
     nominalForms: { genitive: 'viisumin', partitive: 'viisumia', pluralPartitive: 'viisumeja' },
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'viisumi' },
+    verification: 'source-verified',
   },
   {
     id: 'n-matkavakuutus',
@@ -833,8 +841,8 @@ export const BATCH_TRAVEL: Word[] = [
     topics: ['liikkuminen', 'palvelut'],
     nominalForms: { genitive: 'matkavakuutuksen', partitive: 'matkavakuutusta' },
     searchAliases: ['matkavakuutuksen', 'vakuutus'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'matkavakuutus' },
+    verification: 'source-verified',
   },
   {
     id: 'n-tulli',
@@ -845,8 +853,8 @@ export const BATCH_TRAVEL: Word[] = [
     level: 'A2.1',
     topics: ['liikkuminen', 'palvelut'],
     nominalForms: { genitive: 'tullin', partitive: 'tullia', pluralPartitive: 'tulleja' },
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 16, section: 'SANASTO', sourceTerm: 'tulli' },
+    verification: 'source-verified',
   },
   {
     id: 'n-saapuvat',
@@ -860,10 +868,16 @@ export const BATCH_TRAVEL: Word[] = [
     noteTl: 'Ito ang nakasulat sa arrivals board, katapat ng lähtevät. Pareho rin ito ng "saapua" sa maramihan.',
     searchAliases: ['lähtevät'],
     related: ['v-saapua'],
-    source: null,
-    verification: 'needs-review',
-    reviewNote:
-      'Submitted as a bare word with no context. Treated here as the arrivals-board heading because the batch lists it between turvatarkastus and passi, but it is identical to the 3rd person plural of saapua and the source page was not available to settle which was meant.',
+    source: {
+      bookId: 'sm2',
+      book: 'Suomen mestari 2',
+      chapter: 'Kappale 1: Viikonloppureissu',
+      page: 16,
+      section: 'SANASTO',
+      sourceTerm: 'saapuvat',
+      note: 'On page 16 the word stands in a list of airport nouns and signage - lento, lentolippu, käsimatkatavara, turvatarkastus, saapuvat, passi, viisumi - so the arrivals-board reading is the one the chapter teaches, not the verb form. That settles what the entry previously flagged as uncertain.',
+    },
+    verification: 'source-verified',
   },
 
   /* ------------------------------- time words ----------------------------- */
@@ -883,8 +897,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'A si-word: vuorokausi -> vuorokauden, vuorokautta. Not the same as päivä: päivä can mean the daylight part, vuorokausi is the full 24 hours, which is why it is the word on parking signs and hotel rates.',
     noteTl: 'Salitang si-. Hindi ito päivä: ang vuorokausi ay buong 24 oras, kaya ito ang nasa parking at hotel.',
     searchAliases: ['vuorokauden', 'vuorokautta'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 14, section: 'SANASTO', sourceTerm: 'vuorokausi' },
+    verification: 'source-verified',
   },
   {
     id: 'pp-kuluttua',
@@ -909,8 +923,8 @@ export const BATCH_TRAVEL: Word[] = [
     noteTl: 'Genetiivi ang kasama. Ang "... päästä" ay pareho ang ibig sabihin at mas madalas sa usapan.',
     searchAliases: ['päästä'],
     grammarRefs: ['g-postpositiot', 'g-genetiivi'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 15, section: 'SANASTO', sourceTerm: 'kuluttua' },
+    verification: 'source-verified',
   },
   {
     id: 'adv-ajoissa',
@@ -926,8 +940,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'The opposite is myöhässä, which the dictionary already has.',
     noteTl: 'Ang kasalungat ay myöhässä.',
     related: ['adv-myohassa'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 15, section: 'SANASTO', sourceTerm: 'ajoissa' },
+    verification: 'source-verified',
   },
   {
     id: 'adv-asken',
@@ -942,8 +956,8 @@ export const BATCH_TRAVEL: Word[] = [
     ],
     note: 'Always about the past, and always very recent. For "just about to", use kohta.',
     noteTl: 'Laging nakaraan, at kababalik lang. Kohta naman kung malapit nang mangyari.',
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'äsken' },
+    verification: 'source-verified',
   },
   {
     id: 'f-viime-lauantaina',
@@ -956,8 +970,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'Weekdays take -na for "on that day": maanantaina, lauantaina. viime = last, ensi = next.',
     noteTl: 'Ang araw ng linggo ay may -na: lauantaina. viime = nakaraan, ensi = susunod.',
     searchAliases: ['lauantaina', 'viime'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 14, section: 'SANASTO', sourceTerm: 'viime lauantaina' },
+    verification: 'source-verified',
   },
   {
     id: 'f-ensi-viikonloppuna',
@@ -972,8 +986,8 @@ export const BATCH_TRAVEL: Word[] = [
     examples: [
       { fi: 'Ensi viikonloppuna menemme mökille.', en: 'Next weekend we are going to the cottage.', tl: 'Sa susunod na weekend, pupunta kami sa kubo.' },
     ],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 14, section: 'SANASTO', sourceTerm: 'ensi viikonloppuna' },
+    verification: 'source-verified',
   },
   {
     id: 'f-tammikuussa',
@@ -987,8 +1001,8 @@ export const BATCH_TRAVEL: Word[] = [
     noteTl: 'Ang buwan ay may -ssa/-ssä: tammikuussa, kesäkuussa, joulukuussa.',
     searchAliases: ['tammikuu'],
     grammarRefs: ['g-inessiivi'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 14, section: 'SANASTO', sourceTerm: 'tammikuussa' },
+    verification: 'source-verified',
   },
   {
     id: 'f-viime-kuussa',
@@ -1003,8 +1017,8 @@ export const BATCH_TRAVEL: Word[] = [
     examples: [
       { fi: 'Aloitin kurssin viime kuussa.', en: 'I started the course last month.', tl: 'Nagsimula ako sa kurso noong nakaraang buwan.' },
     ],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 14, section: 'SANASTO', sourceTerm: 'viime kuussa' },
+    verification: 'source-verified',
   },
   {
     id: 'f-tassa-kuussa',
@@ -1018,8 +1032,8 @@ export const BATCH_TRAVEL: Word[] = [
     examples: [
       { fi: 'Tässä kuussa on paljon töitä.', en: 'There is a lot of work this month.', tl: 'Maraming trabaho ngayong buwan.' },
     ],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 14, section: 'SANASTO', sourceTerm: 'tässä kuussa' },
+    verification: 'source-verified',
   },
   {
     id: 'f-ensi-kuussa',
@@ -1033,8 +1047,8 @@ export const BATCH_TRAVEL: Word[] = [
     examples: [
       { fi: 'Muutan ensi kuussa uuteen asuntoon.', en: 'I am moving to a new flat next month.', tl: 'Lilipat ako sa bagong apartment sa susunod na buwan.' },
     ],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 14, section: 'SANASTO', sourceTerm: 'ensi kuussa' },
+    verification: 'source-verified',
   },
   {
     id: 'f-viime-vuonna',
@@ -1047,8 +1061,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'vuosi takes the essive -na for years: viime vuonna, tänä vuonna, ensi vuonna.',
     noteTl: 'Ang vuosi ay may -na: viime vuonna, tänä vuonna, ensi vuonna.',
     searchAliases: ['vuonna'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 15, section: 'SANASTO', sourceTerm: 'viime vuonna' },
+    verification: 'source-verified',
   },
   {
     id: 'f-tana-vuonna',
@@ -1062,8 +1076,8 @@ export const BATCH_TRAVEL: Word[] = [
     examples: [
       { fi: 'Tänä vuonna opiskelen suomea.', en: 'This year I am studying Finnish.', tl: 'Ngayong taon, nag-aaral ako ng suomi.' },
     ],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 15, section: 'SANASTO', sourceTerm: 'tänä vuonna' },
+    verification: 'source-verified',
   },
   {
     id: 'f-ensi-vuonna',
@@ -1077,8 +1091,8 @@ export const BATCH_TRAVEL: Word[] = [
     examples: [
       { fi: 'Ensi vuonna haen töihin.', en: 'Next year I will apply for a job.', tl: 'Sa susunod na taon, mag-a-apply ako ng trabaho.' },
     ],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 15, section: 'SANASTO', sourceTerm: 'ensi vuonna' },
+    verification: 'source-verified',
   },
 
   /* ------------------------- small words and glue ------------------------- */
@@ -1096,8 +1110,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'vaan looks similar but is a conjunction meaning "but rather", and only follows a negative.',
     noteTl: 'Kamukha ang vaan pero konjunktio iyon ("kundi"), at pagkatapos lang ng negatibo.',
     related: ['k-vaan'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'vain' },
+    verification: 'source-verified',
   },
   {
     id: 'adv-tietysti',
@@ -1111,8 +1125,8 @@ export const BATCH_TRAVEL: Word[] = [
     noteTl: 'Pareho ang tietysti at tietenkin. Ang totta kai ay mas pasalita.',
     searchAliases: ['tietenkin'],
     related: ['f-totta-kai'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'tietysti' },
+    verification: 'source-verified',
   },
   {
     id: 'adv-silti',
@@ -1125,8 +1139,8 @@ export const BATCH_TRAVEL: Word[] = [
     examples: [
       { fi: 'Satoi, mutta menin silti ulos.', en: 'It rained, but I went out even so.', tl: 'Umulan, pero lumabas pa rin ako.' },
     ],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'silti' },
+    verification: 'source-verified',
   },
   {
     id: 'adv-helposti',
@@ -1139,8 +1153,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'The -sti ending makes an adverb from an adjective: helppo -> helposti.',
     noteTl: 'Ang -sti ay gumagawa ng pang-abay mula sa adjektiivi: helppo -> helposti.',
     related: ['a-helppo'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'helposti' },
+    verification: 'source-verified',
   },
   {
     id: 'adv-mielellaan',
@@ -1157,8 +1171,8 @@ export const BATCH_TRAVEL: Word[] = [
     noteTl: 'Nagbabago ayon sa tao: mielelläni, mielelläsi, mielellään.',
     searchAliases: ['mielelläni', 'mielellämme'],
     grammarRefs: ['g-possessiivisuffiksit'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'mielellään' },
+    verification: 'source-verified',
   },
   {
     id: 'adv-jostain',
@@ -1171,8 +1185,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'The elative of jokin. The set runs jossain (somewhere), jostain (from somewhere), johonkin (to somewhere).',
     noteTl: 'Elatiivi ng jokin: jossain, jostain, johonkin.',
     searchAliases: ['jossain', 'johonkin', 'jokin'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 12, sourceTerm: 'jostain' },
+    verification: 'source-verified',
   },
   {
     id: 'num-ensimmainen',
@@ -1193,8 +1207,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'A -nen word: ensimmäinen -> ensimmäisen. The irregular one in the ordinals, alongside toinen.',
     noteTl: 'Salitang -nen. Isa ito sa iregular na ordinal, kasama ang toinen.',
     searchAliases: ['ensimmäisen', 'eka'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'ensimmäinen' },
+    verification: 'source-verified',
   },
   {
     id: 'f-tulla-vastaan',
@@ -1208,8 +1222,8 @@ export const BATCH_TRAVEL: Word[] = [
       { fi: 'Tuletko vastaan asemalle?', en: 'Will you come and meet me at the station?', tl: 'Susunduin mo ba ako sa istasyon?' },
     ],
     searchAliases: ['vastaan'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 12, sourceTerm: 'tulla vastaan' },
+    verification: 'source-verified',
   },
   {
     id: 'f-joka-tapauksessa',
@@ -1222,8 +1236,8 @@ export const BATCH_TRAVEL: Word[] = [
     examples: [
       { fi: 'Joka tapauksessa lähden huomenna.', en: 'In any case I am leaving tomorrow.', tl: 'Kahit ano pa, aalis ako bukas.' },
     ],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'joka tapauksessa' },
+    verification: 'source-verified',
   },
   {
     id: 'f-joka-paikkaan',
@@ -1238,8 +1252,8 @@ export const BATCH_TRAVEL: Word[] = [
     ],
     note: 'joka before a noun means "every": joka päivä, joka paikka. The question word joka is a different thing.',
     noteTl: 'Ang joka bago ang pangngalan ay "bawat": joka päivä.',
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'joka paikkaan' },
+    verification: 'source-verified',
   },
 
   /* ---------------------------- the internet ------------------------------ */
@@ -1255,8 +1269,8 @@ export const BATCH_TRAVEL: Word[] = [
     note: 'Written Finnish. In speech it is almost always netti.',
     noteTl: 'Sa sulat. Sa usapan, netti halos palagi.',
     related: ['n-netti'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'internet' },
+    verification: 'source-verified',
   },
   {
     id: 'n-netti',
@@ -1275,7 +1289,7 @@ export const BATCH_TRAVEL: Word[] = [
     searchAliases: ['netistä', 'netissä'],
     related: ['n-internet'],
     grammarRefs: ['g-kpt'],
-    source: null,
-    verification: 'linguistically-checked',
+    source: { bookId: 'sm2', book: 'Suomen mestari 2', chapter: 'Kappale 1: Viikonloppureissu', page: 13, section: 'SANASTO', sourceTerm: 'netti' },
+    verification: 'source-verified',
   },
 ];

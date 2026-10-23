@@ -33,9 +33,20 @@ export interface Release {
 }
 
 /** The version this build is. Bump it whenever you add a release below. */
-export const APP_VERSION = '1.4.0';
+export const APP_VERSION = '1.5.0';
 
 export const RELEASES: Release[] = [
+  {
+    version: '1.5.0',
+    date: '2026-10-23',
+    title: 'Words checked against the books',
+    notes: [
+      'The travel and recycling words now say which book, chapter and page they come from. All 134 are confirmed against Suomen mestari 2 and 3, page by page.',
+      'Fifty more words carry a Finnish explanation, and the example sentences for them are taken from the books rather than written from scratch.',
+      'Verbs that govern a case now show it the way the books teach it: vastata puhelimeen, unohtaa avain kotiin, osallistua kurssille, sopia sinulle, kuulostaa hyvältä.',
+      'The word saapuvat was uncertain - an arrivals board, or "they arrive"? Page 16 of Suomen mestari 2 lists it among airport signs, so the board reading is the one that stands.',
+    ],
+  },
   {
     version: '1.4.0',
     date: '2026-10-23',
