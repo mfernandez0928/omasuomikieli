@@ -249,3 +249,42 @@ export function answersMatch(given: string, expected: string, alsoAccept: string
   if (!g) return false;
   return [expected, ...alsoAccept].some((candidate) => normaliseAnswer(candidate) === g);
 }
+
+/** Folds a and o onto their umlauts, so only the dots differ. */
+function foldUmlauts(s: string): string {
+  return s.replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/å/g, 'a');
+}
+
+export interface AnswerCheck {
+  correct: boolean;
+  /** The answer was right but for its missing or stray umlauts. */
+  umlautSlip: boolean;
+}
+
+/**
+ * Grades a typed answer, treating a missing umlaut as a near miss.
+ *
+ * In Finnish ä is a letter of its own, not a variant of a - tähti is a star
+ * and tahti is a beat - so an answer spelled without the dots is not simply
+ * correct. But plenty of learners type on a keyboard that has no ä, and
+ * marking them wrong teaches them nothing about Finnish and files a
+ * keyboard problem in their mistakes list. So the answer passes and the
+ * caller is told, which lets the screen show the proper spelling.
+ */
+export function checkAnswer(
+  given: string,
+  expected: string,
+  alsoAccept: string[] = [],
+): AnswerCheck {
+  const g = normaliseAnswer(given);
+  if (!g) return { correct: false, umlautSlip: false };
+
+  const candidates = [expected, ...alsoAccept].map(normaliseAnswer);
+  if (candidates.some((c) => c === g)) return { correct: true, umlautSlip: false };
+
+  const folded = foldUmlauts(g);
+  if (candidates.some((c) => foldUmlauts(c) === folded)) {
+    return { correct: true, umlautSlip: true };
+  }
+  return { correct: false, umlautSlip: false };
+}

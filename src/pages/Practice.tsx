@@ -6,7 +6,7 @@ import { ExerciseRunner } from '@/components/ExerciseRunner';
 import { ALL_EXERCISES, GRAMMAR_BY_ID, exercisesForGrammar, nextLesson } from '@/data/grammar';
 import { WORDS, getWord } from '@/data/words';
 import { useApp } from '@/hooks/useApp';
-import { buildQueue, dueCount, previewInterval } from '@/services/srs/scheduler';
+import { buildQueue, previewInterval, sessionSize } from '@/services/srs/scheduler';
 import type { Exercise, SrsCard, SrsGrade } from '@/types';
 
 /* ============================== practice hub ============================== */
@@ -44,9 +44,13 @@ const MODES: { to: string; title: string; sub: string; icon: IconName; colour: s
 
 export function PracticeHub() {
   const navigate = useNavigate();
-  const { cards, mistakes, activity } = useApp();
+  const { cards, mistakes, activity, settings } = useApp();
 
-  const due = dueCount(cards);
+  const due = sessionSize(
+    cards,
+    WORDS.map((w) => ({ kind: 'word' as const, refId: w.id })),
+    settings.newPerDay,
+  );
   const unresolved = mistakes.filter((m) => !m.resolved).length;
   const todayAnswered = activity.reduce((n, a) => n + a.exercisesAnswered, 0);
   const todayCorrect = activity.reduce((n, a) => n + a.exercisesCorrect, 0);
@@ -181,18 +185,18 @@ export function ReviewSession() {
   }
 
   const handleGrade = async (grade: SrsGrade) => {
-    await gradeCard(card, grade);
+    const graded = await gradeCard(card, grade);
     setReviewed((n) => n + 1);
     setRevealed(false);
 
     if (grade === 'again') {
-      // Requeue near the end of the session instead of dropping it.
+      // Requeue at the end of the session instead of dropping it. It has to
+      // be the graded card: the copy in the queue is now one review out of
+      // date, and its ease and interval are what the answer buttons preview.
       setQueue((q) => {
         const base = q ?? activeQueue;
-        const rest = base.filter((_, i) => i !== pos);
-        return [...rest.slice(0, pos), ...rest.slice(pos), card];
+        return [...base.filter((_, i) => i !== pos), graded];
       });
-      setPos((p) => p);
       return;
     }
 

@@ -49,7 +49,7 @@ import {
   newId,
 } from '@/services/storage/progress';
 import { isStorageAvailable } from '@/services/storage/db';
-import { createCard, review } from '@/services/srs/scheduler';
+import { applyGrade, createCard } from '@/services/srs/scheduler';
 import { initSpeech } from '@/services/speech';
 
 export type LoadState = 'loading' | 'ready' | 'unavailable';
@@ -181,15 +181,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setStreak(loadStreak());
   }, []);
 
+  /*
+    `cards` is in the dependency list on purpose. applyGrade looks the card
+    up in the deck it is handed, so handing it a stale deck would bring back
+    the very bug it exists to prevent. Reading the deck inside the state
+    updater instead would be worse: updaters run twice under StrictMode, and
+    this one has to save to IndexedDB.
+  */
   const gradeCard = useCallback(
     async (card: SrsCard, grade: SrsGrade) => {
-      const { card: next } = review(card, grade);
-      upsertCard(next);
+      const { cards: updated, card: next } = applyGrade(cards, card, grade);
+      setCards(updated);
       await saveCard(next);
       await noteActivity({ wordsStudied: 1 });
       return next;
     },
-    [upsertCard, noteActivity],
+    [cards, noteActivity],
   );
 
   const setWordStatus = useCallback(

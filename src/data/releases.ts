@@ -33,9 +33,20 @@ export interface Release {
 }
 
 /** The version this build is. Bump it whenever you add a release below. */
-export const APP_VERSION = '1.6.0';
+export const APP_VERSION = '1.7.0';
 
 export const RELEASES: Release[] = [
+  {
+    version: '1.7.0',
+    date: '2026-10-24',
+    title: 'Review counts your mistakes properly again',
+    notes: [
+      'When you pressed Again on a card and then got it right later in the same session, the app forgot that you had missed it. That word now stays marked as difficult and comes back sooner, which is the whole point of pressing Again.',
+      'New words per day is now really per day. Opening Daily review a second time used to hand out another full batch, so a limit of five could quietly become twenty.',
+      'Typing a instead of ä no longer counts as a wrong answer. It is marked correct and the proper spelling is shown, because missing the dots is a keyboard problem, not a Finnish one.',
+      'The home screen now says how many cards are waiting, counting the new words you have not met yet - it used to say nothing at all when only new words were left.',
+    ],
+  },
   {
     version: '1.6.0',
     date: '2026-10-23',

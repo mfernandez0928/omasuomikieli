@@ -1,7 +1,7 @@
 {
   "name": "oma-suomi",
   "private": true,
-  "version": "1.3.0",
+  "version": "1.7.0",
   "type": "module",
   "description": "Oma Suomi - a personal Finnish learning PWA (Finnish / English / Tagalog)",
   "author": "MarkDev",
@@ -13,7 +13,9 @@
     "typecheck": "tsc -b --noEmit",
     "validate:data": "node scripts/validate-data.mjs",
     "validate:situations": "node scripts/validate-situations.mjs",
-    "validate": "npm run validate:data && npm run validate:situations"
+    "validate": "npm run validate:data && npm run validate:situations",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "react": "^19.1.1",
@@ -27,7 +29,8 @@
     "@vitejs/plugin-react": "^5.0.0",
     "typescript": "^5.9.2",
     "vite": "^7.1.3",
-    "vite-plugin-pwa": "^1.0.3"
+    "vite-plugin-pwa": "^1.0.3",
+    "vitest": "^3.2.4"
   },
   "engines": {
     "node": ">=20.19.0"

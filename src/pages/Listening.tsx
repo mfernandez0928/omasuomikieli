@@ -6,7 +6,7 @@ import { PHRASES } from '@/data/phrases';
 import { WORDS } from '@/data/words';
 import { useApp } from '@/hooks/useApp';
 import { speak } from '@/services/speech';
-import { answersMatch } from '@/services/search/search';
+import { checkAnswer } from '@/services/search/search';
 
 interface ListeningItem {
   id: string;
@@ -30,6 +30,7 @@ export function Listening() {
   const [index, setIndex] = useState(0);
   const [typed, setTyped] = useState('');
   const [checked, setChecked] = useState(false);
+  const [slip, setSlip] = useState(false);
   const [correct, setCorrect] = useState(false);
   const [score, setScore] = useState({ answered: 0, correct: 0 });
 
@@ -111,8 +112,9 @@ export function Listening() {
   }
 
   const check = async () => {
-    const ok = answersMatch(typed, item.fi);
+    const { correct: ok, umlautSlip } = checkAnswer(typed, item.fi);
     setCorrect(ok);
+    setSlip(umlautSlip);
     setChecked(true);
     setScore((s) => ({ answered: s.answered + 1, correct: s.correct + (ok ? 1 : 0) }));
     await noteActivity({ exercisesAnswered: 1, exercisesCorrect: ok ? 1 : 0 });
@@ -127,6 +129,7 @@ export function Listening() {
   };
 
   const next = () => {
+    setSlip(false);
     setIndex((i) => i + 1);
     setTyped('');
     setChecked(false);
@@ -210,6 +213,7 @@ export function Listening() {
         <div className="stack fade-in" style={{ gap: 10, marginTop: 12 }}>
           <Callout kind={correct ? 'ok' : 'bad'} icon={correct ? 'check' : 'x'}>
             <b>{correct ? 'Exactly right.' : 'Here is what was said:'}</b>{' '}
+            {correct && slip && <>Mind the dots - the spelling is <b>{item.fi}</b></>}
             {!correct && <b>{item.fi}</b>}
           </Callout>
           <div className="wcard">

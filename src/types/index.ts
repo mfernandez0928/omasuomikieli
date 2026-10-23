@@ -418,6 +418,13 @@ export interface SrsCard {
   reps: number;
   lapses: number;
   status: WordStatus;
+  /**
+   * YYYY-MM-DD of the day this card first entered the deck, which is what
+   * makes `newPerDay` a limit per day rather than per session. Optional
+   * because cards created before this field existed do not carry it; those
+   * are old by definition, so a missing value reads as "not today".
+   */
+  introducedOn?: string;
 }
 
 export interface MistakeEntry {

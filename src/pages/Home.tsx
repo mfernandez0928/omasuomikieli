@@ -9,7 +9,8 @@ import { loadResume } from '@/services/storage/prefs';
 import { BRAND } from '@/data/brand';
 import { TOPICS } from '@/data/topics';
 import { GRAMMAR_LESSONS } from '@/data/grammar';
-import { dueCount } from '@/services/srs/scheduler';
+import { sessionSize } from '@/services/srs/scheduler';
+import { WORDS } from '@/data/words';
 
 const TILES: {
   to: string;
@@ -90,12 +91,19 @@ function dayLabel(isoDate: string): string {
 
 export function Home() {
   const navigate = useNavigate();
-  const { activity, cards, loadState, streak, lessonProgress, profile } = useApp();
+  const { activity, cards, loadState, settings, streak, lessonProgress, profile } = useApp();
   const { done, goal, percent } = useDailyProgress();
 
   const week = lastSevenDays(activity);
   const today = todayKey();
-  const due = dueCount(cards);
+  // What a session would actually hold: cards falling due, plus whatever is
+  // left of today's new-word allowance. Counting only the due ones told a
+  // learner with an untouched allowance that there was nothing to do.
+  const waiting = sessionSize(
+    cards,
+    WORDS.map((w) => ({ kind: 'word' as const, refId: w.id })),
+    settings.newPerDay,
+  );
   const resume = loadResume();
 
   const remaining = Math.max(0, goal - done);
@@ -224,7 +232,7 @@ export function Home() {
       </section>
 
       {/* --------------------------- review reminder --------------------------- */}
-      {due > 0 && (
+      {waiting > 0 && (
         <button
           className="panel row"
           style={{ marginTop: 14, width: '100%', textAlign: 'left', gap: 14 }}
@@ -235,7 +243,7 @@ export function Home() {
           </span>
           <span style={{ flex: 1 }}>
             <span style={{ display: 'block', fontWeight: 700 }}>
-              {due} {due === 1 ? 'card' : 'cards'} due for review
+              {waiting} {waiting === 1 ? 'card' : 'cards'} waiting in Daily review
             </span>
             <span className="small muted">Spaced repetition keeps them from slipping away.</span>
           </span>

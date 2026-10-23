@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Icon } from '@/components/Icon';
 import { Callout, ProgressBar, SpeakButton } from '@/components/ui';
 import type { Exercise } from '@/types';
-import { answersMatch } from '@/services/search/search';
+import { checkAnswer } from '@/services/search/search';
 import { useApp } from '@/hooks/useApp';
 
 export interface RunScore {
@@ -76,6 +76,7 @@ export function ExerciseRunner({
   const [activeLeft, setActiveLeft] = useState<string | null>(null);
   const [checked, setChecked] = useState(false);
   const [wasCorrect, setWasCorrect] = useState(false);
+  const [umlautSlip, setUmlautSlip] = useState(false);
 
   const current = pool[index];
 
@@ -101,6 +102,7 @@ export function ExerciseRunner({
     setActiveLeft(null);
     setChecked(false);
     setWasCorrect(false);
+    setUmlautSlip(false);
     // `signature` is the content of `exercises`; the array identity changes on
     // every render in some callers.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -122,6 +124,7 @@ export function ExerciseRunner({
     setActiveLeft(null);
     setChecked(false);
     setWasCorrect(false);
+    setUmlautSlip(false);
   };
 
   const isMatch = current.kind === 'match';
@@ -133,18 +136,20 @@ export function ExerciseRunner({
       ? typed.trim().length > 0
       : selected !== null;
 
-  const evaluate = (): boolean => {
+  const evaluate = (): { correct: boolean; umlautSlip: boolean } => {
     if (isMatch) {
-      return (current.pairs ?? []).every((p) => matchPicks[p.left] === p.right);
+      const ok = (current.pairs ?? []).every((p) => matchPicks[p.left] === p.right);
+      return { correct: ok, umlautSlip: false };
     }
     if (isTyped) {
-      return answersMatch(typed, current.answer, current.alsoAccept);
+      return checkAnswer(typed, current.answer, current.alsoAccept);
     }
-    return selected === current.answer;
+    return { correct: selected === current.answer, umlautSlip: false };
   };
 
   const handleCheck = async () => {
-    const correct = evaluate();
+    const { correct, umlautSlip: slip } = evaluate();
+    setUmlautSlip(slip);
     attempted.current.add(current.id);
     if (correct) everCorrect.current.add(current.id);
     setWasCorrect(correct);
@@ -452,6 +457,13 @@ export function ExerciseRunner({
         <div className="fade-in stack" style={{ gap: 10 }}>
           <Callout kind={wasCorrect ? 'ok' : 'bad'} icon={wasCorrect ? 'check' : 'x'}>
             <b>{wasCorrect ? 'Correct.' : 'Not quite.'}</b>{' '}
+            {wasCorrect && umlautSlip && (
+              <>
+                Mind the dots though - the spelling is <b>{current.answer}</b> In Finnish ä and
+                ö are letters of their own, so tähti (a star) and tahti (a beat) are different
+                words.{' '}
+              </>
+            )}
             {!wasCorrect && !isMatch && (
               <>
                 The answer is <b>{current.answer}</b>.{' '}
