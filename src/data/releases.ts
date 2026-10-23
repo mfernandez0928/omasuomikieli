@@ -33,9 +33,20 @@ export interface Release {
 }
 
 /** The version this build is. Bump it whenever you add a release below. */
-export const APP_VERSION = '1.3.0';
+export const APP_VERSION = '1.4.0';
 
 export const RELEASES: Release[] = [
+  {
+    version: '1.4.0',
+    date: '2026-10-23',
+    title: 'Explanations and examples for 500 more words',
+    notes: [
+      'Every A1 noun and adjective, and all the everyday A1 verbs, now carry a short explanation in Finnish and at least one example sentence with its translation.',
+      'Opposites are named where a word has one - halpa and kallis, pimeä and valoisa - because that is the fastest way to fix a word in memory.',
+      'Verbs say which case follows them where it matters: odottaa, rakastaa, pelata and neuvoa all take the partitive, and the examples now show it.',
+      'Pairs that learners mix up carry a note: herätä and herättää, muuttua and muuttaa, pelata and soittaa, korkea and pitkä.',
+    ],
+  },
   {
     version: '1.3.0',
     date: '2026-10-23',

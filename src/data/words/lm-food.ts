@@ -150,6 +150,10 @@ export const LM_FOOD: Word[] = [
       partitive: 'banaania',
       pluralPartitive: 'banaaneja',
     },
+    selitys: 'Banaani on pitkä keltainen hedelmä.',
+    examples: [
+      { fi: 'Syön banaanin aamulla.', en: 'I eat a banana in the morning.', tl: 'Kumakain ako ng saging sa umaga.' },
+    ],
     source: veg(25, 75, 'banaani'),
     verification: 'linguistically-checked',
   },
@@ -254,6 +258,10 @@ export const LM_FOOD: Word[] = [
     note: 'musta (black) + the berry suffix. The Finnish forest one is the bilberry, smaller and darker inside than the American blueberry.',
     noteTl: 'musta (itim) + panlapi ng berry. Mas maliit at mas maitim sa loob kaysa American blueberry.',
     grammarRefs: ['g-kpt'],
+    selitys: 'Mustikka on pieni sininen marja, joka kasvaa metsässä.',
+    examples: [
+      { fi: 'Poimin mustikoita metsässä.', en: 'I pick bilberries in the forest.', tl: 'Namimitas ako ng blueberry sa gubat.' },
+    ],
     source: veg(25, 75, 'mustikka'),
     verification: 'linguistically-checked',
   },
@@ -406,6 +414,10 @@ export const LM_FOOD: Word[] = [
     note: 'pp ~ p gradation: ruokakauppa -> ruokakaupan.',
     noteTl: 'Astevaihtelu pp ~ p: ruokakauppa -> ruokakaupan.',
     grammarRefs: ['g-kpt'],
+    selitys: 'Ruokakauppa on kauppa, josta ostetaan ruokaa.',
+    examples: [
+      { fi: 'Käyn ruokakaupassa työn jälkeen.', en: 'I go to the grocery shop after work.', tl: 'Dumadaan ako sa grocery pagkatapos ng trabaho.' },
+    ],
     source: shop('ruoka + kauppa'),
     verification: 'linguistically-checked',
   },
@@ -420,6 +432,10 @@ export const LM_FOOD: Word[] = [
     nominalForms: { genitive: 'appelsiinimehun', partitive: 'appelsiinimehua' },
     note: 'Written as one word. Finnish joins compound parts with no space and no hyphen.',
     noteTl: 'Isang salita lang. Walang espasyo at walang gitling sa yhdyssana ng suomi.',
+    selitys: 'Appelsiinimehu on mehu, joka tehdään appelsiineista.',
+    examples: [
+      { fi: 'Juon appelsiinimehua aamiaisella.', en: 'I drink orange juice at breakfast.', tl: 'Umiinom ako ng orange juice sa almusal.' },
+    ],
     source: shop('appelsiini + mehu'),
     verification: 'linguistically-checked',
   },

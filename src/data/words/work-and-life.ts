@@ -359,6 +359,10 @@ export const WORK_AND_LIFE: Word[] = [
     searchAliases: ['maanantaina'],
     related: ['n-torstai', 'n-viikko'],
     grammarRefs: ['g-genetiivi'],
+    selitys: 'Maanantai on viikon ensimmäinen päivä.',
+    examples: [
+      { fi: 'Kurssi alkaa maanantaina.', en: 'The course starts on Monday.', tl: 'Magsisimula ang kurso sa Lunes.' },
+    ],
     source: null,
     verification: 'linguistically-checked',
   },
@@ -380,6 +384,10 @@ export const WORK_AND_LIFE: Word[] = [
     searchAliases: ['torstaina'],
     related: ['n-maanantai', 'n-viikko'],
     grammarRefs: ['g-genetiivi'],
+    selitys: 'Torstai on viikon neljäs päivä.',
+    examples: [
+      { fi: 'Torstaina on kokous.', en: 'There is a meeting on Thursday.', tl: 'May miting sa Huwebes.' },
+    ],
     source: null,
     verification: 'linguistically-checked',
   },

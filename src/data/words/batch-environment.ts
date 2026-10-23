@@ -595,6 +595,10 @@ export const BATCH_ENVIRONMENT: Word[] = [
     noteTl: 'Nasa listahan ang maramihang valot, na siyang karaniwan para sa ilaw ng kuwarto.',
     searchAliases: ['valot'],
     related: ['v-sytyttaa', 'v-sammuttaa', 'a-valoisa'],
+    selitys: 'Valo on se, minkä avulla ihminen näkee. Auringosta ja lampusta tulee valoa.',
+    examples: [
+      { fi: 'Sammuta valot, kun lähdet.', en: 'Switch off the lights when you leave.', tl: 'Patayin ang ilaw kapag aalis.' },
+    ],
     source: null,
     verification: 'linguistically-checked',
   },

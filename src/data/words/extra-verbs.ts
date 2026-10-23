@@ -725,6 +725,11 @@ export const EXTRA_WORDS: Word[] = [
     noteTl: 'Laging partitiivi: rakastan sinua. Hindi *rakastan sinut.',
     related: ['v-tykata', 'v-pitaa'],
     grammarRefs: ['g-partitiivi', 'g-objekti'],
+    selitys: 'Rakastaa tarkoittaa, että ihminen pitää jostakin tai jostakusta hyvin paljon. Sen jälkeen sana on partitiivissa.',
+    examples: [
+      { fi: 'Rakastan sinua.', en: 'I love you.', tl: 'Mahal kita.' },
+      { fi: 'Hän rakastaa suomalaista luontoa.', en: 'She loves Finnish nature.', tl: 'Mahal niya ang kalikasan ng Finland.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'rakastaa, rakastan' },
     verification: 'source-verified',
   },

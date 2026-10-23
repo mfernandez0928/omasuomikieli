@@ -689,6 +689,11 @@ export const B1_VERBS: Word[] = [
     note: 'What you wait for is always partitive: odotan sinua, odotan vastausta.',
     related: ['v-joutua'],
     grammarRefs: ['g-partitiivi', 'g-rektio'],
+    selitys: 'Odottaa tarkoittaa, että ihminen on paikallaan, kunnes jotakin tapahtuu. Odottaa-verbin jälkeen sana on partitiivissa.',
+    examples: [
+      { fi: 'Odotan bussia pysäkillä.', en: 'I am waiting for the bus at the stop.', tl: 'Naghihintay ako ng bus sa hintuan.' },
+      { fi: 'Älä odota minua, tulen myöhemmin.', en: 'Do not wait for me, I will come later.', tl: 'Huwag mo akong hintayin, susunod ako.' },
+    ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'odottaa, odotan' },
     verification: 'source-verified',
   },

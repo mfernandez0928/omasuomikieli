@@ -376,6 +376,7 @@ export const OS1_K1_WORDS: Word[] = [
     searchAliases: ['venäläisen', 'venäläistä'],
     related: ['n-venaja', 'a-suomalainen', 'n-kansalaisuus'],
     grammarRefs: ['g-adjektiivit'],
+    selitys: 'Venäläinen tarkoittaa ihmistä, joka on Venäjältä, tai asiaa, joka on Venäjältä.',
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'venäläinen, venäläisen' },
     verification: 'source-verified',
   },
