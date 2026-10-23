@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '@/components/Icon';
 import { Callout, Toggle, TopBar } from '@/components/ui';
 import { useApp } from '@/hooks/useApp';
-import { clearAll, exportAll, isStorageAvailable } from '@/services/storage/db';
+import { clearAll, isStorageAvailable } from '@/services/storage/db';
+import { countRecords, createBackup, restoreBackup, type RestoreReport } from '@/services/storage/backup';
 import { cleanName, isName } from '@/services/storage/prefs';
 import { rosterEnabled } from '@/services/sync/roster';
 import type { UserProfile } from '@/types';
@@ -17,20 +18,49 @@ export function Settings() {
   const { settings, updateSettings, speechReady, cards, mistakes, personalWords, streak, profile, setProfileName } =
     useApp();
   const [confirmReset, setConfirmReset] = useState(false);
-  const [exported, setExported] = useState(false);
+  const [exported, setExported] = useState(0);
+  const [restoring, setRestoring] = useState(false);
+  const [report, setReport] = useState<RestoreReport | null>(null);
+  const fileInput = useRef<HTMLInputElement>(null);
 
   const handleExport = async () => {
-    const data = await exportAll();
-    const blob = new Blob([JSON.stringify({ exportedAt: new Date().toISOString(), ...data }, null, 2)], {
-      type: 'application/json',
-    });
+    const backup = await createBackup();
+    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = `oma-suomi-backup-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
-    URL.revokeObjectURL(url);
-    setExported(true);
+    // Revoked on a later tick: Safari has not finished reading the blob yet
+    // when the click returns, and revoking at once gives an empty file.
+    setTimeout(() => URL.revokeObjectURL(url), 10_000);
+    setExported(countRecords(backup));
+  };
+
+  const handleImport = async (file: File) => {
+    setRestoring(true);
+    setReport(null);
+    try {
+      const text = await file.text();
+      let parsed: unknown;
+      try {
+        parsed = JSON.parse(text) as unknown;
+      } catch {
+        setReport({
+          ok: false,
+          error: 'That file is not readable JSON.',
+          written: {},
+          skipped: 0,
+          prefsRestored: [],
+          prefsRejected: [],
+          name: null,
+        });
+        return;
+      }
+      setReport(await restoreBackup(parsed));
+    } finally {
+      setRestoring(false);
+    }
   };
 
   return (
@@ -121,10 +151,71 @@ export function Settings() {
           <Stat label="Best streak" value={`${streak.best} d`} />
         </div>
 
-        <button className="btn btn--sm btn--block" style={{ marginTop: 12 }} onClick={handleExport}>
-          <Icon name="download" size={15} />
-          {exported ? 'Backup downloaded' : 'Download a backup (JSON)'}
-        </button>
+        <p className="muted" style={{ marginTop: 12, fontSize: 13, lineHeight: 1.5 }}>
+          Your progress is saved on this device only. Nothing is sent anywhere, so a name on its
+          own cannot bring it back - a backup file is the only way to move it.
+        </p>
+        <p className="muted" style={{ marginTop: 6, fontSize: 13, lineHeight: 1.5 }}>
+          On iPhone and iPad this matters: an app added to the home screen gets its own separate
+          storage, so it starts empty even though your work is still there in Safari. Export in
+          Safari, then import here.
+        </p>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 12 }}>
+          <button className="btn btn--sm" onClick={handleExport}>
+            <Icon name="download" size={15} />
+            {exported > 0 ? `Saved ${exported} records` : 'Export a backup'}
+          </button>
+          <button
+            className="btn btn--sm"
+            disabled={restoring}
+            onClick={() => fileInput.current?.click()}
+          >
+            <Icon name="file" size={15} />
+            {restoring ? 'Restoring...' : 'Import a backup'}
+          </button>
+        </div>
+        <input
+          ref={fileInput}
+          type="file"
+          accept="application/json,.json"
+          hidden
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            // Cleared so picking the same file twice still fires a change.
+            e.target.value = '';
+            if (file) void handleImport(file);
+          }}
+        />
+
+        {report && (
+          <div style={{ marginTop: 12 }}>
+            {report.ok ? (
+              <Callout kind="ok" icon="check">
+                {report.name ? `Welcome back, ${report.name}. ` : ''}
+                Restored{' '}
+                {Object.values(report.written).reduce((a, b) => a + b, 0)} records
+                {report.skipped > 0 ? `, skipped ${report.skipped} the app could not read` : ''}.
+                Reload the app to see them.
+                {report.formatWarning ? ` ${report.formatWarning}` : ''}
+              </Callout>
+            ) : (
+              <Callout kind="bad" icon="alert">
+                {report.error ?? 'Nothing could be restored from that file.'}
+              </Callout>
+            )}
+          </div>
+        )}
+
+        {report?.ok && (
+          <button
+            className="btn btn--sm btn--block btn--primary"
+            style={{ marginTop: 8 }}
+            onClick={() => window.location.reload()}
+          >
+            Reload now
+          </button>
+        )}
 
         {!isStorageAvailable() && (
           <div style={{ marginTop: 12 }}>
@@ -138,7 +229,7 @@ export function Settings() {
           <div className="stack" style={{ gap: 8, marginTop: 12 }}>
             <Callout kind="bad" icon="alert">
               This deletes every review card, mistake, saved word and streak on this device. It
-              cannot be undone, and no copy exists anywhere else. Download a backup first if you
+              cannot be undone, and no copy exists anywhere else. Export a backup first if you
               want one.
             </Callout>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>

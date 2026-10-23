@@ -3,6 +3,7 @@ import { HeroArt } from '@/components/HeroArt';
 import { Icon } from '@/components/Icon';
 import { cleanName, isName } from '@/services/storage/prefs';
 import { rosterEnabled } from '@/services/sync/roster';
+import { restoreBackup } from '@/services/storage/backup';
 
 /**
  * Shown once, before the app opens, to ask who is using it.
@@ -50,6 +51,43 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
     if (!ready || done.current) return;
     done.current = true;
     onDone(cleanName(first), cleanName(last));
+  };
+
+  /*
+    The way back in after the storage has changed under someone.
+
+    An app added to the home screen on iOS gets its own storage container,
+    separate from Safari's, so a learner who has studied for weeks can arrive
+    at this screen with everything apparently gone. It is not gone, but typing
+    the name again cannot bring it back: the name is a label, and no progress
+    is ever sent anywhere to be fetched. A backup file is the only thing that
+    crosses between containers, so the offer to import one belongs here, on
+    the screen they actually land on - not only in Settings, which is on the
+    far side of this name wall.
+  */
+  const restoreInput = useRef<HTMLInputElement>(null);
+  const [restoreState, setRestoreState] = useState<
+    { kind: 'idle' } | { kind: 'busy' } | { kind: 'failed'; message: string }
+  >({ kind: 'idle' });
+
+  const restore = async (file: File) => {
+    setRestoreState({ kind: 'busy' });
+    try {
+      const report = await restoreBackup(JSON.parse(await file.text()) as unknown);
+      if (report.ok && report.name) {
+        // The profile is in place, so a reload lands straight in the app.
+        window.location.reload();
+        return;
+      }
+      setRestoreState({
+        kind: 'failed',
+        message: report.ok
+          ? 'That backup restored your progress but held no name. Enter your name to carry on.'
+          : (report.error ?? 'Nothing could be restored from that file.'),
+      });
+    } catch {
+      setRestoreState({ kind: 'failed', message: 'That file could not be read as a backup.' });
+    }
   };
 
   return (
@@ -137,6 +175,46 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
           Aloitetaan · Start
           <Icon name="chevron-right" size={18} />
         </button>
+
+        <div
+          style={{
+            marginTop: 16,
+            paddingTop: 14,
+            borderTop: '1px solid var(--line, rgba(255,255,255,.1))',
+          }}
+        >
+          <p className="tiny dim" style={{ lineHeight: 1.65 }}>
+            Studied here before and your progress is missing? On iPhone and iPad an app added
+            to the home screen keeps its own separate storage, so it starts empty even though
+            your work is still there in Safari. Open the app in Safari, export a backup from
+            Settings, then bring it in here.
+          </p>
+          <button
+            className="btn btn--sm btn--block"
+            style={{ marginTop: 10 }}
+            disabled={restoreState.kind === 'busy'}
+            onClick={() => restoreInput.current?.click()}
+          >
+            <Icon name="file" size={15} />
+            {restoreState.kind === 'busy' ? 'Restoring…' : 'Restore from a backup'}
+          </button>
+          <input
+            ref={restoreInput}
+            type="file"
+            accept="application/json,.json"
+            hidden
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              e.target.value = '';
+              if (file) void restore(file);
+            }}
+          />
+          {restoreState.kind === 'failed' && (
+            <p className="tiny" style={{ color: 'var(--bad)', marginTop: 8, lineHeight: 1.5 }}>
+              {restoreState.message}
+            </p>
+          )}
+        </div>
 
         {/*
           Shown only when this build reports names. With no roster configured

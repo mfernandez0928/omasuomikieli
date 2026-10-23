@@ -33,9 +33,20 @@ export interface Release {
 }
 
 /** The version this build is. Bump it whenever you add a release below. */
-export const APP_VERSION = '1.5.0';
+export const APP_VERSION = '1.6.0';
 
 export const RELEASES: Release[] = [
+  {
+    version: '1.6.0',
+    date: '2026-10-23',
+    title: 'Move your progress between devices',
+    notes: [
+      'Settings can now export your whole account to a file - your name, streak, saved words, review cards and mistakes - and import it back.',
+      'The name screen offers to restore from a backup too, so you can get your progress back without typing a name first.',
+      'If you added the app to your home screen on an iPhone or iPad and it opened empty, this is the fix. The installed app gets its own separate storage, so your work is still in Safari: export it there, import it here.',
+      'The old backup button only saved part of your data. It now includes your name, settings, streak and saved words as well.',
+    ],
+  },
   {
     version: '1.5.0',
     date: '2026-10-23',
