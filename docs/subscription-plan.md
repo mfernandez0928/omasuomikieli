@@ -54,6 +54,94 @@ Migration for existing learners: the local profile becomes the pre-filled
 name on a sign-up form. Their progress is in IndexedDB on the device and
 should be uploaded on first sign-in, not thrown away.
 
+#### How it goes in without breaking the app
+
+The one rule that matters: **the app must keep working signed out, offline,
+exactly as it does today.** Auth is an addition, never a precondition. The
+boot path right now touches no network at all - `loadProfile()` is a
+synchronous localStorage read, the Gate decides from local state, and
+`registerSW` and `flushRoster` are both fire-and-forget. A learner on the
+metro opens the app and it works. That property is worth more than any
+feature on this page, and a careless auth integration is exactly what
+destroys it.
+
+So the shape is:
+
+- `session` is extra state alongside `profile`, not a replacement for it.
+  The Gate keeps asking "is there a profile?", never "is there a session?".
+- Supabase's client reads a persisted session out of localStorage, so a
+  signed-in learner is known without a round trip. Token refresh happens in
+  the background and is allowed to fail; failing it means no sync this
+  session, not a locked app.
+- Nothing awaits the network before the first render.
+
+One piece of luck makes this far cheaper than it might have been: **no local
+data is keyed to the learner's identity.** There is no `userId` anywhere in
+the codebase. SRS cards are keyed `${kind}:${refId}`, mistakes by their own
+id, activity by date, lesson progress by `grammarId`. So signing in does not
+re-key anything - it attaches an owner to data that already exists. Signing
+in merges local data upward; it never replaces local data with the server's.
+
+#### Cloud backup, and what it costs
+
+Backups are the first thing accounts make possible, and the storage question
+has been measured rather than guessed:
+
+| | Raw JSON | Gzipped |
+| --- | --- | --- |
+| Typical learner (6 months, 300 cards) | 82.6 KB | **3.4 KB** |
+| Ceiling (all 1256 words, 2 years, 400 mistakes) | 437 KB | **15.1 KB** |
+
+Compression is 24-29x because the records repeat the same field names and
+similar values, and `CompressionStream` is available in the browser, so the
+compression happens before anything leaves the device.
+
+Against the Supabase free plan - 500 MB database, 1 GB file storage, 5 GB
+egress, projects paused after 1 week idle:
+
+| Stored as | Fits in 500 MB |
+| --- | --- |
+| Raw JSON | ~6,200 learners |
+| Gzipped | ~151,000 learners |
+
+**Storage is not the constraint and should not drive the design.** Uploads
+do not count against egress, only reads, and a backup is written often and
+read rarely - the favourable direction. At one sync a day, gzipped, the 5 GB
+egress covers roughly 51,000 learners.
+
+What does constrain it:
+
+- **A readable table is a leak unless RLS is right.** The `learners` table is
+  deliberately insert-only, and `docs/roster-setup.md` says in as many words
+  not to add a select policy, because the anon key ships inside the JS
+  bundle. A backups table has to be readable, so it needs `select` granted on
+  that table alone and a policy of `using (auth.uid() = user_id)`. Test it by
+  signing in as one account and trying to read another's row with the public
+  key; that test is the whole point and must be run before launch.
+- **The free plan pauses after a week idle.** For a backup specifically this
+  is poor timing: the restore fails exactly when someone reaches for it after
+  a break. Another reason the app must not require the server to function.
+- **Do not let the service worker cache API responses.** The workbox config
+  precaches static assets only (`js,css,html,svg,png,woff2`). Adding runtime
+  caching of authenticated requests would put one learner's data where
+  another on the same device could read it.
+
+#### What could break, and how likely
+
+| Risk | Severity | Avoided by |
+| --- | --- | --- |
+| Offline use stops working | **High** | Never await the network before first render; Gate reads local state only |
+| Existing learners locked out of their own progress | **High** | Local profile keeps working; account is an upgrade, and sign-in merges up |
+| A wrong RLS policy exposes every backup | **High** | Grant `select` on the backups table only; policy on `auth.uid()`; test cross-account reads |
+| Open sign-ups abused | Medium | Already a finding in `docs/security-review.md`; turn off now, re-enable with rate limiting and CAPTCHA |
+| Project paused on the free plan | Medium | App works without the server; sync retries later |
+| Two devices overwrite each other | Medium | Backups carry `exportedAt`; last-writer-wins is acceptable for a backup, not for live sync - do not call it sync until it merges |
+| Client-side paywall bypassed | Certain, if attempted | Unchanged: the course is in the bundle, so gating is cosmetic until step 2 is done |
+
+None of these is a reason not to do accounts. They are the reasons to do
+accounts *first and on their own*, with nothing gated, and to leave
+`BILLING_ENABLED` false until steps 2 and 3 are real.
+
 ### 2. Content off the device
 
 Free content stays in the bundle. Paid content has to be fetched after the
