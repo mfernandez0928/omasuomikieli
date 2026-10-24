@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { HeroArt } from '@/components/HeroArt';
 import { Icon } from '@/components/Icon';
+import { RELEASE_STAGE } from '@/data/brand';
 import { cleanName, isName } from '@/services/storage/prefs';
 import { rosterEnabled } from '@/services/sync/roster';
 import { restoreBackup } from '@/services/storage/backup';
@@ -99,6 +100,13 @@ export function Welcome({ onDone }: { onDone: (first: string, last: string) => v
           <span>Suomi</span>
         </h1>
         <p className="hero__sub">Learn Finnish. Every Day.</p>
+        <p style={{ marginTop: 12 }}>
+          <span className="badge badge--gold">{RELEASE_STAGE}</span>
+        </p>
+        <p className="tiny dim" style={{ marginTop: 8, lineHeight: 1.6 }}>
+          This is a beta. It works, and it is still being added to, so things may change
+          between visits.
+        </p>
       </section>
 
       <div className="panel" style={{ marginTop: 18 }}>

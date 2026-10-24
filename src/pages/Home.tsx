@@ -6,7 +6,7 @@ import { useApp, useDailyProgress } from '@/hooks/useApp';
 import { lastSevenDays } from '@/services/storage/progress';
 import { todayKey } from '@/services/storage/prefs';
 import { loadResume } from '@/services/storage/prefs';
-import { BRAND } from '@/data/brand';
+import { BRAND, RELEASE_STAGE } from '@/data/brand';
 import { TOPICS } from '@/data/topics';
 import { GRAMMAR_LESSONS } from '@/data/grammar';
 import { sessionSize } from '@/services/srs/scheduler';
@@ -127,7 +127,12 @@ export function Home() {
           <span>Suomi</span>
         </h1>
         <p className="hero__sub">Learn Finnish. Every Day.</p>
-        <p className="hero__mark">{BRAND}</p>
+        <div className="row" style={{ gap: 8, marginTop: 14 }}>
+          <span className="badge badge--gold">{RELEASE_STAGE}</span>
+          <span className="hero__mark" style={{ marginTop: 0 }}>
+            {BRAND}
+          </span>
+        </div>
       </section>
 
       {loadState === 'unavailable' && <StorageWarning />}
