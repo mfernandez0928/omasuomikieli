@@ -1,10 +1,21 @@
-import { defineConfig } from 'vite';
+import { configDefaults, defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import { fileURLToPath, URL } from 'node:url';
 
 export default defineConfig({
   base: './',
+  test: {
+    /*
+      `.backups/` holds file-level snapshots of `src/`, and `src/` now contains
+      test files. Without this, every snapshot's copy of every test runs again
+      against an old copy of the code: the run passes, the count quietly
+      doubles with each snapshot taken, and a snapshot from before a fix keeps
+      asserting the old behaviour. The same goes for a git worktree parked
+      inside the project.
+    */
+    exclude: [...configDefaults.exclude, '.backups/**', '.claude/**'],
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
