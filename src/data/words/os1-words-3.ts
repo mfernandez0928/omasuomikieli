@@ -3061,6 +3061,7 @@ export const OS1_WORDS_3: Word[] = [
     examples: [
       { fi: 'Haen lapset päiväkodista.', en: 'I pick the children up from daycare.', tl: 'Sinusundo ko ang mga bata sa daycare.' },
       { fi: 'Haen töitä.', en: 'I am applying for jobs.', tl: 'Naghahanap ako ng trabaho.' },
+      { fi: 'Haen työpaikkaa kaupasta.', en: 'I am applying for a job at a shop.', tl: 'Nag-a-apply ako ng trabaho sa isang tindahan.' },
     ],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 6: Vaatteet ja ostokset', page: 155, section: 'SANASTO', sourceTerm: 'hakea, haen' },
     verification: 'source-verified',

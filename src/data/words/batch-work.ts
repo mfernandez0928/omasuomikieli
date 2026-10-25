@@ -1,0 +1,233 @@
+import type { Word } from '@/types';
+
+/**
+ * Work and study words from a submitted list, batch 3.
+ *
+ * The list had 12 words. Three were already in the dictionary and are not
+ * repeated here: työpaikka, palkka and hakea. The list's expression
+ * "hakea työpaikkaa" is added as an example on the existing hakea entry
+ * instead. The other two expressions, suorittaa tutkinto and valmistua
+ * koulusta, are the rections of the verbs below.
+ *
+ * The list gave a vartalo for every word. Nouns here carry nominalForms
+ * instead, since `vartalo` is the present-tense stem of a verb. For suorittaa
+ * the stem is entered as suorita- (weak grade, as in suoritan), matching how
+ * the rest of the dictionary writes verb stems; the list had suoritta-.
+ *
+ * `source` is null throughout: the list came with no book, chapter or page.
+ * The Finnish explanations (selitys) are the list's own.
+ */
+export const BATCH_WORK: Word[] = [
+  {
+    id: 'n-tyontekija',
+    fi: 'työntekijä',
+    en: 'employee',
+    tl: 'empleyado',
+    type: 'substantiivi',
+    level: 'A2.1',
+    topics: ['tyo'],
+    nominalForms: { genitive: 'työntekijän', partitive: 'työntekijää', pluralPartitive: 'työntekijöitä' },
+    selitys: 'Henkilö, joka tekee työtä.',
+    examples: [
+      { fi: 'Yrityksessä on kymmenen työntekijää.', en: 'The company has ten employees.', tl: 'May sampung empleyado ang kompanya.' },
+    ],
+    note: 'Literally "work-doer": työn (genitive) + tekijä. The other side is työnantaja.',
+    noteTl: 'Literal na "gumagawa ng trabaho". Ang kabila: työnantaja.',
+    related: ['n-tyonantaja', 'n-tyo'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+  {
+    id: 'n-tyonantaja',
+    fi: 'työnantaja',
+    en: 'employer',
+    tl: 'nagpapatrabaho, employer',
+    type: 'substantiivi',
+    level: 'A2.1',
+    topics: ['tyo'],
+    nominalForms: { genitive: 'työnantajan', partitive: 'työnantajaa', pluralPartitive: 'työnantajia' },
+    selitys: 'Henkilö tai yritys, joka antaa työtä.',
+    examples: [
+      { fi: 'Työnantaja maksaa palkan kerran kuussa.', en: 'The employer pays the salary once a month.', tl: 'Nagbabayad ng sahod ang employer minsan sa isang buwan.' },
+    ],
+    note: 'Literally "work-giver": työn (genitive) + antaja.',
+    noteTl: 'Literal na "nagbibigay ng trabaho".',
+    related: ['n-tyontekija', 'n-palkka'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+  {
+    id: 'n-tyovuoro',
+    fi: 'työvuoro',
+    en: 'work shift',
+    tl: 'shift sa trabaho',
+    type: 'substantiivi',
+    level: 'A2.1',
+    topics: ['tyo'],
+    nominalForms: { genitive: 'työvuoron', partitive: 'työvuoroa', pluralNominative: 'työvuorot' },
+    selitys: 'Aika, jolloin olet töissä.',
+    examples: [
+      { fi: 'Työvuoroni alkaa kello seitsemän.', en: 'My shift starts at seven.', tl: 'Nagsisimula ang shift ko nang alas-siyete.' },
+    ],
+    note: 'One shift. Working in shifts as a system is vuorotyö. työvuorolista is the shift roster.',
+    noteTl: 'Isang shift. Ang trabahong pa-shift ay vuorotyö. Iskedyul ng shift: työvuorolista.',
+    related: ['n-vuoro', 'n-vuorotyo'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+  {
+    id: 'n-tyotehtava',
+    fi: 'työtehtävä',
+    en: 'work task, duty',
+    tl: 'gawain sa trabaho',
+    type: 'substantiivi',
+    level: 'A2.2',
+    topics: ['tyo'],
+    nominalForms: { genitive: 'työtehtävän', partitive: 'työtehtävää', pluralPartitive: 'työtehtäviä' },
+    selitys: 'Tehtävä, joka pitää tehdä työssä.',
+    examples: [
+      { fi: 'Mitä työtehtäviä sinulla on?', en: 'What are your duties at work?', tl: 'Ano ang mga gawain mo sa trabaho?' },
+    ],
+    note: 'Often plural, työtehtävät, for the duties of a job as a whole - a common question in a job interview.',
+    noteTl: 'Madalas sa maramihan (työtehtävät), lalo na sa job interview.',
+    related: ['n-tyo'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+  {
+    id: 'n-haastattelu',
+    fi: 'haastattelu',
+    en: 'interview',
+    tl: 'panayam, interview',
+    type: 'substantiivi',
+    level: 'A2.1',
+    topics: ['tyo'],
+    nominalForms: { genitive: 'haastattelun', partitive: 'haastattelua', illative: 'haastatteluun', pluralPartitive: 'haastatteluja' },
+    selitys: 'Keskustelu, jossa kysytään esimerkiksi työstä tai hakijasta.',
+    examples: [
+      { fi: 'Menen haastatteluun maanantaina.', en: 'I am going to an interview on Monday.', tl: 'Pupunta ako sa interview sa Lunes.' },
+    ],
+    note: 'A job interview is työhaastattelu. You go to one with the illative: mennä haastatteluun.',
+    noteTl: 'Job interview: työhaastattelu. mennä haastatteluun (illatiivi).',
+    searchAliases: ['työhaastattelu'],
+    related: ['v-hakea'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+  {
+    id: 'n-koulutus',
+    fi: 'koulutus',
+    en: 'education, training',
+    tl: 'edukasyon, pagsasanay',
+    type: 'substantiivi',
+    level: 'A2.2',
+    topics: ['koulu', 'tyo'],
+    nominalForms: { genitive: 'koulutuksen', partitive: 'koulutusta', pluralPartitive: 'koulutuksia' },
+    selitys: 'Opiskelu, jossa opitaan tietoja ja taitoja.',
+    examples: [
+      { fi: 'Minulla on sairaanhoitajan koulutus.', en: 'I have training as a nurse.', tl: 'May pagsasanay ako bilang nars.' },
+    ],
+    note: '-us nouns change to -ukse- before endings: koulutus -> koulutuksen, but partitive koulutusta.',
+    noteTl: 'Ang -us ay nagiging -ukse-: koulutuksen. Partitiivi: koulutusta.',
+    related: ['n-tutkinto', 'n-koulu'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+  {
+    id: 'n-tutkinto',
+    fi: 'tutkinto',
+    en: 'degree, qualification',
+    tl: 'kwalipikasyon, degree',
+    type: 'substantiivi',
+    level: 'A2.2',
+    topics: ['koulu', 'tyo'],
+    nominalForms: { genitive: 'tutkinnon', partitive: 'tutkintoa', pluralPartitive: 'tutkintoja' },
+    selitys: 'Opinnoista saatu todistus tai pätevyys.',
+    examples: [
+      { fi: 'Hänellä on tutkinto Filippiineiltä.', en: 'She has a degree from the Philippines.', tl: 'May degree siya mula sa Pilipinas.' },
+    ],
+    note: 'nt ~ nn gradation: tutkinto -> tutkinnon. You complete one with suorittaa: suorittaa tutkinto.',
+    noteTl: 'Astevaihtelu nt ~ nn: tutkinnon. Tapusin ang degree: suorittaa tutkinto.',
+    related: ['v-suorittaa', 'n-koulutus'],
+    grammarRefs: ['g-kpt'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+  {
+    id: 'v-suorittaa',
+    fi: 'suorittaa',
+    en: 'to complete, to carry out',
+    tl: 'tapusin, isagawa',
+    type: 'verbi',
+    level: 'A2.2',
+    topics: ['koulu', 'tyo'],
+    vartalo: 'suorita-',
+    verbType: 1,
+    verbForms: {
+      present1sg: 'suoritan',
+      present3sg: 'suorittaa',
+      present3pl: 'suorittavat',
+      negativePresent: 'suorita',
+      imperfect1sg: 'suoritin',
+      pastParticiple: 'suorittanut',
+    },
+    rections: [
+      {
+        pattern: 'suorittaa + objekti (suorittaa tutkinto)',
+        example: 'Suoritin tutkinnon viime vuonna.',
+        english: 'I completed my degree last year.',
+        tagalog: 'Natapos ko ang degree ko noong isang taon.',
+      },
+    ],
+    selitys: 'Tehdä jokin tehtävä tai saada opinnot valmiiksi.',
+    examples: [
+      { fi: 'Suoritan kurssin verkossa.', en: 'I am doing the course online.', tl: 'Tinatapos ko ang kurso online.' },
+    ],
+    note: 'tt ~ t gradation: suorittaa -> suoritan. The dictionary phrase is suorittaa tutkinto; a finished one takes the genitive-accusative: suoritin tutkinnon.',
+    noteTl: 'Astevaihtelu tt ~ t: suoritan. suorittaa tutkinto = tapusin ang degree; suoritin tutkinnon = natapos ko.',
+    related: ['n-tutkinto', 'v-valmistua'],
+    grammarRefs: ['g-kpt', 'g-rektio'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+  {
+    id: 'v-valmistua',
+    fi: 'valmistua',
+    en: 'to graduate; to be finished',
+    tl: 'makapagtapos; matapos',
+    type: 'verbi',
+    level: 'A2.2',
+    topics: ['koulu'],
+    vartalo: 'valmistu-',
+    verbType: 1,
+    verbForms: {
+      present1sg: 'valmistun',
+      present3sg: 'valmistuu',
+      present3pl: 'valmistuvat',
+      negativePresent: 'valmistu',
+      imperfect1sg: 'valmistuin',
+      pastParticiple: 'valmistunut',
+    },
+    rections: [
+      {
+        pattern: 'valmistua + -sta/-stä (valmistua koulusta)',
+        example: 'Valmistuin koulusta keväällä.',
+        english: 'I graduated from school in the spring.',
+        tagalog: 'Nakapagtapos ako sa paaralan noong tagsibol.',
+      },
+      {
+        pattern: 'valmistua + -ksi (as what)',
+        example: 'Hän valmistui sairaanhoitajaksi.',
+        english: 'She graduated as a nurse.',
+        tagalog: 'Nakapagtapos siya bilang nars.',
+      },
+    ],
+    selitys: 'Saada opinnot päätökseen.',
+    note: 'The school is in the elative (-sta/-stä), the profession in the translative (-ksi). From valmis, ready: a building or a meal can also valmistua.',
+    noteTl: 'Paaralan: -sta/-stä. Propesyon: -ksi. Mula sa valmis (handa/tapos).',
+    related: ['v-suorittaa', 'n-koulu'],
+    grammarRefs: ['g-rektio'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+];

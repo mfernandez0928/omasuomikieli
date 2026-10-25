@@ -1,0 +1,208 @@
+import type { Word } from '@/types';
+
+/**
+ * Family, friends and getting along, from a submitted list, batch 6.
+ *
+ * The list had 12 words. Five were already in the dictionary and are not
+ * repeated here: sukulainen, sopia, auttaa, huolehtia and tutustua.
+ *
+ * The list gave a vartalo for every word. Nouns here carry nominalForms
+ * instead, since `vartalo` is the present-tense stem of a verb. For
+ * kunnioittaa the stem is the weak grade used in the personal forms,
+ * kunnioita-, matching the rest of the dictionary; the list had kunnioitta-.
+ *
+ * `source` is null throughout: the list came with no book, chapter or page.
+ * The Finnish explanations (selitys) and the example sentences are the
+ * list's own.
+ */
+export const BATCH_RELATIONSHIPS: Word[] = [
+  {
+    id: 'n-ystavyys',
+    fi: 'ystävyys',
+    en: 'friendship',
+    tl: 'pagkakaibigan',
+    type: 'substantiivi',
+    level: 'A2.2',
+    topics: ['sosiaaliset'],
+    nominalForms: { genitive: 'ystävyyden', partitive: 'ystävyyttä' },
+    selitys: 'Kahden tai useamman ihmisen välinen ystävällinen suhde.',
+    examples: [
+      { fi: 'Pitkä ystävyys on minulle tärkeä.', en: 'A long friendship is important to me.', tl: 'Mahalaga sa akin ang matagal nang pagkakaibigan.' },
+    ],
+    note: 'From ystävä, friend. -yys nouns change to -yyde- before most endings: ystävyyden, but partitive ystävyyttä.',
+    noteTl: 'Mula sa ystävä (kaibigan). ystävyyden, partitiivi ystävyyttä.',
+    related: ['n-ystava'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+  {
+    id: 'n-luottamus',
+    fi: 'luottamus',
+    en: 'trust',
+    tl: 'tiwala',
+    type: 'substantiivi',
+    level: 'A2.2',
+    topics: ['sosiaaliset', 'abstraktit'],
+    nominalForms: { genitive: 'luottamuksen', partitive: 'luottamusta' },
+    selitys: 'Tunne siitä, että toiseen ihmiseen voi uskoa ja turvautua.',
+    examples: [
+      { fi: 'Luottamus on tärkeää parisuhteessa.', en: 'Trust is important in a relationship.', tl: 'Mahalaga ang tiwala sa isang relasyon.' },
+    ],
+    note: 'From luottaa, to trust. Like the verb, it takes the illative: luottamus johonkin. -us nouns change to -ukse-: luottamuksen.',
+    noteTl: 'Mula sa luottaa. Illatiivi: luottamus johonkin. luottamuksen, partitiivi luottamusta.',
+    related: ['v-luottaa'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+  {
+    id: 'n-riita',
+    fi: 'riita',
+    en: 'argument, quarrel',
+    tl: 'pagtatalo, away',
+    type: 'substantiivi',
+    level: 'A2.2',
+    topics: ['sosiaaliset'],
+    nominalForms: { genitive: 'riidan', partitive: 'riitaa', pluralPartitive: 'riitoja' },
+    selitys: 'Tilanne, jossa ihmiset ovat eri mieltä ja saattavat puhua vihaisesti.',
+    examples: [
+      { fi: 'Meille tuli riita pienestä asiasta.', en: 'We got into an argument over a small thing.', tl: 'Nag-away kami dahil sa isang maliit na bagay.' },
+    ],
+    note: 't ~ d gradation: riita -> riidan. Getting into one is tulla riita (jollekulle); the verb "to argue" is riidellä.',
+    noteTl: 'Astevaihtelu t ~ d: riidan. Mag-away: riidellä. Meille tuli riita = nag-away kami.',
+    related: ['v-sopia'],
+    grammarRefs: ['g-kpt'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+  {
+    id: 'v-tukea',
+    fi: 'tukea',
+    en: 'to support',
+    tl: 'sumuporta, umalalay',
+    type: 'verbi',
+    level: 'A2.2',
+    topics: ['sosiaaliset'],
+    vartalo: 'tue-',
+    verbType: 1,
+    verbForms: {
+      present1sg: 'tuen',
+      present3sg: 'tukee',
+      present3pl: 'tukevat',
+      negativePresent: 'tue',
+      imperfect1sg: 'tuin',
+      pastParticiple: 'tukenut',
+    },
+    rections: [
+      {
+        pattern: 'tukea + partitiivi',
+        example: 'Perheeni tukee minua.',
+        english: 'My family supports me.',
+        tagalog: 'Sinusuportahan ako ng pamilya ko.',
+      },
+    ],
+    selitys: 'Auttaa toista ihmistä vaikeassa tilanteessa.',
+    note: 'k ~ ø gradation: tukea -> tuen. The person supported is in the partitive. The noun is tuki, support (also financial support, as in asumistuki).',
+    noteTl: 'Astevaihtelu k ~ ø: tuen. Partitiivi: tukee minua. Pangngalan: tuki.',
+    related: ['v-auttaa'],
+    grammarRefs: ['g-kpt', 'g-rektio'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+  {
+    id: 'v-kayttaytya',
+    fi: 'käyttäytyä',
+    en: 'to behave',
+    tl: 'umasal, kumilos',
+    type: 'verbi',
+    level: 'A2.2',
+    topics: ['sosiaaliset'],
+    vartalo: 'käyttäydy-',
+    verbType: 1,
+    verbForms: {
+      present1sg: 'käyttäydyn',
+      present3sg: 'käyttäytyy',
+      present3pl: 'käyttäytyvät',
+      negativePresent: 'käyttäydy',
+      imperfect1sg: 'käyttäydyin',
+      pastParticiple: 'käyttäytynyt',
+    },
+    selitys: 'Toimia tietyllä tavalla muiden ihmisten seurassa.',
+    examples: [
+      { fi: 'Lapsi käyttäytyi hyvin päiväkodissa.', en: 'The child behaved well at daycare.', tl: 'Maayos ang asal ng bata sa daycare.' },
+    ],
+    note: 't ~ d gradation: käyttäytyä -> käyttäydyn. Nearly always with an adverb: käyttäytyä hyvin, huonosti, kohteliaasti.',
+    noteTl: 'Astevaihtelu t ~ d: käyttäydyn. Laging may adverbi: käyttäytyä hyvin / huonosti.',
+    grammarRefs: ['g-kpt'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+  {
+    id: 'v-kunnioittaa',
+    fi: 'kunnioittaa',
+    en: 'to respect',
+    tl: 'igalang',
+    type: 'verbi',
+    level: 'A2.2',
+    topics: ['sosiaaliset'],
+    vartalo: 'kunnioita-',
+    verbType: 1,
+    verbForms: {
+      present1sg: 'kunnioitan',
+      present3sg: 'kunnioittaa',
+      present3pl: 'kunnioittavat',
+      negativePresent: 'kunnioita',
+      imperfect1sg: 'kunnioitin',
+      pastParticiple: 'kunnioittanut',
+    },
+    rections: [
+      {
+        pattern: 'kunnioittaa + partitiivi',
+        example: 'Kunnioitan vanhempiani.',
+        english: 'I respect my parents.',
+        tagalog: 'Iginagalang ko ang mga magulang ko.',
+      },
+    ],
+    selitys: 'Kohdella toista ihmistä arvostavasti.',
+    examples: [
+      { fi: 'Meidän pitää kunnioittaa toisiamme.', en: 'We must respect each other.', tl: "Kailangan nating igalang ang isa't isa." },
+    ],
+    note: 'tt ~ t gradation: kunnioittaa -> kunnioitan. The object is in the partitive, as with most feeling verbs.',
+    noteTl: 'Astevaihtelu tt ~ t: kunnioitan. Partitiivi ang layon.',
+    grammarRefs: ['g-kpt', 'g-rektio'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+  {
+    id: 'v-ikavoida',
+    fi: 'ikävöidä',
+    en: 'to miss (someone)',
+    tl: 'mangulila, ma-miss',
+    type: 'verbi',
+    level: 'A2.2',
+    topics: ['sosiaaliset'],
+    vartalo: 'ikävöi-',
+    verbType: 2,
+    verbForms: {
+      present1sg: 'ikävöin',
+      present3sg: 'ikävöi',
+      present3pl: 'ikävöivät',
+      negativePresent: 'ikävöi',
+      imperfect1sg: 'ikävöin',
+      pastParticiple: 'ikävöinyt',
+    },
+    rections: [
+      {
+        pattern: 'ikävöidä + partitiivi',
+        example: 'Ikävöin perhettäni.',
+        english: 'I miss my family.',
+        tagalog: 'Nangungulila ako sa pamilya ko.',
+      },
+    ],
+    selitys: 'Kaivata ihmistä, joka ei ole lähellä.',
+    note: 'Verb type 2 (-oida/-öidä): present and imperfect 1sg look the same, ikävöin. In everyday speech Finns more often say minulla on ikävä sinua, or just Ikävä!',
+    noteTl: 'Verbityyppi 2. Sa pang-araw-araw: minulla on ikävä sinua (miss kita).',
+    grammarRefs: ['g-verbityypit', 'g-rektio'],
+    source: null,
+    verification: 'linguistically-checked',
+  },
+];

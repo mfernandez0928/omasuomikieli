@@ -19,6 +19,12 @@ import { LM_HOME_HEALTH } from './lm-home-health';
 import { LM_LANGUAGE } from './lm-language';
 import { BATCH_TRAVEL } from './batch-travel';
 import { BATCH_ENVIRONMENT } from './batch-environment';
+import { BATCH_EVERYDAY } from './batch-everyday';
+import { BATCH_WORK } from './batch-work';
+import { BATCH_HEALTH } from './batch-health';
+import { BATCH_ERRANDS } from './batch-errands';
+import { BATCH_RELATIONSHIPS } from './batch-relationships';
+import { BATCH_OFFICIALS } from './batch-officials';
 
 /**
  * The curated set is authored in this folder. The supplied v0.2.1 database is
@@ -49,6 +55,12 @@ const CURATED: Word[] = [
   ...LM_LANGUAGE,
   ...BATCH_TRAVEL,
   ...BATCH_ENVIRONMENT,
+  ...BATCH_EVERYDAY,
+  ...BATCH_WORK,
+  ...BATCH_HEALTH,
+  ...BATCH_ERRANDS,
+  ...BATCH_RELATIONSHIPS,
+  ...BATCH_OFFICIALS,
 ];
 
 const curatedFinnish = new Set(CURATED.map((w) => w.fi.toLowerCase()));
@@ -130,4 +142,10 @@ export {
   LM_LANGUAGE,
   BATCH_TRAVEL,
   BATCH_ENVIRONMENT,
+  BATCH_EVERYDAY,
+  BATCH_WORK,
+  BATCH_HEALTH,
+  BATCH_ERRANDS,
+  BATCH_RELATIONSHIPS,
+  BATCH_OFFICIALS,
 };

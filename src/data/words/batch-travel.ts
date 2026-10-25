@@ -738,7 +738,7 @@ export const BATCH_TRAVEL: Word[] = [
     examples: [
       { fi: 'Minun täytyy perua varaus.', en: 'I have to cancel the booking.', tl: 'Kailangan kong kanselahin ang reserbasyon.' },
     ],
-    note: 'The verb is perua (peruun, perui). peruuttaa means the same and is equally common.',
+    note: 'The verb is perua (perun, perui). peruuttaa means the same and is equally common.',
     noteTl: 'Ang verbo ay perua. Ganoon din ang peruuttaa.',
     searchAliases: ['perua', 'peruuttaa'],
     related: ['n-varaus', 'a-peruttu'],
