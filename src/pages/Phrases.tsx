@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icon, type IconName } from '@/components/Icon';
-import { EmptyState, LevelBadge, SpeakButton, TopBar } from '@/components/ui';
+import { EmptyState, LevelBadge, RevealTranslation, SpeakButton, TopBar } from '@/components/ui';
 import { SITUATIONS, SITUATION_BY_ID } from '@/data/topics';
 import { PHRASES, phraseCount, phrasesInSituation } from '@/data/phrases';
 import { GRAMMAR_BY_ID } from '@/data/grammar';
@@ -139,15 +139,12 @@ export function PhraseCard({ id }: { id: string }) {
   const navigate = useNavigate();
   const { settings } = useApp();
   const phrase = PHRASES.find((p) => p.id === id);
-  const [open, setOpen] = useState(false);
 
   if (!phrase) return null;
 
   const grammar = (phrase.grammarRefs ?? [])
     .map((g) => GRAMMAR_BY_ID.get(g))
     .filter((g): g is NonNullable<typeof g> => Boolean(g));
-
-  const expandable = Boolean(phrase.puhekieli || phrase.note || grammar.length);
 
   return (
     <div className="wcard">
@@ -156,14 +153,6 @@ export function PhraseCard({ id }: { id: string }) {
           <p className="wcard__fi" style={{ fontSize: '1rem', lineHeight: 1.4 }}>
             {phrase.fi}
           </p>
-          <p className="wcard__gloss" style={{ marginTop: 4 }}>
-            {phrase.en}
-          </p>
-          {settings.showTagalog && (
-            <p className="wcard__gloss">
-              <b>{phrase.tl}</b>
-            </p>
-          )}
         </div>
         <div className="row" style={{ gap: 4, flex: 'none' }}>
           <LevelBadge level={phrase.level} />
@@ -171,56 +160,47 @@ export function PhraseCard({ id }: { id: string }) {
         </div>
       </div>
 
-      {expandable && (
-        <>
-          <button
-            className="row small"
-            style={{ marginTop: 8, color: '#2563eb', fontWeight: 600, gap: 4 }}
-            onClick={() => setOpen((o) => !o)}
-            aria-expanded={open}
-          >
-            {open ? 'Hide details' : 'Show details'}
-            <Icon name={open ? 'chevron-down' : 'chevron-right'} size={14} />
-          </button>
-
-          {open && (
-            <div className="fade-in" style={{ marginTop: 10, borderTop: '1px solid var(--card-border)', paddingTop: 10 }}>
-              {phrase.puhekieli && (
-                <div style={{ marginBottom: 10 }}>
-                  <span className="badge badge--light">puhekieli</span>
-                  <p style={{ fontWeight: 650, marginTop: 5 }}>{phrase.puhekieli}</p>
-                  <p className="small" style={{ color: 'var(--card-ink-soft)' }}>
-                    How people actually say it. Keep the form above for writing and officials.
-                  </p>
-                </div>
-              )}
-              {phrase.note && (
-                <p className="small" style={{ color: 'var(--card-ink-soft)', lineHeight: 1.55 }}>
-                  {phrase.note}
-                </p>
-              )}
-              {settings.showTagalog && phrase.noteTl && (
-                <p className="small" style={{ color: 'var(--card-ink-soft)', lineHeight: 1.55, marginTop: 4 }}>
-                  {phrase.noteTl}
-                </p>
-              )}
-              {grammar.length > 0 && (
-                <div className="chips" style={{ marginTop: 10 }}>
-                  {grammar.map((g) => (
-                    <button
-                      key={g.id}
-                      className="chip chip--light"
-                      onClick={() => navigate(`/grammar/${g.id}`)}
-                    >
-                      {g.title}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-        </>
-      )}
+      {/* The meaning and the details share one button, so the Finnish is read first. */}
+      <RevealTranslation>
+        <p className="wcard__gloss">{phrase.en}</p>
+        {settings.showTagalog && (
+          <p className="wcard__gloss">
+            <b>{phrase.tl}</b>
+          </p>
+        )}
+        {phrase.puhekieli && (
+          <div style={{ marginTop: 10 }}>
+            <span className="badge badge--light">puhekieli</span>
+            <p style={{ fontWeight: 650, marginTop: 5 }}>{phrase.puhekieli}</p>
+            <p className="small" style={{ color: 'var(--card-ink-soft)' }}>
+              How people actually say it. Keep the form above for writing and officials.
+            </p>
+          </div>
+        )}
+        {phrase.note && (
+          <p className="small" style={{ color: 'var(--card-ink-soft)', lineHeight: 1.55, marginTop: 10 }}>
+            {phrase.note}
+          </p>
+        )}
+        {settings.showTagalog && phrase.noteTl && (
+          <p className="small" style={{ color: 'var(--card-ink-soft)', lineHeight: 1.55, marginTop: 4 }}>
+            {phrase.noteTl}
+          </p>
+        )}
+        {grammar.length > 0 && (
+          <div className="chips" style={{ marginTop: 10 }}>
+            {grammar.map((g) => (
+              <button
+                key={g.id}
+                className="chip chip--light"
+                onClick={() => navigate(`/grammar/${g.id}`)}
+              >
+                {g.title}
+              </button>
+            ))}
+          </div>
+        )}
+      </RevealTranslation>
     </div>
   );
 }

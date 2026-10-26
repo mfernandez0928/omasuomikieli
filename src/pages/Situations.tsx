@@ -252,6 +252,7 @@ function SceneRunner({ scene }: { scene: RolePlay }) {
                 option={o}
                 state={chosen === null ? 'idle' : i === chosen ? (o.ok ? 'right' : 'wrong') : picked?.ok && o.ok ? 'right' : 'idle'}
                 disabled={Boolean(picked?.ok)}
+                showGloss={Boolean(picked?.ok)}
                 onClick={() => choose(i)}
               />
             ))}
@@ -362,11 +363,18 @@ function OptionButton({
   option,
   state,
   disabled,
+  showGloss,
   onClick,
 }: {
   option: RolePlayOption;
   state: 'idle' | 'right' | 'wrong';
   disabled: boolean;
+  /**
+   * The English line under each option. Hidden until the right one is
+   * chosen: showing it earlier lets the learner pick by the English, and
+   * showing it after a wrong pick would hand them the answer.
+   */
+  showGloss: boolean;
   onClick: () => void;
 }) {
   const cls =
@@ -374,9 +382,11 @@ function OptionButton({
   return (
     <button className={cls} onClick={onClick} disabled={disabled} style={{ textAlign: 'left' }}>
       <span style={{ fontWeight: 600, lineHeight: 1.45 }}>{option.fi}</span>
-      <span className="small" style={{ display: 'block', marginTop: 3 }}>
-        {option.en}
-      </span>
+      {showGloss && (
+        <span className="small" style={{ display: 'block', marginTop: 3 }}>
+          {option.en}
+        </span>
+      )}
     </button>
   );
 }
