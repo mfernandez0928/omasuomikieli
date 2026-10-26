@@ -33,9 +33,20 @@ export interface Release {
 }
 
 /** The version this build is. Bump it whenever you add a release below. */
-export const APP_VERSION = '1.7.0';
+export const APP_VERSION = '1.8.0';
 
 export const RELEASES: Release[] = [
+  {
+    version: '1.8.0',
+    date: '2026-10-27',
+    title: 'Natural Finnish replies',
+    notes: [
+      'New section, Luontevia vastauksia: 80 everyday questions, each with a natural reply, in ten categories. Find it at the top of Phrases or under More.',
+      'Practise the replies four ways: choose the right reply, check what a pair means, recall the Finnish from the meaning, or listen and pick the meaning.',
+      'Translations now stay hidden until you press Show translation - in replies, phrases and role-play answers - so you read the Finnish first.',
+      '47 new words on everyday life, work and study, health, bills and forms, relationships and dealing with officials.',
+    ],
+  },
   {
     version: '1.7.0',
     date: '2026-10-24',

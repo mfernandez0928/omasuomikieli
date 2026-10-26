@@ -235,7 +235,7 @@ export function ReplyPractice() {
           onChange={setCategory}
           options={[
             { value: 'all' as const, label: 'All' },
-            ...REPLY_CATEGORIES.map((c) => ({ value: c.id, label: c.titleFi.split(' ja ')[0] })),
+            ...REPLY_CATEGORIES.map((c) => ({ value: c.id, label: c.titleFi.split(/, | ja /)[0] })),
           ]}
         />
 
