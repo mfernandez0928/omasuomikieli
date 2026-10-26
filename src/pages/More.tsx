@@ -17,6 +17,13 @@ const LINKS: { to: string; title: string; sub: string; icon: IconName; colour: s
     colour: 'var(--c-phrases)',
   },
   {
+    to: '/replies',
+    title: 'Natural Finnish Replies',
+    sub: 'Luontevia vastauksia · 80 pairs',
+    icon: 'chat',
+    colour: 'var(--c-phrases)',
+  },
+  {
     to: '/phrases',
     title: 'Useful Phrases',
     sub: 'Organised by real-life situation',

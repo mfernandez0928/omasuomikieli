@@ -11,6 +11,7 @@ import { Vocabulary } from '@/pages/Vocabulary';
 import { WordDetail } from '@/pages/WordDetail';
 import { PhraseSituation, PhrasesList } from '@/pages/Phrases';
 import { SituationPlay, SituationsList } from '@/pages/Situations';
+import { ReplyCategoryPage, RepliesList } from '@/pages/Replies';
 import {
   GrammarPractice,
   MixedPractice,
@@ -87,6 +88,9 @@ export default function App() {
 
             <Route path="/phrases" element={<PhrasesList />} />
             <Route path="/phrases/:id" element={<PhraseSituation />} />
+
+            <Route path="/replies" element={<RepliesList />} />
+            <Route path="/replies/:id" element={<ReplyCategoryPage />} />
 
             <Route path="/situations" element={<SituationsList />} />
             <Route path="/situations/:id" element={<SituationPlay />} />

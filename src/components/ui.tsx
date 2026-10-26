@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Icon, type IconName } from './Icon';
 import type { Level, Verification } from '@/types';
 import { useApp } from '@/hooks/useApp';
@@ -110,6 +110,49 @@ export function SpeakButton({ text, label }: { text: string; label?: string }) {
     >
       <Icon name="speaker" size={17} />
     </button>
+  );
+}
+
+/* ------------------------------ translations ------------------------------ */
+
+/**
+ * Keeps a translation out of sight until the learner asks for it.
+ *
+ * Seeing the English or Tagalog at the same moment as the Finnish means the
+ * Finnish never has to be understood on its own, so on practice surfaces the
+ * meaning waits behind this button. The children are not mounted at all
+ * while closed, so nothing can be read ahead by scrolling or selecting.
+ */
+export function RevealTranslation({
+  children,
+  label = 'Show translation',
+  hideLabel = 'Hide translation',
+}: {
+  children: ReactNode;
+  label?: string;
+  hideLabel?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button
+        className="row small"
+        style={{ marginTop: 8, color: '#2563eb', fontWeight: 600, gap: 4 }}
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+      >
+        {open ? hideLabel : label}
+        <Icon name={open ? 'chevron-down' : 'chevron-right'} size={14} />
+      </button>
+      {open && (
+        <div
+          className="fade-in"
+          style={{ marginTop: 10, borderTop: '1px solid var(--card-border)', paddingTop: 10 }}
+        >
+          {children}
+        </div>
+      )}
+    </>
   );
 }
 

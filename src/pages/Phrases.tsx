@@ -23,6 +23,21 @@ export function PhrasesList() {
         back={false}
       />
 
+      <button
+        className="rowcard"
+        style={{ marginBottom: 12 }}
+        onClick={() => navigate('/replies')}
+      >
+        <span className="rowcard__num" style={{ background: 'var(--c-phrases)' }}>
+          <Icon name="chat" size={15} />
+        </span>
+        <span className="rowcard__body">
+          <span className="rowcard__title">Luontevia vastauksia</span>
+          <span className="rowcard__sub">Natural Finnish Replies · question and answer pairs</span>
+        </span>
+        <Icon name="chevron-right" size={17} className="rowcard__chev" />
+      </button>
+
       <div className="search">
         <span className="search__icon">
           <Icon name="search" size={18} />
