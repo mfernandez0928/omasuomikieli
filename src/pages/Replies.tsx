@@ -12,6 +12,7 @@ import {
   TopBar,
 } from '@/components/ui';
 import { buildChooseReply, buildListenMeaning } from '@/services/replies/exercises';
+import { searchReplies } from '@/services/search/search';
 import {
   REPLY_CATEGORIES,
   REPLY_CATEGORY_BY_ID,
@@ -27,6 +28,8 @@ import type { ReplyCategoryId, ReplyPair } from '@/types';
 export function RepliesList() {
   const navigate = useNavigate();
   const [notesOpen, setNotesOpen] = useState(false);
+  const [query, setQuery] = useState('');
+  const matches = useMemo(() => searchReplies(query), [query]);
 
   return (
     <div className="page fade-in">
@@ -55,21 +58,52 @@ export function RepliesList() {
         {notesOpen && <UsageNotes />}
       </div>
 
-      <div className="rows" style={{ marginTop: 16 }}>
-        {REPLY_CATEGORIES.map((c) => (
-          <button key={c.id} className="rowcard" onClick={() => navigate(`/replies/${c.id}`)}>
-            <span className="rowcard__num" style={{ background: 'var(--c-phrases)' }}>
-              <Icon name={c.icon as IconName} size={15} />
-            </span>
-            <span className="rowcard__body">
-              <span className="rowcard__title">{c.titleFi}</span>
-              <span className="rowcard__sub">{c.title}</span>
-            </span>
-            <span className="badge">{repliesInCategory(c.id).length}</span>
-            <Icon name="chevron-right" size={17} className="rowcard__chev" />
-          </button>
-        ))}
+      <div className="search" style={{ marginTop: 14 }}>
+        <span className="search__icon">
+          <Icon name="search" size={18} />
+        </span>
+        <input
+          className="input"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search replies in any language..."
+          aria-label="Search replies"
+          autoComplete="off"
+        />
       </div>
+
+      {query ? (
+        <div style={{ marginTop: 14 }}>
+          <p className="small dim" style={{ marginBottom: 10 }}>
+            {matches.length} {matches.length === 1 ? 'pair' : 'pairs'}
+          </p>
+          {matches.length === 0 ? (
+            <EmptyState icon="search" title="Nothing matched" text="Try a different word, or browse by category." />
+          ) : (
+            <div className="stack" style={{ gap: 8 }}>
+              {matches.map((p) => (
+                <ReplyCard key={p.id} pair={p} />
+              ))}
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="rows" style={{ marginTop: 16 }}>
+          {REPLY_CATEGORIES.map((c) => (
+            <button key={c.id} className="rowcard" onClick={() => navigate(`/replies/${c.id}`)}>
+              <span className="rowcard__num" style={{ background: 'var(--c-phrases)' }}>
+                <Icon name={c.icon as IconName} size={15} />
+              </span>
+              <span className="rowcard__body">
+                <span className="rowcard__title">{c.titleFi}</span>
+                <span className="rowcard__sub">{c.title}</span>
+              </span>
+              <span className="badge">{repliesInCategory(c.id).length}</span>
+              <Icon name="chevron-right" size={17} className="rowcard__chev" />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

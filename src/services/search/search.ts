@@ -1,6 +1,7 @@
-import type { Level, Phrase, TopicId, VerbType, Word, WordType } from '@/types';
+import type { Level, Phrase, ReplyPair, TopicId, VerbType, Word, WordType } from '@/types';
 import { WORDS } from '@/data/words';
 import { PHRASES } from '@/data/phrases';
+import { REPLY_PAIRS } from '@/data/replies';
 import { GRAMMAR_LESSONS } from '@/data/grammar';
 
 /**
@@ -167,7 +168,7 @@ export function searchWords(query: string, filters: SearchFilters = {}): WordHit
 }
 
 export interface GlobalHit {
-  kind: 'word' | 'phrase' | 'grammar';
+  kind: 'word' | 'phrase' | 'grammar' | 'reply';
   id: string;
   title: string;
   subtitle: string;
@@ -207,6 +208,19 @@ export function searchEverything(query: string, limit = 40): GlobalHit[] {
     }
   }
 
+  // A reply hit opens its category; the subtitle is the Finnish reply, not a
+  // translation, because that page is a practice surface.
+  for (const p of searchReplies(query)) {
+    results.push({
+      kind: 'reply',
+      id: p.category,
+      title: p.fi.q,
+      subtitle: p.fi.a,
+      score: fold(p.fi.q).startsWith(q) ? 60 : 30,
+      badge: p.level,
+    });
+  }
+
   for (const g of GRAMMAR_LESSONS) {
     const hay = fold(`${g.title} ${g.subtitle} ${g.finnishTerm} ${g.rule}`);
     if (hay.includes(q)) {
@@ -222,6 +236,19 @@ export function searchEverything(query: string, limit = 40): GlobalHit[] {
   }
 
   return results.sort((a, b) => b.score - a.score).slice(0, limit);
+}
+
+function replyHaystack(p: ReplyPair): string {
+  return fold(
+    `${p.fi.q} ${p.fi.a} ${p.en.q} ${p.en.a} ${p.tl.q} ${p.tl.a} ${p.puhekieli ?? ''}`,
+  );
+}
+
+/** Reply pairs whose Finnish, English or Tagalog contains the query. */
+export function searchReplies(query: string): ReplyPair[] {
+  const q = fold(query);
+  if (!q) return [];
+  return REPLY_PAIRS.filter((p) => replyHaystack(p).includes(q));
 }
 
 export function searchPhrases(query: string): Phrase[] {

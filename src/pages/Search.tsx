@@ -7,6 +7,7 @@ import { searchEverything } from '@/services/search/search';
 const KIND_META = {
   word: { label: 'Word', colour: 'var(--c-vocab)', path: '/vocabulary/' },
   phrase: { label: 'Phrase', colour: 'var(--c-phrases)', path: '/phrases' },
+  reply: { label: 'Reply', colour: 'var(--c-phrases)', path: '/replies/' },
   grammar: { label: 'Grammar', colour: 'var(--c-grammar)', path: '/grammar/' },
 } as const;
 
@@ -20,7 +21,7 @@ export function Search() {
 
   return (
     <div className="page fade-in">
-      <TopBar title="Search" subtitle="Words, phrases and grammar" />
+      <TopBar title="Search" subtitle="Words, phrases, replies and grammar" />
 
       <div className="search">
         <span className="search__icon">
