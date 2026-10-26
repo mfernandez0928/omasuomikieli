@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Icon } from '@/components/Icon';
 import { RevealTranslation, SpeakButton } from '@/components/ui';
 import { useApp } from '@/hooks/useApp';
+import { FLIP_DURATION, FlipCard, ProgressFill, useActionLock } from '@/components/motion';
 import type { ReplyPair } from '@/types';
 
 /**
@@ -27,10 +28,14 @@ export function ReplyFlashcards({
   const [revealed, setRevealed] = useState(false);
   const [knew, setKnew] = useState(0);
   const [requeued, setRequeued] = useState<Set<string>>(new Set());
+  // While the card is turning, a second tap must not land on a grade button.
+  const flipLock = useActionLock(FLIP_DURATION);
 
   const pair = queue[pos];
+  const reveal = () => flipLock.run(() => setRevealed(true));
 
   const grade = (gotIt: boolean) => {
+    if (flipLock.locked) return;
     void noteActivity({ exercisesAnswered: 1, exercisesCorrect: gotIt ? 1 : 0 });
     let next = queue;
     if (gotIt) {
@@ -53,51 +58,57 @@ export function ReplyFlashcards({
     <div className="stack fade-in">
       <div className="qbar">
         <div className="qbar__progress">
-          <div
-            className="progress__fill"
-            style={{ width: `${(pos / queue.length) * 100}%`, height: '100%' }}
-          />
+          <ProgressFill percent={(pos / queue.length) * 100} />
         </div>
         <span className="qbar__count">
           {pos + 1} / {queue.length}
         </span>
       </div>
 
-      <div className="wcard" style={{ padding: 20, minHeight: 200 }} key={`${pair.id}-${pos}`}>
-        {direction === 'fi-first' ? (
-          <>
-            <FinnishLine text={pair.fi.q} strong />
-            <FinnishLine text={pair.fi.a} reply />
-            <RevealTranslation>
-              <Meaning pair={pair} showTagalog={settings.showTagalog} />
-            </RevealTranslation>
-          </>
-        ) : (
-          <>
+      {direction === 'fi-first' ? (
+        <div className="wcard fade-in" style={{ padding: 20, minHeight: 200 }} key={`${pair.id}-${pos}`}>
+          <FinnishLine text={pair.fi.q} strong />
+          <FinnishLine text={pair.fi.a} reply />
+          <RevealTranslation>
             <Meaning pair={pair} showTagalog={settings.showTagalog} />
-            <p className="small muted" style={{ marginTop: 14 }}>
-              How would you reply in Finnish?
-            </p>
-            {revealed ? (
-              <div className="fade-in" style={{ marginTop: 10 }}>
-                <FinnishLine text={pair.fi.q} strong />
-                <FinnishLine text={pair.fi.a} reply />
-              </div>
-            ) : (
-              <button
-                className="btn btn--ghost btn--block"
-                style={{ marginTop: 12 }}
-                onClick={() => setRevealed(true)}
-              >
-                Show answer
-              </button>
-            )}
-          </>
-        )}
-      </div>
+          </RevealTranslation>
+        </div>
+      ) : (
+        // A new key per card: the next card starts face up instead of turning back.
+        <div className="fade-in" key={`${pair.id}-${pos}`}>
+          <FlipCard
+            flipped={revealed}
+            onFlip={reveal}
+            faceStyle={{ padding: 20, minHeight: 200 }}
+            front={
+              <>
+                <Meaning pair={pair} showTagalog={settings.showTagalog} />
+                <p className="small muted" style={{ marginTop: 14 }}>
+                  How would you reply in Finnish?
+                </p>
+                <button className="btn btn--ghost btn--block" style={{ marginTop: 12 }} onClick={reveal}>
+                  Show answer
+                </button>
+              </>
+            }
+            back={
+              <>
+                <Meaning pair={pair} showTagalog={settings.showTagalog} />
+                <div style={{ marginTop: 12, borderTop: '1px solid var(--card-border)', paddingTop: 12 }}>
+                  <FinnishLine text={pair.fi.q} strong />
+                  <FinnishLine text={pair.fi.a} reply />
+                </div>
+              </>
+            }
+          />
+        </div>
+      )}
 
       {(direction === 'fi-first' || revealed) && (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+        <div
+          className={direction === 'fi-first' ? undefined : 'fade-in'}
+          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}
+        >
           <button className="btn btn--ghost" onClick={() => grade(false)}>
             <Icon name="refresh" size={16} />
             Not yet

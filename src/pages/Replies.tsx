@@ -22,6 +22,7 @@ import {
 } from '@/data/replies';
 import { useApp } from '@/hooks/useApp';
 import type { ReplyCategoryId, ReplyPair } from '@/types';
+import { Celebrate } from '@/components/motion';
 
 /* ---------------------------------- list ---------------------------------- */
 
@@ -276,6 +277,7 @@ export function ReplyPractice() {
         />
       ) : result ? (
         <div className="panel center fade-in">
+          <Celebrate good={result.total > 0 && result.knew / result.total >= 0.7} />
           <p className="eyebrow">Done</p>
           <p style={{ fontSize: '1.6rem', fontWeight: 800, margin: '6px 0' }}>
             {result.knew} / {result.total}

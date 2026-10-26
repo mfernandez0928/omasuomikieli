@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '@/components/Icon';
 import { Callout, EmptyState, FilterPills, TopBar } from '@/components/ui';
+import { Celebrate, Collapse, ProgressFill } from '@/components/motion';
 import { PHRASES } from '@/data/phrases';
 import { WORDS } from '@/data/words';
 import { useApp } from '@/hooks/useApp';
@@ -88,6 +89,7 @@ export function Listening() {
       <div className="page fade-in">
         <TopBar title="Listening Practice" back={false} />
         <div className="panel center">
+          <Celebrate good={score.answered > 0 && pct >= 70} icon={pct >= 70 ? 'check' : 'speaker'} />
           <h2 className="section__title">
             {score.correct} / {score.answered} correct ({pct}%)
           </h2>
@@ -158,10 +160,7 @@ export function Listening() {
 
       <div className="qbar">
         <div className="qbar__progress">
-          <div
-            className="progress__fill"
-            style={{ width: `${(index / items.length) * 100}%`, height: '100%' }}
-          />
+          <ProgressFill percent={(index / items.length) * 100} />
         </div>
         <span className="qbar__count">
           {index + 1} / {items.length}
@@ -194,7 +193,7 @@ export function Listening() {
         </label>
         <input
           id="heard"
-          className="input"
+          className={`input ${checked ? (correct ? 'input--ok' : 'input--wrong') : ''}`}
           value={typed}
           disabled={checked}
           autoComplete="off"
@@ -209,8 +208,9 @@ export function Listening() {
         />
       </div>
 
-      {checked && (
-        <div className="stack fade-in" style={{ gap: 10, marginTop: 12 }}>
+      {/* Keyed per sentence so moving on never slides out the next one's text. */}
+      <Collapse key={`${mode}-${index}`} open={checked}>
+        <div className="feedback stack" style={{ gap: 10, paddingTop: 12 }}>
           <Callout kind={correct ? 'ok' : 'bad'} icon={correct ? 'check' : 'x'}>
             <b>{correct ? 'Exactly right.' : 'Here is what was said:'}</b>{' '}
             {correct && slip && <>Mind the dots - the spelling is <b>{item.fi}</b></>}
@@ -228,7 +228,7 @@ export function Listening() {
             )}
           </div>
         </div>
-      )}
+      </Collapse>
 
       <button
         className="btn btn--primary btn--block"

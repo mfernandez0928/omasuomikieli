@@ -4,6 +4,10 @@
    ========================================================================== */
 
 :root {
+  /* Motion: a natural deceleration for things arriving, a gentler one for moving. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
   /* Surfaces */
   --bg: #080f1d;
   --bg-elevated: #0e1627;
@@ -270,7 +274,7 @@ p {
   border-radius: 50%;
   color: var(--ink);
   background: rgba(255, 255, 255, 0.05);
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, transform 0.12s ease;
   flex: none;
 }
 
@@ -399,10 +403,17 @@ p {
 }
 
 .progress__fill {
+  width: 100%;
   height: 100%;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--gold), var(--gold-bright));
-  transition: width 0.4s ease;
+  /*
+    Moved with translateX (see ProgressFill) so a change animates on the
+    compositor. The track's overflow: hidden clips the part pushed off left.
+  */
+  transform: translateX(-100%);
+  transition: transform 0.5s var(--ease-out);
+  animation: progress-in 0.7s var(--ease-out);
 }
 
 .week {
@@ -535,7 +546,7 @@ p {
   border: 1px solid var(--border-soft);
   border-radius: var(--r);
   padding: 12px 14px;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
 }
 
 .rowcard:hover {
@@ -947,6 +958,7 @@ p {
   border: 1px solid var(--border-soft);
   color: var(--ink-soft);
   white-space: nowrap;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.12s ease;
 }
 
 .pill--active {
@@ -969,7 +981,7 @@ p {
   background: var(--surface-3);
   color: var(--ink);
   border: 1px solid var(--border);
-  transition: filter 0.15s ease, background 0.15s ease;
+  transition: filter 0.15s ease, background 0.15s ease, transform 0.12s ease;
   min-height: 46px;
 }
 
@@ -1125,7 +1137,7 @@ p {
   padding: 14px 16px;
   font-weight: 600;
   font-size: 0.97rem;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.12s ease;
 }
 
 .option:hover:not(:disabled) {
@@ -1319,13 +1331,13 @@ p {
 }
 
 .fade-in {
-  animation: fade 0.22s ease;
+  animation: fade 0.26s var(--ease-out);
 }
 
 @keyframes fade {
   from {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -1709,4 +1721,430 @@ p {
   font-size: 0.97rem;
   line-height: 1.65;
   color: var(--ink);
+}
+
+/* ===================== motion ===================== */
+
+/*
+  Shared animation for the components in src/components/motion.tsx.
+  Only transform and opacity move, except Collapse, which has to animate
+  height (via grid rows) so the content below slides rather than jumps.
+  Everything here is switched off under prefers-reduced-motion at the end
+  of this section, on top of the global duration override near the top.
+*/
+
+/* ---- press feedback ---- */
+
+.btn:active:not(:disabled),
+.option:active:not(:disabled),
+.pill:active,
+.chip:active,
+.icon-btn:active,
+.rowcard:active,
+button.wcard:active {
+  transform: scale(0.97);
+}
+
+/* ---- bottom nav ---- */
+
+.nav__item svg {
+  transition: transform 0.25s var(--ease-out);
+}
+
+.nav__item--active svg {
+  transform: translateY(-2px) scale(1.08);
+}
+
+/* ---- flip card ---- */
+
+.flip {
+  perspective: 1100px;
+}
+
+.flip__inner {
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 0.46s var(--ease-in-out);
+}
+
+.flip--on .flip__inner {
+  transform: rotateY(180deg);
+}
+
+.flip:not(.flip--on) {
+  cursor: pointer;
+}
+
+/* Both faces share one grid cell, so the card is as tall as its taller face. */
+.flip__face {
+  grid-area: 1 / 1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip__back {
+  transform: rotateY(180deg);
+  outline: none;
+}
+
+.flip__back:focus-visible {
+  box-shadow: 0 0 0 3px var(--gold);
+}
+
+/* ---- collapse ---- */
+
+.collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.26s var(--ease-out),
+    opacity 0.2s ease;
+}
+
+.collapse--open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.collapse__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Once open, focus rings and shadows inside must not be clipped. */
+.collapse--settled > .collapse__inner {
+  overflow: visible;
+}
+
+.chev {
+  transition: transform 0.22s var(--ease-out);
+}
+
+.chev--open {
+  transform: rotate(90deg);
+}
+
+/* ---- answer feedback ---- */
+
+.option {
+  position: relative;
+}
+
+.option--correct {
+  animation: answer-pop 0.34s var(--ease-out);
+}
+
+.option--wrong,
+.input--wrong {
+  animation: answer-shake 0.36s ease;
+}
+
+.input--ok {
+  border-color: var(--ok);
+}
+
+.input--wrong {
+  border-color: var(--bad);
+}
+
+@keyframes answer-pop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.025);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes answer-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(4px);
+  }
+  60% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+/* The right option leaves room on the right for its checkmark. */
+.option:has(> .mark) {
+  padding-right: 44px;
+}
+
+.mark {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  margin-top: -11px;
+  width: 22px;
+  height: 22px;
+  color: var(--ok);
+  animation: mark-in 0.3s var(--ease-out);
+}
+
+.mark svg {
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mark__circle {
+  stroke-dasharray: 66;
+  stroke-dashoffset: 66;
+  animation: mark-draw 0.4s var(--ease-out) forwards;
+  opacity: 0.35;
+}
+
+.mark__tick {
+  stroke-dasharray: 16;
+  stroke-dashoffset: 16;
+  animation: mark-draw 0.28s var(--ease-out) 0.18s forwards;
+}
+
+@keyframes mark-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes mark-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+/* A right answer's callout icon gets a small pop as it slides in. */
+.feedback .callout--ok .callout__icon {
+  animation: icon-pop 0.4s var(--ease-out) 0.08s backwards;
+}
+
+@keyframes icon-pop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ---- progress ---- */
+
+@keyframes progress-in {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+/* ---- celebration ---- */
+
+.celebrate {
+  position: relative;
+  margin: 0 auto 12px;
+}
+
+.celebrate__icon {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(246, 166, 35, 0.16);
+  color: var(--gold);
+}
+
+.celebrate--good .celebrate__icon {
+  background: rgba(34, 197, 94, 0.16);
+  color: var(--ok);
+  animation: icon-pop 0.5s var(--ease-out) 0.1s backwards;
+}
+
+.burst {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.burst__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--ok);
+  opacity: 0;
+  animation: burst-ring 0.7s var(--ease-out) 0.15s;
+}
+
+.burst__dot {
+  --angle: calc(var(--i) * 45deg);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0;
+  animation: burst-dot 0.7s var(--ease-out) 0.18s;
+}
+
+.burst__dot:nth-child(odd) {
+  background: var(--ok);
+}
+
+@keyframes burst-ring {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
+
+@keyframes burst-dot {
+  0% {
+    opacity: 1;
+    transform: rotate(var(--angle)) translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--angle)) translateY(-46px) scale(0.4);
+  }
+}
+
+/* The empty state's icon can carry a burst too (a finished review). */
+.empty__icon {
+  position: relative;
+}
+
+.empty__icon--good {
+  background: rgba(34, 197, 94, 0.16);
+  color: var(--ok);
+  animation: icon-pop 0.5s var(--ease-out) 0.1s backwards;
+}
+
+/* ---- list reveal ---- */
+
+/*
+  Added by useRevealList only when it can also take it away again. The
+  delayed animation is a failsafe: if the observer never reports an item
+  (a throttled tab, say), the item still shows up on its own.
+*/
+.reveal {
+  opacity: 0;
+  animation: reveal-failsafe 0.01s linear 1.6s forwards;
+}
+
+@keyframes reveal-failsafe {
+  to {
+    opacity: 1;
+  }
+}
+
+.reveal--in {
+  animation: fade 0.36s var(--ease-out) both;
+  opacity: 1;
+}
+
+/* ---- dialog exit ---- */
+
+.modal__backdrop--closing {
+  animation: fade-out 0.16s ease forwards;
+}
+
+.modal--closing {
+  animation: modal-drop 0.16s ease forwards;
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-drop {
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+}
+
+/* ---- reduced motion ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  .flip__inner,
+  .flip--on .flip__inner,
+  .flip__back {
+    transform: none;
+    transition: none;
+  }
+
+  /* No rotation: the front simply gives way to the back. */
+  .flip--on .flip__front {
+    visibility: hidden;
+  }
+
+  .btn:active:not(:disabled),
+  .option:active:not(:disabled),
+  .pill:active,
+  .chip:active,
+  .icon-btn:active,
+  .rowcard:active,
+  button.wcard:active,
+  .nav__item--active svg {
+    transform: none;
+  }
+
+  .option--correct,
+  .option--wrong,
+  .input--wrong,
+  .mark,
+  .celebrate__icon,
+  .empty__icon--good,
+  .feedback .callout__icon,
+  .progress__fill,
+  .reveal--in,
+  .modal__backdrop--closing,
+  .modal--closing {
+    animation: none;
+  }
+
+  .mark__circle,
+  .mark__tick {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .burst {
+    display: none;
+  }
+
+  .reveal {
+    opacity: 1;
+  }
 }

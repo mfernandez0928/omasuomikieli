@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icon, type IconName } from '@/components/Icon';
 import { Callout, EmptyState, LevelBadge, SpeakButton, TopBar, useLeaveFor } from '@/components/ui';
+import { FLIP_DURATION, FlipCard, ProgressFill, useActionLock } from '@/components/motion';
 import { ExerciseRunner } from '@/components/ExerciseRunner';
 import { ALL_EXERCISES, GRAMMAR_BY_ID, exercisesForGrammar, nextLesson } from '@/data/grammar';
 import { WORDS, getWord } from '@/data/words';
@@ -138,6 +139,8 @@ export function ReviewSession() {
   const [pos, setPos] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [reviewed, setReviewed] = useState(0);
+  // While the card is turning, a second tap must not land on a grade button.
+  const flipLock = useActionLock(FLIP_DURATION);
 
   const candidates = useMemo(
     () => WORDS.map((w) => ({ kind: 'word' as const, refId: w.id })),
@@ -163,6 +166,7 @@ export function ReviewSession() {
         <TopBar title="Daily review" />
         <EmptyState
           icon="check"
+          celebrate={reviewed > 0}
           title={reviewed > 0 ? 'Review finished' : 'Nothing due right now'}
           text={
             reviewed > 0
@@ -184,7 +188,10 @@ export function ReviewSession() {
     );
   }
 
+  const reveal = () => flipLock.run(() => setRevealed(true));
+
   const handleGrade = async (grade: SrsGrade) => {
+    if (flipLock.locked) return;
     const graded = await gradeCard(card, grade);
     setReviewed((n) => n + 1);
     setRevealed(false);
@@ -210,53 +217,60 @@ export function ReviewSession() {
 
       <div className="qbar">
         <div className="qbar__progress">
-          <div
-            className="progress__fill"
-            style={{ width: `${(pos / Math.max(1, activeQueue.length)) * 100}%`, height: '100%' }}
-          />
+          <ProgressFill percent={(pos / Math.max(1, activeQueue.length)) * 100} />
         </div>
         <span className="qbar__count">{reviewed} done</span>
       </div>
 
-      <div className="wcard" style={{ padding: 24, textAlign: 'center', minHeight: 190 }}>
-        <div className="row" style={{ justifyContent: 'center', gap: 8 }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 800, letterSpacing: '-0.03em' }}>{word.fi}</h2>
-          <SpeakButton text={word.fi} />
-        </div>
-        <p className="small" style={{ color: 'var(--card-ink-soft)', marginTop: 6 }}>
-          {word.type}
-          {word.verbType ? ` · verbityyppi ${word.verbType}` : ''} · {word.level}
-        </p>
-
-        {revealed ? (
-          <div className="fade-in" style={{ marginTop: 16 }}>
-            <p style={{ fontSize: '1.15rem', fontWeight: 650 }}>{word.en}</p>
-            {settings.showTagalog && (
-              <p style={{ color: '#b45309', fontWeight: 650, marginTop: 2 }}>{word.tl}</p>
-            )}
-            {word.vartalo && (
-              <p className="small" style={{ color: 'var(--card-ink-soft)', marginTop: 10 }}>
-                vartalo: <b>{word.vartalo}</b>
-                {word.verbForms && ` · ${word.verbForms.present1sg} / ${word.verbForms.present3sg}`}
+      {/*
+        Keyed per review: the next card arrives face up rather than turning
+        back, which would flash the answer just graded.
+      */}
+      <div className="fade-in" key={`${card.refId}-${reviewed}`}>
+        <FlipCard
+          flipped={revealed}
+          onFlip={reveal}
+          faceStyle={{ padding: 24, textAlign: 'center', minHeight: 190 }}
+          front={
+            <>
+              <CardHead word={word} />
+              <p className="small" style={{ color: 'var(--card-ink-soft)', marginTop: 28 }}>
+                What does this mean?
               </p>
-            )}
-            {word.examples?.[0] && (
-              <p className="small" style={{ marginTop: 12, lineHeight: 1.5 }}>
-                <b>{word.examples[0].fi}</b>
-                <br />
-                <span style={{ color: 'var(--card-ink-soft)' }}>{word.examples[0].en}</span>
-              </p>
-            )}
-          </div>
-        ) : (
-          <p className="small" style={{ color: 'var(--card-ink-soft)', marginTop: 28 }}>
-            What does this mean?
-          </p>
-        )}
+            </>
+          }
+          back={
+            <>
+              <CardHead word={word} />
+              <div style={{ marginTop: 16 }}>
+                <p style={{ fontSize: '1.15rem', fontWeight: 650 }}>{word.en}</p>
+                {settings.showTagalog && (
+                  <p style={{ color: '#b45309', fontWeight: 650, marginTop: 2 }}>{word.tl}</p>
+                )}
+                {word.vartalo && (
+                  <p className="small" style={{ color: 'var(--card-ink-soft)', marginTop: 10 }}>
+                    vartalo: <b>{word.vartalo}</b>
+                    {word.verbForms && ` · ${word.verbForms.present1sg} / ${word.verbForms.present3sg}`}
+                  </p>
+                )}
+                {word.examples?.[0] && (
+                  <p className="small" style={{ marginTop: 12, lineHeight: 1.5 }}>
+                    <b>{word.examples[0].fi}</b>
+                    <br />
+                    <span style={{ color: 'var(--card-ink-soft)' }}>{word.examples[0].en}</span>
+                  </p>
+                )}
+              </div>
+            </>
+          }
+        />
       </div>
 
       {revealed ? (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 7, marginTop: 14 }}>
+        <div
+          className="fade-in"
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 7, marginTop: 14 }}
+        >
           {GRADES.map((g) => (
             <button
               key={g.grade}
@@ -273,7 +287,7 @@ export function ReviewSession() {
         <button
           className="btn btn--primary btn--block"
           style={{ marginTop: 14 }}
-          onClick={() => setRevealed(true)}
+          onClick={reveal}
         >
           Show answer
         </button>
@@ -287,6 +301,22 @@ export function ReviewSession() {
         Open full entry
       </button>
     </div>
+  );
+}
+
+/** The word and its type: on both faces, so turning the card keeps its place. */
+function CardHead({ word }: { word: NonNullable<ReturnType<typeof getWord>> }) {
+  return (
+    <>
+      <div className="row" style={{ justifyContent: 'center', gap: 8 }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: 800, letterSpacing: '-0.03em' }}>{word.fi}</h2>
+        <SpeakButton text={word.fi} />
+      </div>
+      <p className="small" style={{ color: 'var(--card-ink-soft)', marginTop: 6 }}>
+        {word.type}
+        {word.verbType ? ` · verbityyppi ${word.verbType}` : ''} · {word.level}
+      </p>
+    </>
   );
 }
 

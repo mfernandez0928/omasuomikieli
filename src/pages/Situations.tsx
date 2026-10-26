@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icon, type IconName } from '@/components/Icon';
 import { Callout, EmptyState, LevelBadge, SpeakButton, TopBar } from '@/components/ui';
+import { Celebrate, CheckMark } from '@/components/motion';
 import { SCENES, getScene, splitLine } from '@/data/situations';
 import { GRAMMAR_BY_ID } from '@/data/grammar';
 import { getWord } from '@/data/words';
@@ -259,7 +260,9 @@ function SceneRunner({ scene }: { scene: RolePlay }) {
           </div>
 
           {picked && (
-            <div className={`callout callout--${picked.ok ? 'ok' : 'bad'}`} style={{ marginTop: 12 }}>
+            // Keyed by the pick, so each new answer's note animates in afresh.
+            <div key={`${turnIndex}-${chosen}`} className="feedback fade-in" style={{ marginTop: 12 }}>
+            <div className={`callout callout--${picked.ok ? 'ok' : 'bad'}`}>
               <span className="callout__icon">
                 <Icon name={picked.ok ? 'check' : 'x'} size={14} />
               </span>
@@ -271,6 +274,7 @@ function SceneRunner({ scene }: { scene: RolePlay }) {
                   </span>
                 )}
               </span>
+            </div>
             </div>
           )}
 
@@ -387,6 +391,7 @@ function OptionButton({
           {option.en}
         </span>
       )}
+      {state === 'right' && <CheckMark />}
     </button>
   );
 }
@@ -467,7 +472,8 @@ function Finished({
   const clean = firstTry.total > 0 && firstTry.right === firstTry.total;
 
   return (
-    <div className="panel" style={{ marginTop: 14 }}>
+    <div className="panel fade-in" style={{ marginTop: 14 }}>
+      <Celebrate good={clean} icon={clean ? 'check' : 'chat'} size={52} start />
       <p className="eyebrow">Scene finished</p>
       <p style={{ fontWeight: 700, fontSize: '1.08rem' }}>
         {metGoals.size}/{scene.goals.length} goals · {firstTry.right}/{firstTry.total} right first

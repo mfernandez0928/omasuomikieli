@@ -4,6 +4,7 @@ import { Icon, type IconName } from './Icon';
 import type { Level, Verification } from '@/types';
 import { useApp } from '@/hooks/useApp';
 import { speak } from '@/services/speech';
+import { Burst, Collapse, ProgressFill } from './motion';
 
 /* ------------------------------ page header ------------------------------ */
 
@@ -121,7 +122,8 @@ export function SpeakButton({ text, label }: { text: string; label?: string }) {
  * Seeing the English or Tagalog at the same moment as the Finnish means the
  * Finnish never has to be understood on its own, so on practice surfaces the
  * meaning waits behind this button. The children are not mounted at all
- * while closed, so nothing can be read ahead by scrolling or selecting.
+ * while closed, so nothing can be read ahead by scrolling or selecting -
+ * Collapse only keeps them for the length of the closing slide.
  */
 export function RevealTranslation({
   children,
@@ -142,16 +144,13 @@ export function RevealTranslation({
         aria-expanded={open}
       >
         {open ? hideLabel : label}
-        <Icon name={open ? 'chevron-down' : 'chevron-right'} size={14} />
+        <Icon name="chevron-right" size={14} className={`chev ${open ? 'chev--open' : ''}`} />
       </button>
-      {open && (
-        <div
-          className="fade-in"
-          style={{ marginTop: 10, borderTop: '1px solid var(--card-border)', paddingTop: 10 }}
-        >
+      <Collapse open={open}>
+        <div style={{ marginTop: 10, borderTop: '1px solid var(--card-border)', paddingTop: 10 }}>
           {children}
         </div>
-      )}
+      </Collapse>
     </>
   );
 }
@@ -163,16 +162,20 @@ export function EmptyState({
   title,
   text,
   action,
+  celebrate = false,
 }: {
   icon?: IconName;
   title: string;
   text: string;
   action?: ReactNode;
+  /** A finished set: the icon pops in green with a one-off burst. */
+  celebrate?: boolean;
 }) {
   return (
     <div className="empty">
-      <div className="empty__icon">
+      <div className={`empty__icon ${celebrate ? 'empty__icon--good' : ''}`}>
         <Icon name={icon} size={26} />
+        {celebrate && <Burst />}
       </div>
       <p className="empty__title">{title}</p>
       <p className="empty__text">{text}</p>
@@ -283,7 +286,7 @@ export function ProgressBar({ percent }: { percent: number }) {
       aria-valuemin={0}
       aria-valuemax={100}
     >
-      <div className="progress__fill" style={{ width: `${Math.min(100, Math.max(0, percent))}%` }} />
+      <ProgressFill percent={percent} />
     </div>
   );
 }

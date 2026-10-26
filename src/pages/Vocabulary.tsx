@@ -1,7 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Icon } from '@/components/Icon';
 import { EmptyState, LevelBadge, SpeakButton, TopBar, VerificationBadge } from '@/components/ui';
+import { Collapse, useRevealList } from '@/components/motion';
 import { WORDS } from '@/data/words';
 import { TOPICS } from '@/data/topics';
 import { searchWords, type SearchFilters } from '@/services/search/search';
@@ -50,6 +51,10 @@ export function Vocabulary() {
     [cards],
   );
 
+  // The first screenful of words eases in once; the rest of the list just renders.
+  const listRef = useRef<HTMLDivElement | null>(null);
+  useRevealList(listRef, results.length > 0);
+
   const activeFilters = [topic, level, type, origin].filter((f) => f !== 'all').length +
     (verbType !== 'all' ? 1 : 0);
 
@@ -85,8 +90,8 @@ export function Vocabulary() {
         />
       </div>
 
-      {showFilters && (
-        <div className="panel fade-in" style={{ marginTop: 12 }}>
+      <Collapse open={showFilters}>
+        <div className="panel" style={{ marginTop: 12 }}>
           <Select
             label="Level"
             value={level}
@@ -137,7 +142,7 @@ export function Vocabulary() {
             </button>
           )}
         </div>
-      )}
+      </Collapse>
 
       <p className="small dim" style={{ margin: '14px 0 10px' }}>
         {results.length} {results.length === 1 ? 'word' : 'words'}
@@ -151,12 +156,13 @@ export function Vocabulary() {
           text="Try a shorter search, or clear the filters. You can search by Finnish, English, Tagalog, or an inflected form such as kaupassa."
         />
       ) : (
-        <div className="stack" style={{ gap: 8 }}>
+        <div className="stack" style={{ gap: 8 }} ref={listRef}>
           {results.map(({ word, matchedForm }) => {
             const status = statusById.get(word.id);
             return (
               <button
                 key={word.id}
+                data-reveal
                 className="wcard row"
                 style={{ gap: 10, width: '100%', textAlign: 'left' }}
                 onClick={() => navigate(`/vocabulary/${word.id}`)}

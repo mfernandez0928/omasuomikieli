@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Icon } from '@/components/Icon';
 import { Callout, ProgressBar, SpeakButton } from '@/components/ui';
+import { Celebrate, CheckMark, Collapse, ProgressFill } from '@/components/motion';
 import type { Exercise } from '@/types';
 import { checkAnswer } from '@/services/search/search';
 import { useApp } from '@/hooks/useApp';
@@ -220,18 +221,7 @@ export function ExerciseRunner({
     return (
       <div className="stack fade-in">
         <div className="panel center">
-          <div
-            className="goal__flame"
-            style={{
-              margin: '0 auto 12px',
-              width: 60,
-              height: 60,
-              background: pct >= 70 ? 'rgba(34,197,94,0.16)' : 'rgba(246,166,35,0.16)',
-              color: pct >= 70 ? 'var(--ok)' : 'var(--gold)',
-            }}
-          >
-            <Icon name={pct >= 70 ? 'check' : 'refresh'} size={28} />
-          </div>
+          <Celebrate good={pct >= 70} />
           <h2 className="section__title">
             {score.correct} / {score.answered} correct
           </h2>
@@ -307,10 +297,7 @@ export function ExerciseRunner({
     <div className="stack fade-in">
       <div className="qbar">
         <div className="qbar__progress">
-          <div
-            className="progress__fill"
-            style={{ width: `${(index / pool.length) * 100}%`, height: '100%' }}
-          />
+          <ProgressFill percent={(index / pool.length) * 100} />
         </div>
         <span className="qbar__count">
           {index + 1} / {pool.length}
@@ -384,6 +371,7 @@ export function ExerciseRunner({
                         → {picked}
                       </span>
                     )}
+                    {correct && <CheckMark />}
                   </button>
                 );
               })}
@@ -424,7 +412,7 @@ export function ExerciseRunner({
           </label>
           <input
             id="answer"
-            className="input"
+            className={`input ${checked ? (wasCorrect ? 'input--ok' : 'input--wrong') : ''}`}
             value={typed}
             disabled={checked}
             autoComplete="off"
@@ -466,6 +454,7 @@ export function ExerciseRunner({
                 onClick={() => setSelected(opt)}
               >
                 {opt}
+                {checked && isAnswer && <CheckMark />}
               </button>
             );
           })}
@@ -473,8 +462,12 @@ export function ExerciseRunner({
       )}
 
       {/* ------------------------------ feedback ----------------------------- */}
-      {checked && (
-        <div className="fade-in stack" style={{ gap: 10 }}>
+      {/*
+        Keyed per question: moving on must drop this at once, not slide it shut
+        while it already shows the next question's answer.
+      */}
+      <Collapse key={`${round}-${index}`} open={checked}>
+        <div className="feedback stack" style={{ gap: 10 }}>
           <Callout kind={wasCorrect ? 'ok' : 'bad'} icon={wasCorrect ? 'check' : 'x'}>
             <b>{wasCorrect ? 'Correct.' : 'Not quite.'}</b>{' '}
             {wasCorrect && umlautSlip && (
@@ -497,7 +490,7 @@ export function ExerciseRunner({
             </p>
           )}
         </div>
-      )}
+      </Collapse>
 
       {checked ? (
         <button className="btn btn--primary btn--block" onClick={handleNext}>

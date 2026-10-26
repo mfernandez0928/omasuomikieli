@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Icon } from '@/components/Icon';
+import { useReducedMotion } from '@/components/motion';
+import { MODAL_EXIT_MS } from '@/services/motion/motion';
 import {
   APP_VERSION,
   RELEASES,
@@ -110,13 +112,32 @@ export function WhatsNew({
   const closeRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
+  /*
+    Closing plays a short exit first, then tells the caller. A ref, not
+    state, guards it so a double tap or Escape during the exit closes once,
+    and so `close` stays stable for the effect below.
+  */
+  const reduced = useReducedMotion();
+  const [closing, setClosing] = useState(false);
+  const closingRef = useRef(false);
+  const close = useCallback(() => {
+    if (closingRef.current) return;
+    closingRef.current = true;
+    if (reduced) {
+      onClose();
+      return;
+    }
+    setClosing(true);
+    window.setTimeout(onClose, MODAL_EXIT_MS);
+  }, [onClose, reduced]);
+
   useEffect(() => {
     closeRef.current?.focus();
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         e.stopPropagation();
-        onClose();
+        close();
         return;
       }
       // Keep Tab inside the dialog while it is open.
@@ -143,18 +164,18 @@ export function WhatsNew({
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = previous;
     };
-  }, [onClose]);
+  }, [close]);
 
   if (releases.length === 0) return null;
 
   return (
     <div
-      className="modal__backdrop"
-      onClick={onClose}
+      className={`modal__backdrop ${closing ? 'modal__backdrop--closing' : ''}`}
+      onClick={close}
       role="presentation"
     >
       <div
-        className="modal"
+        className={`modal ${closing ? 'modal--closing' : ''}`}
         ref={panelRef}
         role="dialog"
         aria-modal="true"
@@ -173,7 +194,7 @@ export function WhatsNew({
           </div>
           <button
             className="icon-btn icon-btn--plain"
-            onClick={onClose}
+            onClick={close}
             aria-label="Close"
             ref={closeRef}
           >
@@ -205,7 +226,7 @@ export function WhatsNew({
         </div>
 
         <div className="modal__foot">
-          <button className="btn btn--primary btn--block" onClick={onClose}>
+          <button className="btn btn--primary btn--block" onClick={close}>
             Selvä · Got it
           </button>
         </div>
