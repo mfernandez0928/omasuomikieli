@@ -1,7 +1,17 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icon, type IconName } from '@/components/Icon';
-import { EmptyState, LevelBadge, RevealTranslation, SpeakButton, TopBar } from '@/components/ui';
+import { ExerciseRunner } from '@/components/ExerciseRunner';
+import { ReplyFlashcards } from '@/components/ReplyFlashcards';
+import {
+  EmptyState,
+  FilterPills,
+  LevelBadge,
+  RevealTranslation,
+  SpeakButton,
+  TopBar,
+} from '@/components/ui';
+import { buildChooseReply, buildListenMeaning } from '@/services/replies/exercises';
 import {
   REPLY_CATEGORIES,
   REPLY_CATEGORY_BY_ID,
@@ -121,6 +131,139 @@ export function ReplyCategoryPage() {
           <ReplyCard key={p.id} pair={p} />
         ))}
       </div>
+    </div>
+  );
+}
+
+/* -------------------------------- practice -------------------------------- */
+
+type PracticeMode = 'choose' | 'meaning' | 'recall' | 'listen';
+
+const MODES: { id: PracticeMode; title: string; sub: string; icon: IconName }[] = [
+  { id: 'choose', title: 'Valitse vastaus', sub: 'Read the question, choose the natural reply', icon: 'chat' },
+  { id: 'meaning', title: 'Mitä se tarkoittaa?', sub: 'Read the Finnish pair, then check its meaning', icon: 'cards' },
+  { id: 'recall', title: 'Muista vastaus', sub: 'See the meaning, recall the Finnish reply', icon: 'idea' },
+  { id: 'listen', title: 'Kuuntele', sub: 'Hear the reply, choose what it means', icon: 'headphones' },
+];
+
+const ROUND_SIZE = 10;
+
+function draw(category: ReplyCategoryId | 'all'): ReplyPair[] {
+  const pool = category === 'all' ? REPLY_PAIRS : repliesInCategory(category);
+  const out = [...pool];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out.slice(0, ROUND_SIZE);
+}
+
+export function ReplyPractice() {
+  const { settings, speechReady } = useApp();
+  const [category, setCategory] = useState<ReplyCategoryId | 'all'>('all');
+  const [mode, setMode] = useState<PracticeMode | null>(null);
+  const [pairs, setPairs] = useState<ReplyPair[]>([]);
+  const [run, setRun] = useState(0);
+  const [result, setResult] = useState<{ knew: number; total: number } | null>(null);
+
+  // Listening needs a Finnish voice; without one the mode is not offered.
+  const canListen = settings.speechEnabled && speechReady;
+  const modes = MODES.filter((m) => m.id !== 'listen' || canListen);
+
+  const start = (m: PracticeMode) => {
+    setPairs(draw(category));
+    setMode(m);
+    setResult(null);
+    setRun((r) => r + 1);
+  };
+  const backToModes = () => {
+    setMode(null);
+    setResult(null);
+  };
+
+  const exercises = useMemo(() => {
+    if (mode === 'choose') return buildChooseReply(pairs);
+    if (mode === 'listen') return buildListenMeaning(pairs);
+    return [];
+  }, [mode, pairs]);
+
+  if (mode === null) {
+    return (
+      <div className="page fade-in">
+        <TopBar title="Harjoittele vastauksia" subtitle="Practise natural replies" />
+
+        <p className="eyebrow" style={{ marginBottom: 8 }}>
+          Category
+        </p>
+        <FilterPills
+          label="Category"
+          value={category}
+          onChange={setCategory}
+          options={[
+            { value: 'all' as const, label: 'All' },
+            ...REPLY_CATEGORIES.map((c) => ({ value: c.id, label: c.titleFi.split(' ja ')[0] })),
+          ]}
+        />
+
+        <div className="rows" style={{ marginTop: 16 }}>
+          {modes.map((m) => (
+            <button key={m.id} className="rowcard" onClick={() => start(m.id)}>
+              <span className="rowcard__num" style={{ background: 'var(--c-phrases)' }}>
+                <Icon name={m.icon} size={15} />
+              </span>
+              <span className="rowcard__body">
+                <span className="rowcard__title">{m.title}</span>
+                <span className="rowcard__sub">{m.sub}</span>
+              </span>
+              <Icon name="chevron-right" size={17} className="rowcard__chev" />
+            </button>
+          ))}
+        </div>
+        {!canListen && (
+          <p className="tiny dim" style={{ marginTop: 10, lineHeight: 1.5 }}>
+            Listening practice appears when this device has a Finnish voice and speech is on in Settings.
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  const title = MODES.find((m) => m.id === mode)!.title;
+
+  return (
+    <div className="page fade-in">
+      <TopBar title={title} subtitle="Natural Finnish Replies" />
+      {mode === 'choose' || mode === 'listen' ? (
+        <ExerciseRunner
+          key={run}
+          exercises={exercises}
+          title={title}
+          nextUp={{ label: 'Choose another practice', onGo: backToModes }}
+        />
+      ) : result ? (
+        <div className="panel center fade-in">
+          <p className="eyebrow">Done</p>
+          <p style={{ fontSize: '1.6rem', fontWeight: 800, margin: '6px 0' }}>
+            {result.knew} / {result.total}
+          </p>
+          <p className="small muted">knew it on the first try</p>
+          <div className="stack" style={{ gap: 8, marginTop: 16 }}>
+            <button className="btn btn--primary btn--block" onClick={() => start(mode)}>
+              Another {ROUND_SIZE}
+            </button>
+            <button className="btn btn--ghost btn--block" onClick={backToModes}>
+              Choose another practice
+            </button>
+          </div>
+        </div>
+      ) : (
+        <ReplyFlashcards
+          key={run}
+          pairs={pairs}
+          direction={mode === 'meaning' ? 'fi-first' : 'meaning-first'}
+          onDone={setResult}
+        />
+      )}
     </div>
   );
 }

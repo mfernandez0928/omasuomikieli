@@ -179,7 +179,8 @@ export function ExerciseRunner({
         origin: 'practice',
         grammarId: current.grammarId,
         wordId: current.wordId,
-        note: current.question,
+        // A listening question has no text; the sentence it played is the context.
+        note: current.question || current.audio,
       });
     }
 
