@@ -48,6 +48,53 @@ export const REPLY_USAGE_NOTES: { fi: string; en: string; tl: string }[] = [
 
 type Extra = Pick<ReplyPair, 'note' | 'noteTl' | 'puhekieli'>;
 
+/**
+ * Other replies in the set that would also be a natural answer to a pair's
+ * question, keyed by pair number. "Lähdetäänkö kahville?" can just as well be
+ * answered "Mielelläni! Kiitos kutsusta." - marking that wrong in a
+ * choose-the-reply exercise would teach the wrong lesson.
+ *
+ * Judged by hand against every reply a practice question could offer.
+ * Replies in the wrong case (Mitä kuuluu? - "Ihan hyvin") or with the wrong
+ * formula (a thank-you answered with Ei se mitään) are deliberately NOT
+ * listed: those are the mistakes worth practising.
+ */
+const ALSO_FITS: Record<number, number[]> = {
+  1: [5, 8],
+  2: [8],
+  3: [6],
+  4: [8, 15],
+  6: [2],
+  8: [2, 5],
+  9: [14],
+  11: [12, 14],
+  12: [11, 14],
+  14: [12],
+  15: [4, 11, 14],
+  17: [18, 20, 22],
+  18: [17, 22],
+  20: [21],
+  22: [17, 18],
+  25: [28],
+  26: [76],
+  30: [28],
+  34: [37, 39],
+  39: [37],
+  41: [44],
+  44: [41],
+  47: [48],
+  48: [60],
+  50: [55],
+  52: [55],
+  57: [62],
+  60: [48],
+  62: [57],
+  72: [69],
+  76: [26],
+  77: [80],
+  80: [77],
+};
+
 function pair(
   num: number,
   category: ReplyCategoryId,
@@ -66,6 +113,7 @@ function pair(
     en: { q: en[0], a: en[1] },
     tl: { q: tl[0], a: tl[1] },
     ...extra,
+    ...(ALSO_FITS[num] && { alsoFits: ALSO_FITS[num] }),
     source: null,
     verification: 'linguistically-checked',
   };

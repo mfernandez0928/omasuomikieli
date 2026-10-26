@@ -51,3 +51,22 @@ test('ids are unique across both builders', () => {
   const ids = [...buildChooseReply(REPLY_PAIRS), ...buildListenMeaning(REPLY_PAIRS)].map((e) => e.id);
   expect(new Set(ids).size).toBe(160);
 });
+
+describe('a second correct reply is never offered as wrong', () => {
+  test('no distractor is a reply that also fits the question', () => {
+    const byReply = new Map(REPLY_PAIRS.map((p) => [p.fi.a, p.num]));
+    for (const ex of buildChooseReply(REPLY_PAIRS)) {
+      const pair = REPLY_PAIRS.find((p) => ex.id === `${p.id}-choose`)!;
+      for (const o of ex.options!) {
+        if (o === ex.answer) continue;
+        expect(pair.alsoFits ?? [], `${pair.id} offers ${o}`).not.toContain(byReply.get(o));
+      }
+    }
+  });
+
+  test('an invitation to coffee does not offer other yeses as wrong', () => {
+    const [ex] = buildChooseReply([pairById('rp-17')]);
+    expect(ex.options).not.toContain(pairById('rp-18').fi.a);
+    expect(ex.options).not.toContain(pairById('rp-22').fi.a);
+  });
+});

@@ -427,6 +427,11 @@ export interface ReplyPair {
   noteTl?: string;
   /** The colloquial version of the reply, where it is worth knowing. */
   puhekieli?: string;
+  /**
+   * Numbers of other pairs whose reply would also be a natural answer to this
+   * question. Practice never offers those as wrong options.
+   */
+  alsoFits?: number[];
   source: null;
   verification: 'linguistically-checked';
 }

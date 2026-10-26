@@ -261,7 +261,8 @@ export function ExerciseRunner({
               {wrongList.map((e) => (
                 <div key={e.id} className="wcard">
                   <p className="small" style={{ color: 'var(--card-ink-soft)' }}>
-                    {e.question}
+                    {/* A listening question has no text; show what was played. */}
+                    {e.question || e.audio}
                   </p>
                   <p style={{ fontWeight: 700, marginTop: 4 }}>{e.answer}</p>
                 </div>

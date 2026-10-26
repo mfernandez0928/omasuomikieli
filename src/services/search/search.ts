@@ -170,6 +170,8 @@ export function searchWords(query: string, filters: SearchFilters = {}): WordHit
 export interface GlobalHit {
   kind: 'word' | 'phrase' | 'grammar' | 'reply';
   id: string;
+  /** Where the hit opens, when that is not derived from `id`. */
+  path?: string;
   title: string;
   subtitle: string;
   score: number;
@@ -213,7 +215,8 @@ export function searchEverything(query: string, limit = 40): GlobalHit[] {
   for (const p of searchReplies(query)) {
     results.push({
       kind: 'reply',
-      id: p.category,
+      id: p.id,
+      path: `/replies/${p.category}`,
       title: p.fi.q,
       subtitle: p.fi.a,
       score: fold(p.fi.q).startsWith(q) ? 60 : 30,

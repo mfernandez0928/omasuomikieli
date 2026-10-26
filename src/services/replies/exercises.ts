@@ -16,8 +16,9 @@ function distractors(
   pool: ReplyPair[],
   text: (p: ReplyPair) => string,
 ): string[] {
+  const fits = new Set(pair.alsoFits ?? []);
   const others = pool
-    .filter((p) => p.id !== pair.id)
+    .filter((p) => p.id !== pair.id && !fits.has(p.num))
     .sort((a, b) => {
       const sameA = a.category === pair.category ? 0 : 1;
       const sameB = b.category === pair.category ? 0 : 1;

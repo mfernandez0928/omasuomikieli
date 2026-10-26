@@ -76,7 +76,7 @@ export function Search() {
                   key={`${hit.kind}-${hit.id}`}
                   className="rowcard"
                   onClick={() =>
-                    navigate(hit.kind === 'phrase' ? '/phrases' : `${meta.path}${hit.id}`)
+                    navigate(hit.path ?? (hit.kind === 'phrase' ? '/phrases' : `${meta.path}${hit.id}`))
                   }
                 >
                   <span
