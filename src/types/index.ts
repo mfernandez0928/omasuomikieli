@@ -375,6 +375,57 @@ export interface Phrase {
   verification: Verification;
 }
 
+/** The ten categories of the Natural Finnish Replies set, in its order. */
+export type ReplyCategoryId =
+  | 'tervehdykset'
+  | 'tunteet'
+  | 'kutsut'
+  | 'kohteliaisuus'
+  | 'mielipiteet'
+  | 'tyo-opiskelu'
+  | 'ostokset'
+  | 'ongelmat'
+  | 'puhelut'
+  | 'reaktiot';
+
+export interface ReplyCategory {
+  id: ReplyCategoryId;
+  /** 1-10, the order of the source dataset. */
+  num: number;
+  title: string;
+  titleFi: string;
+  icon: string;
+}
+
+/** One line of a reply pair in one language: the question and its answer. */
+export interface ReplyLines {
+  q: string;
+  a: string;
+}
+
+/**
+ * A Finnish question and a natural reply to it, learned together as a pair
+ * rather than as two unrelated phrases.
+ */
+export interface ReplyPair {
+  /** 'rp-01' ... 'rp-80'. */
+  id: string;
+  /** 1-80, the numbering of the source dataset. Kept so entries can be checked against it. */
+  num: number;
+  category: ReplyCategoryId;
+  level: Level;
+  fi: ReplyLines;
+  en: ReplyLines;
+  tl: ReplyLines;
+  /** Usage or register note, in English. */
+  note?: string;
+  noteTl?: string;
+  /** The colloquial version of the reply, where it is worth knowing. */
+  puhekieli?: string;
+  source: null;
+  verification: 'linguistically-checked';
+}
+
 export interface Situation {
   id: SituationId;
   title: string;
