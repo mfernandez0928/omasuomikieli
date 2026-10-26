@@ -4,6 +4,7 @@ import { Callout, ProgressBar, SpeakButton } from '@/components/ui';
 import type { Exercise } from '@/types';
 import { checkAnswer } from '@/services/search/search';
 import { useApp } from '@/hooks/useApp';
+import { speak } from '@/services/speech';
 
 export interface RunScore {
   answered: number;
@@ -79,6 +80,11 @@ export function ExerciseRunner({
   const [umlautSlip, setUmlautSlip] = useState(false);
 
   const current = pool[index];
+
+  // A listening question plays itself once when it comes up; Play repeats it.
+  useEffect(() => {
+    if (current?.audio && !done) speak(current.audio);
+  }, [current?.id, current?.audio, done]);
 
   const rightColumn = useMemo(
     () => (current?.pairs ? shuffled(current.pairs.map((p) => p.right), current.id) : []),
@@ -314,14 +320,26 @@ export function ExerciseRunner({
           {current.prompt}
         </p>
 
-        <p className="question">
-          {questionParts.map((part, i) => (
-            <span key={i}>
-              {part}
-              {i < questionParts.length - 1 && <span className="blank" />}
-            </span>
-          ))}
-        </p>
+        {current.audio ? (
+          // A listening question: the sentence is played, never printed.
+          <button
+            className="btn btn--primary"
+            onClick={() => speak(current.audio!)}
+            aria-label="Play the sentence"
+          >
+            <Icon name="speaker" size={18} />
+            Play
+          </button>
+        ) : (
+          <p className="question">
+            {questionParts.map((part, i) => (
+              <span key={i}>
+                {part}
+                {i < questionParts.length - 1 && <span className="blank" />}
+              </span>
+            ))}
+          </p>
+        )}
 
         {current.hint && (
           <p className="small dim" style={{ marginTop: 8 }}>
@@ -329,7 +347,7 @@ export function ExerciseRunner({
           </p>
         )}
 
-        {!current.question.includes('___') && !isMatch && (
+        {!current.audio && !current.question.includes('___') && !isMatch && (
           <div style={{ marginTop: 6 }}>
             <SpeakButton text={current.question} />
           </div>

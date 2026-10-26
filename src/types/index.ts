@@ -259,6 +259,11 @@ export interface Exercise {
   prompt: string;
   /** Sentence or word; `___` marks the gap. */
   question: string;
+  /**
+   * Finnish to be heard rather than read. When set, the runner plays this
+   * instead of showing the question text, so the learner has to listen.
+   */
+  audio?: string;
   /** Extra hint shown under the question, e.g. the dictionary form. */
   hint?: string;
   options?: string[];
