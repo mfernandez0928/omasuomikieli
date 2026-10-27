@@ -5,6 +5,7 @@ import { IMPORTED_WORDS, MERGED_AWAY, WORDS, validateWords } from '@/data/words'
 import { GRAMMAR_LESSONS } from '@/data/grammar';
 import { PHRASES } from '@/data/phrases';
 import { SOURCE_BOOKS } from '@/data/sources';
+import { INDEPENDENCE_NOTICE } from '@/data/brand';
 import { SCENES, SCENE_LEXICON } from '@/data/situations';
 import { ALL_SPOKEN } from '@/data/puhekieli';
 import { getWord } from '@/data/words';
@@ -367,6 +368,15 @@ function SourceInventory() {
         Built by extracting each PDF's text and reading its own table of contents — not from
         general knowledge of what is usually taught at a given level.
       </p>
+
+      {/*
+        This section names the books, so the notice belongs here rather than
+        only in the footers. A list of titles with chapters and page numbers
+        is the one place the app could be mistaken for an official companion.
+      */}
+      <div style={{ marginBottom: 12 }}>
+        <Callout kind="info">{INDEPENDENCE_NOTICE}</Callout>
+      </div>
 
       <div className="stack" style={{ gap: 10 }}>
         {SOURCE_BOOKS.map((book) => {

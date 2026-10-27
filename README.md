@@ -342,9 +342,37 @@ vocabulary in the role-plays.
 
 ## Privacy
 
-Everything stays on the device: IndexedDB for review cards, mistakes, saved words and activity;
-`localStorage` for settings, favourites and streak. No network requests after load, no analytics,
-no account. Clearing site data erases progress — take a backup first.
+Learning data stays on the device: IndexedDB for review cards, mistakes, saved words and
+activity; `localStorage` for settings, favourites and streak. No analytics, no account, no
+password. Clearing site data erases progress — take a backup first.
+
+The one exception is the name given on the first screen. Where a build is configured with
+roster keys (`VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`), that first and last name — and
+nothing else — is posted once to an insert-only table so the author knows who is using the app.
+No progress, no answers and no device information are sent. Builds without those keys make no
+network requests after load, and the first screen says which of the two it is.
+
+---
+
+## Licence and attribution
+
+Proprietary. See [LICENSE](LICENSE). This repository is published so the app can be read about,
+not so it can be reused: no copying, redistribution, derivative works, or extraction of the
+vocabulary and exercises — including by automated or machine-learning tools — without written
+permission.
+
+The dictionary is also protected as a database in its own right, under Directive 96/9/EC and
+section 49 of the Finnish Copyright Act, separately from the copyright in each entry.
+
+**Independence.** Oma Suomi is an independent study aid. It is not affiliated with, endorsed by
+or connected to the publishers or authors of any textbook named in this document. Those books
+remain the property of their own authors and publishers; they are cited by title, chapter and
+page as references, which is what the provenance chain above is for. The full textbook word-list
+transcription is a private working record and is deliberately kept out of this repository
+(`src/data/sources/*.local.ts`, gitignored). Every English and Tagalog meaning, exercise,
+dialogue and grammar explanation in the app is original work.
+
+Third-party dependencies keep their own licences, listed in `package.json`.
 
 ---
 

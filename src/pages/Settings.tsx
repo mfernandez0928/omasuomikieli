@@ -9,7 +9,7 @@ import { cleanName, isName } from '@/services/storage/prefs';
 import { rosterEnabled } from '@/services/sync/roster';
 import type { UserProfile } from '@/types';
 import { WORDS } from '@/data/words';
-import { BRAND, COPYRIGHT } from '@/data/brand';
+import { BRAND, COPYRIGHT, INDEPENDENCE_NOTICE } from '@/data/brand';
 import { GRAMMAR_LESSONS, ALL_EXERCISES } from '@/data/grammar';
 import { PHRASES } from '@/data/phrases';
 
@@ -282,15 +282,36 @@ export function Settings() {
         </button>
       </section>
 
+      {/*
+        Two versions, chosen the same way as on the first-run screen. With a
+        roster configured the name does leave the device, so the stronger
+        wording would be untrue - and this is the screen where a learner comes
+        looking for exactly that answer.
+      */}
       <p className="tiny dim center" style={{ marginTop: 22, lineHeight: 1.7 }}>
-        Oma Suomi runs entirely on this device. There is no password, no server and no tracking.
-        Your name and your progress live in this browser's storage only - clearing site data erases
-        them.
+        {rosterEnabled ? (
+          <>
+            Your progress runs entirely on this device. There is no password and no tracking, and
+            your answers, review cards and saved words live in this browser's storage only -
+            clearing site data erases them. Only your name is sent, once, so the person who made
+            the app knows who is using it.
+          </>
+        ) : (
+          <>
+            Oma Suomi runs entirely on this device. There is no password, no server and no
+            tracking. Your name and your progress live in this browser's storage only - clearing
+            site data erases them.
+          </>
+        )}
       </p>
 
       <p className="tiny dim center" style={{ marginTop: 14, lineHeight: 1.7 }}>
         <b style={{ color: 'var(--gold)' }}>{BRAND}</b>
         <span style={{ display: 'block' }}>{COPYRIGHT}</span>
+      </p>
+
+      <p className="tiny dim center" style={{ marginTop: 14, lineHeight: 1.7 }}>
+        {INDEPENDENCE_NOTICE}
       </p>
     </div>
   );

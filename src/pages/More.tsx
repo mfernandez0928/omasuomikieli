@@ -4,9 +4,10 @@ import { Icon, type IconName } from '@/components/Icon';
 import { TopBar } from '@/components/ui';
 import { useApp } from '@/hooks/useApp';
 import { WORDS } from '@/data/words';
-import { BRAND, COPYRIGHT, RELEASE_STAGE } from '@/data/brand';
+import { BRAND, COPYRIGHT, INDEPENDENCE_NOTICE, RELEASE_STAGE } from '@/data/brand';
 import { WhatsNew } from '@/components/WhatsNew';
 import { APP_VERSION, RELEASES } from '@/data/releases';
+import { rosterEnabled } from '@/services/sync/roster';
 
 const LINKS: { to: string; title: string; sub: string; icon: IconName; colour: string }[] = [
   {
@@ -136,7 +137,9 @@ export function More() {
       )}
 
       <p className="tiny dim center" style={{ marginTop: 26, lineHeight: 1.7 }}>
-        Oma Suomi · {WORDS.length} words · works offline · nothing leaves your device
+        Oma Suomi · {WORDS.length} words · works offline ·{' '}
+        {/* Not "nothing leaves your device": with a roster configured, the name does. */}
+        {rosterEnabled ? 'your progress stays on your device' : 'nothing leaves your device'}
         <span style={{ display: 'block', marginTop: 6 }}>
           {RELEASE_STAGE} · v{APP_VERSION}
         </span>
@@ -144,6 +147,10 @@ export function More() {
           <b style={{ color: 'var(--gold)' }}>{BRAND}</b>
         </span>
         <span style={{ display: 'block' }}>{COPYRIGHT}</span>
+      </p>
+
+      <p className="tiny dim center" style={{ marginTop: 14, lineHeight: 1.7 }}>
+        {INDEPENDENCE_NOTICE}
       </p>
     </div>
   );
