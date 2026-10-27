@@ -1,0 +1,83 @@
+PROPRIETARY LICENCE
+
+Oma Suomi
+Copyright (c) 2026 MarkDev (Mark Ronaldo Fernandez II). All rights reserved.
+
+This software and its accompanying content are proprietary. They are published
+so that learners can use the application, not so that the work can be reused.
+
+1. Grant
+
+   You may install and use the application from its official address,
+   https://omasuomikieli.vercel.app/, for your own learning, free of charge.
+   Nothing else is granted.
+
+2. Restrictions
+
+   Without prior written permission from the copyright holder you may not:
+
+   a. copy, reproduce, publish, host, mirror or redistribute this software or
+      any part of it, in source or compiled form;
+
+   b. extract, scrape, harvest or re-publish the vocabulary, translations,
+      example sentences, grammar lessons, exercises, dialogues or any other
+      content, whether by hand, by script, or with the assistance of automated
+      or machine-learning tools;
+
+   c. use this software or its content to train, fine-tune or evaluate a
+      machine-learning model;
+
+   d. create derivative works, including translations into other languages or
+      ports to other platforms;
+
+   e. sell, licence, sublicence, rent or otherwise commercialise this software
+      or its content;
+
+   f. remove, obscure or alter any copyright, trademark or authorship notice.
+
+3. Database right
+
+   The vocabulary, translations and exercises form a database compiled through
+   substantial investment in obtaining, verifying and presenting its contents.
+   It is protected both by copyright in the individual entries and by the sui
+   generis database right under Directive 96/9/EC and section 49 of the Finnish
+   Copyright Act (tekijanoikeuslaki 404/1961). Extraction or re-utilisation of
+   a substantial part of it, and repeated extraction of insubstantial parts, are
+   infringements independently of any copyright in the software.
+
+4. Third-party material
+
+   The Finnish source material is cited to its published textbooks, which
+   remain the property of their own authors and publishers. Citation does not
+   transfer any right in those works, and nothing in this licence grants you
+   rights in them.
+
+   Third-party open-source dependencies are covered by their own licences,
+   which are unaffected by this document and are listed in package.json.
+
+5. Trademark
+
+   "Oma Suomi" and "MarkDev@2026" are marks of the copyright holder. This
+   licence grants no right to use them.
+
+6. No warranty
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+   WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
+   OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN IT.
+
+   The application is a learning aid. It is not a substitute for a teacher, a
+   textbook or professional advice.
+
+7. Governing law
+
+   This licence is governed by the law of Finland. Mandatory consumer rights
+   and any rights that cannot be waived under applicable law are unaffected.
+
+8. Contact
+
+   For permission to use this software or its content beyond clause 1, contact
+   the copyright holder through the project's repository.
