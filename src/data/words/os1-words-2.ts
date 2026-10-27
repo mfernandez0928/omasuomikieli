@@ -3183,6 +3183,7 @@ export const OS1_WORDS_2: Word[] = [
     examples: [
       { fi: 'Vedä verhot kiinni illalla.', en: 'Close the curtains in the evening.', tl: 'Isara ang kurtina sa gabi.' },
     ],
+    searchAliases: ['verhot'],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 5: Tässä kaupungissa', page: 133, section: 'SANASTO', sourceTerm: 'verho, -n' },
     verification: 'source-verified',
   },

@@ -26,6 +26,7 @@ import { BATCH_ERRANDS } from './batch-errands';
 import { BATCH_RELATIONSHIPS } from './batch-relationships';
 import { BATCH_OFFICIALS } from './batch-officials';
 import { BATCH_STUDY_NOTES } from './batch-study-notes';
+import { BATCH_LIFE_STORY } from './batch-life-story';
 
 /**
  * The curated set is authored in this folder. The supplied v0.2.1 database is
@@ -63,6 +64,7 @@ const CURATED: Word[] = [
   ...BATCH_RELATIONSHIPS,
   ...BATCH_OFFICIALS,
   ...BATCH_STUDY_NOTES,
+  ...BATCH_LIFE_STORY,
 ];
 
 const curatedFinnish = new Set(CURATED.map((w) => w.fi.toLowerCase()));
@@ -151,4 +153,5 @@ export {
   BATCH_RELATIONSHIPS,
   BATCH_OFFICIALS,
   BATCH_STUDY_NOTES,
+  BATCH_LIFE_STORY,
 };

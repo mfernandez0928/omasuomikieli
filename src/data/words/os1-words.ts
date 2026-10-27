@@ -1240,6 +1240,7 @@ export const OS1_WORDS: Word[] = [
     examples: [
       { fi: 'Meillä on kaksi lasta.', en: 'We have two children.', tl: 'May dalawa kaming anak.' },
     ],
+    searchAliases: ['lapseni', 'lapsena'],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 2: Susanin naapurit', page: 49, section: 'SANASTO', sourceTerm: 'lapsi, lapsen' },
     verification: 'source-verified',
   },
@@ -2691,6 +2692,7 @@ export const OS1_WORDS: Word[] = [
       { fi: 'Pelaan jalkapalloa kerran viikossa.', en: 'I play football once a week.', tl: 'Naglalaro ako ng putbol isang beses sa isang linggo.' },
     ],
     note: 'pelata is for games with rules; soittaa is for musical instruments; leikkiä is children playing.',
+    searchAliases: ['pelasin'],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3: Keskiviikkona kesällä', page: 75, section: 'SANASTO', sourceTerm: 'pelata, pelaan' },
     verification: 'source-verified',
   },

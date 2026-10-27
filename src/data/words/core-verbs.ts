@@ -44,6 +44,7 @@ export const CORE_VERBS: Word[] = [
     noteTl: 'Walang hiwalay na salita para sa "to have" sa suomi. Ginagamit ang olla: minulla on = mayroon ako.',
     related: ['v-tulla', 'n-koira'],
     grammarRefs: ['g-verbityypit', 'g-preesens', 'g-adessiivi'],
+    searchAliases: ['oli'],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 1: Tervetuloa!', page: 23, section: 'SANASTO', sourceTerm: 'olla, olen' },
     reviewNote:
       'olla matched Suomen mestari 2 p.84 and Suomen mestari 3 pp.12/121 only inside phrases (olla paikalla, olla kiinnostunut, olla vastassa), so neither book is cited. Resolved in batch 4: Oma suomi 1\'s index lists \'olla (1), olen\' as a headword, so the entry is sourced there instead.',
