@@ -2030,6 +2030,7 @@ export const OS1_WORDS: Word[] = [
     topics: ['arki'],
     nominalForms: { genitive: 'aamun' },
     selitys: 'Aamu on päivän alku, kun ihminen herää. Vastakohta on ilta.',
+    searchAliases: ['aamulla'],
     examples: [
       { fi: 'Aamulla juon kahvia.', en: 'In the morning I drink coffee.', tl: 'Umaga akong nagkakape.' },
     ],
@@ -2215,6 +2216,7 @@ export const OS1_WORDS: Word[] = [
     topics: ['arki'],
     nominalForms: { genitive: 'illan' },
     selitys: 'Ilta on päivän loppuosa ennen yötä. Vastakohta on aamu.',
+    searchAliases: ['illalla'],
     examples: [
       { fi: 'Illalla katson televisiota.', en: 'In the evening I watch television.', tl: 'Nanonood ako ng TV sa gabi.' },
     ],

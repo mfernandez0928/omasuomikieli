@@ -1374,6 +1374,7 @@ export const NOUNS: Word[] = [
     examples: [{ fi: 'Hyvää päivää!', en: 'Good day!', tl: 'Magandang araw!' }],
     note: 'The greeting "Hyvää päivää!" is in the partitive - that is why it is not *Hyvä päivä.',
     noteTl: 'Partitiivi ang bati: "Hyvää päivää!"',
+    searchAliases: ['päivällä'],
     related: ['n-aika'],
     grammarRefs: ['g-partitiivi'],
     source: { bookId: 'os1', book: 'Oma suomi 1', chapter: 'Kappale 3', sourceTerm: 'päivä, -n' },
